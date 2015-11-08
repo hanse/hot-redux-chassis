@@ -59,7 +59,8 @@ export default {
     // build a index.html with assets injected
     new HtmlWebpackPlugin({
       template: 'index.html',
-      inject: true
+      inject: true,
+      favicon: 'assets/favicon.ico'
     })
   ]),
 
