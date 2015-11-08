@@ -1,0 +1,7 @@
+
+export const Auth = {
+  LOGIN_BEGIN: 'Auth/LOGIN_BEGIN',
+  LOGIN_SUCCESS: 'Auth/LOGIN_SUCCESS',
+  LOGIN_FAILURE: 'Auth/LOGIN_FAILURE',
+  LOGOUT: 'Auth/LOGOUT'
+};

@@ -2,7 +2,8 @@
   "extends": "airbnb",
   "rules": {
     "comma-dangle": 0,
-    "jsx-quotes": [2, "prefer-single"]
+    "jsx-quotes": [2, "prefer-single"],
+    "new-cap": 0
   },
   "env": {
     "browser": true,

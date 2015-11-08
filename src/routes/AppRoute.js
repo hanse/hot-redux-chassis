@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import App from '../components/App';
 
 @connect(state => state)
-export default class RootRoute extends Component {
+export default class AppRoute extends Component {
   render() {
     return <App {...this.props} />;
   }
