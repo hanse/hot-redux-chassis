@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 1rem;
+}
+
+body {
+  font-family: "Menlo", monospace;
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+a {
+  color: rgb(115, 26, 53);
+}

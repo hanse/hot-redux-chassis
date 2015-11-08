@@ -1,24 +1,13 @@
-/* eslint-disable */
-var path = require('path');
-var webpack = require('webpack');
-var compact = require('lodash/array/compact');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+import path from 'path';
+import webpack from 'webpack';
+import compact from 'lodash/array/compact';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-var isProduction = process.env.NODE_ENV === 'production';
-var isDevelopment = process.env.NODE_ENV === 'development';
+const isProduction = process.env.NODE_ENV === 'production';
+const isDevelopment = process.env.NODE_ENV === 'development';
 
-/**
- * Define some globals that can be used in the app code.
- * E.g. if (__DEV__) devTool();
- */
-var definePlugin = new webpack.DefinePlugin({
-  __DEV__: JSON.stringify(!isProduction),
-  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-});
-
-
-module.exports = {
+export default {
   /**
    * @see webpack-devtools
    */
@@ -46,11 +35,16 @@ module.exports = {
    */
   plugins: compact([
     isProduction && new webpack.optimize.OccurenceOrderPlugin(),
-    definePlugin,
+
+    new webpack.DefinePlugin({
+      __DEV__: JSON.stringify(!isProduction),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
 
     isDevelopment && new webpack.HotModuleReplacementPlugin(),
     isDevelopment && new webpack.NoErrorsPlugin(),
 
+    // Minify bundles
     isProduction && new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
@@ -86,9 +80,10 @@ module.exports = {
       }
     ],
   },
-  postcss: function(webpack) {
+
+  postcss(wp) {
     return [
-      require('postcss-import')({ addDependencyTo: webpack }),
+      require('postcss-import')({ addDependencyTo: wp }),
       require('postcss-cssnext'),
       require('postcss-nested')
     ];
