@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import Dashboard from '../components/Dashboard';
 import { login, logout } from '../actions/auth';
 
-@connect(state => ({
-  username: state.auth.get('username')
-}), {
+@connect(null, {
   login, logout
 })
 export default class DashboardRoute extends Component {
