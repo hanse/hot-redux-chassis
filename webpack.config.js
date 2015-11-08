@@ -64,7 +64,8 @@ export default {
   ]),
 
   resolve: {
-    extensions: ['', '.js', '.jsx', '.css']
+    root: path.resolve(__dirname),
+    extensions: ['', '.js', '.jsx', '.css', '.png', '.jpg']
   },
 
   module: {
@@ -77,6 +78,10 @@ export default {
       {
         test: /\.css$/,
         loader: isProduction ? ExtractTextPlugin.extract('style', 'css!postcss') : 'style!css!postcss'
+      },
+      {
+        test: /\.(png|jpg)/,
+        loader: 'url-loader?limit=8192'
       }
     ],
   },
