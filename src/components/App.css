@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 html {
@@ -8,11 +9,34 @@ html {
 }
 
 body {
-  font-family: "Menlo", monospace;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   font-size: 1.2rem;
   line-height: 1.8;
 }
 
 a {
   color: rgb(115, 26, 53);
+}
+
+.u-content {
+  padding: 2rem;
+}
+
+.u-spaced {
+  margin: 1rem 0;
+}
+
+.Button {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  border: 0;
+  background: rgba(112, 154, 23, 1);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-weight: 400;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(112, 154, 23, .9);
+  }
 }

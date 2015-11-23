@@ -3,7 +3,8 @@
   "rules": {
     "comma-dangle": 0,
     "jsx-quotes": [2, "prefer-single"],
-    "new-cap": 0
+    "new-cap": 0,
+    "react/no-multi-comp": 0
   },
   "env": {
     "browser": true,
