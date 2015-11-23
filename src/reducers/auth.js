@@ -3,7 +3,7 @@ import createReducer from '../utils/createReducer';
 import { Auth } from '../actions/types';
 
 const initialState = Map({
-  username: 'anonymous',
+  username: 'anonymoo1s',
   token: null,
   failed: false
 });
