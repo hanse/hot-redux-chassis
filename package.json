@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Hanse",
   "scripts": {
-    "start": "nodemon --ignore src --ignore tests --exec babel-node -- dev-server.js",
+    "start": "nodemon --ignore src --ignore tests --exec babel-node -- server.js",
     "build": "NODE_ENV=production webpack",
     "lint": "eslint src",
     "test": "mocha --compilers js:babel/register --require ./tests/setup.js --recursive 'src/**/*.spec.js'",

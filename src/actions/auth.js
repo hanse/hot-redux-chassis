@@ -9,7 +9,7 @@ export function login(username, password) {
       } else {
         dispatch({ type: Auth.LOGIN_FAILURE });
       }
-    }, 750);
+    }, 500);
   };
 }
 
