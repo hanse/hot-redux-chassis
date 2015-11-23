@@ -1,19 +1,19 @@
 import './Header.css';
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, IndexLink } from 'react-router';
 
-const Navigation = ({ items }) => (
+const Navigation = () => (
   <nav className='Navigation'>
-    <ul>{items.map(([href, label]) => <li><Link to={href}>{label}</Link></li>)}</ul>
+    <ul>
+      <li><IndexLink to='/' activeClassName='active'>Home</IndexLink></li>
+      <li><Link to='/about' activeClassName='active'>About</Link></li>
+      <li><Link to='/contact' activeClassName='active'>Contact</Link></li>
+    </ul>
   </nav>
 );
 
 export default () => (
   <div className='Header'>
-    <Navigation items={[
-      ['', 'Hjem'],
-      ['', 'About'],
-      ['', 'Hello']
-    ]} />
+    <Navigation />
   </div>
 );

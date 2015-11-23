@@ -17,7 +17,7 @@
     display: inline-block;
     text-decoration: none;
 
-    &:hover {
+    &:hover, &.active {
       background: #222;
     }
   }

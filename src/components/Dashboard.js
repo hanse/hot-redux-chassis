@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import Header from './Header';
 import ballmer from 'assets/ballmer.jpg';
 
 export default class Dashboard extends Component {
@@ -12,18 +11,15 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div className='Dashboard'>
-        <Header />
-        <div className='u-content'>
-          <h2>Hello, {this.props.username}</h2>
-          <div className='u-spaced'>
-            <button
-              className='Button'
-              onClick={() => this.props.isLoggedIn ? this.props.logout() : this.props.login('admin', 'admin')}
-            >{this.props.isLoggedIn ? 'Logout' : 'Login'}</button>
-          </div>
-          <img src={ballmer} alt='Steve Ballmer' />
+      <div className='Dashboard u-content'>
+        <h2>Hello, {this.props.username}</h2>
+        <div className='u-spaced'>
+          <button
+            className='Button'
+            onClick={() => this.props.isLoggedIn ? this.props.logout() : this.props.login('admin', 'admin')}
+          >{this.props.isLoggedIn ? 'Logout' : 'Login'}</button>
         </div>
+        <img src={ballmer} alt='Steve Ballmer' />
       </div>
     );
   }
