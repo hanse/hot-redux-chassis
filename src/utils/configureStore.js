@@ -10,7 +10,7 @@ export default function configureStore(initialState) {
   const loggerMiddleware = createLogger({
     level: 'info',
     collapsed: true,
-    transformer: (state) => Object.keys(state).reduce((json, key) => {
+    stateTransformer: (state) => Object.keys(state).reduce((json, key) => {
       json[key] = Iterable.isIterable(state[key]) ? state[key].toJS() : state[key];
       return json;
     }, {})

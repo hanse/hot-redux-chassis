@@ -17,9 +17,6 @@ describe('components', () => {
       const { output } = setup();
       expect(output.type).toBe('div');
       expect(output.props.className).toBe('Header');
-
-      const nav = output.props.children;
-      expect(nav.props.items.length).toBe(3);
     });
   });
 });

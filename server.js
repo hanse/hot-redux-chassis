@@ -1,5 +1,6 @@
 import path from 'path';
 import express from 'express';
+import config from './webpack.config.babel';
 
 const app = express();
 
@@ -7,7 +8,6 @@ app.set('host', process.env.HOST || 'localhost');
 app.set('port', process.env.PORT || 3000);
 
 if (process.env.NODE_ENV === 'development') {
-  const config = require('./webpack.config.babel');
   const compiler = require('webpack')(config);
 
   app.use(require('webpack-dev-middleware')(compiler, {
