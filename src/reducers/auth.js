@@ -3,7 +3,7 @@ import createReducer from '../utils/createReducer';
 import { Auth } from '../actions/types';
 
 const initialState = Map({
-  username: 'anonymoo1s',
+  username: null,
   token: null,
   failed: false
 });
@@ -19,5 +19,11 @@ export default createReducer(initialState, {
     state.merge(action.payload),
 
   [Auth.LOGOUT]: state =>
-    state.merge({ token: null, username: initialState.get('username') })
+    state.merge({ token: null, username: initialState.get('username') }),
+
+  [Auth.FETCH_PROFILE_SUCCESS]: (state, action) =>
+    state.merge(action.payload),
+
+  [Auth.FETCH_PROFILE_FAILURE]: (state) =>
+    state.merge(initialState)
 });

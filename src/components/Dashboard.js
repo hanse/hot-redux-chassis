@@ -12,7 +12,7 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div className='Dashboard u-content'>
-        <h2>Hello, {this.props.username}</h2>
+        <h2>{this.props.isLoggedIn && `Hello, ${this.props.username}!`}</h2>
         <div className='u-spaced'>
           <button
             className='Button'

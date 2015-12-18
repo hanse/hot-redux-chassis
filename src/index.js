@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ReduxRouter } from 'redux-router';
+import { fromJS } from 'immutable';
 import configureStore from './utils/configureStore';
 
 if (__DEV__) {
@@ -9,9 +10,15 @@ if (__DEV__) {
     console.log(self); // eslint-disable-line no-console
     return this;
   };
+
+  global.React = React;
 }
 
-const store = configureStore();
+const store = configureStore({
+  auth: fromJS({
+    token: window.localStorage.getItem('token') || ''
+  })
+});
 
 render(
   <Provider {...{ store }}>

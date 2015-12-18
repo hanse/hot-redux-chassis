@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon --ignore src --ignore tests --exec babel-node -- server.js",
     "build": "NODE_ENV=production webpack",
-    "lint": "eslint src --parser babel-eslint",
+    "lint": "eslint src",
     "test": "mocha --compilers js:babel-core/register --require ./tests/setup.js --recursive 'src/**/*.spec.js'",
     "test:watch": "npm run test -- --watch"
   },

@@ -15,9 +15,12 @@ git commit -m "Initial commit"
 
 ## Features
 
-* Hot Reloading
-* Webpack (dev and prod)
-* Testing setup
+* Hot Reloading (Babel 6 + react-transform-hmr)
+* Webpack (both development and production configurations)
+* Testing setup (Shallow and with JSDom)
 * ESLint
 * Immutable.js
 * PostCSS
+* Authentication Flow + User profile fetching
+* Notification Center
+* HTTP requests using `fetch()`.

@@ -4,7 +4,12 @@ import Header from './Header';
 
 export default class App extends Component {
   static propTypes = {
-    children: PropTypes.any
+    children: PropTypes.any,
+    fetchUserProfile: PropTypes.func
+  }
+
+  componentDidMount() {
+    this.props.fetchUserProfile();
   }
 
   render() {
