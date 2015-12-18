@@ -1,4 +1,5 @@
 import { Auth } from './types';
+import { pushState } from 'redux-router';
 
 export function fetchUserProfile() {
   return (dispatch, getState) => {
@@ -20,7 +21,7 @@ export function fetchUserProfile() {
   };
 }
 
-export function login(username, password) {
+export function login(username, password, redirectTo) {
   return (dispatch) => {
     dispatch({ type: Auth.LOGIN_BEGIN });
     setTimeout(() => {
@@ -29,6 +30,10 @@ export function login(username, password) {
         window.localStorage.setItem('token', token);
         dispatch({ type: Auth.LOGIN_SUCCESS, payload: { token, username } });
         dispatch(fetchUserProfile(token));
+
+        if (redirectTo) {
+          dispatch(pushState(null, redirectTo));
+        }
       } else {
         dispatch({ type: Auth.LOGIN_FAILURE });
       }

@@ -21,13 +21,12 @@ export default class Dashboard extends Component {
           />
         )}
 
-        <div className='u-spaced'>
-          <button
-            className='Button'
-            onClick={() => this.props.isLoggedIn ? this.props.logout() : this.props.login('admin', 'admin')}
-          >{this.props.isLoggedIn ? 'Logout' : 'Login'}</button>
-        </div>
-        <img src={ballmer} alt='Steve Ballmer' />
+        {this.props.isLoggedIn && (
+          <div>
+            <button className='Button' onClick={this.props.logout}>Log out</button>
+            <div><img src={ballmer} alt='Steve Ballmer' /></div>
+          </div>
+        )}
       </div>
     );
   }

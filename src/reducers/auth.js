@@ -3,10 +3,17 @@ import createReducer from '../utils/createReducer';
 import { Auth } from '../actions/types';
 
 const initialState = Map({
-  username: null,
-  token: null,
+  username: 'Guest',
+  token: window.localStorage.getItem('token'),
   failed: false
 });
+
+export function stateSelector(state) {
+  return {
+    isLoggedIn: !!state.get('token'),
+    username: state.get('username')
+  };
+}
 
 export default createReducer(initialState, {
   [Auth.LOGIN_BEGIN]: state =>

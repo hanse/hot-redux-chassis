@@ -1,0 +1,10 @@
+input {
+  display: block;
+}
+
+.Login__form {
+  background: #ccc;
+  padding: 1rem;
+  border: 3px solid #eee;
+  margin: 1rem;
+}

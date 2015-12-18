@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.0",
+    "history": "^1.13.1",
     "immutable": "^3.7.5",
     "lodash": "^3.10.1",
     "react": "^0.14.2",
