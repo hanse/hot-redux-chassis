@@ -23,7 +23,10 @@ export default function configureStore(initialState) {
 
   const finalCreateStore = compose(
     middlewares,
-    reduxReactRouter({ routes, createHistory: createHashHistory })
+    reduxReactRouter({
+      routes,
+      createHistory: createHashHistory
+    })
   )(createStore);
 
   const mergeReducers = (reducers) => combineReducers({
