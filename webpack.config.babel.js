@@ -78,7 +78,9 @@ export default {
       },
       {
         test: /\.css$/,
-        loader: isProduction ? ExtractTextPlugin.extract('style', 'css!postcss') : 'style!css!postcss'
+        loader: isProduction
+          ? ExtractTextPlugin.extract('style', 'css?modules&&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss')
+          : 'style!css?modules&localIdentName=&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
       },
       {
         test: /\.(png|jpg)/,

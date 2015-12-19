@@ -1,4 +1,4 @@
-import './Login.css';
+import styles from './Login.css';
 import React, { PropTypes, Component } from 'react';
 import LoginForm from './LoginForm';
 
@@ -14,9 +14,9 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className='Login'>
-        <h1>Welcome, please sign in</h1>
-        <div className='Login__form'>
+      <div className={styles.root}>
+        <h2>Welcome, please sign in</h2>
+        <div className={styles.form}>
           <LoginForm onSubmit={::this.handleLogin} />
         </div>
         <p>Sign up is currently not available.</p>

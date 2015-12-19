@@ -1,9 +1,9 @@
-import './Header.css';
+import styles from './Header.css';
 import React from 'react';
 import { Link, IndexLink } from 'react-router';
 
 const Navigation = () => (
-  <nav className='Navigation'>
+  <nav className={styles.navigation}>
     <ul>
       <li><IndexLink to='/' activeClassName='active'>Home</IndexLink></li>
       <li><Link to='/about' activeClassName='active'>About</Link></li>
@@ -13,7 +13,7 @@ const Navigation = () => (
 );
 
 export default () => (
-  <div className='Header'>
+  <div className={styles.root}>
     <Navigation />
   </div>
 );

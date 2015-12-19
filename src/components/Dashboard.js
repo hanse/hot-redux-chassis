@@ -1,3 +1,4 @@
+import styles from './Dashboard.css';
 import React, { Component, PropTypes } from 'react';
 import ballmer from 'assets/ballmer.jpg';
 import LoginForm from './LoginForm';
@@ -12,18 +13,21 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div className='Dashboard u-content'>
-        <h2>{this.props.isLoggedIn && `Hello, ${this.props.username}!`}</h2>
+      <div className={styles.root}>
+        {this.props.isLoggedIn && <h2>{`Hello, ${this.props.username}!`}</h2>}
 
         {!this.props.isLoggedIn && (
-          <LoginForm
-            onSubmit={this.props.login}
-          />
+          <div>
+            <p>Hello, we decided to put a login form here as well</p>
+            <LoginForm
+              onSubmit={this.props.login}
+            />
+          </div>
         )}
 
         {this.props.isLoggedIn && (
           <div>
-            <button className='Button' onClick={this.props.logout}>Log out</button>
+            <button onClick={this.props.logout}>Log out</button>
             <div><img src={ballmer} alt='Steve Ballmer' /></div>
           </div>
         )}

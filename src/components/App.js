@@ -14,7 +14,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className='App'>
+      <div>
         <Header />
         {React.cloneElement(this.props.children, this.props)}
       </div>

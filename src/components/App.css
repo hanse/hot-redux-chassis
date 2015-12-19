@@ -18,15 +18,7 @@ a {
   color: rgb(115, 26, 53);
 }
 
-.u-content {
-  padding: 2rem;
-}
-
-.u-spaced {
-  margin: 1rem 0;
-}
-
-.Button {
+button {
   font-size: 1.1rem;
   text-transform: uppercase;
   border: 0;
@@ -45,4 +37,5 @@ input {
   font-size: 1.2rem;
   padding: 5px;
   margin-bottom: 5px;
+  display: block;
 }

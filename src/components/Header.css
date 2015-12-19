@@ -1,14 +1,14 @@
-.Header {
+.root {
   background: #333;
   padding: 0 2rem;
 }
 
-.Navigation {
+.navigation {
   height: 60px;
   line-height: 60px;
 }
 
-.Navigation ul li {
+.navigation li {
   display: inline;
 
   a {
