@@ -47,7 +47,7 @@
     "file-loader": "^0.8.4",
     "history": "^2.0.0",
     "html-webpack-plugin": "^2.9.0",
-    "jsdom": "^7.0.2",
+    "jsdom": "^8.0.4",
     "mocha": "^2.3.4",
     "nodemon": "^1.8.1",
     "postcss-cssnext": "^2.2.0",
