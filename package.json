@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Hanse",
   "scripts": {
-    "start": "nodemon --ignore src --ignore tests --exec babel-node -- server.js",
+    "start": "nodemon --ignore app --ignore tests --exec babel-node -- server.js",
     "build": "NODE_ENV=production webpack",
     "lint": "eslint src",
     "test": "mocha --compilers js:babel-core/register --require ./tests/setup.js --recursive 'src/**/*.spec.js'",
@@ -47,6 +47,7 @@
     "file-loader": "^0.8.4",
     "history": "^2.0.1",
     "html-webpack-plugin": "^2.10.0",
+    "immutable-devtools": "0.0.6",
     "jsdom": "^8.1.0",
     "mocha": "^2.3.4",
     "nodemon": "^1.8.1",

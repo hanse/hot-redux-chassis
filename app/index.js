@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import Immutable from 'immutable';
+import installDevTools from 'immutable-devtools';
 import configureStore from 'app/utils/configureStore';
 import routes from 'app/routes';
 
@@ -11,6 +13,8 @@ if (__DEV__) {
     console.log(self); // eslint-disable-line no-console
     return this;
   };
+
+  installDevTools(Immutable);
 
   global.React = React;
 }
