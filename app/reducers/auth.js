@@ -1,5 +1,4 @@
 import { Map } from 'immutable';
-import createReducer from 'app/utils/createReducer';
 import { Auth } from 'app/actions/types';
 
 const initialState = Map({
@@ -8,29 +7,21 @@ const initialState = Map({
   failed: false
 });
 
-export function stateSelector(state) {
-  return {
-    isLoggedIn: !!state.get('token'),
-    username: state.get('username')
-  };
+export default function auth(state = initialState, action) {
+  switch (action.type) {
+    case Auth.LOGIN_BEGIN:
+      return state.merge({ failed: false });
+    case Auth.LOGIN_FAILURE:
+      return state.merge({ failed: true });
+    case Auth.LOGIN_SUCCESS:
+      return state.merge(action.payload);
+    case Auth.LOGOUT:
+      return state.merge(initialState);
+    case Auth.FETCH_PROFILE_SUCCESS:
+      return state.merge(action.payload);
+    case Auth.FETCH_PROFILE_FAILURE:
+      return state.merge(initialState);
+    default:
+      return state;
+  }
 }
-
-export default createReducer(initialState, {
-  [Auth.LOGIN_BEGIN]: state =>
-    state.merge({ failed: false }),
-
-  [Auth.LOGIN_FAILURE]: state =>
-    state.merge({ failed: true }),
-
-  [Auth.LOGIN_SUCCESS]: (state, action) =>
-    state.merge(action.payload),
-
-  [Auth.LOGOUT]: state =>
-    state.merge(initialState),
-
-  [Auth.FETCH_PROFILE_SUCCESS]: (state, action) =>
-    state.merge(action.payload),
-
-  [Auth.FETCH_PROFILE_FAILURE]: (state) =>
-    state.merge(initialState)
-});

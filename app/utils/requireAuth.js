@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { stateSelector } from 'app/reducers/auth';
+import { authSelector } from 'app/selectors';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
@@ -34,7 +34,5 @@ export default function requireAuth(ProtectedComponent) {
     }
   }
 
-  return connect(state => ({
-    ...stateSelector(state.auth)
-  }))(AuthenticatedComponent);
+  return connect(authSelector)(AuthenticatedComponent);
 }
