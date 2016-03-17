@@ -1,5 +1,5 @@
 import { Auth } from 'app/actions/types';
-import { pushState } from 'redux-router';
+import { push } from 'react-router-redux';
 
 export function fetchUserProfile() {
   return (dispatch, getState) => {
@@ -32,7 +32,7 @@ export function login(username, password, redirectTo) {
         dispatch(fetchUserProfile(token));
 
         if (redirectTo) {
-          dispatch(pushState(null, redirectTo));
+          dispatch(push(redirectTo));
         }
       } else {
         dispatch({ type: Auth.LOGIN_FAILURE });

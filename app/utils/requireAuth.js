@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { stateSelector } from 'app/reducers/auth';
 import { connect } from 'react-redux';
-import { pushState } from 'redux-router';
+import { push } from 'react-router-redux';
 
 export default function requireAuth(ProtectedComponent) {
   class AuthenticatedComponent extends Component {
@@ -22,7 +22,7 @@ export default function requireAuth(ProtectedComponent) {
     redirectUnlessAuthenticated() {
       if (!this.props.isLoggedIn) {
         const redirectLocation = this.props.location.pathname;
-        this.props.dispatch(pushState(null, `/login?next=${redirectLocation}`));
+        this.props.dispatch(push(`/login?next=${redirectLocation}`));
       }
     }
 
