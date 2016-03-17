@@ -2,9 +2,16 @@ import { connect } from 'react-redux';
 import App from '../components/App';
 import { fetchUserProfile } from '../actions/auth';
 
-export default connect(state => ({
+const mapStateToProps = (state) => ({
   username: state.auth.get('username'),
   isLoggedIn: !!state.auth.get('token')
-}), {
+});
+
+const mapDispatchToProps = {
   fetchUserProfile
-})(App);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

@@ -1,13 +1,11 @@
-import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import { createHashHistory } from 'history';
 import { Iterable } from 'immutable';
-import { reduxReactRouter, routerStateReducer } from 'redux-router';
-import routes from '../routes';
+import { routerReducer } from 'react-router-redux';
 
-export default function configureStore(initialState) {
-  const loggerMiddleware = createLogger({
+export default function configureStore(initialState = {}) {
+  const logger = createLogger({
     level: 'info',
     collapsed: true,
     stateTransformer: (state) => Object.keys(state).reduce((json, key) => {
@@ -16,27 +14,16 @@ export default function configureStore(initialState) {
     }, {})
   });
 
-  const middlewares = applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-  );
-
-  const finalCreateStore = compose(
-    middlewares,
-    reduxReactRouter({
-      routes,
-      createHistory: createHashHistory
-    })
-  )(createStore);
-
   const mergeReducers = (reducers) => combineReducers({
-    router: routerStateReducer,
-    ...reducers
+    ...reducers,
+    routing: routerReducer
   });
 
-  const reducer = mergeReducers(require('../reducers'));
-
-  const store = finalCreateStore(reducer, initialState);
+  const store = createStore(
+    mergeReducers(require('../reducers')),
+    initialState,
+    applyMiddleware(thunk, logger)
+  );
 
   if (__DEV__ && module.hot) {
     module.hot.accept('../reducers', () => {

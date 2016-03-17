@@ -1,8 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { ReduxRouter } from 'redux-router';
+import { Router, hashHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from './utils/configureStore';
+import routes from './routes';
 
 if (__DEV__) {
   global.log = function log(self = this) {
@@ -14,10 +16,13 @@ if (__DEV__) {
 }
 
 const store = configureStore();
+const history = syncHistoryWithStore(hashHistory, store);
 
 render(
   <Provider {...{ store }}>
-    <ReduxRouter />
+    <Router {...{ history }}>
+      {routes}
+    </Router>
   </Provider>,
   document.getElementById('root')
 );

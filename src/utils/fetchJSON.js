@@ -2,15 +2,19 @@ export default function fetchJSON(path, options) {
   return fetch(path, {
     ...options,
     headers: {
+      'Content-Type': 'application/json',
       ...options.headers,
-      'Content-Type': 'application/json'
     }
-  }).then((response) => {
-    if (response.status >= 200 && response.status < 300) {
-      return response;
+  }).then((response) =>
+    response.json().then(json => ({ json, response }))
+  ).then(({ json, response }) => {
+    if (response.ok) {
+      return { json, response };
     }
-    const error = new Error(response.statusText);
+
+    const error = new Error(`${response.status} ${response.statusText}`);
     error.response = response;
+    error.json = json;
     throw error;
-  }).then(response => response.json());
+  });
 }

@@ -66,7 +66,10 @@ export default {
 
   resolve: {
     root: path.resolve(__dirname),
-    extensions: ['', '.js', '.jsx', '.css', '.png', '.jpg']
+    extensions: ['', '.js', '.jsx', '.css', '.png', '.jpg'],
+    alias: {
+      'app': path.resolve(__dirname, 'app')
+    }
   },
 
   module: {
