@@ -1,6 +1,6 @@
 import styles from './Dashboard.css';
 import React, { Component, PropTypes } from 'react';
-import ballmer from 'assets/ballmer.jpg';
+import ballmer from 'app/assets/ballmer.jpg';
 import LoginForm from './LoginForm';
 
 export default class Dashboard extends Component {

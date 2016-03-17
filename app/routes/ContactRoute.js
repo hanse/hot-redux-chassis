@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import About from '../components/About';
+import Contact from 'app/components/Contact';
 
 export default connect(() => ({
 }), {
-})(About);
+})(Contact);

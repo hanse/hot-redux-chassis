@@ -1,6 +1,6 @@
 import { Map } from 'immutable';
-import createReducer from '../utils/createReducer';
-import { Auth } from '../actions/types';
+import createReducer from 'app/utils/createReducer';
+import { Auth } from 'app/actions/types';
 
 const initialState = Map({
   username: 'Guest',

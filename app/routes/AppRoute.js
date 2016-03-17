@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import App from '../components/App';
-import { fetchUserProfile } from '../actions/auth';
+import App from 'app/components/App';
+import { fetchUserProfile } from 'app/actions/auth';
 
 const mapStateToProps = (state) => ({
   username: state.auth.get('username'),

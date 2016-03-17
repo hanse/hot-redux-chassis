@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import Dashboard from '../components/Dashboard';
-import { login, logout } from '../actions/auth';
+import Dashboard from 'app/components/Dashboard';
+import { login, logout } from 'app/actions/auth';
 
 export default connect(() => ({
 }), {

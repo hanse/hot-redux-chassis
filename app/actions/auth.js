@@ -1,4 +1,4 @@
-import { Auth } from './types';
+import { Auth } from 'app/actions/types';
 import { pushState } from 'redux-router';
 
 export function fetchUserProfile() {

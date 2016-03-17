@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { stateSelector } from '../reducers/auth';
+import { stateSelector } from 'app/reducers/auth';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 

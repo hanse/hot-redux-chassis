@@ -18,7 +18,7 @@ export default {
    */
   entry: compact([
     isDevelopment && 'webpack-hot-middleware/client',
-    './src/index.js'
+    './app/index.js'
   ]),
 
   /**
@@ -60,16 +60,13 @@ export default {
     new HtmlWebpackPlugin({
       template: 'index.html',
       inject: true,
-      favicon: 'assets/favicon.ico'
+      favicon: 'app/assets/favicon.ico'
     })
   ]),
 
   resolve: {
     root: path.resolve(__dirname),
     extensions: ['', '.js', '.jsx', '.css', '.png', '.jpg'],
-    alias: {
-      'app': path.resolve(__dirname, 'app')
-    }
   },
 
   module: {
@@ -77,7 +74,7 @@ export default {
       {
         test: /\.jsx?$/,
         loader: 'babel',
-        include: path.join(__dirname, 'src')
+        include: path.join(__dirname, 'app')
       },
       {
         test: /\.css$/,
