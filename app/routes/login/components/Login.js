@@ -1,6 +1,6 @@
 import styles from './Login.css';
 import React, { PropTypes, Component } from 'react';
-import LoginForm from './LoginForm';
+import LoginForm from 'app/components/LoginForm/LoginForm';
 
 export default class Login extends Component {
   static propTypes = {

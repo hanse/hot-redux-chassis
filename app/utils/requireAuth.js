@@ -9,7 +9,7 @@ export default function requireAuth(ProtectedComponent) {
       dispatch: PropTypes.func.isRequired,
       location: PropTypes.object.isRequired,
       isLoggedIn: PropTypes.bool.isRequired
-    }
+    };
 
     componentWillMount() {
       this.redirectUnlessAuthenticated();

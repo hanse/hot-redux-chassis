@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Login from 'app/components/Login';
+import Dashboard from './components/Dashboard';
 import { login, logout } from 'app/actions/auth';
 
 const mapStateToProps = () => ({});
@@ -12,4 +12,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(Dashboard);

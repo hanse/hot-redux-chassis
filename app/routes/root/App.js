@@ -1,6 +1,6 @@
 import './App.css';
 import React, { PropTypes, Component } from 'react';
-import Header from './Header';
+import Header from 'app/components/Header/Header';
 
 export default class App extends Component {
   static propTypes = {
