@@ -1,4 +1,4 @@
-export default function fetchJSON(path, options) {
+export default function fetchJSON(path, options = {}) {
   return fetch(path, {
     ...options,
     headers: {

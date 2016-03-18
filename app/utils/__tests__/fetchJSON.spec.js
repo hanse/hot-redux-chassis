@@ -1,6 +1,8 @@
 import fetchJSON from '../fetchJSON';
+import sinon from 'sinon';
+import { expect } from 'chai';
 
-describe('fetchJSON', () => {
+describe('utils/fetchJSON', () => {
   beforeEach(() => {
     sinon.stub(window, 'fetch');
   });
@@ -22,12 +24,34 @@ describe('fetchJSON', () => {
     });
 
     it('should format the response correctly', (done) => {
-      fetchJSON('/ok')
+      fetchJSON('/')
         .catch(done)
         .then(({ json }) => {
-          expect(json.hello).to.equal('world');
+          expect(json).to.eql({ hello: 'world' });
           done();
         });
+    });
+  });
+
+  describe('response with error', () => {
+    beforeEach(() => {
+      const res = new Response('{}', {
+        status: 401,
+        statusText: 'Unauthorized',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
+
+      window.fetch.returns(Promise.resolve(res));
+    });
+
+    it('should catch errors', (done) => {
+      fetchJSON('/')
+        .then(() => {}, (error) => {
+          expect(error.response.statusText).to.eql('Unauthorized');
+          done();
+        }).catch(done);
     });
   });
 });

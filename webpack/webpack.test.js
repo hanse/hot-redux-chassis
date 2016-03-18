@@ -3,10 +3,6 @@ const path = require('path');
 module.exports = {
   devtool: 'inline-source-map',
   module: {
-    noParse: [
-      /node_modules(\\|\/)sinon\//,
-      /node_modules(\\|\/)acorn/,
-    ],
     loaders: [
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.css$/, loader: 'null-loader' },

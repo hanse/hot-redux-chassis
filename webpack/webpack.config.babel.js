@@ -104,6 +104,8 @@ export default {
     ],
   },
 
+  target: 'web',
+
   postcss(wp) {
     return [
       require('postcss-import')({ addDependencyTo: wp }),
