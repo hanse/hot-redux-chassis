@@ -30,7 +30,7 @@
   "devDependencies": {
     "babel": "^6.3.13",
     "babel-cli": "^6.3.17",
-    "babel-eslint": "^5.0.0-beta6",
+    "babel-eslint": "^6.0.0-beta",
     "babel-loader": "^6.2.0",
     "babel-plugin-react-transform": "^2.0.0-beta1",
     "babel-preset-es2015-native-modules": "^6.6.0",
