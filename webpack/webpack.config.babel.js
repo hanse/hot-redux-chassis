@@ -1,15 +1,15 @@
-import path from 'path';
-import webpack from 'webpack';
-import compact from 'lodash/compact';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+const path = require('path');
+const webpack = require('webpack');
+const compact = require('lodash/compact');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 const cssLoader = 'css?modules&&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'; // eslint-disable-line
 
-export default {
+module.exports = {
   /**
    * @see webpack-devtools
    */

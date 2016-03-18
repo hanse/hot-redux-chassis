@@ -1,7 +1,7 @@
-import path from 'path';
-import express from 'express';
-import jsonServer from 'json-server';
-import config from './webpack/webpack.config.babel';
+const path = require('path');
+const express = require('express');
+const jsonServer = require('json-server');
+const config = require('./webpack/webpack.config.babel');
 
 const app = express();
 
