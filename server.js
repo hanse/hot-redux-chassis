@@ -1,5 +1,6 @@
 import path from 'path';
 import express from 'express';
+import jsonServer from 'json-server';
 import config from './webpack/webpack.config.babel';
 
 const app = express();
@@ -18,8 +19,10 @@ if (process.env.NODE_ENV === 'development') {
   app.use(require('webpack-hot-middleware')(compiler));
 }
 
+app.use('/api', jsonServer.router('tests/db.json'));
+
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'app', 'index.html'));
 });
 
 app.listen(app.get('port'), app.get('host'), (err) => {
