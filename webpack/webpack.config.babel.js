@@ -30,8 +30,9 @@ export default {
    * Define the output directory
    */
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: '[name].bundle.js',
+    path: path.join(__dirname, '../dist'),
+    filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
     publicPath: ''
   },
 
@@ -41,11 +42,11 @@ export default {
   plugins: compact([
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: 2,
-      filename: 'vendor.bundle.js'
+      minChunks: Infinity,
+      filename: 'vendor.js'
     }),
 
-    isProduction && new webpack.optimize.OccurenceOrderPlugin(),
+    isProduction && new webpack.optimize.OccurrenceOrderPlugin(),
 
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(!isProduction),
@@ -69,7 +70,7 @@ export default {
 
     // build a index.html with assets injected
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: 'app/index.html',
       inject: true,
       favicon: 'app/assets/favicon.ico'
     })
@@ -77,10 +78,10 @@ export default {
 
   resolve: {
     modules: [
-      path.resolve(__dirname),
+      path.resolve(__dirname, '../'),
       'node_modules'
     ],
-    extensions: ['.js'],
+    extensions: ['', '.js', '.json'],
   },
 
   module: {
@@ -88,7 +89,7 @@ export default {
       {
         test: /\.jsx?$/,
         loader: 'babel',
-        include: path.join(__dirname, 'app')
+        include: path.join(__dirname, '../app')
       },
       {
         test: /\.css$/,

@@ -1,6 +1,6 @@
 import path from 'path';
 import express from 'express';
-import config from './webpack.config.babel';
+import config from './webpack/webpack.config.babel';
 
 const app = express();
 
