@@ -16,17 +16,20 @@ export default {
   /**
    * Define webpack entries
    */
-  entry: compact([
-    isDevelopment && 'webpack-hot-middleware/client',
-    './app/index.js'
-  ]),
+  entry: {
+    app: compact([
+      isDevelopment && 'webpack-hot-middleware/client',
+      './app/index.js'
+    ]),
+    vendor: ['react', 'react-dom']
+  },
 
   /**
    * Define the output directory
    */
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     publicPath: ''
   },
 
@@ -34,6 +37,12 @@ export default {
    *
    */
   plugins: compact([
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: 'vendor.bundle.js'
+    }),
+
     isProduction && new webpack.optimize.OccurenceOrderPlugin(),
 
     new webpack.DefinePlugin({

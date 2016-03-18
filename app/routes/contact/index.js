@@ -1,4 +1,8 @@
 export default {
   path: 'contact',
-  component: require('./ContactRoute').default
+  getComponent: (location, cb) => {
+    require.ensure([], (require) => {
+      cb(null, require('./ContactRoute').default);
+    });
+  }
 };

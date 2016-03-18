@@ -1,4 +1,8 @@
 export default {
   path: 'about',
-  component: require('./AboutRoute').default
+  getComponent: (location, cb) => {
+    require.ensure([], (require) => {
+      cb(null, require('./AboutRoute').default);
+    });
+  }
 };
