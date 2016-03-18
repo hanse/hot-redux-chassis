@@ -7,6 +7,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 const isProduction = process.env.NODE_ENV === 'production';
 const isDevelopment = process.env.NODE_ENV === 'development';
 
+const cssLoader = 'css?modules&&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'; // eslint-disable-line
+
 export default {
   /**
    * @see webpack-devtools
@@ -39,7 +41,7 @@ export default {
   plugins: compact([
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: Infinity,
+      minChunks: 2,
       filename: 'vendor.bundle.js'
     }),
 
@@ -74,8 +76,11 @@ export default {
   ]),
 
   resolve: {
-    root: path.resolve(__dirname),
-    extensions: ['', '.js', '.jsx', '.css', '.png', '.jpg'],
+    modules: [
+      path.resolve(__dirname),
+      'node_modules'
+    ],
+    extensions: ['.js'],
   },
 
   module: {
@@ -88,8 +93,8 @@ export default {
       {
         test: /\.css$/,
         loader: isProduction
-          ? ExtractTextPlugin.extract('style', 'css?modules&&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss')
-          : 'style!css?modules&localIdentName=&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
+          ? ExtractTextPlugin.extract('style', cssLoader)
+          : `style!${cssLoader}`
       },
       {
         test: /\.(png|jpg)/,
