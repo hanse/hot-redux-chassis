@@ -1,15 +1,19 @@
+/** @flow */
+
 import styles from './Dashboard.css';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import ballmer from 'app/assets/ballmer.jpg';
 import LoginForm from 'app/components/LoginForm/LoginForm';
 
+type Props = {
+  username: string;
+  isLoggedIn: boolean;
+  login: () => any;
+  logout: () => any;
+};
+
 export default class Dashboard extends Component {
-  static propTypes = {
-    username: PropTypes.string.isRequired,
-    isLoggedIn: PropTypes.bool,
-    login: PropTypes.func,
-    logout: PropTypes.func
-  }
+  props: Props;
 
   render() {
     return (

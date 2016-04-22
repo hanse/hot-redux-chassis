@@ -40,6 +40,7 @@
     "chai": "3.5.0",
     "chai-enzyme": "0.4.2",
     "css-loader": "0.23.1",
+    "empty": "0.10.1",
     "enzyme": "2.2.0",
     "eslint": "2.8.0",
     "eslint-config-airbnb": "8.0.0",

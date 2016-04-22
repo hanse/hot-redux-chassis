@@ -1,12 +1,16 @@
+/** @flow */
+
 import './App.css';
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import Header from 'app/components/Header/Header';
 
+type Props = {
+  children: any;
+  fetchUserProfile: () => any;
+};
+
 export default class App extends Component {
-  static propTypes = {
-    children: PropTypes.any,
-    fetchUserProfile: PropTypes.func
-  }
+  props: Props;
 
   componentDidMount() {
     this.props.fetchUserProfile();

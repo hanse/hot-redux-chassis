@@ -1,5 +1,5 @@
 import React from 'react';
-import app from './app/AppRoute';
+import app from './app';
 import dashboard from './dashboard';
 import contact from './contact';
 import about from './about';
