@@ -1,7 +1,11 @@
+/** @flow */
+
 import { Auth } from 'app/actions/types';
 import { push } from 'react-router-redux';
 
-export function fetchUserProfile() {
+type Thunk = (dispatch: () => any, getState: () => any) => any;
+
+export function fetchUserProfile(): Thunk {
   return (dispatch, getState) => {
     const token = getState().auth.get('token');
     if (token === '12345') {
@@ -21,7 +25,7 @@ export function fetchUserProfile() {
   };
 }
 
-export function login(username, password, redirectTo) {
+export function login(username: string, password: string, redirectTo: ?string): Thunk {
   return (dispatch) => {
     dispatch({ type: Auth.LOGIN_BEGIN });
     setTimeout(() => {
@@ -41,7 +45,7 @@ export function login(username, password, redirectTo) {
   };
 }
 
-export function logout() {
+export function logout(): Thunk {
   return (dispatch) => {
     window.localStorage.removeItem('token');
     window.location.reload();

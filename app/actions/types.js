@@ -1,3 +1,14 @@
+/** @flow */
+
+export type Action = {
+  type: string;
+  payload: ?any;
+  meta: any;
+  error?: boolean;
+};
+
+export type AnyAction = Object & Action;
+export type Reducer<T> = (state: T, action: AnyAction) => T;
 
 export const Auth = {
   LOGIN_BEGIN: 'Auth/LOGIN_BEGIN',
