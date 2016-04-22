@@ -1,5 +1,5 @@
 import React from 'react';
-import app from './app';
+import { AppRoute } from './app';
 import dashboard from './dashboard';
 import contact from './contact';
 import about from './about';
@@ -15,7 +15,7 @@ export function loadingError(err) {
 
 export default {
   path: '/',
-  component: app,
+  component: AppRoute,
   indexRoute: dashboard,
   childRoutes: [
     about,

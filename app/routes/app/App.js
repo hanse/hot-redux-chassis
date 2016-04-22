@@ -20,7 +20,7 @@ export default class App extends Component {
     return (
       <div>
         <Header />
-        {React.cloneElement(this.props.children, this.props)}
+        {this.props.children}
       </div>
     );
   }

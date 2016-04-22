@@ -2,7 +2,12 @@ import { connect } from 'react-redux';
 import Dashboard from './components/Dashboard';
 import { login, logout } from 'app/actions/auth';
 
-const mapStateToProps = () => ({});
+function mapStateToProps(state) {
+  return {
+    username: state.auth.get('username'),
+    isLoggedIn: !!state.auth.get('token')
+  };
+}
 
 const mapDispatchToProps = {
   login,
