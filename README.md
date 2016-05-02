@@ -5,7 +5,7 @@ An example of how various projects from the React ecosystem can be glued togethe
 ## Features
 
 * Next-generation JavaScript using [Babel 6](http://babeljs.io/)
-* Hot Reloading ([babel-plugin-react-transform](https://github.com/gaearon/babel-plugin-react-transform) + [react-transform-hmr](https://github.com/gaearon/react-transform-hmr)
+* [React Hot Loader 3](https://github.com/gaearon/react-hot-loader)
 * Module bundling using [webpack 2](https://gist.github.com/sokra/27b24881210b56bbaff7)
 * Testing using [karma](https://github.com/karma-runner/karma), [enzyme](https://github.com/airbnb/enzyme), [sinon](https://github.com/sinonjs/sinon) and [chai](https://github.com/chaijs/chai)
 * Static type-checking using [flow](https://flowtye.org)

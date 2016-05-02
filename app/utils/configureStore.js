@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
@@ -22,7 +22,10 @@ export default function configureStore(initialState = {}) {
   const store = createStore(
     mergeReducers(require('../reducers')),
     initialState,
-    applyMiddleware(thunk, logger)
+    compose(
+      applyMiddleware(thunk, logger),
+      window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
   );
 
   if (__DEV__ && module.hot) {
