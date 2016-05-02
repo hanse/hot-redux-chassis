@@ -21,6 +21,7 @@ module.exports = {
   entry: {
     app: compact([
       isDevelopment && 'webpack-hot-middleware/client',
+      isDevelopment && 'react-hot-loader/patch',
       './app/index.js'
     ]),
     vendor: ['react', 'react-dom']
