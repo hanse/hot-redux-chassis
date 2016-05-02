@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
+import promiseMiddleware from './promiseMiddleware';
 import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
 
@@ -17,7 +18,7 @@ export default function configureStore(initialState = {}) {
     require('../reducers').default,
     initialState,
     compose(
-      applyMiddleware(thunk, logger),
+      applyMiddleware(promiseMiddleware, thunk, logger),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );
