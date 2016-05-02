@@ -1,8 +1,10 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import promiseMiddleware from './promiseMiddleware';
+import errorMiddleware from './errorMiddleware';
 import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
+import { showNotification } from 'app/actions/notifications';
 
 export default function configureStore(initialState = {}) {
   const logger = createLogger({
@@ -18,7 +20,7 @@ export default function configureStore(initialState = {}) {
     require('../reducers').default,
     initialState,
     compose(
-      applyMiddleware(promiseMiddleware, thunk, logger),
+      applyMiddleware(promiseMiddleware, errorMiddleware, thunk, logger),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );

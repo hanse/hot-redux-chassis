@@ -5,13 +5,14 @@ export default function promiseMiddleware() {
     }
 
     const { types, promise, meta, payload } = action;
-    const [ PENDING, SUCCESS, FAILURE ] = types;
 
     if (!Array.isArray(types) || types.length !== 3) {
       throw new TypeError(
         'The `types` field must be an array containing exactly 3 action types.'
       );
     }
+
+    const [ PENDING, SUCCESS, FAILURE ] = types;
 
     next({
       type: PENDING,

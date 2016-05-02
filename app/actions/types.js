@@ -19,3 +19,8 @@ export const Auth = {
   FETCH_PROFILE_SUCCESS: 'Auth/FETCH_PROFILE_SUCCESS',
   FETCH_PROFILE_FAILURE: 'Auth/FETCH_PROFILE_FAILURE'
 };
+
+export const Notification = {
+  SHOW: 'Notification/SHOW',
+  DISMISS: 'Notification/DISMISS'
+};
