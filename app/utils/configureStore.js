@@ -2,7 +2,6 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
-import { routerReducer } from 'react-router-redux';
 
 export default function configureStore(initialState = {}) {
   const logger = createLogger({
@@ -14,13 +13,8 @@ export default function configureStore(initialState = {}) {
     }, {})
   });
 
-  const mergeReducers = (reducers) => combineReducers({
-    ...reducers,
-    routing: routerReducer
-  });
-
   const store = createStore(
-    mergeReducers(require('../reducers')),
+    require('../reducers').default,
     initialState,
     compose(
       applyMiddleware(thunk, logger),
@@ -28,9 +22,9 @@ export default function configureStore(initialState = {}) {
     )
   );
 
-  if (__DEV__ && module.hot) {
+  if (module.hot) {
     module.hot.accept('../reducers', () => {
-      const nextReducer = mergeReducers(require('../reducers'));
+      const nextReducer = require('../reducers').default;
       store.replaceReducer(nextReducer);
     });
   }
