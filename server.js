@@ -1,7 +1,9 @@
 const path = require('path');
 const express = require('express');
 const jsonServer = require('json-server');
-const config = require('./webpack/webpack.config.babel');
+const config = require('./webpack/webpack.config.babel')({
+  development: process.env.NODE_ENV === 'development'
+});
 
 const app = express();
 
