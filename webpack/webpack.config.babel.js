@@ -7,7 +7,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const cssLoader = 'css?modules&&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'; // eslint-disable-line
+// const cssLoader = 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'; // eslint-disable-line
+
+const cssLoader = {
+  loader: 'css',
+  query: {
+    modules: true,
+    importLoaders: 1,
+    localIdentName: '[name]__[local]___[hash:base64:5]'
+  }
+};
 
 module.exports = {
   /**
@@ -24,7 +33,7 @@ module.exports = {
       isDevelopment && 'react-hot-loader/patch',
       './app/index.js'
     ]),
-    vendor: ['react', 'react-dom']
+    vendor: ['react', 'react-dom', 'lodash', 'react-router']
   },
 
   /**
@@ -61,12 +70,21 @@ module.exports = {
     isProduction && new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
+      },
+      output: {
+        comments: false,
       }
     }),
 
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+
     // Make a separate css bundle for production
-    isProduction && new ExtractTextPlugin('bundle.css', {
-      allChunks: true
+    new ExtractTextPlugin('bundle.css', {
+      allChunks: true,
+      disable: !isProduction
     }),
 
     // build a index.html with assets injected
@@ -94,13 +112,15 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: isProduction
-          ? ExtractTextPlugin.extract('style', cssLoader)
-          : `style!${cssLoader}`
+        // loader: ExtractTextPlugin.extract('style', [cssLoader, 'postcss']),
+        loaders: ['style', cssLoader, 'postcss']
       },
       {
         test: /\.(png|jpg)/,
-        loader: 'url-loader?limit=8192'
+        loader: 'url',
+        query: {
+          limit: 8192
+        }
       }
     ],
   },

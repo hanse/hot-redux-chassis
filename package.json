@@ -4,7 +4,7 @@
   "author": "Hanse",
   "scripts": {
     "start": "nodemon --ignore app --ignore tests --exec babel-node -- server.js",
-    "build": "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --color -p",
+    "build": "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --color -p --progress",
     "lint": "eslint app --ignore-path .gitignore",
     "test": "NODE_ENV=test karma start tests/karma.conf.js --single-run",
     "test:watch": "npm run test -- --auto-watch --no-single-run"
