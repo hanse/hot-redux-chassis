@@ -2,8 +2,7 @@
 
 import { Auth } from 'app/actions/types';
 import { push } from 'react-router-redux';
-
-type Thunk = (dispatch: () => any, getState: () => any) => any;
+import type { Thunk } from 'app/actions/types';
 
 export function fetchUserProfile(): Thunk {
   return (dispatch, getState) => {
@@ -28,10 +27,6 @@ export function fetchUserProfile(): Thunk {
 export function login(username: string, password: string, redirectTo: ?string): Thunk {
   return (dispatch) => {
     dispatch({ type: Auth.LOGIN_BEGIN });
-    dispatch({
-      types: ['FOOBAR', 'FOOBAR1', 'FOOBAR2'],
-      promise: Promise.reject(new Error('Hello World'))
-    });
     setTimeout(() => {
       if (username === 'admin' && password === 'admin') {
         const token = '12345';

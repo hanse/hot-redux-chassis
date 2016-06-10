@@ -1,14 +1,17 @@
+/** @flow */
+
 import React, { PropTypes, Component } from 'react';
-import { authSelector } from 'app/selectors';
+import { isLoggedIn } from 'app/reducers/auth';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import type { Dispatch } from 'app/actions/types';
 
-export default function requireAuth(ProtectedComponent) {
+export default function requireAuth(ProtectedComponent: ReactClass) {
   class AuthenticatedComponent extends Component {
-    static propTypes = {
-      dispatch: PropTypes.func.isRequired,
-      location: PropTypes.object.isRequired,
-      isLoggedIn: PropTypes.bool.isRequired
+    props: {
+      dispatch: Dispatch;
+      location: any;
+      isLoggedIn: boolean;
     };
 
     componentWillMount() {
@@ -34,5 +37,7 @@ export default function requireAuth(ProtectedComponent) {
     }
   }
 
-  return connect(authSelector)(AuthenticatedComponent);
+  return connect((state) => ({
+    isLoggedIn: isLoggedIn(state)
+  }))(AuthenticatedComponent);
 }

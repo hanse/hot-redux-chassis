@@ -1,7 +1,10 @@
+/** @flow */
+
 import { Notification } from './types';
+import type { Action } from './types';
 
 let notificationId = 0;
-export function showNotification(message) {
+export function showNotification(message: string): Action {
   return {
     type: Notification.SHOW,
     payload: {
@@ -11,7 +14,7 @@ export function showNotification(message) {
   };
 }
 
-export function dismissNotification(id) {
+export function dismissNotification(id: number): Action {
   return {
     type: Notification.DISMISS,
     payload: { id }

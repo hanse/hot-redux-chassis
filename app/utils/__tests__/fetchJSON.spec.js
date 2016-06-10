@@ -33,6 +33,25 @@ describe('utils/fetchJSON', () => {
     });
   });
 
+  describe('empty responses', () => {
+    beforeEach(() => {
+      const res = new Response(null, {
+        status: 204,
+        statusText: 'No Content',
+      });
+
+      window.fetch.returns(Promise.resolve(res));
+    });
+
+    it('should handle 204 No Content', (done) => {
+      fetchJSON('/')
+        .then(({ response }) => {
+          expect(response.status).to.equal(204);
+          done();
+        }).catch(done);
+    });
+  });
+
   describe('response with error', () => {
     beforeEach(() => {
       const res = new Response('{}', {

@@ -5,6 +5,7 @@
 .*/node_modules/babylon.*
 .*/node_modules/invariant.*
 .*/node_modules/json5.*
+.*/node_modules/systemjs-builder.*
 .*/node_modules/fbjs/lib/PromiseMap.js
 .*/node_modules/fbjs/lib/fetchWithRetries.js
 .*/node_modules/fbjs/lib/Deferred.js.flow

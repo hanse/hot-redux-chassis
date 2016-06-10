@@ -2,7 +2,7 @@
 
 import { Map, fromJS } from 'immutable';
 import { Auth } from 'app/actions/types';
-import type { Action } from 'app/actions/types';
+import type { Action, RootState } from 'app/actions/types';
 
 type State = Map<string, any>;
 
@@ -29,4 +29,18 @@ export default function auth(state: State = initialState, action: Action): State
     default:
       return state;
   }
+}
+
+/**
+ *
+ */
+export function isLoggedIn(state: RootState): string {
+  return !!state.auth.get('token');
+}
+
+/**
+ *
+ */
+export function selectCurrentUsername(state: RootState): string {
+  return state.auth.get('username');
 }
