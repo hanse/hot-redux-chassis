@@ -1,6 +1,7 @@
+import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
 import Immutable from 'immutable';
@@ -19,7 +20,7 @@ if (__DEV__) {
 }
 
 const store = configureStore();
-const history = syncHistoryWithStore(hashHistory, store);
+const history = syncHistoryWithStore(browserHistory, store);
 
 const rootElement = document.getElementById('root');
 

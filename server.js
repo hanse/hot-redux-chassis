@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
 const jsonServer = require('json-server');
 const config = require('./webpack/webpack.config.babel')({
   development: process.env.NODE_ENV === 'development'
@@ -9,6 +10,7 @@ const app = express();
 
 app.set('host', process.env.HOST || 'localhost');
 app.set('port', process.env.PORT || 3000);
+app.use(bodyParser.json());
 
 if (process.env.NODE_ENV === 'development') {
   const compiler = require('webpack')(config);
@@ -22,6 +24,16 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use('/api', jsonServer.router('tests/db.json'));
+
+app.post('/auth/login', (req, res) => {
+  const body = req.body;
+  if (body.username === 'admin' && body.password === 'admin') {
+    return res.send({
+      token: '12345'
+    });
+  }
+  return res.sendStatus(401);
+});
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'app', 'index.html'));

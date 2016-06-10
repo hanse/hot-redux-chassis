@@ -4,7 +4,7 @@ import promiseMiddleware from './promiseMiddleware';
 import errorMiddleware from './errorMiddleware';
 import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
-import { showNotification } from 'app/actions/notifications';
+import { showNotification } from 'app/state/notifications';
 
 export default function configureStore(initialState = {}) {
   const logger = createLogger({
@@ -17,7 +17,7 @@ export default function configureStore(initialState = {}) {
   });
 
   const store = createStore(
-    require('../reducers').default,
+    require('../state').default,
     initialState,
     compose(
       applyMiddleware(promiseMiddleware, errorMiddleware, thunk, logger),
@@ -26,8 +26,8 @@ export default function configureStore(initialState = {}) {
   );
 
   if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextReducer = require('../reducers').default;
+    module.hot.accept('../state', () => {
+      const nextReducer = require('../state').default;
       store.replaceReducer(nextReducer);
     });
   }

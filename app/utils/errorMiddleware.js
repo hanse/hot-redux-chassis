@@ -1,4 +1,4 @@
-import { showNotification } from 'app/actions/notifications';
+import { showNotification } from 'app/state/notifications';
 
 export default function errorMiddleware(store) {
   return (next) => (action) => {
