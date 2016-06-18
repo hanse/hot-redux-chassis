@@ -4,6 +4,8 @@ import promiseMiddleware from './promiseMiddleware';
 import errorMiddleware from './errorMiddleware';
 import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
+import { browserHistory } from 'react-router';
+import { routerMiddleware } from 'react-router-redux';
 import { showNotification } from 'app/state/notifications';
 
 export default function configureStore(initialState = {}) {
@@ -20,7 +22,13 @@ export default function configureStore(initialState = {}) {
     require('../state').default,
     initialState,
     compose(
-      applyMiddleware(promiseMiddleware, errorMiddleware, thunk, logger),
+      applyMiddleware(
+        thunk,
+        promiseMiddleware,
+        errorMiddleware,
+        routerMiddleware(browserHistory),
+        logger
+      ),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );
