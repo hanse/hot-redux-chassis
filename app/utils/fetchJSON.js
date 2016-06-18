@@ -6,13 +6,17 @@ class HttpError extends Error {
 }
 
 export default function fetchJSON(path: string, options: Object = {}) {
-  return fetch(path, {
+  const request = {
     ...options,
     headers: {
       'Content-Type': 'application/json',
       ...options.headers,
     }
-  }).then((response) => {
+  };
+
+  console.log('fetch.request', path, request);
+  return fetch(path, request).then((response) => {
+    console.log('fetch.response', response);
     if (response.status === 204) {
       return Promise.resolve({ response, json: null });
     }

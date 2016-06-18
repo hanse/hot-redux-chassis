@@ -2,6 +2,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const jsonServer = require('json-server');
+const uuid = require('node-uuid');
+
 const config = require('./webpack/webpack.config.babel')({
   development: process.env.NODE_ENV === 'development'
 });
@@ -23,16 +25,57 @@ if (process.env.NODE_ENV === 'development') {
   app.use(require('webpack-hot-middleware')(compiler));
 }
 
+
+const users = [{
+  id: 1,
+  username: 'admin',
+  password: 'admin',
+}];
+
+const tokens = {};
+
 app.use('/api', jsonServer.router('tests/db.json'));
+
+app.get('/users/me', (req, res) => {
+  const authorization = req.headers.authorization;
+  if (!authorization) {
+    return res.status(401).send({ error: 'Missing authorization header' });
+  }
+
+  const token = authorization.split(' ')[1];
+
+  if (!tokens[token]) {
+    return res.status(401).send({ error: 'Invalid token' });
+  }
+
+  const userId = tokens[token];
+  const user = users.find((user) => user.id === userId);
+
+  res.send({
+    id: user.id,
+    username: user.username
+  });
+});
 
 app.post('/auth/login', (req, res) => {
   const body = req.body;
-  if (body.username === 'admin' && body.password === 'admin') {
-    return res.send({
-      token: '12345'
+
+  const user = users.find((user) =>
+    user.username === body.username && user.password === body.password
+  );
+
+  if (!user) {
+    return res.status(401).send({
+      error: 'Invalid credentials'
     });
   }
-  return res.sendStatus(401);
+
+  const token = uuid.v4();
+  tokens[token] = user.id;
+
+  res.send({
+    token
+  });
 });
 
 app.get('*', (req, res) => {

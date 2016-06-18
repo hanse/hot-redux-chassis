@@ -2,11 +2,7 @@
 
 import { Map, fromJS } from 'immutable';
 import type { Action, RootState, Thunk } from 'app/types';
-
-type AuthActions =
-    { type: 'FETCH_PROFILE' }
-  | { type: 'FETCH_PROFILE_SUCCESS' }
-  | { type: 'FETCH_PROFILE_FAILURE' }
+import fetchJSON from 'app/utils/fetchJSON';
 
 /**
  *
@@ -19,43 +15,52 @@ const LOGIN_SUCCESS = 'Auth/LOGIN_SUCCESS';
 const LOGIN_FAILURE = 'Auth/LOGIN_FAILURE';
 const LOGOUT = 'Auth/LOGOUT';
 
-export function fetchUserProfile(): Thunk {
-  return (dispatch, getState) => {
-    const token = getState().auth.get('token');
-    if (token === '12345') {
+export function rehydrateAuth() {
+  return (dispatch) => {
+    const token = window.localStorage.getItem('token');
+    if (!token) return;
+    dispatch(fetchUserProfile(token)).then((action) => {
       dispatch({
-        type: FETCH_PROFILE_SUCCESS,
+        type: LOGIN_SUCCESS,
         payload: {
-          username: 'admin'
+          json: { token }
         }
-      });
-    } else {
-      window.localStorage.removeItem('token');
-      dispatch({
-        type: FETCH_PROFILE_FAILURE,
-        error: new Error('Invalid token')
-      });
-    }
+      })
+    });
+  };
+}
+
+export function fetchUserProfile(token): Thunk {
+  return {
+    types: [FETCH_PROFILE, FETCH_PROFILE_SUCCESS, FETCH_PROFILE_FAILURE],
+    promise: fetchJSON(`http://localhost:3000/users/me`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
   };
 }
 
 export function login(username: string, password: string, redirectTo: ?string): Thunk {
   return (dispatch) => {
-    dispatch({ type: LOGIN });
-    setTimeout(() => {
-      if (username === 'admin' && password === 'admin') {
-        const token = '12345';
-        window.localStorage.setItem('token', token);
-        dispatch({ type: LOGIN_SUCCESS, payload: { token, username } });
-        dispatch(fetchUserProfile(token));
+    return dispatch({
+      types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE],
+      promise: fetchJSON('http://localhost:3000/auth/login', {
+        method: 'post',
+        body: JSON.stringify({
+          username,
+          password
+        })
+      })
+    }).then((action) => {
+      window.localStorage.setItem('token', action.payload.json.token);
+      dispatch(fetchUserProfile(action.payload.json.token));
 
-        if (redirectTo) {
-          dispatch(push(redirectTo));
-        }
-      } else {
-        dispatch({ type: LOGIN_FAILURE });
+      if (redirectTo) {
+        dispatch(push(redirectTo));
       }
-    }, 500);
+      return action;
+    });
   };
 }
 
@@ -73,7 +78,7 @@ type State = Map<string, any>;
 
 const initialState = fromJS({
   username: 'Guest',
-  token: window.localStorage.getItem('token'),
+  token: null,
   failed: false
 });
 
@@ -84,11 +89,13 @@ export default function auth(state: State = initialState, action: Action): State
     case LOGIN_FAILURE:
       return state.merge({ failed: true });
     case LOGIN_SUCCESS:
-      return state.merge(action.payload || {});
+      return state.merge({
+        token: action.payload.json.token
+      });
     case LOGOUT:
       return state.merge(initialState);
     case FETCH_PROFILE_SUCCESS:
-      return state.merge(action.payload || {});
+      return state.merge(action.payload.json || {});
     case FETCH_PROFILE_FAILURE:
       return state.merge(initialState);
     default:

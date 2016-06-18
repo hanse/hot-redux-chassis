@@ -6,14 +6,14 @@ import Header from 'app/components/Header/Header';
 
 type Props = {
   children: any;
-  fetchUserProfile: () => any;
+  rehydrateAuth: () => any;
 };
 
 export default class App extends Component {
   props: Props;
 
   componentDidMount() {
-    this.props.fetchUserProfile();
+    this.props.rehydrateAuth();
   }
 
   render() {

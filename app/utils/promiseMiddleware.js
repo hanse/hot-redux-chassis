@@ -23,7 +23,7 @@ export default function promiseMiddleware() {
     return new Promise((resolve, reject) => {
       promise.then(
         (payload) => {
-          console.info('promiseMiddleware.response', payload);
+          console.info('promiseMiddleware.resolved', payload);
           resolve(next({
             type: SUCCESS,
             payload,
@@ -31,7 +31,7 @@ export default function promiseMiddleware() {
           }));
         },
         (error) => {
-          console.info('promiseMiddleware.error', error);
+          console.info('promiseMiddleware.rejected', error);
           reject(next({
             type: FAILURE,
             error,
