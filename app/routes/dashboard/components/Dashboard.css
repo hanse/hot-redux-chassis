@@ -1,3 +1,11 @@
 .root {
   padding: 2rem;
 }
+
+.loginContainer {
+  background: #eee;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 10;
+  max-width: 500px;
+}

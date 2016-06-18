@@ -35,7 +35,15 @@ button {
 
 input {
   font-size: 1.2rem;
-  padding: 5px;
+  padding: 10px;
   margin-bottom: 5px;
   display: block;
+  border: 0;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 10px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #333;
 }

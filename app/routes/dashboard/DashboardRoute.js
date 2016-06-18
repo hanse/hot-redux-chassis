@@ -5,7 +5,8 @@ import { login, logout } from 'app/state/auth';
 function mapStateToProps(state) {
   return {
     username: state.auth.get('username'),
-    isLoggedIn: !!state.auth.get('token')
+    isLoggedIn: !!state.auth.get('token'),
+    loginFailed: state.auth.get('failed')
   };
 }
 

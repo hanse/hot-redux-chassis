@@ -21,8 +21,10 @@ export default class Dashboard extends Component {
         {this.props.isLoggedIn && <h2>{`Hello, ${this.props.username}!`}</h2>}
 
         {!this.props.isLoggedIn && (
-          <div>
-            <p>Hello, we decided to put a login form here as well</p>
+          <div className={styles.loginContainer}>
+            {this.props.loginFailed && (
+              <p style={{ color: '#ad1d13', fontWeight: 700 }}>The login details were not correct.</p>
+            )}
             <LoginForm
               onSubmit={this.props.login}
             />
