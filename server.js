@@ -14,6 +14,10 @@ app.set('host', process.env.HOST || 'localhost');
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 
+if (!process.env.NODE_ENV) {
+  console.log('NODE_ENV is not set, please put export NODE_ENV=development in your shell config.');
+}
+
 if (process.env.NODE_ENV === 'development') {
   const compiler = require('webpack')(config);
 
