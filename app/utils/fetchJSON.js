@@ -10,17 +10,17 @@ export default function fetchJSON(path: string, options: Object = {}) {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options.headers,
+      ...options.headers
     }
   };
 
-  console.log('fetch.request', path, request);
+  __DEV__ && console.log('fetch.request', path, request); // eslint-disable-line
   return fetch(path, request).then((response) => {
-    console.log('fetch.response', response);
+    __DEV__ && console.log('fetch.response', response); // eslint-disable-line
     if (response.status === 204) {
       return Promise.resolve({ response, json: null });
     }
-    return response.json().then(json => ({ json, response }))
+    return response.json().then(json => ({ json, response }));
   }).then(({ json, response }) => {
     if (response.ok) {
       return { json, response };

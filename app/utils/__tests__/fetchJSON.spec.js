@@ -16,8 +16,8 @@ describe('utils/fetchJSON', () => {
       const res = new Response('{"hello":"world"}', {
         status: 200,
         headers: {
-          'Content-type': 'application/json',
-        },
+          'Content-type': 'application/json'
+        }
       });
 
       window.fetch.returns(Promise.resolve(res));
@@ -37,7 +37,7 @@ describe('utils/fetchJSON', () => {
     beforeEach(() => {
       const res = new Response(null, {
         status: 204,
-        statusText: 'No Content',
+        statusText: 'No Content'
       });
 
       window.fetch.returns(Promise.resolve(res));
@@ -58,8 +58,8 @@ describe('utils/fetchJSON', () => {
         status: 401,
         statusText: 'Unauthorized',
         headers: {
-          'Content-type': 'application/json',
-        },
+          'Content-type': 'application/json'
+        }
       });
 
       window.fetch.returns(Promise.resolve(res));

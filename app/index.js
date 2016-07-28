@@ -35,7 +35,7 @@ if (module.hot) {
   module.hot.accept('./Root', () => {
     render(
       <AppContainer>
-         <Root {...{ store, history }} />
+        <Root {...{ store, history }} />
       </AppContainer>,
       rootElement
     );

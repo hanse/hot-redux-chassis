@@ -12,7 +12,7 @@ export default function promiseMiddleware() {
       );
     }
 
-    const [ PENDING, SUCCESS, FAILURE ] = types;
+    const [PENDING, SUCCESS, FAILURE] = types;
 
     next({
       type: PENDING,
@@ -23,7 +23,7 @@ export default function promiseMiddleware() {
     return new Promise((resolve, reject) => {
       promise.then(
         (payload) => {
-          console.info('promiseMiddleware.resolved', payload);
+          __DEV__ && console.info('promiseMiddleware.resolved', payload); // eslint-disable-line
           resolve(next({
             type: SUCCESS,
             payload,
@@ -31,7 +31,7 @@ export default function promiseMiddleware() {
           }));
         },
         (error) => {
-          console.info('promiseMiddleware.rejected', error);
+          __DEV__ && console.info('promiseMiddleware.rejected', error); // eslint-disable-line
           reject(next({
             type: FAILURE,
             error,

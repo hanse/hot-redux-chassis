@@ -1,10 +1,34 @@
 {
   "parser": "babel-eslint",
+  "extends": "airbnb",
+  "plugins": [
+    "react",
+    "flow-vars",
+    "import"
+  ],
   "rules": {
-    "comma-dangle": 0,
+    "flow-vars/define-flow-type": 1,
+    "flow-vars/use-flow-type": 1,
+    "comma-dangle": [2, "never"],
     "jsx-quotes": [2, "prefer-single"],
     "new-cap": 0,
-    "react/no-multi-comp": 0
+    "react/no-multi-comp": [2, { "ignoreStateless": true }],
+    "react/prop-types": 0,
+    "react/sort-comp": 0,
+    "react/prefer-stateless-function": 0,
+    "arrow-body-style": 0,
+    "no-shadow": 0,
+    "global-require": 0,
+    "no-use-before-define": 0,
+    "no-param-reassign": 0,
+    "import/no-unresolved": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack/webpack.config.babel.js"
+      }
+    }
   },
   "env": {
     "browser": true,
@@ -12,6 +36,7 @@
   },
   "globals": {
     "__DEV__": true,
+    "COMMIT_HASH": true,
     "log": true
   }
 }

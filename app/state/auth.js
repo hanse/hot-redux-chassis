@@ -19,8 +19,8 @@ const LOGOUT = 'Auth/LOGOUT';
 export function rehydrateAuth(): Thunk {
   return (dispatch) => {
     const token = window.localStorage.getItem('token');
-    if (!token) return;
-    return dispatch(fetchUserProfile(token)).then((action) => {
+    if (!token) return Promise.resolve();
+    return dispatch(fetchUserProfile(token)).then(() => {
       return dispatch({
         type: LOGIN_SUCCESS,
         payload: {
@@ -34,9 +34,9 @@ export function rehydrateAuth(): Thunk {
 export function fetchUserProfile(token: string): Thunk {
   return {
     types: [FETCH_PROFILE, FETCH_PROFILE_SUCCESS, FETCH_PROFILE_FAILURE],
-    promise: fetchJSON(`http://localhost:3000/users/me`, {
+    promise: fetchJSON('http://localhost:3000/users/me', {
       headers: {
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       }
     })
   };

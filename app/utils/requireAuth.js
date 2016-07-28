@@ -1,6 +1,6 @@
 /** @flow */
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { isLoggedIn } from 'app/reducers/auth';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';

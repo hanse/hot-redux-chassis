@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import promiseMiddleware from './promiseMiddleware';
 import errorMiddleware from './errorMiddleware';
@@ -6,7 +6,6 @@ import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
-import { showNotification } from 'app/state/notifications';
 
 export default function configureStore(initialState = {}) {
   const logger = createLogger({

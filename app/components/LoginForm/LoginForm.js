@@ -1,6 +1,6 @@
 /** @flow */
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 
 type Props = {
   onSubmit: (u: string, p: string) => any;
@@ -11,8 +11,6 @@ type State = {
   password: string;
 }
 
-type EventHandler = (e: SyntheticEvent) => void;
-
 export default class LoginForm extends Component {
   props: Props;
 
@@ -21,7 +19,7 @@ export default class LoginForm extends Component {
     password: ''
   };
 
-  handleSubmit: EventHandler = (e: SyntheticEvent) => {
+  handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     this.props.onSubmit(
       this.state.username,

@@ -4,7 +4,12 @@ const compact = require('lodash/compact');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = function(options) {
+const modules = [
+  path.resolve(__dirname, '../'),
+  'node_modules'
+];
+
+module.exports = (options) => {
   return {
     /**
      * @see webpack-devtools
@@ -59,7 +64,7 @@ module.exports = function(options) {
           warnings: false
         },
         output: {
-          comments: false,
+          comments: false
         }
       }),
 
@@ -83,11 +88,9 @@ module.exports = function(options) {
     ]),
 
     resolve: {
-      modules: [
-        path.resolve(__dirname, '../'),
-        'node_modules'
-      ],
-      extensions: ['', '.js', '.json'],
+      modulesDirectory: modules,
+      modules,
+      extensions: ['', '.js', '.json']
     },
 
     module: {
@@ -119,7 +122,7 @@ module.exports = function(options) {
             limit: 8192
           }
         }
-      ],
+      ]
     },
 
     target: 'web',
@@ -132,4 +135,4 @@ module.exports = function(options) {
       ];
     }
   };
-}
+};
