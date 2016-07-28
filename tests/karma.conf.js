@@ -14,7 +14,7 @@ module.exports = (config) => {
       included: true
     }],
     preprocessors: {
-      ['./bundler.js']: ['webpack', 'sourcemap']
+      './bundler.js': ['webpack', 'sourcemap']
     },
     webpack: webpackConfig,
     webpackMiddleware: {

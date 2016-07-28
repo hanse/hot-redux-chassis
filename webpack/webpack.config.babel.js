@@ -74,7 +74,8 @@ module.exports = (options) => {
       }),
 
       // Make a separate css bundle for production
-      new ExtractTextPlugin('bundle.css', {
+      new ExtractTextPlugin({
+        filename: '[name].css',
         allChunks: true,
         disable: !!options.development
       }),

@@ -1,7 +1,7 @@
 /** @flow */
 
 import React, { Component } from 'react';
-import { isLoggedIn } from 'app/reducers/auth';
+import { isLoggedIn } from 'app/state/auth';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import type { Dispatch } from 'app/actions/types';
