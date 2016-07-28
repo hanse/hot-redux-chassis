@@ -28,3 +28,14 @@ vim package.json # Edit package.json before committing
 git add .
 git commit -m "Initial commit"
 ```
+
+## Atom
+[Atom](https://atom.io) is a great editor for modern JavaScript development. With these additional packages it becomes even greater:
+
+* [nuclide](https://atom.io/packages/nuclide)
+* [pigments](https://atom.io/packages/pigments)
+* [linter-stylelint](https://atom.io/packages/linter-stylelint)
+* [linter-eslint](https://atom.io/packages/linter-eslint)
+
+## License
+MIT
