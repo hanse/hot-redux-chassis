@@ -1,7 +1,10 @@
+/* eslint-disable no-console */
+
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const jsonServer = require('json-server');
+const chalk = require('chalk');
 const auth = require('./auth');
 
 const config = require('../webpack/webpack.config.babel')({
@@ -16,12 +19,75 @@ app.use(bodyParser.json());
 app.use('/api', jsonServer.router('tests/db.json'));
 app.use('/auth', auth);
 
+function clearConsole() {
+  process.stdout.write('\x1bc');
+}
+
+function log(level, message) {
+  const colorFunctions = {
+    info: chalk.cyan,
+    warning: chalk.yellow,
+    error: chalk.red
+  };
+
+  const label = `[${level.toUpperCase()}]`;
+  const colorize = colorFunctions[level] || colorFunctions.info;
+  console.log(colorize(label), message);
+}
+
+function formatMessage(message) {
+  return message
+    .replace(/^\s*at\s.*:\d+:\d+[\s\)]*\n/gm, '') // at ... ...:x:y
+    .replace('./~/css-loader!./~/postcss-loader!', '');
+}
+
 if (process.env.NODE_ENV !== 'production') {
   const compiler = require('webpack')(config);
 
+  compiler.plugin('invalid', () => {
+    log('info', chalk.yellow('Compiling assets...'));
+  });
+
+  compiler.plugin('done', (stats) => {
+    const hasErrors = stats.hasErrors();
+    const hasWarnings = stats.hasWarnings();
+
+    if (!hasErrors && !hasWarnings) {
+      log('info', chalk.green(`Assets compiled in ${stats.endTime - stats.startTime} ms`));
+      return;
+    }
+
+    const json = stats.toJson();
+
+    const formattedErrors = json.errors.map(
+      (message) => `Error in ${formatMessage(message)}`
+    );
+
+    const formattedWarnings = json.warnings.map(
+      (message) => `Warning in ${formatMessage(message)}`
+    );
+
+    if (hasErrors) {
+      log('error', 'Failed to compile assets');
+      formattedErrors.forEach((message) => {
+        console.log(message);
+        console.log();
+      });
+      return;
+    }
+
+    if (hasWarnings) {
+      log('warning', 'Compiled assets with warnings');
+      formattedWarnings.forEach((message) => {
+        console.log(message);
+        console.log();
+      });
+    }
+  });
+
   app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
+    publicPath: config.output.publicPath,
+    quiet: true,
   }));
 
   app.use(require('webpack-hot-middleware')(compiler));
@@ -43,9 +109,18 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.listen(app.get('port'), app.get('host'), (err) => {
+  clearConsole();
   if (err) {
-    console.log(err); // eslint-disable-line
+    log('error', err);
   } else {
-    console.log('Development server listening on %s:%s', app.get('host'), app.get('port')); // eslint-disable-line
+    log('info', `Server listening on localhost:${app.get('port')}`);
+    log('info', `NODE_ENV=${process.env.NODE_ENV}`);
+
+    if (!process.env.NODE_ENV) {
+      log(
+        'warning'
+        `NODE_ENV is not set. Please put ${chalk.cyan('export NODE_ENV=development')} in your shell config.` // eslint-disable-line
+      );
+    }
   }
 });
