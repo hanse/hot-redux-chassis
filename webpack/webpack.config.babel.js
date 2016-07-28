@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const compact = require('lodash/compact');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const packageJson = require('../package.json');
 
 const modules = [
   path.resolve(__dirname, '../'),
@@ -84,7 +85,9 @@ module.exports = (options) => {
       new HtmlWebpackPlugin({
         template: 'app/index.html',
         inject: true,
-        favicon: 'app/assets/favicon.ico'
+        hash: true,
+        favicon: 'app/assets/favicon.ico',
+        appName: packageJson.name
       })
     ]),
 
