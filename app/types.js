@@ -15,6 +15,11 @@ export type EmptyAction = {
   error?: Error;
 };
 
+export type PromiseAction = {
+  types: [string, string, string];
+  promise: Promise<*>;
+};
+
 export type RootState = { [key: string]: Map<string, any> };
 export type AnyAction = Object & Action;
 export type Reducer<T> = (state: T, action: AnyAction) => T;

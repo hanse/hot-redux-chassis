@@ -1,3 +1,5 @@
+/** @flow */
+
 import styles from './Header.css';
 import React from 'react';
 import { Link, IndexLink } from 'react-router';

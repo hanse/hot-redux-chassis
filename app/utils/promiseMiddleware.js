@@ -1,5 +1,7 @@
+/** @flow */
+
 export default function promiseMiddleware() {
-  return next => action => {
+  return (next) => (action) => {
     if (!action.promise) {
       return next(action);
     }

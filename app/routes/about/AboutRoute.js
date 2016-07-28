@@ -1,3 +1,5 @@
+/** @flow */
+
 import About from './components/About';
 import { connect } from 'react-redux';
 

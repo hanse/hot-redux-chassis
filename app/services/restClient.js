@@ -1,6 +1,19 @@
+/** @flow */
+
 import fetchJSON from 'app/utils/fetchJSON';
 
-function createApiClient({ url }) {
+import type {
+  HttpPromise,
+  HttpOptions
+} from 'app/utils/fetchJSON';
+
+type ApiClientOptions = {
+  url: string;
+};
+
+type ApiClient = (path: string, options: HttpOptions) => HttpPromise;
+
+function createApiClient({ url }: ApiClientOptions): ApiClient {
   return function request(path, options) {
     return fetchJSON(`${url}${path}`, options);
   };

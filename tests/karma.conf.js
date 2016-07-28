@@ -1,4 +1,4 @@
-const webpackConfig = require('../webpack/webpack.test.js');
+const webpackConfig = require('../webpack/webpack.test.babel.js');
 
 module.exports = (config) => {
   config.set({

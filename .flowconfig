@@ -15,10 +15,11 @@
 .*/node_modules/fbjs/lib/everySet.js.flow
 .*/node_modules/fbjs/lib/UnicodeBidi.js.flow
 .*/node_modules/fbjs/lib/UnicodeBidiService.js.flow
+.*/node_modules/editions.*
 
 
 [libs]
-./interfaces/
+flow/
 
 [options]
 esproposal.class_static_fields=enable

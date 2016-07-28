@@ -27,7 +27,7 @@ export function dismissNotification(id: number): Action {
 /**
  *
  */
-type State = Map;
+type State = Map<string, any>;
 
 /**
  *
@@ -39,10 +39,10 @@ const initialState = fromJS({});
  */
 export default function notifications(state: State = initialState, action: Action): State {
   switch (action.type) {
-    case Notification.SHOW:
+    case SHOW:
       return state.set(action.payload.id, action.payload);
 
-    case Notification.DISMISS:
+    case DISMISS:
       return state.delete(action.payload.id);
 
     default:

@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import { isLoggedIn } from 'app/state/auth';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import type { Dispatch } from 'app/actions/types';
+import type { Dispatch } from 'app/types';
 
-export default function requireAuth(ProtectedComponent: ReactClass) {
+export default function requireAuth(ProtectedComponent: ReactClass<*>) {
   class AuthenticatedComponent extends Component {
     props: {
       dispatch: Dispatch;

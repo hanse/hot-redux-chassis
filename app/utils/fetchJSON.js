@@ -1,10 +1,17 @@
 /** @flow */
 
+export type HttpOptions = Object;
+export type HttpPromise = Promise<HttpResponse | HttpError>;
+
 class HttpError extends Error {
   response: Response;
 }
 
-function parseJSON(response) {
+class HttpResponse extends Response {
+  jsonData: ?Object;
+}
+
+function parseJSON(response: HttpResponse) {
   response.jsonData = null;
 
   if (response.status === 204) {
@@ -17,11 +24,15 @@ function parseJSON(response) {
   });
 }
 
-export default function fetchJSON(path: string, options: Object = {}) {
+export default function fetchJSON(
+  path: string,
+  options: Object = {}
+): Promise<HttpResponse | HttpError> {
   const request = {
     ...options,
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
       ...options.headers
     }
   };

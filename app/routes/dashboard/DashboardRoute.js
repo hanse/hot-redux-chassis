@@ -1,3 +1,5 @@
+/** @flow */
+
 import { connect } from 'react-redux';
 import Dashboard from './components/Dashboard';
 import { login, logout } from 'app/state/auth';

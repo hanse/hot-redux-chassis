@@ -26,8 +26,8 @@ describe('utils/fetchJSON', () => {
     it('should format the response correctly', (done) => {
       fetchJSON('/')
         .catch(done)
-        .then(({ json }) => {
-          expect(json).to.eql({ hello: 'world' });
+        .then(({ jsonData }) => {
+          expect(jsonData).to.eql({ hello: 'world' });
           done();
         });
     });
@@ -45,7 +45,7 @@ describe('utils/fetchJSON', () => {
 
     it('should handle 204 No Content', (done) => {
       fetchJSON('/')
-        .then(({ response }) => {
+        .then((response) => {
           expect(response.status).to.equal(204);
           done();
         }).catch(done);

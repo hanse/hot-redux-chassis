@@ -1,3 +1,5 @@
+/** @flow */
+
 import { connect } from 'react-redux';
 import Login from './components/Login';
 import { login, logout } from 'app/state/auth';

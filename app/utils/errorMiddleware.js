@@ -1,3 +1,5 @@
+/** @flow */
+
 import { showNotification } from 'app/state/notifications';
 
 export default function errorMiddleware(store) {

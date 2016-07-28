@@ -1,3 +1,5 @@
+/** @flow */
+
 import styles from './Contact.css';
 import React from 'react';
 

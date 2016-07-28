@@ -1,11 +1,11 @@
+/** @flow */
+
 import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
-import Immutable from 'immutable';
-import installDevTools from 'immutable-devtools';
 import configureStore from 'app/utils/configureStore';
 import Root from './Root';
 
@@ -15,7 +15,6 @@ global.log = function log(self = this) {
 };
 
 if (__DEV__) {
-  installDevTools(Immutable);
   global.React = React;
 }
 

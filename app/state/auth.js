@@ -2,7 +2,7 @@
 
 import { Map, fromJS } from 'immutable';
 import { push } from 'react-router-redux';
-import type { Action, RootState, Thunk } from 'app/types';
+import type { Action, PromiseAction, RootState, Thunk } from 'app/types';
 import request from 'app/services/restClient';
 
 /**
@@ -31,7 +31,7 @@ export function rehydrateAuth(): Thunk {
   };
 }
 
-export function fetchUserProfile(token: string): Thunk {
+export function fetchUserProfile(token: string): PromiseAction {
   return {
     types: [FETCH_PROFILE, FETCH_PROFILE_SUCCESS, FETCH_PROFILE_FAILURE],
     promise: request('auth/me', {
