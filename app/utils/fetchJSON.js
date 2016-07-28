@@ -2,7 +2,19 @@
 
 class HttpError extends Error {
   response: Response;
-  json: ?Object;
+}
+
+function parseJSON(response) {
+  response.jsonData = null;
+
+  if (response.status === 204) {
+    return response;
+  }
+
+  return response.json().then((jsonData) => {
+    response.jsonData = jsonData;
+    return response;
+  });
 }
 
 export default function fetchJSON(path: string, options: Object = {}) {
@@ -15,20 +27,19 @@ export default function fetchJSON(path: string, options: Object = {}) {
   };
 
   __DEV__ && console.log('fetch.request', path, request); // eslint-disable-line
-  return fetch(path, request).then((response) => {
-    __DEV__ && console.log('fetch.response', response); // eslint-disable-line
-    if (response.status === 204) {
-      return Promise.resolve({ response, json: null });
-    }
-    return response.json().then(json => ({ json, response }));
-  }).then(({ json, response }) => {
-    if (response.ok) {
-      return { json, response };
-    }
+  return fetch(path, request)
+    .then((response) => {
+      __DEV__ && console.log('fetch.response', response); // eslint-disable-line
+      return response;
+    })
+    .then(parseJSON)
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      }
 
-    const error = new HttpError(`${response.status} ${response.statusText}`);
-    error.response = response;
-    error.json = json;
-    throw error;
-  });
+      const error = new HttpError(`${response.status} ${response.statusText}`);
+      error.response = response;
+      throw error;
+    });
 }

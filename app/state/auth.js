@@ -3,7 +3,7 @@
 import { Map, fromJS } from 'immutable';
 import { push } from 'react-router-redux';
 import type { Action, RootState, Thunk } from 'app/types';
-import fetchJSON from 'app/utils/fetchJSON';
+import request from 'app/services/restClient';
 
 /**
  *
@@ -24,7 +24,7 @@ export function rehydrateAuth(): Thunk {
       return dispatch({
         type: LOGIN_SUCCESS,
         payload: {
-          json: { token }
+          jsonData: { token }
         }
       });
     });
@@ -34,7 +34,7 @@ export function rehydrateAuth(): Thunk {
 export function fetchUserProfile(token: string): Thunk {
   return {
     types: [FETCH_PROFILE, FETCH_PROFILE_SUCCESS, FETCH_PROFILE_FAILURE],
-    promise: fetchJSON('http://localhost:3000/auth/me', {
+    promise: request('auth/me', {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -46,7 +46,7 @@ export function login(username: string, password: string, redirectTo: ?string): 
   return (dispatch) => {
     return dispatch({
       types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE],
-      promise: fetchJSON('http://localhost:3000/auth/login', {
+      promise: request('auth/login', {
         method: 'post',
         body: JSON.stringify({
           username,
@@ -54,8 +54,8 @@ export function login(username: string, password: string, redirectTo: ?string): 
         })
       })
     }).then((action) => {
-      window.localStorage.setItem('token', action.payload.json.token);
-      dispatch(fetchUserProfile(action.payload.json.token));
+      window.localStorage.setItem('token', action.payload.jsonData.token);
+      dispatch(fetchUserProfile(action.payload.jsonData.token));
 
       if (redirectTo) {
         dispatch(push(redirectTo));
@@ -93,14 +93,14 @@ export default function auth(state: State = initialState, action: Action): State
 
     case LOGIN_SUCCESS:
       return state.merge({
-        token: action.payload.json.token
+        token: action.payload.jsonData.token
       });
 
     case LOGOUT:
       return state.merge(initialState);
 
     case FETCH_PROFILE_SUCCESS:
-      return state.merge(action.payload.json || {});
+      return state.merge(action.payload.jsonData || {});
 
     case FETCH_PROFILE_FAILURE:
       return state.merge(initialState);
