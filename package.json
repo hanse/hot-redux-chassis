@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Hanse",
   "scripts": {
-    "start": "nodemon --ignore app --ignore tests --exec babel-node -- server.js",
+    "start": "nodemon --ignore app --ignore tests --exec babel-node -- server/index.js",
     "build": "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --color -p --progress --env",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint app --ignore-path .gitignore",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Hanse/hot-redux-chassis.git"
   },
   "dependencies": {
     "babel": "6.5.2",
@@ -78,7 +78,7 @@
     "stylelint": "7.0.3",
     "stylelint-config-standard": "11.0.0",
     "url-loader": "0.5.7",
-    "webpack": "^2.1.0-beta.13",
+    "webpack": "2.1.0-beta.20",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.10.0"
   },

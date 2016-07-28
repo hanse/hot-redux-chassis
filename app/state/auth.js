@@ -34,7 +34,7 @@ export function rehydrateAuth(): Thunk {
 export function fetchUserProfile(token: string): Thunk {
   return {
     types: [FETCH_PROFILE, FETCH_PROFILE_SUCCESS, FETCH_PROFILE_FAILURE],
-    promise: fetchJSON('http://localhost:3000/users/me', {
+    promise: fetchJSON('http://localhost:3000/auth/me', {
       headers: {
         Authorization: `Bearer ${token}`
       }
