@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nodemon --ignore app --ignore tests --exec babel-node -- server.js",
     "build": "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --color -p --progress --env",
-    "lint": "eslint app --ignore-path .gitignore",
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:js": "eslint app --ignore-path .gitignore",
+    "lint:css": "stylelint ./app/**/*.css",
     "test": "NODE_ENV=test karma start tests/karma.conf.js --single-run",
     "test:watch": "npm run test -- --auto-watch --no-single-run"
   },
@@ -70,9 +72,18 @@
     "redux-thunk": "^2.1.0",
     "sinon": "1.17.4",
     "style-loader": "0.13.1",
+    "stylelint": "7.0.3",
+    "stylelint-config-standard": "11.0.0",
     "url-loader": "0.5.7",
     "webpack": "^2.1.0-beta.13",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.10.0"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "string-quotes": "single",
+      "indentation": 2
+    }
   }
 }

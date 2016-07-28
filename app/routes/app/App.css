@@ -29,7 +29,7 @@ button {
   cursor: pointer;
 
   &:hover {
-    background: rgba(112, 154, 23, .9);
+    background: rgba(112, 154, 23, 0.9);
   }
 }
 
