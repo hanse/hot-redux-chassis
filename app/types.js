@@ -15,8 +15,8 @@ export type EmptyAction = {
   error?: Error;
 };
 
-export type RootState = { [key: string]: Map };
+export type RootState = { [key: string]: Map<string, any> };
 export type AnyAction = Object & Action;
 export type Reducer<T> = (state: T, action: AnyAction) => T;
 export type Thunk = (dispatch: Dispatch, getState: () => RootState) => any;
-export type Dispatch = (action: Action | Thunk | EmptyAction) => Promise;
+export type Dispatch = (action: Action | Thunk | EmptyAction) => Promise<*>;

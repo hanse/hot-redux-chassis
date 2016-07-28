@@ -1,6 +1,7 @@
 /** @flow */
 
 import { Map, fromJS } from 'immutable';
+import { push } from 'react-router-redux';
 import type { Action, RootState, Thunk } from 'app/types';
 import fetchJSON from 'app/utils/fetchJSON';
 
@@ -15,22 +16,22 @@ const LOGIN_SUCCESS = 'Auth/LOGIN_SUCCESS';
 const LOGIN_FAILURE = 'Auth/LOGIN_FAILURE';
 const LOGOUT = 'Auth/LOGOUT';
 
-export function rehydrateAuth() {
+export function rehydrateAuth(): Thunk {
   return (dispatch) => {
     const token = window.localStorage.getItem('token');
     if (!token) return;
-    dispatch(fetchUserProfile(token)).then((action) => {
-      dispatch({
+    return dispatch(fetchUserProfile(token)).then((action) => {
+      return dispatch({
         type: LOGIN_SUCCESS,
         payload: {
           json: { token }
         }
-      })
+      });
     });
   };
 }
 
-export function fetchUserProfile(token): Thunk {
+export function fetchUserProfile(token: string): Thunk {
   return {
     types: [FETCH_PROFILE, FETCH_PROFILE_SUCCESS, FETCH_PROFILE_FAILURE],
     promise: fetchJSON(`http://localhost:3000/users/me`, {
@@ -68,7 +69,7 @@ export function logout(): Thunk {
   return (dispatch) => {
     window.localStorage.removeItem('token');
     window.location.reload();
-    dispatch({
+    return dispatch({
       type: LOGOUT
     });
   };
@@ -86,18 +87,24 @@ export default function auth(state: State = initialState, action: Action): State
   switch (action.type) {
     case LOGIN:
       return state.merge({ failed: false });
+
     case LOGIN_FAILURE:
       return state.merge({ failed: true });
+
     case LOGIN_SUCCESS:
       return state.merge({
         token: action.payload.json.token
       });
+
     case LOGOUT:
       return state.merge(initialState);
+
     case FETCH_PROFILE_SUCCESS:
       return state.merge(action.payload.json || {});
+
     case FETCH_PROFILE_FAILURE:
       return state.merge(initialState);
+
     default:
       return state;
   }
