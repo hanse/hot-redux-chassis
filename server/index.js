@@ -23,17 +23,25 @@ function clearConsole() {
   process.stdout.write('\x1bc');
 }
 
-function log(level, message) {
-  const colorFunctions = {
-    info: chalk.cyan,
-    warning: chalk.yellow,
-    error: chalk.red
+function createLogger(colors, defaultLevel = 'info') {
+  const log = (level, message) => {
+    const label = `[${level.toUpperCase()}]`;
+    const colorize = colors[level] || colors[defaultLevel];
+    console.log(colorize(label), message);
   };
 
-  const label = `[${level.toUpperCase()}]`;
-  const colorize = colorFunctions[level] || colorFunctions.info;
-  console.log(colorize(label), message);
+  Object.keys(colors).forEach((color) => {
+    log[color] = log.bind(null, color);
+  });
+
+  return log;
 }
+
+const log = createLogger({
+  info: chalk.cyan,
+  warning: chalk.yellow,
+  error: chalk.red
+});
 
 function formatMessage(message) {
   return message
@@ -45,7 +53,7 @@ if (process.env.NODE_ENV !== 'production') {
   const compiler = require('webpack')(config);
 
   compiler.plugin('invalid', () => {
-    log('info', chalk.yellow('Compiling assets...'));
+    log.info(chalk.yellow('Compiling assets...'));
   });
 
   compiler.plugin('done', (stats) => {
@@ -53,7 +61,7 @@ if (process.env.NODE_ENV !== 'production') {
     const hasWarnings = stats.hasWarnings();
 
     if (!hasErrors && !hasWarnings) {
-      log('info', chalk.green(`Assets compiled in ${stats.endTime - stats.startTime} ms`));
+      log.info(chalk.green(`Assets compiled in ${stats.endTime - stats.startTime} ms`));
       return;
     }
 
@@ -68,7 +76,7 @@ if (process.env.NODE_ENV !== 'production') {
     );
 
     if (hasErrors) {
-      log('error', 'Failed to compile assets');
+      log.error('Failed to compile assets');
       formattedErrors.forEach((message) => {
         console.log(message);
         console.log();
@@ -77,7 +85,7 @@ if (process.env.NODE_ENV !== 'production') {
     }
 
     if (hasWarnings) {
-      log('warning', 'Compiled assets with warnings');
+      log.warning('Compiled assets with warnings');
       formattedWarnings.forEach((message) => {
         console.log(message);
         console.log();
@@ -87,7 +95,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   app.use(require('webpack-dev-middleware')(compiler, {
     publicPath: config.output.publicPath,
-    quiet: true,
+    quiet: true
   }));
 
   app.use(require('webpack-hot-middleware')(compiler));
@@ -111,14 +119,13 @@ if (process.env.NODE_ENV !== 'production') {
 app.listen(app.get('port'), app.get('host'), (err) => {
   clearConsole();
   if (err) {
-    log('error', err);
+    log.error(err);
   } else {
-    log('info', `Server listening on localhost:${app.get('port')}`);
-    log('info', `NODE_ENV=${process.env.NODE_ENV}`);
+    log.info(`Server listening on localhost:${app.get('port')}`);
+    log.info(`NODE_ENV=${process.env.NODE_ENV}`);
 
     if (!process.env.NODE_ENV) {
-      log(
-        'warning'
+      log.warning(
         `NODE_ENV is not set. Please put ${chalk.cyan('export NODE_ENV=development')} in your shell config.` // eslint-disable-line
       );
     }
