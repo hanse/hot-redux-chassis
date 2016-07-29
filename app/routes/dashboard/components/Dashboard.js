@@ -4,6 +4,8 @@ import styles from './Dashboard.css';
 import React, { Component } from 'react';
 import ballmer from 'app/assets/ballmer.jpg';
 import LoginForm from 'app/components/LoginForm';
+import MessageBox from 'app/components/MessageBox';
+import Button from 'app/components/Button';
 
 type Props = {
   username: string;
@@ -23,9 +25,10 @@ export default class Dashboard extends Component {
         {!this.props.isLoggedIn && (
           <div className={styles.loginContainer}>
             {this.props.loginFailed && (
-              <p style={{ color: '#ad1d13', fontWeight: 700 }}>
-                The login details were not correct.
-              </p>
+              <MessageBox
+                message="The login details were not correct"
+                type="error"
+              />
             )}
             <LoginForm
               onSubmit={this.props.login}
@@ -35,7 +38,7 @@ export default class Dashboard extends Component {
 
         {this.props.isLoggedIn && (
           <div>
-            <button onClick={this.props.logout}>Log out</button>
+            <Button onClick={this.props.logout}>Log out</Button>
             <img src={ballmer} alt="Steve Ballmer" />
           </div>
         )}

@@ -1,0 +1,28 @@
+.messageBox {
+  padding: 10px 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.success {
+  background: #27ae60;
+}
+
+.warning {
+  background: #f1c40f;
+}
+
+.error {
+  background: #c0392b;
+}
+
+.button {
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+}
