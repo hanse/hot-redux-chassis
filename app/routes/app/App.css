@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
 }
 
 html {
@@ -18,32 +19,6 @@ a {
   color: rgb(115, 26, 53);
 }
 
-button {
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  border: 0;
-  background: rgba(112, 154, 23, 1);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  font-weight: 400;
-  cursor: pointer;
-
-  &:hover {
-    background: rgba(112, 154, 23, 0.9);
-  }
-}
-
-input {
-  font-size: 1.2rem;
-  padding: 10px;
-  margin-bottom: 5px;
-  display: block;
-  border: 0;
-  border-bottom: 2px solid #ccc;
-  margin-bottom: 10px;
-}
-
-input:focus {
-  outline: none;
-  border-color: #333;
+img {
+  max-width: 100%;
 }

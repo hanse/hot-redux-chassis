@@ -1,7 +1,5 @@
 /** @flow */
 
-import component from './DashboardRoute';
-
 export default {
-  component
+  component: require('./DashboardRoute').default
 };

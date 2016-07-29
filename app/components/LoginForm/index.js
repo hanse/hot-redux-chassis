@@ -1,6 +1,8 @@
 /** @flow */
 
 import React, { Component } from 'react';
+import Button from 'app/components/Button';
+import Input from 'app/components/Input';
 
 type Props = {
   onSubmit: (u: string, p: string) => any;
@@ -30,19 +32,19 @@ export default class LoginForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
-          type='text'
-          placeholder='username'
+        <Input
+          type="text"
+          placeholder="username"
           onChange={(e) => this.setState({ username: e.target.value })}
         />
 
-        <input
-          type='password'
-          placeholder='password'
+        <Input
+          type="password"
+          placeholder="password"
           onChange={(e) => this.setState({ password: e.target.value })}
         />
 
-        <button type='submit'>Login</button>
+        <Button type="submit" block>Login</Button>
       </form>
     );
   }

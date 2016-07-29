@@ -3,7 +3,7 @@
 import styles from './Dashboard.css';
 import React, { Component } from 'react';
 import ballmer from 'app/assets/ballmer.jpg';
-import LoginForm from 'app/components/LoginForm/LoginForm';
+import LoginForm from 'app/components/LoginForm';
 
 type Props = {
   username: string;
@@ -36,7 +36,7 @@ export default class Dashboard extends Component {
         {this.props.isLoggedIn && (
           <div>
             <button onClick={this.props.logout}>Log out</button>
-            <div><img src={ballmer} alt='Steve Ballmer' /></div>
+            <img src={ballmer} alt="Steve Ballmer" />
           </div>
         )}
       </div>

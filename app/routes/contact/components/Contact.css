@@ -1,3 +1,5 @@
+@import '../../../styles/variables.css';
+
 .root {
-  padding: 2rem;
+  padding: var(--root-padding);
 }

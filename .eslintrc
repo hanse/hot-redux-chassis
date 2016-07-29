@@ -10,7 +10,7 @@
     "flow-vars/define-flow-type": 1,
     "flow-vars/use-flow-type": 1,
     "comma-dangle": [2, "never"],
-    "jsx-quotes": [2, "prefer-single"],
+    "jsx-quotes": [2, "prefer-double"],
     "new-cap": 0,
     "react/no-multi-comp": [2, { "ignoreStateless": true }],
     "react/prop-types": 0,

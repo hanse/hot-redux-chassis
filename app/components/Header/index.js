@@ -7,9 +7,9 @@ import { Link, IndexLink } from 'react-router';
 const Navigation = () => (
   <nav className={styles.navigation}>
     <ul>
-      <li><IndexLink to='/' activeClassName='active'>Home</IndexLink></li>
-      <li><Link to='/about' activeClassName='active'>About</Link></li>
-      <li><Link to='/contact' activeClassName='active'>Contact</Link></li>
+      <li><IndexLink to="/" activeClassName={styles.activeItem}>Home</IndexLink></li>
+      <li><Link to="/about" activeClassName={styles.activeItem}>About</Link></li>
+      <li><Link to="/contact" activeClassName={styles.activeItem}>Contact</Link></li>
     </ul>
   </nav>
 );

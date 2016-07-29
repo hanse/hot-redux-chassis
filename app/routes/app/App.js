@@ -2,7 +2,7 @@
 
 import './App.css';
 import React, { Component } from 'react';
-import Header from 'app/components/Header/Header';
+import Header from 'app/components/Header';
 
 type Props = {
   children: any;

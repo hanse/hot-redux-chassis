@@ -1,24 +1,28 @@
 .root {
   background: #333;
-  padding: 0 2rem;
 }
 
-.navigation {
-  height: 60px;
-  line-height: 60px;
+.navigation ul {
+  height: 64px;
+  line-height: 64px;
+  display: flex;
+  list-style: none;
 }
 
 .navigation li {
-  display: inline;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   a {
-    padding: 0 20px;
     color: #ddd;
-    display: inline-block;
     text-decoration: none;
+    width: 100%;
+    text-align: center;
 
     &:hover,
-    &.active {
+    &.activeItem {
       background: #222;
     }
   }

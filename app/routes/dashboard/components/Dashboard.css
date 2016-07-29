@@ -1,11 +1,12 @@
+@import '../../../styles/variables.css';
+
 .root {
-  padding: 2rem;
+  padding: var(--root-padding);
 }
 
 .loginContainer {
   background: #eee;
-  padding: 2rem;
+  padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 10;
-  max-width: 500px;
 }

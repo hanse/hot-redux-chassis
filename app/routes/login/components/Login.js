@@ -2,7 +2,7 @@
 
 import styles from './Login.css';
 import React, { Component } from 'react';
-import LoginForm from 'app/components/LoginForm/LoginForm';
+import LoginForm from 'app/components/LoginForm';
 
 type Props = {
   login: () => any;
