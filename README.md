@@ -1,4 +1,4 @@
-# hot-redux-chassis
+# hot-redux-chassis [![CircleCI](https://circleci.com/gh/Hanse/hot-redux-chassis/tree/master.svg?style=svg)](https://circleci.com/gh/Hanse/hot-redux-chassis/tree/master)
 
 An example of how various projects from the React ecosystem can be glued together for a nice developer experience. Will try to keep it up to date with the latest and greatest. It can also serve as a starting point for new projects.
 
