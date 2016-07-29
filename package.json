@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "author": "Hanse",
   "license": "MIT",
+  "engines": {
+    "node": "6.3.1"
+  },
   "scripts": {
+    "postinstall": "if [ $BUILD_ASSETS ]; then npm run build; fi",
     "start": "nodemon --ignore app --ignore tests --exec babel-node -- server/index.js",
     "build": "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --color -p --progress --env",
     "flow": "flow",
