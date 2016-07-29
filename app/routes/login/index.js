@@ -1,6 +1,8 @@
 /** @flow */
 
+import component from './LoginRoute';
+
 export default {
   path: 'login',
-  component: require('./LoginRoute').default
+  component
 };
