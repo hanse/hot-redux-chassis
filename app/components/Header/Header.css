@@ -23,6 +23,7 @@
   list-style: none;
   flex-direction: row;
   justify-content: flex-end;
+  margin: 0;
 
   @media (--small-viewport) {
     flex-direction: column;

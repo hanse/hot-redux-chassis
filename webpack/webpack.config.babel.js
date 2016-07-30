@@ -98,35 +98,38 @@ module.exports = (options) => {
     },
 
     module: {
-      loaders: [
-        {
-          test: /\.jsx?$/,
-          loader: 'babel',
-          include: path.join(__dirname, '../app')
-        },
-        {
-          test: /\.css$/,
-          loaders: [
-            'style',
-            {
-              loader: 'css',
-              query: {
-                modules: true,
-                importLoaders: 1,
-                localIdentName: '[name]__[local]___[hash:base64:5]'
-              }
-            },
-            'postcss'
-          ]
-        },
-        {
-          test: /\.(png|jpg)/,
-          loader: 'url',
-          query: {
-            limit: 8192
-          }
+      loaders: [{
+        test: /\.jsx?$/,
+        loader: 'babel',
+        include: path.join(__dirname, '../app')
+      }, {
+        test: /\.css$/,
+        include: /node_modules/,
+        loaders: ['style', 'css']
+      }, {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loaders: [
+          'style', {
+            loader: 'css',
+            query: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          'postcss'
+        ]
+      }, {
+        test: /\.json$/,
+        loader: 'json-loader'
+      }, {
+        test: /\.(png|jpg|mp4|webm)/,
+        loader: 'url',
+        query: {
+          limit: 8192
         }
-      ]
+      }]
     },
 
     target: 'web',

@@ -114,6 +114,9 @@ if (process.env.NODE_ENV !== 'production') {
   });
 } else {
   app.use(express.static(config.output.path));
+  app.use((req, res) => {
+    res.sendFile(`${config.output.path}/index.html`);
+  });
 }
 
 app.listen(app.get('port'), app.get('host'), (err) => {
