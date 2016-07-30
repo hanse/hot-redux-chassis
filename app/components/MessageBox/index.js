@@ -3,11 +3,12 @@
 import styles from './MessageBox.css';
 import React from 'react';
 import cx from 'classnames';
+import Icon from '../Icon';
 
 type Props = {
-  message: string | React.Element;
+  message: string | React.Element<*>;
   type: 'success'|'warning'|'error';
-  onClose: () => void;
+  onClose?: () => void;
 };
 
 function MessageBox({ message, type, onClose }: Props) {
@@ -17,7 +18,7 @@ function MessageBox({ message, type, onClose }: Props) {
       <button
         className={styles.button}
         onClick={onClose}
-      >X</button>
+      ><Icon name="close" /></button>
     </div>
   );
 }

@@ -17,7 +17,6 @@
 .*/node_modules/fbjs/lib/UnicodeBidiService.js.flow
 .*/node_modules/editions.*
 
-
 [libs]
 flow/
 
@@ -28,8 +27,6 @@ module.name_mapper='.*\(.css\|.jpg\|.png\)' -> 'empty/object'
 module.name_mapper='^\(.*\)$' -> '<PROJECT_ROOT>/\1'
 
 munge_underscores=true
-
-strip_root=true
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
