@@ -12,6 +12,7 @@ type Props = {
   isLoggedIn: boolean;
   login: () => any;
   logout: () => any;
+  clearLoginError: () => any;
 };
 
 export default class Dashboard extends Component {
@@ -28,6 +29,7 @@ export default class Dashboard extends Component {
               <MessageBox
                 message="The login details were not correct"
                 type="error"
+                onClose={this.props.clearLoginError}
               />
             )}
             <LoginForm

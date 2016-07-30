@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux';
 import Dashboard from './components/Dashboard';
-import { login, logout } from 'app/state/auth';
+import { login, logout, clearLoginError } from 'app/state/auth';
 
 function mapStateToProps(state) {
   return {
@@ -14,7 +14,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   login,
-  logout
+  logout,
+  clearLoginError
 };
 
 export default connect(

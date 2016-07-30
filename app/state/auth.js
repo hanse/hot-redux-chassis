@@ -1,7 +1,7 @@
 /** @flow */
 
 import { Map, fromJS } from 'immutable';
-import { push } from 'react-router-redux';
+import { push, LOCATION_CHANGE } from 'react-router-redux';
 import type { Action, PromiseAction, RootState, Thunk } from 'app/types';
 import request from 'app/services/restClient';
 
@@ -14,6 +14,7 @@ const FETCH_PROFILE_FAILURE = 'Auth/FETCH_PROFILE_FAILURE';
 const LOGIN = 'Auth/LOGIN';
 const LOGIN_SUCCESS = 'Auth/LOGIN_SUCCESS';
 const LOGIN_FAILURE = 'Auth/LOGIN_FAILURE';
+const LOGIN_CLEAR_ERROR = 'Auth/LOGIN_CLEAR_ERROR';
 const LOGOUT = 'Auth/LOGOUT';
 
 export function rehydrateAuth(): Thunk {
@@ -75,6 +76,12 @@ export function logout(): Thunk {
   };
 }
 
+export function clearLoginError() {
+  return {
+    type: LOGIN_CLEAR_ERROR
+  };
+}
+
 type State = Map<string, any>;
 
 const initialState = fromJS({
@@ -86,6 +93,8 @@ const initialState = fromJS({
 export default function auth(state: State = initialState, action: Action): State {
   switch (action.type) {
     case LOGIN:
+    case LOCATION_CHANGE:
+    case LOGIN_CLEAR_ERROR:
       return state.merge({ failed: false });
 
     case LOGIN_FAILURE:
