@@ -1,0 +1,59 @@
+
+:root {
+  --breadSize: 4px;
+  --burgerWidth: 36px;
+}
+
+.hamburgerButton {
+  display: block;
+  width: var(--burgerWidth);
+  height: calc(var(--breadSize) * 5);
+  position: relative;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  transform: rotate(0deg);
+  transition: 0.5s ease-in-out;
+}
+
+.hamburgerButton div {
+  position: absolute;
+  height: var(--breadSize);
+  width: 100%;
+  border-radius: var(--breadSize);
+  background: #fff;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+
+  &:nth-child(1) {
+    top: 0;
+  }
+
+  &:nth-child(2),
+  &:nth-child(3) {
+    top: calc(var(--breadSize) * 2);
+  }
+
+  &:nth-child(4) {
+    top: calc(var(--breadSize) * 4);
+  }
+}
+
+.hamburgerButton.open div {
+  &:nth-child(2) {
+    transform: rotate(45deg);
+  }
+
+  &:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+
+  &:nth-child(1),
+  &:nth-child(4) {
+    top: calc(var(--breadSize) * 2);
+    left: 50%;
+    width: 0;
+  }
+}

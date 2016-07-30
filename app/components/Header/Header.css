@@ -1,29 +1,115 @@
-.root {
-  background: #333;
+@import '../../styles/variables.css';
+
+:root {
+  --navigationHeight: 84px;
+  --mobileNavigationHeight: 54px;
 }
 
-.navigation ul {
-  height: 64px;
-  line-height: 64px;
+.root {
+  background: #222;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--rootPadding);
+  max-width: var(--containerMaxWidth);
+  margin: 0 auto;
+}
+
+.navigationItems {
+  flex: 1;
   display: flex;
   list-style: none;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  @media (--small-viewport) {
+    flex-direction: column;
+    transform: scaleY(0);
+    transform-origin: 0 0;
+    transition: all 0.3s;
+    position: absolute;
+    opacity: 0.5;
+    left: 0;
+    right: 0;
+    top: var(--mobileNavigationHeight);
+    max-height: 0;
+    background: #333;
+
+    &.openMenu {
+      transform: scaleY(1);
+      max-height: 1000px;
+      opacity: 1;
+    }
+  }
 }
 
-.navigation li {
-  flex: 1;
+.navigationItems li {
+  flex: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: var(--navigationHeight);
+  line-height: var(--navigationHeight);
+
+  @media (--small-viewport) {
+    flex: 1;
+    height: var(--mobileNavigationHeight);
+    line-height: var(--mobileNavigationHeight);
+  }
 
   a {
-    color: #ddd;
+    color: #ccc;
     text-decoration: none;
     width: 100%;
     text-align: center;
+    padding: 0 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
 
     &:hover,
     &.activeItem {
-      background: #222;
+      text-decoration: underline;
+      color: #ecf0f1;
     }
+  }
+}
+
+.mobileMenu {
+  display: none;
+  height: var(--mobileNavigationHeight);
+  line-height: var(--mobileNavigationHeight);
+  padding: 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (--small-viewport) {
+    display: flex;
+    flex: 1;
+  }
+}
+
+.mobileTitle {
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.desktopTitle {
+  color: #fff;
+  font-size: 32px;
+  display: block;
+  flex: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  @media (--small-viewport) {
+    display: none;
   }
 }

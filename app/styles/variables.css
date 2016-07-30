@@ -1,3 +1,7 @@
 :root {
-  --root-padding: 1.6rem;
+  --rootPadding: 1.6rem;
+  --containerMaxWidth: 900px;
 }
+
+@custom-media --small-viewport (max-width: 30em);
+@custom-media --large-viewport (min-width: 30em);

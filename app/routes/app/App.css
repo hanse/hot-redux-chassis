@@ -22,3 +22,8 @@ a {
 img {
   max-width: 100%;
 }
+
+button {
+  border: 0;
+  border-radius: 0;
+}
