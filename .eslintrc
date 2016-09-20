@@ -33,11 +33,12 @@
   },
   "env": {
     "browser": true,
-    "mocha": true
+    "jest": true
   },
   "globals": {
     "__DEV__": true,
     "COMMIT_HASH": true,
-    "log": true
+    "log": true,
+    "expect": true
   }
 }

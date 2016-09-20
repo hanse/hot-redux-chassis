@@ -1,14 +1,14 @@
+import 'isomorphic-fetch';
 import fetchJSON from '../fetchJSON';
 import sinon from 'sinon';
-import { expect } from 'chai';
 
 describe('utils/fetchJSON', () => {
   beforeEach(() => {
-    sinon.stub(window, 'fetch');
+    sinon.stub(global, 'fetch');
   });
 
   afterEach(() => {
-    window.fetch.restore();
+    global.fetch.restore();
   });
 
   describe('successful response', () => {
@@ -20,15 +20,13 @@ describe('utils/fetchJSON', () => {
         }
       });
 
-      window.fetch.returns(Promise.resolve(res));
+      global.fetch.returns(Promise.resolve(res));
     });
 
-    it('should format the response correctly', (done) => {
-      fetchJSON('/')
-        .catch(done)
+    it('should format the response correctly', () => {
+      return fetchJSON('/')
         .then(({ jsonData }) => {
-          expect(jsonData).to.eql({ hello: 'world' });
-          done();
+          expect(jsonData).toEqual({ hello: 'world' });
         });
     });
   });
@@ -40,15 +38,14 @@ describe('utils/fetchJSON', () => {
         statusText: 'No Content'
       });
 
-      window.fetch.returns(Promise.resolve(res));
+      global.fetch.returns(Promise.resolve(res));
     });
 
-    it('should handle 204 No Content', (done) => {
-      fetchJSON('/')
+    it('should handle 204 No Content', () => {
+      return fetchJSON('/')
         .then((response) => {
-          expect(response.status).to.equal(204);
-          done();
-        }).catch(done);
+          expect(response.status).toEqual(204);
+        });
     });
   });
 
@@ -62,15 +59,14 @@ describe('utils/fetchJSON', () => {
         }
       });
 
-      window.fetch.returns(Promise.resolve(res));
+      global.fetch.returns(Promise.resolve(res));
     });
 
-    it('should catch errors', (done) => {
-      fetchJSON('/')
+    it('should catch errors', () => {
+      return fetchJSON('/')
         .then(() => {}, (error) => {
-          expect(error.response.statusText).to.eql('Unauthorized');
-          done();
-        }).catch(done);
+          expect(error.response.statusText).toEqual('Unauthorized');
+        });
     });
   });
 });
