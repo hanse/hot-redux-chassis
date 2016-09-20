@@ -3,13 +3,13 @@
 import { fromJS, Map } from 'immutable';
 
 type NotificationAction =
-    { type: 'SHOW', payload: { id: number, message: string }}
-  | { type: 'DISMISS', payload: { id: number }}
+    { type: 'SHOW_NOTIFICATION', payload: { id: number, message: string }}
+  | { type: 'DISMISS_NOTIFICATION', payload: { id: number }}
 
 let notificationId = 0;
 export function showNotification(message: string): NotificationAction {
   return {
-    type: 'SHOW',
+    type: 'SHOW_NOTIFICATION',
     payload: {
       id: notificationId++, // impure
       message
@@ -19,10 +19,14 @@ export function showNotification(message: string): NotificationAction {
 
 export function dismissNotification(id: number): NotificationAction {
   return {
-    type: 'DISMISS',
+    type: 'DISMISS_NOTIFICATION',
     payload: { id }
   };
 }
+
+export const errorNotificationEpic = (action$: any) =>
+  action$.filter((action) => !!action.error)
+    .map((action) => showNotification(action.payload.message));
 
 /**
  *
@@ -42,10 +46,10 @@ export default function notifications(
   action: NotificationAction
 ): State {
   switch (action.type) {
-    case 'SHOW':
+    case 'SHOW_NOTIFICATION':
       return state.set(action.payload.id, action.payload);
 
-    case 'DISMISS':
+    case 'DISMISS_NOTIFICATION':
       return state.delete(action.payload.id);
 
     default:

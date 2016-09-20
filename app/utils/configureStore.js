@@ -6,13 +6,11 @@ import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
-import errorMiddleware from './errorMiddleware';
 import { rootEpic } from '../state';
 
 export default function configureStore(initialState: Object = {}) {
   const middlewares = [
     createEpicMiddleware(rootEpic),
-    errorMiddleware,
     routerMiddleware(browserHistory)
   ];
 
