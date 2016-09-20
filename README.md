@@ -9,13 +9,13 @@ A live production build is always available on [http://hot-redux-chassis.herokua
 * Next-generation JavaScript using [Babel 6](http://babeljs.io/)
 * [React Hot Loader 3](https://github.com/gaearon/react-hot-loader)
 * Module bundling using [webpack 2](https://gist.github.com/sokra/27b24881210b56bbaff7)
-* Testing using [karma](https://github.com/karma-runner/karma), [enzyme](https://github.com/airbnb/enzyme), [sinon](https://github.com/sinonjs/sinon) and [chai](https://github.com/chaijs/chai)
+* Painless esting using [Jest](https://facebook.github.io/jest/) and [enzyme](https://github.com/airbnb/enzyme)
 * Static type-checking using [flow](https://flowtye.org)
 * [ESLint](http://eslint.org/) for source code linting
 * [Redux](https://github.com/rackt/redux), [react-router](https://github.com/rackt/react-router) and [Immutable.js](https://facebook.github.io/immutable-js/)
+* [redux-observable](https://github.com/redux-observable/redux-observable) for managing async actions and side effects
 * Code Splitting
 * [CSS Modules](https://github.com/css-modules/css-modules) + [PostCSS](https://github.com/postcss/postcss) for next generation scoped CSS modules
-* HTTP requests using [`window.fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) + a tiny convenience wrapper for JSON requests
 
 ## Start a New Project
 
