@@ -2,12 +2,12 @@
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import promiseMiddleware from './promiseMiddleware';
-import errorMiddleware from './errorMiddleware';
 import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
+import promiseMiddleware from './promiseMiddleware';
+import errorMiddleware from './errorMiddleware';
 
 export default function configureStore(initialState: Object = {}) {
   const middlewares = [
@@ -35,11 +35,12 @@ export default function configureStore(initialState: Object = {}) {
     initialState,
     compose(
       applyMiddleware(...middlewares),
-      window.devToolsExtension ? window.devToolsExtension() : f => f
+      window.devToolsExtension ? window.devToolsExtension() : (f) => f
     )
   );
 
   if (module.hot) {
+    // $FlowIssue
     module.hot.accept('../state', () => {
       const nextReducer = require('../state').default;
       store.replaceReducer(nextReducer);

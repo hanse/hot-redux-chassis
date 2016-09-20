@@ -66,6 +66,7 @@ if (process.env.NODE_ENV !== 'production') {
     }
 
     const json = stats.toJson();
+    console.log(json)
 
     const formattedErrors = json.errors.map(
       (message) => `Error in ${formatMessage(message)}`

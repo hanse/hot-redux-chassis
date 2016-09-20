@@ -3,12 +3,13 @@
   "extends": "airbnb",
   "plugins": [
     "react",
-    "flow-vars",
+    "flowtype",
     "import"
   ],
   "rules": {
-    "flow-vars/define-flow-type": 1,
-    "flow-vars/use-flow-type": 1,
+    "flowtype/define-flow-type": 1,
+    "flowtype/use-flow-type": 1,
+    "arrow-parens": [2, "always"],
     "comma-dangle": [2, "never"],
     "jsx-quotes": [2, "prefer-double"],
     "new-cap": 0,
@@ -16,13 +17,22 @@
     "react/prop-types": 0,
     "react/sort-comp": 0,
     "react/prefer-stateless-function": 0,
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx"] }],
     "arrow-body-style": 0,
     "no-shadow": 0,
+    "no-plusplus": 0,
     "global-require": 0,
     "no-use-before-define": 0,
     "no-param-reassign": 0,
     "no-duplicate-imports": 0,
-    "import/no-unresolved": 0
+    "import/no-unresolved": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/newline-after-import": 0,
+    "import/no-duplicates": 0,
+    "import/imports-first": 0,
+    "import/no-named-as-default": 0,
+    "import/prefer-default-export": 0,
+    "import/no-named-as-default-member": 0
   },
   "settings": {
     "import/resolver": {

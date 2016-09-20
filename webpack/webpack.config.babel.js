@@ -92,9 +92,8 @@ module.exports = (options) => {
     ]),
 
     resolve: {
-      modulesDirectory: modules,
       modules,
-      extensions: ['', '.js', '.json']
+      extensions: ['.js', '.json']
     },
 
     module: {

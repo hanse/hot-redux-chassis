@@ -11,7 +11,6 @@ function HamburgerButton({ open, ...props }) {
         styles.hamburgerButton,
         open && styles.open
       )}
-      aria-role="button"
       {...props}
     >
       <div />
