@@ -1,8 +1,13 @@
 /** @flow */
 
+// $FlowIssue
 import 'babel-polyfill';
 import 'isomorphic-fetch';
+
+// $FlowIssue
 import '!file?name=[name].[ext]!./manifest.json';
+
+// $FlowIssue
 import 'file?name=[name].[ext]!./humans.txt';
 
 import React from 'react';
@@ -35,6 +40,7 @@ render(
 );
 
 if (module.hot) {
+  // $FlowIssue
   module.hot.accept('./Root', () => {
     render(
       <AppContainer>

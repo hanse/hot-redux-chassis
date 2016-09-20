@@ -4,7 +4,11 @@ import styles from './HamburgerButton.css';
 import React from 'react';
 import cx from 'classnames';
 
-function HamburgerButton({ open, ...props }) {
+type Props = {
+  open: boolean
+};
+
+function HamburgerButton({ open, ...props }: Props) {
   return (
     <div
       className={cx(

@@ -1,4 +1,3 @@
-/** @flow */
 
 export default function promiseMiddleware() {
   return (next) => (action) => {
