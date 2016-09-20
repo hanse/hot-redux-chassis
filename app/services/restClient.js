@@ -1,21 +1,17 @@
-/** @flow */
+import { ajax } from 'rxjs/observable/dom/ajax';
 
-import fetchJSON from 'app/utils/fetchJSON';
-
-import type {
-  HttpPromise,
-  HttpOptions
-} from 'app/utils/fetchJSON';
-
-type ApiClientOptions = {
-  url: string;
-};
-
-type ApiClient = (path: string, options: HttpOptions) => HttpPromise;
-
-function createApiClient({ url }: ApiClientOptions): ApiClient {
+function createApiClient({ url }) {
   return function request(path, options) {
-    return fetchJSON(`${url}${path}`, options);
+    console.log(path, options); // eslint-disable-line
+    return ajax({
+      url: `${url}${path}`,
+      responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      ...options
+    });
   };
 }
 

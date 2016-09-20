@@ -1,17 +1,18 @@
 /** @flow */
 
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import { createEpicMiddleware } from 'redux-observable';
 import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import promiseMiddleware from './promiseMiddleware';
 import errorMiddleware from './errorMiddleware';
+import { rootEpic } from '../state';
 
 export default function configureStore(initialState: Object = {}) {
   const middlewares = [
-    thunk,
+    createEpicMiddleware(rootEpic),
     promiseMiddleware,
     errorMiddleware,
     routerMiddleware(browserHistory)
@@ -31,7 +32,7 @@ export default function configureStore(initialState: Object = {}) {
   }
 
   const store = createStore(
-    require('../state').default,
+    require('../state').rootReducer,
     initialState,
     compose(
       applyMiddleware(...middlewares),
@@ -39,10 +40,14 @@ export default function configureStore(initialState: Object = {}) {
     )
   );
 
+  if (window.devToolsExtension) {
+    window.devToolsExtension.updateStore(store);
+  }
+
   if (module.hot) {
     // $FlowIssue
     module.hot.accept('../state', () => {
-      const nextReducer = require('../state').default;
+      const nextReducer = require('../state').rootReducer;
       store.replaceReducer(nextReducer);
     });
   }
