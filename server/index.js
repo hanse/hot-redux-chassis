@@ -98,7 +98,9 @@ if (process.env.NODE_ENV !== 'production') {
     quiet: true
   }));
 
-  app.use(require('webpack-hot-middleware')(compiler));
+  app.use(require('webpack-hot-middleware')(compiler, {
+    log: false
+  }));
 
   app.use((req, res, next) => {
     const filename = path.join(compiler.outputPath, 'index.html');
