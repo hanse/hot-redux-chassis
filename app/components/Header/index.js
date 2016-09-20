@@ -1,4 +1,4 @@
-/** @flow */
+// @flow
 
 import styles from './Header.css';
 import React, { Component } from 'react';
@@ -19,6 +19,7 @@ const navigationItems = [{
   label: 'Contact',
   LinkComponent: Link
 }];
+
 
 /**
  * A responsive header component with titles and menus.

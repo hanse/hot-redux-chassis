@@ -1,4 +1,4 @@
-/** @flow */
+// @flow
 
 import { loadRoute, loadingError } from 'app/routes';
 import type { AsyncRoute } from 'app/routes';

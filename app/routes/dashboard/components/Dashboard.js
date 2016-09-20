@@ -1,4 +1,4 @@
-/** @flow */
+// @flow
 
 import styles from './Dashboard.css';
 import React, { Component } from 'react';

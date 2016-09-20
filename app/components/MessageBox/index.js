@@ -1,4 +1,4 @@
-/** @flow */
+// @flow
 
 import styles from './MessageBox.css';
 import React from 'react';

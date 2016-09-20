@@ -1,14 +1,19 @@
-/** @flow */
+// @flow
 
 import styles from './Button.css';
 import React from 'react';
 import cx from 'classnames';
 
+type Props = {
+  className?: string,
+  block?: boolean
+};
+
 function Button({
   className,
   block = false,
   ...props
-}: Object) {
+}: Props) {
   return (
     <button
       type="button"

@@ -1,4 +1,4 @@
-/** @flow */
+// @flow
 
 import styles from './Input.css';
 import React from 'react';

@@ -1,4 +1,4 @@
-/** @flow */
+// @flow
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
@@ -6,14 +6,12 @@ import createLogger from 'redux-logger';
 import { Iterable } from 'immutable';
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
-import promiseMiddleware from './promiseMiddleware';
 import errorMiddleware from './errorMiddleware';
 import { rootEpic } from '../state';
 
 export default function configureStore(initialState: Object = {}) {
   const middlewares = [
     createEpicMiddleware(rootEpic),
-    promiseMiddleware,
     errorMiddleware,
     routerMiddleware(browserHistory)
   ];

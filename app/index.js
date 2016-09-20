@@ -1,4 +1,4 @@
-/** @flow */
+// @flow
 
 // $FlowIssue
 import 'babel-polyfill';

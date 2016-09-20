@@ -1,11 +1,11 @@
-/** @flow */
+// @flow
 
 import styles from './HamburgerButton.css';
 import React from 'react';
 import cx from 'classnames';
 
 type Props = {
-  open: boolean
+  open?: boolean
 };
 
 function HamburgerButton({ open, ...props }: Props) {

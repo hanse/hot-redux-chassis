@@ -1,4 +1,4 @@
-/** @flow */
+// @flow
 
 import React, { Component } from 'react';
 import Button from 'app/components/Button';

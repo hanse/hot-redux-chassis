@@ -1,55 +1,53 @@
-/** @flow */
+// @flow
 
 import { Observable } from 'rxjs';
 import { Map, fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import type { Action, RootState } from 'app/types';
+import type { RootState } from 'app/types';
 import request from 'app/services/restClient';
 
-/**
- *
- */
-const FETCH_PROFILE = 'Auth/FETCH_PROFILE';
-const FETCH_PROFILE_SUCCESS = 'Auth/FETCH_PROFILE_SUCCESS';
-const FETCH_PROFILE_FAILURE = 'Auth/FETCH_PROFILE_FAILURE';
-const LOGIN = 'Auth/LOGIN';
-const LOGIN_SUCCESS = 'Auth/LOGIN_SUCCESS';
-const LOGIN_FAILURE = 'Auth/LOGIN_FAILURE';
-const LOGIN_CLEAR_ERROR = 'Auth/LOGIN_CLEAR_ERROR';
-const LOGOUT = 'Auth/LOGOUT';
-const REHYDRATE_AUTH = 'Auth/REHYDRATE_AUTH';
+type AuthAction =
+    { type: 'FETCH_PROFILE' }
+  | { type: 'FETCH_PROFILE_SUCCESS', payload: { username: string } }
+  | { type: 'FETCH_PROFILE_FAILURE' }
+  | { type: 'LOGIN' }
+  | { type: 'LOGIN_SUCCESS', payload: { token: string } }
+  | { type: 'LOGIN_FAILURE' }
+  | { type: 'LOGIN_CLEAR_ERROR' }
+  | { type: 'LOGOUT' }
+  | { type: 'REHYDRATE_AUTH' };
 
-export function rehydrateAuth() {
+export function rehydrateAuth(): AuthAction {
   return {
-    type: REHYDRATE_AUTH
+    type: 'REHYDRATE_AUTH'
   };
 }
 
-export function fetchUserProfile(token: string) {
+export function fetchUserProfile(token: string): AuthAction {
   return {
-    type: FETCH_PROFILE,
+    type: 'FETCH_PROFILE',
     payload: { token }
   };
 }
 
-export function fetchProfileSuccess(payload: any) {
+export function fetchProfileSuccess(payload: any): AuthAction {
   return {
-    type: FETCH_PROFILE_SUCCESS,
+    type: 'FETCH_PROFILE_SUCCESS',
     payload
   };
 }
 
-export function loginSuccess(payload: any) {
+export function loginSuccess(payload: any): AuthAction {
   return {
-    type: LOGIN_SUCCESS,
+    type: 'LOGIN_SUCCESS',
     payload
   };
 }
 
 export const loginEpic = (action$: any) =>
-  action$.ofType(LOGIN)
-    .map((action) => action.payload)
-    .switchMap(({ username, password }) => {
+  action$.ofType('LOGIN')
+    .switchMap((action) => {
+      const { username, password } = action.payload;
       return request('auth/login', {
         method: 'POST',
         body: {
@@ -66,14 +64,14 @@ export const loginEpic = (action$: any) =>
           );
         })
         .catch((error) => Observable.of({
-          type: LOGIN_FAILURE,
+          type: 'LOGIN_FAILURE',
           payload: error.xhr.response,
           error: true
         }));
     });
 
 export const logoutEpic = (action$: any) =>
-  action$.ofType(LOGOUT)
+  action$.ofType('LOGOUT')
     .switchMap(() => {
       window.localStorage.removeItem('token');
       return Observable.of({
@@ -82,7 +80,7 @@ export const logoutEpic = (action$: any) =>
     });
 
 export const rehydrateAuthEpic = (action$: any) =>
-  action$.ofType(REHYDRATE_AUTH)
+  action$.ofType('REHYDRATE_AUTH')
     .switchMap(() => {
       const token = window.localStorage.getItem('token');
       if (!token) {
@@ -96,7 +94,7 @@ export const rehydrateAuthEpic = (action$: any) =>
     });
 
 export const fetchProfileEpic = (action$: any) =>
-  action$.ofType(FETCH_PROFILE)
+  action$.ofType('FETCH_PROFILE')
     .map((action) => action.payload.token)
     .switchMap((token) =>
       request('auth/me', {
@@ -105,15 +103,15 @@ export const fetchProfileEpic = (action$: any) =>
         }
       }).map((result) => fetchProfileSuccess(result.response))
         .catch((error) => Observable.of({
-          type: FETCH_PROFILE_FAILURE,
+          type: 'FETCH_PROFILE_FAILURE',
           payload: error.xhr.response,
           error: true
         }))
     );
 
-export function login(username: string, password: string) {
+export function login(username: string, password: string): AuthAction {
   return {
-    type: LOGIN,
+    type: 'LOGIN',
     payload: {
       username,
       password
@@ -121,15 +119,15 @@ export function login(username: string, password: string) {
   };
 }
 
-export function logout() {
+export function logout(): AuthAction {
   return {
-    type: LOGOUT
+    type: 'LOGOUT'
   };
 }
 
-export function clearLoginError() {
+export function clearLoginError(): AuthAction {
   return {
-    type: LOGIN_CLEAR_ERROR
+    type: 'LOGIN_CLEAR_ERROR'
   };
 }
 
@@ -141,28 +139,28 @@ const initialState = fromJS({
   failed: false
 });
 
-export default function auth(state: State = initialState, action: Action): State {
+export default function auth(state: State = initialState, action: AuthAction): State {
   switch (action.type) {
-    case LOGIN:
+    case 'LOGIN':
     case LOCATION_CHANGE:
-    case LOGIN_CLEAR_ERROR:
+    case 'LOGIN_CLEAR_ERROR':
       return state.merge({ failed: false });
 
-    case LOGIN_FAILURE:
+    case 'LOGIN_FAILURE':
       return state.merge({ failed: true });
 
-    case LOGIN_SUCCESS:
+    case 'LOGIN_SUCCESS':
       return state.merge({
         token: action.payload.token
       });
 
-    case LOGOUT:
+    case 'LOGOUT':
       return state.merge(initialState);
 
-    case FETCH_PROFILE_SUCCESS:
+    case 'FETCH_PROFILE_SUCCESS':
       return state.merge(action.payload || {});
 
-    case FETCH_PROFILE_FAILURE:
+    case 'FETCH_PROFILE_FAILURE':
       return state.merge(initialState);
 
     default:

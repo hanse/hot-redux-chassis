@@ -1,4 +1,4 @@
-/** @flow */
+// @flow
 
 import styles from './Login.css';
 import React, { Component } from 'react';
