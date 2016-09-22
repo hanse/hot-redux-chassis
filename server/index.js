@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const jsonServer = require('json-server');
 const chalk = require('chalk');
 const auth = require('./auth');
+const search = require('./search');
 
 const config = require('../webpack/webpack.config.babel')({
   development: process.env.NODE_ENV === 'development'
@@ -18,6 +19,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 app.use('/api', jsonServer.router('tests/db.json'));
 app.use('/auth', auth);
+app.use('/search', search);
 
 function clearConsole() {
   process.stdout.write('\x1bc');

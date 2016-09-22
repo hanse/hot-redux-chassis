@@ -5,8 +5,11 @@ import React, { Component } from 'react';
 import Header from 'app/components/Header';
 
 type Props = {
-  children: any;
-  rehydrateAuth: () => any;
+  children: any,
+  rehydrateAuth: () => any,
+  searchOpen: boolean,
+  toggleSearch: () => void,
+  location: Object
 };
 
 export default class App extends Component {
@@ -18,8 +21,12 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        <Header />
+      <div style={{ WebkitFilter: this.props.searchOpen ? 'blur(7px)' : null }}>
+        <Header
+          searchOpen={this.props.searchOpen}
+          toggleSearch={this.props.toggleSearch}
+          location={this.props.location}
+        />
         {this.props.children}
       </div>
     );

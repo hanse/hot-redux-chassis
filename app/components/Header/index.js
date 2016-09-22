@@ -3,8 +3,11 @@
 import styles from './Header.css';
 import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
+import { Modal } from 'react-overlays';
 import cx from 'classnames';
 import HamburgerButton from 'app/components/HamburgerButton';
+import Icon from 'app/components/Icon';
+import Search from 'app/components/Search';
 
 const navigationItems = [{
   to: '/',
@@ -20,14 +23,13 @@ const navigationItems = [{
   LinkComponent: Link
 }];
 
-
 /**
  * A responsive header component with titles and menus.
  * On small screens the menu collapses into an animated hamburger menu.
  */
 class Header extends Component {
   state = {
-    isOpen: false
+    menuOpen: false
   };
 
   render() {
@@ -35,26 +37,44 @@ class Header extends Component {
       <div className={styles.root}>
         <div className={styles.header}>
           <div className={styles.mobileMenu}>
-            <Link to="/" className={styles.mobileTitle}>hanse</Link>
             <HamburgerButton
-              onClick={() => this.setState({ isOpen: !this.state.isOpen })}
-              open={this.state.isOpen}
+              onClick={() => this.setState({ menuOpen: !this.state.menuOpen })}
+              open={this.state.menuOpen}
             />
+            <Link to="/" className={styles.mobileTitle}>hanse</Link>
           </div>
 
           <Link to="/" className={styles.desktopTitle}>hanse</Link>
-          <ul className={cx(styles.navigationItems, this.state.isOpen && styles.openMenu)}>
+          <ul className={cx(styles.navigationItems, this.state.menuOpen && styles.openMenu)}>
             {navigationItems.map(({ LinkComponent, to, label }, index) => (
               <li key={index}>
                 <LinkComponent
                   to={to}
                   activeClassName={styles.activeItem}
-                  onClick={() => this.setState({ isOpen: false })}
+                  onClick={() => this.setState({ menuOpen: false })}
                 >{label}</LinkComponent>
               </li>
             ))}
           </ul>
+
+          <button
+            className={styles.searchButton}
+            onClick={this.props.toggleSearch}
+          >
+            <Icon name="search" />
+          </button>
         </div>
+
+        <Modal
+          show={this.props.searchOpen}
+          onHide={this.props.toggleSearch}
+          backdropClassName={styles.backdrop}
+          backdrop
+        >
+          <Search
+            query={this.props.location.query.q}
+          />
+        </Modal>
       </div>
     );
   }

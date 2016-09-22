@@ -1,0 +1,42 @@
+@import '../../styles/variables.css';
+
+.overlay {
+  max-width: var(--containerMaxWidth);
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.inputContainer {
+  height: 84px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+
+  input {
+    font-size: 20px;
+    outline: 0;
+    border: 0;
+    flex: 1;
+    padding: 0 10px;
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+::-webkit-input-placeholder {
+  color: #666;
+}
+
+.itemList {
+  background: #fff;
+}
+
+.item {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+}
