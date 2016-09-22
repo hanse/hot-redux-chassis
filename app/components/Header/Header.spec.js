@@ -5,7 +5,7 @@ import styles from './Header.css';
 
 describe('<Header />', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<Header />);
+    const wrapper = shallow(<Header location={{ query: {} }} />);
     expect(wrapper.type()).toEqual('div');
     expect(wrapper.props().className).toEqual(styles.root);
   });
