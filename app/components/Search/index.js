@@ -6,9 +6,24 @@ import { search, clearSearch } from 'app/state/search';
 import styles from './Search.css';
 
 class Search extends Component {
+
+  componentDidMount() {
+    this.search(this.props.query);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.query !== nextProps.query) {
+      this.search(nextProps.query);
+    }
+  }
+
   handleChange = (e) => {
-    this.props.search(e.target.value);
+    this.search(e.target.value);
   };
+
+  search(query) {
+    this.props.search(query);
+  }
 
   render() {
     return (
