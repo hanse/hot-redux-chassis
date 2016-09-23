@@ -24,9 +24,17 @@ export function dismissNotification(id: number): NotificationAction {
   };
 }
 
+function formatActionError(action) {
+  if (action.payload && action.payload.message) {
+    return action.payload.message;
+  }
+
+  return 'Unknown error';
+}
+
 export const errorNotificationEpic = (action$: any) =>
   action$.filter((action) => !!action.error)
-    .map((action) => showNotification(action.payload.message));
+    .map((action) => showNotification(formatActionError(action)));
 
 /**
  *

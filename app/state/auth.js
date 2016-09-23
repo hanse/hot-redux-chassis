@@ -65,7 +65,7 @@ export const loginEpic = (action$: any) =>
         })
         .catch((error) => Observable.of({
           type: 'LOGIN_FAILURE',
-          payload: new Error(error.xhr.response.error),
+          payload: error.xhr.response,
           error: true
         }));
     });
@@ -104,7 +104,7 @@ export const fetchProfileEpic = (action$: any) =>
       }).map((result) => fetchProfileSuccess(result.response))
         .catch((error) => Observable.of({
           type: 'FETCH_PROFILE_FAILURE',
-          payload: new Error(error.xhr.response.error),
+          payload: error.xhr.response,
           error: true
         }))
     );

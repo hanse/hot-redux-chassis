@@ -40,5 +40,5 @@ function createApiClient({ url }: ApiClientOptions): ApiClient {
 }
 
 export default createApiClient({
-  url: 'http://localhost:3000/'
+  url: ''
 });

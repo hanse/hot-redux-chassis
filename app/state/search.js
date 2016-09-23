@@ -45,7 +45,7 @@ export const searchEpic = (action$) =>
               .map((result) => receiveResults(result.response))
               .catch((error) => Observable.of({
                 type: 'SEARCH_FAILURE',
-                payload: new Error(error.xhr.response.error),
+                payload: error.xhr.response,
                 error: true
               }))
             )
