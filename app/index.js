@@ -42,9 +42,10 @@ render(
 if (module.hot) {
   // $FlowIssue
   module.hot.accept('./Root', () => {
+    const NextRoot = require('./Root').default;
     render(
       <AppContainer>
-        <Root {...{ store, history }} />
+        <NextRoot {...{ store, history }} />
       </AppContainer>,
       rootElement
     );

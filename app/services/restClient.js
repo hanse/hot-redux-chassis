@@ -26,7 +26,6 @@ type ApiClientOptions = {
 
 function createApiClient({ url }: ApiClientOptions): ApiClient {
   return function request(path, options) {
-    console.log(path, options); // eslint-disable-line
     return ajax({
       url: `${url}${path}`,
       responseType: 'json',
