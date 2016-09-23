@@ -4,7 +4,7 @@
   "author": "Hanse",
   "license": "MIT",
   "engines": {
-    "node": "6.3.1"
+    "node": "6.6.0"
   },
   "scripts": {
     "postinstall": "if [ $BUILD_ASSETS ]; then npm run build; fi",
