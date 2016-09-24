@@ -14,7 +14,7 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint app --ignore-path .gitignore",
     "lint:css": "stylelint ./app/**/*.css",
-    "test": "jest",
+    "test": "NODE_ENV=test jest",
     "test:watch": "npm run test -- --watch"
   },
   "repository": {
