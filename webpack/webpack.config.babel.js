@@ -68,7 +68,7 @@ module.exports = (options) => ({
         minimize: !options.development,
         postcss(wp) {
           return [
-            require('postcss-import')({ addDependencyTo: wp }),
+            require('postcss-import')(),
             require('postcss-cssnext'),
             require('postcss-nested')
           ];
@@ -109,20 +109,20 @@ module.exports = (options) => ({
     }, {
       test: /\.css$/,
       include: /node_modules/,
-      loaders: ['style', 'css']
+      loaders: ['style-loader', 'css-loader']
     }, {
       test: /\.css$/,
       exclude: /node_modules/,
       loaders: [
-        'style', {
-          loader: 'css',
+        'style-loader', {
+          loader: 'css-loader',
           query: {
             modules: true,
             importLoaders: 1,
             localIdentName: '[name]__[local]___[hash:base64:5]'
           }
         },
-        'postcss'
+        'postcss-loader'
       ]
     }, {
       test: /\.json$/,
