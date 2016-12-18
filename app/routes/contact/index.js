@@ -6,7 +6,7 @@ import type { AsyncRoute } from 'app/routes';
 export default ({
   path: 'contact',
   getComponent(location, cb) {
-    System.import('./ContactRoute')
+    import('./ContactRoute')
       .then(loadRoute(cb))
       .catch(loadingError);
   }

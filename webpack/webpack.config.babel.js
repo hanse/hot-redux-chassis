@@ -104,7 +104,7 @@ module.exports = (options) => ({
   module: {
     rules: [{
       test: /\.jsx?$/,
-      loader: 'babel',
+      loader: 'babel-loader',
       include: path.join(__dirname, '../app')
     }, {
       test: /\.css$/,
@@ -129,7 +129,7 @@ module.exports = (options) => ({
       loader: 'json-loader'
     }, {
       test: /\.(png|jpg|mp4|webm)/,
-      loader: 'url',
+      loader: 'url-loader',
       query: {
         limit: 8192
       }
