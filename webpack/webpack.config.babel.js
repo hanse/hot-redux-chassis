@@ -28,7 +28,7 @@ module.exports = (options) => ({
    * Define the output directory
    */
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: path.join(__dirname, '..', 'dist'),
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
     publicPath: '/'
@@ -41,7 +41,7 @@ module.exports = (options) => ({
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
-      filename: 'vendor.js'
+      filename: '[name].js'
     }),
 
     !options.development && new webpack.optimize.OccurrenceOrderPlugin(),
@@ -106,7 +106,7 @@ module.exports = (options) => ({
     rules: [{
       test: /\.jsx?$/,
       loader: 'babel-loader',
-      include: path.join(__dirname, '../app')
+      include: path.join(__dirname, '..', 'app')
     }, {
       test: /\.css$/,
       include: /node_modules/,
