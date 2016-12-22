@@ -27,18 +27,14 @@ export default function configureStore(initialState: Object = {}) {
     middlewares.push(logger);
   }
 
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
     require('../state').rootReducer,
     initialState,
-    compose(
-      applyMiddleware(...middlewares),
-      window.devToolsExtension ? window.devToolsExtension() : (f) => f
+    composeEnhancers(
+      applyMiddleware(...middlewares)
     )
   );
-
-  if (window.devToolsExtension) {
-    window.devToolsExtension.updateStore(store);
-  }
 
   if (module.hot) {
     // $FlowIssue

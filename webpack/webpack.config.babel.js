@@ -1,15 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
-const compact = require('lodash/compact');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const packageJson = require('../package.json');
+
+const compact = (filterable) => filterable.filter(Boolean);
 
 module.exports = (options) => ({
   /**
    * @see webpack-devtools
    */
-  devtool: options.development && 'eval-source-map',
+  devtool: options.development && 'cheap-module-eval-source-map',
 
   /**
    * Define webpack entries
@@ -20,7 +21,7 @@ module.exports = (options) => ({
       options.development && 'react-hot-loader/patch',
       './app/index.js'
     ]),
-    vendor: ['react', 'react-dom', 'lodash', 'react-router']
+    vendor: ['react', 'react-dom', 'react-router']
   },
 
   /**
@@ -66,7 +67,7 @@ module.exports = (options) => ({
     new webpack.LoaderOptionsPlugin({
       options: {
         minimize: !options.development,
-        postcss(wp) {
+        postcss() {
           return [
             require('postcss-import')(),
             require('postcss-cssnext'),
@@ -78,7 +79,7 @@ module.exports = (options) => ({
 
     // Make a separate css bundle for production
     new ExtractTextPlugin({
-      filename: '[name].css',
+      filename: '[name].[contenthash:8].css',
       allChunks: true,
       disable: !!options.development
     }),
@@ -109,24 +110,24 @@ module.exports = (options) => ({
     }, {
       test: /\.css$/,
       include: /node_modules/,
-      loaders: ['style-loader', 'css-loader']
+      loaders: ExtractTextPlugin.extract({
+        fallbackLoader: 'style-loader',
+        loader: 'css-loader'
+      })
     }, {
       test: /\.css$/,
       exclude: /node_modules/,
-      loaders: [
-        'style-loader', {
+      loader: ExtractTextPlugin.extract({
+        fallbackLoader: 'style-loader',
+        loader: [{
           loader: 'css-loader',
           query: {
             modules: true,
             importLoaders: 1,
             localIdentName: '[name]__[local]___[hash:base64:5]'
           }
-        },
-        'postcss-loader'
-      ]
-    }, {
-      test: /\.json$/,
-      loader: 'json-loader'
+        }, 'postcss-loader']
+      })
     }, {
       test: /\.(png|jpg|mp4|webm)/,
       loader: 'url-loader',
