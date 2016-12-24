@@ -58,7 +58,7 @@
     "jest": "^18.0.0",
     "json-loader": "0.5.4",
     "json-server": "^0.9.4",
-    "lodash": "4.17.2",
+    "lodash": "4.17.3",
     "node-uuid": "1.4.7",
     "nodemon": "1.11.0",
     "null-loader": "0.1.1",
