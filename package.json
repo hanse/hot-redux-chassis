@@ -85,7 +85,7 @@
     "stylelint-config-standard": "^15.0.1",
     "url-loader": "0.5.7",
     "webpack": "2.2.0-rc.1",
-    "webpack-express-middleware": "1.1.1"
+    "webpack-express-middleware": "1.1.2"
   },
   "stylelint": {
     "extends": "stylelint-config-standard",
