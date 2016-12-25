@@ -1,0 +1,7 @@
+if [ $BUILD_ASSETS ]; then
+  yarn run build;
+fi
+
+if [ "$NODE_ENV" != "production" ]; then
+  yarn run build:dll;
+fi

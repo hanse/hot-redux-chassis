@@ -1,9 +1,11 @@
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const packageJson = require('../package.json');
 
+const dllConfig = packageJson.dllConfig;
 const compact = (filterable) => filterable.filter(Boolean);
 
 module.exports = (options) => ({
@@ -37,13 +39,7 @@ module.exports = (options) => ({
   /**
    *
    */
-  plugins: compact([
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-      filename: '[name].js'
-    }),
-
+  plugins: getDependencyHandlers(options).concat(compact([
     !options.development && new webpack.optimize.OccurrenceOrderPlugin(),
 
     new webpack.DefinePlugin({
@@ -90,9 +86,10 @@ module.exports = (options) => ({
       inject: true,
       hash: true,
       favicon: 'app/assets/favicon.ico',
-      appName: packageJson.name
+      appName: packageJson.name,
+      isDevelopment: options.development
     })
-  ]),
+  ])),
 
   resolve: {
     modules: [
@@ -106,7 +103,10 @@ module.exports = (options) => ({
     rules: [{
       test: /\.jsx?$/,
       loader: 'babel-loader',
-      include: path.join(__dirname, '..', 'app')
+      include: path.join(__dirname, '..', 'app'),
+      query: {
+        cacheDirectory: true
+      }
     }, {
       test: /\.css$/,
       include: /node_modules/,
@@ -139,3 +139,29 @@ module.exports = (options) => ({
 
   target: 'web'
 });
+
+
+function getDependencyHandlers(options) {
+  if (!options.development) {
+    return [new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: '[name].js'
+    })];
+  }
+
+  const dllPath = path.resolve(process.cwd(), dllConfig.path);
+  const manifestPath = path.resolve(dllPath, 'vendors.json');
+
+  if (!fs.existsSync(manifestPath)) {
+    console.error('The DLL manifest is missing. Please run `yarn run build:dll`');
+    process.exit(0);
+  }
+
+  return [
+    new webpack.DllReferencePlugin({
+      context: process.cwd(),
+      manifest: require(manifestPath)
+    })
+  ];
+}

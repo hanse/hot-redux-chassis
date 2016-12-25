@@ -21,5 +21,8 @@
   </head>
   <body>
     <div id="root"></div>
+    <% if (htmlWebpackPlugin.options.isDevelopment) { %>
+    <script type="text/javascript" src="/vendors.dll.js"></script>
+    <% } %>
   </body>
 </html>
