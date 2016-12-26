@@ -102,15 +102,15 @@ module.exports = (options) => ({
   module: {
     rules: [{
       test: /\.jsx?$/,
-      loader: 'babel-loader',
-      include: path.join(__dirname, '..', 'app'),
-      query: {
+      include: path.join(process.cwd(), 'app'),
+      use: ['babel-loader'],
+      options: {
         cacheDirectory: true
       }
     }, {
       test: /\.css$/,
       include: /node_modules/,
-      loaders: ExtractTextPlugin.extract({
+      loader: ExtractTextPlugin.extract({
         fallbackLoader: 'style-loader',
         loader: 'css-loader'
       })
@@ -130,8 +130,8 @@ module.exports = (options) => ({
       })
     }, {
       test: /\.(png|jpg|mp4|webm)/,
-      loader: 'url-loader',
-      query: {
+      use: ['url-loader'],
+      options: {
         limit: 8192
       }
     }]
