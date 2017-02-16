@@ -48,7 +48,7 @@ module.exports = (options) => ({
     }),
 
     options.development && new webpack.HotModuleReplacementPlugin(),
-    options.development && new webpack.NoErrorsPlugin(),
+    options.development && new webpack.NoEmitOnErrorsPlugin(),
 
     // Minify bundles
     new webpack.optimize.UglifyJsPlugin({
@@ -103,25 +103,22 @@ module.exports = (options) => ({
     rules: [{
       test: /\.jsx?$/,
       include: path.join(process.cwd(), 'app'),
-      use: ['babel-loader'],
-      options: {
-        cacheDirectory: true
-      }
+      use: 'babel-loader'
     }, {
       test: /\.css$/,
       include: /node_modules/,
-      loader: ExtractTextPlugin.extract({
+      use: ExtractTextPlugin.extract({
         fallbackLoader: 'style-loader',
-        loader: 'css-loader'
+        use: 'css-loader'
       })
     }, {
       test: /\.css$/,
       exclude: /node_modules/,
-      loader: ExtractTextPlugin.extract({
+      use: ExtractTextPlugin.extract({
         fallbackLoader: 'style-loader',
-        loader: [{
+        use: [{
           loader: 'css-loader',
-          query: {
+          options: {
             modules: true,
             importLoaders: 1,
             localIdentName: '[name]__[local]___[hash:base64:5]'
@@ -130,10 +127,12 @@ module.exports = (options) => ({
       })
     }, {
       test: /\.(png|jpg|mp4|webm)/,
-      use: ['url-loader'],
-      options: {
-        limit: 8192
-      }
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 8192
+        }
+      }]
     }]
   },
 
