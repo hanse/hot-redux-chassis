@@ -118,13 +118,12 @@
 .searchButton {
   color: #fff;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 700;
   padding: 0 20px;
 }
 
 .backdrop {
-  background: rgba(255, 255, 255, 0.5);
   top: 0;
   left: 0;
   right: 0;

@@ -5,3 +5,7 @@
 
 @custom-media --small-viewport (max-width: 30em);
 @custom-media --large-viewport (min-width: 30em);
+
+button {
+  outline: none;
+}

@@ -11,16 +11,19 @@
 
 .inputContainer {
   height: 84px;
-  border-bottom: 1px solid #ddd;
   display: flex;
+  padding: 0 var(--rootPadding);
+  background: #222;
 
   input {
-    font-size: 20px;
+    font-size: 26px;
     outline: 0;
     border: 0;
     flex: 1;
     padding: 0 10px;
-    background: rgba(255, 255, 255, 0.8);
+    color: #eee;
+    background: transparent;
+    appearance: none;
   }
 }
 
@@ -30,6 +33,7 @@
 
 .itemList {
   background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .item {
@@ -39,4 +43,15 @@
   &:last-of-type {
     border-bottom: 0;
   }
+}
+
+.selectedItem {
+  composes: item;
+  background: #eee;
+}
+
+.closeButton {
+  padding: 0 20px;
+  font-size: 26px;
+  color: #ddd;
 }

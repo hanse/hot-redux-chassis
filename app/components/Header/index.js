@@ -45,7 +45,7 @@ class Header extends Component {
               onClick={() => this.setState({ menuOpen: !this.state.menuOpen })}
               open={this.state.menuOpen}
             />
-            <Link to="/" className={styles.mobileTitle}>hanse</Link>
+            <Link to="/" className={styles.mobileTitle}>React</Link>
           </div>
 
           <Link to="/" className={styles.desktopTitle}>hanse</Link>
@@ -55,7 +55,7 @@ class Header extends Component {
               this.state.menuOpen && styles.openMenu
             )}
           >
-            {navigationItems.map(({ LinkComponent, to, label }) => (
+            {navigationItems.map(({ LinkComponent, to, label }) =>
               <li key={label}>
                 <LinkComponent
                   to={to}
@@ -65,7 +65,7 @@ class Header extends Component {
                   {label}
                 </LinkComponent>
               </li>
-            ))}
+            )}
           </ul>
 
           <button
@@ -82,7 +82,10 @@ class Header extends Component {
           backdropClassName={styles.backdrop}
           backdrop
         >
-          <Search query={this.props.location.query.q} />
+          <Search
+            query={this.props.location.query.q}
+            onClose={this.props.toggleSearch}
+          />
         </Modal>
       </div>
     );
