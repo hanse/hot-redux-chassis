@@ -3,7 +3,7 @@
 import { Observable } from 'rxjs';
 import { Map, fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import type { RootState } from 'app/types';
+import type { State as RootState } from 'app/types';
 import request from 'app/services/restClient';
 
 type AuthAction =

@@ -8,13 +8,17 @@ import notifications, { errorNotificationEpic } from 'app/state/notifications';
 import ui from 'app/state/ui';
 import results, { searchEpic, clearSearchEpic } from 'app/state/search';
 
-export const rootReducer = combineReducers({
+const reducers = {
   auth,
   notifications,
   ui,
   routing: routerReducer,
   search: results
-});
+};
+
+export type Reducers = typeof reducers;
+
+export const rootReducer = combineReducers(reducers);
 
 export const rootEpic = combineEpics(
   rehydrateAuthEpic,

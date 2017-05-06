@@ -1,6 +1,7 @@
 // @flow
 
-import { Map } from 'immutable';
+import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
+import type { Reducers } from './state';
 
 export type Action = {
   type: string,
@@ -9,8 +10,14 @@ export type Action = {
   error?: boolean
 };
 
-export type RootState = { [key: string]: Map<string, any> };
-export type AnyAction = Object & Action;
-export type Reducer<T> = (state: T, action: AnyAction) => T;
-export type Thunk = (dispatch: Dispatch, getState: () => RootState) => any;
-export type Dispatch = (action: Action) => any;
+type $ExtractFunctionReturn = <V>(v: (...args: any) => V) => V;
+
+export type State = $ObjMap<Reducers, $ExtractFunctionReturn>;
+
+export type Store = ReduxStore<State, Action>;
+
+export type GetState = () => State;
+
+export type Thunk<A> = (d: Dispatch, gs: GetState) => Promise<void> | void | A;
+
+export type Dispatch = ReduxDispatch<Action> & (t: Thunk<*>) => Action;
