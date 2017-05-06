@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 import LoginForm from 'app/components/LoginForm';
 
 type Props = {
-  login: () => any;
-  location: any;
+  login: () => any,
+  location: any
 };
 
 export default class Login extends Component {

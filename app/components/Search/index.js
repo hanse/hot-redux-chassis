@@ -6,7 +6,6 @@ import { search, clearSearch } from 'app/state/search';
 import styles from './Search.css';
 
 class Search extends Component {
-
   componentDidMount() {
     this.search(this.props.query);
   }
@@ -17,7 +16,7 @@ class Search extends Component {
     }
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.search(e.target.value);
   };
 
@@ -59,7 +58,4 @@ const mapDispatchToProps = {
   clearSearch
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

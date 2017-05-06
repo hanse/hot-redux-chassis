@@ -7,7 +7,7 @@ import type { State as RootState } from 'app/types';
 import request from 'app/services/restClient';
 
 type AuthAction =
-    { type: 'FETCH_PROFILE' }
+  | { type: 'FETCH_PROFILE' }
   | { type: 'FETCH_PROFILE_SUCCESS', payload: { username: string } }
   | { type: 'FETCH_PROFILE_FAILURE' }
   | { type: 'LOGIN' }
@@ -45,68 +45,71 @@ export function loginSuccess(payload: any): AuthAction {
 }
 
 export const loginEpic = (action$: any) =>
-  action$.ofType('LOGIN')
-    .switchMap((action) => {
-      const { username, password } = action.payload;
-      return request('auth/login', {
-        method: 'POST',
-        body: {
-          username,
-          password
-        }
+  action$.ofType('LOGIN').switchMap(action => {
+    const { username, password } = action.payload;
+    return request('auth/login', {
+      method: 'POST',
+      body: {
+        username,
+        password
+      }
+    })
+      .map(result => result.response)
+      .switchMap(payload => {
+        window.localStorage.setItem('token', payload.token);
+        return Observable.merge(
+          Observable.of(loginSuccess(payload)),
+          Observable.of(fetchUserProfile(payload.token))
+        );
       })
-        .map((result) => result.response)
-        .switchMap((payload) => {
-          window.localStorage.setItem('token', payload.token);
-          return Observable.merge(
-            Observable.of(loginSuccess(payload)),
-            Observable.of(fetchUserProfile(payload.token))
-          );
-        })
-        .catch((error) => Observable.of({
+      .catch(error =>
+        Observable.of({
           type: 'LOGIN_FAILURE',
           payload: error.xhr.response,
           error: true
-        }));
-    });
+        })
+      );
+  });
 
 export const logoutEpic = (action$: any) =>
-  action$.ofType('LOGOUT')
-    .switchMap(() => {
-      window.localStorage.removeItem('token');
-      return Observable.of({
-        type: 'LOGOUT_SUCCESS'
-      });
+  action$.ofType('LOGOUT').switchMap(() => {
+    window.localStorage.removeItem('token');
+    return Observable.of({
+      type: 'LOGOUT_SUCCESS'
     });
+  });
 
 export const rehydrateAuthEpic = (action$: any) =>
-  action$.ofType('REHYDRATE_AUTH')
-    .switchMap(() => {
-      const token = window.localStorage.getItem('token');
-      if (!token) {
-        return Observable.of();
-      }
+  action$.ofType('REHYDRATE_AUTH').switchMap(() => {
+    const token = window.localStorage.getItem('token');
+    if (!token) {
+      return Observable.of();
+    }
 
-      return Observable.merge(
-        Observable.of(loginSuccess({ token })),
-        Observable.of(fetchUserProfile(token))
-      );
-    });
+    return Observable.merge(
+      Observable.of(loginSuccess({ token })),
+      Observable.of(fetchUserProfile(token))
+    );
+  });
 
 export const fetchProfileEpic = (action$: any) =>
-  action$.ofType('FETCH_PROFILE')
-    .map((action) => action.payload.token)
-    .switchMap((token) =>
+  action$
+    .ofType('FETCH_PROFILE')
+    .map(action => action.payload.token)
+    .switchMap(token =>
       request('auth/me', {
         headers: {
           Authorization: `Bearer ${token}`
         }
-      }).map((result) => fetchProfileSuccess(result.response))
-        .catch((error) => Observable.of({
-          type: 'FETCH_PROFILE_FAILURE',
-          payload: error.xhr.response,
-          error: true
-        }))
+      })
+        .map(result => fetchProfileSuccess(result.response))
+        .catch(error =>
+          Observable.of({
+            type: 'FETCH_PROFILE_FAILURE',
+            payload: error.xhr.response,
+            error: true
+          })
+        )
     );
 
 export function login(username: string, password: string): AuthAction {
@@ -139,7 +142,10 @@ const initialState = fromJS({
   failed: false
 });
 
-export default function auth(state: State = initialState, action: AuthAction): State {
+export default function auth(
+  state: State = initialState,
+  action: AuthAction
+): State {
   switch (action.type) {
     case 'LOGIN':
     case LOCATION_CHANGE:

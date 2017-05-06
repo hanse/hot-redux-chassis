@@ -3,8 +3,8 @@
 import { fromJS, Map } from 'immutable';
 
 type NotificationAction =
-    { type: 'SHOW_NOTIFICATION', payload: { id: number, message: string }}
-  | { type: 'DISMISS_NOTIFICATION', payload: { id: number }}
+  | { type: 'SHOW_NOTIFICATION', payload: { id: number, message: string } }
+  | { type: 'DISMISS_NOTIFICATION', payload: { id: number } };
 
 let notificationId = 0;
 export function showNotification(message: string): NotificationAction {
@@ -33,8 +33,9 @@ function formatActionError(action) {
 }
 
 export const errorNotificationEpic = (action$: any) =>
-  action$.filter((action) => !!action.error)
-    .map((action) => showNotification(formatActionError(action)));
+  action$
+    .filter(action => !!action.error)
+    .map(action => showNotification(formatActionError(action)));
 
 /**
  *

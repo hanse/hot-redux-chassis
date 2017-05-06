@@ -10,13 +10,7 @@ type Props = {
 
 function HamburgerButton({ open, ...props }: Props) {
   return (
-    <div
-      className={cx(
-        styles.hamburgerButton,
-        open && styles.open
-      )}
-      {...props}
-    >
+    <div className={cx(styles.hamburgerButton, open && styles.open)} {...props}>
       <div />
       <div />
       <div />

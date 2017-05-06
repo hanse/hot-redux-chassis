@@ -9,18 +9,11 @@ type Props = {
   block?: boolean
 };
 
-function Button({
-  className,
-  block = false,
-  ...props
-}: Props) {
+function Button({ className, block = false, ...props }: Props) {
   return (
     <button
       type="button"
-      className={cx(
-        className || styles.button,
-        block && styles.block
-      )}
+      className={cx(className || styles.button, block && styles.block)}
       {...props}
     />
   );

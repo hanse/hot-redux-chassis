@@ -6,12 +6,12 @@ import about from './about';
 import login from './login';
 
 export type AsyncRoute = {
-  path: string;
-  getComponent: (location: string, cb: () => any) => void;
+  path: string,
+  getComponent: (location: string, cb: () => any) => void
 };
 
 export function loadRoute(callback) {
-  return (module) => callback(null, module.default);
+  return module => callback(null, module.default);
 }
 
 export function loadingError(err) {

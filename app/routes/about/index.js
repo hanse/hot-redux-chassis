@@ -6,8 +6,6 @@ import type { AsyncRoute } from 'app/routes';
 export default ({
   path: 'about',
   getComponent(location, cb) {
-    import('./AboutRoute')
-      .then(loadRoute(cb))
-      .catch(loadingError);
+    import('./AboutRoute').then(loadRoute(cb)).catch(loadingError);
   }
 }: AsyncRoute);

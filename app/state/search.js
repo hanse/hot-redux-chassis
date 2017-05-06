@@ -23,32 +23,35 @@ export function receiveResults(payload) {
   };
 }
 
-export const clearSearchEpic = (action$) =>
-  action$.ofType('SEARCH')
-    .filter((action) => !action.payload.query)
-    .mergeMap(() => Observable.merge(
-      Observable.of(replace('')),
-      Observable.of(clearSearch())
-    ));
+export const clearSearchEpic = action$ =>
+  action$
+    .ofType('SEARCH')
+    .filter(action => !action.payload.query)
+    .mergeMap(() =>
+      Observable.merge(Observable.of(replace('')), Observable.of(clearSearch()))
+    );
 
-export const searchEpic = (action$) =>
-  action$.ofType('SEARCH')
-    .map((action) => action.payload.query)
-    .filter((query) => !!query)
-    .switchMap((query) =>
+export const searchEpic = action$ =>
+  action$
+    .ofType('SEARCH')
+    .map(action => action.payload.query)
+    .filter(query => !!query)
+    .switchMap(query =>
       Observable.merge(
         Observable.of(replace(`?q=${query}`)),
         Observable.timer(800)
           .takeUntil(action$.ofType('CLEAR_SEARCH'))
           .mergeMap(() =>
             request(`search?q=${query}`)
-              .map((result) => receiveResults(result.response))
-              .catch((error) => Observable.of({
-                type: 'SEARCH_FAILURE',
-                payload: error.xhr.response,
-                error: true
-              }))
-            )
+              .map(result => receiveResults(result.response))
+              .catch(error =>
+                Observable.of({
+                  type: 'SEARCH_FAILURE',
+                  payload: error.xhr.response,
+                  error: true
+                })
+              )
+          )
       )
     );
 

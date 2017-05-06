@@ -19,21 +19,23 @@ export default function configureStore(): Store {
     const logger = createLogger({
       level: 'info',
       collapsed: true,
-      stateTransformer: (state) => Object.keys(state).reduce((json, key) => {
-        json[key] = Iterable.isIterable(state[key]) ? state[key].toJS() : state[key];
-        return json;
-      }, {})
+      stateTransformer: state =>
+        Object.keys(state).reduce((json, key) => {
+          json[key] = Iterable.isIterable(state[key])
+            ? state[key].toJS()
+            : state[key];
+          return json;
+        }, {})
     });
 
     middlewares.push(logger);
   }
 
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
     require('../state').rootReducer,
-    composeEnhancers(
-      applyMiddleware(...middlewares)
-    )
+    composeEnhancers(applyMiddleware(...middlewares))
   );
 
   if (module.hot) {

@@ -6,19 +6,18 @@ import cx from 'classnames';
 import Icon from '../Icon';
 
 type Props = {
-  message: string | React.Element<*>;
-  type: 'success'|'warning'|'error';
-  onClose?: () => void;
+  message: string | React.Element<*>,
+  type: 'success' | 'warning' | 'error',
+  onClose?: () => void
 };
 
 function MessageBox({ message, type, onClose }: Props) {
   return (
     <div className={cx(styles.messageBox, styles[type])}>
       {message}
-      <button
-        className={styles.button}
-        onClick={onClose}
-      ><Icon name="close" /></button>
+      <button className={styles.button} onClick={onClose}>
+        <Icon name="close" />
+      </button>
     </div>
   );
 }

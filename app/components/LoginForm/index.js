@@ -5,13 +5,13 @@ import Button from 'app/components/Button';
 import Input from 'app/components/Input';
 
 type Props = {
-  onSubmit: (u: string, p: string) => any;
+  onSubmit: (u: string, p: string) => any
 };
 
 type State = {
-  username: string;
-  password: string;
-}
+  username: string,
+  password: string
+};
 
 export default class LoginForm extends Component {
   props: Props;
@@ -23,10 +23,7 @@ export default class LoginForm extends Component {
 
   handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    this.props.onSubmit(
-      this.state.username,
-      this.state.password
-    );
+    this.props.onSubmit(this.state.username, this.state.password);
   };
 
   render() {
@@ -35,13 +32,13 @@ export default class LoginForm extends Component {
         <Input
           type="text"
           placeholder="username"
-          onChange={(e) => this.setState({ username: e.target.value })}
+          onChange={e => this.setState({ username: e.target.value })}
         />
 
         <Input
           type="password"
           placeholder="password"
-          onChange={(e) => this.setState({ password: e.target.value })}
+          onChange={e => this.setState({ password: e.target.value })}
         />
 
         <Button type="submit" block>Login</Button>

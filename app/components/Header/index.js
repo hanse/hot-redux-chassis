@@ -9,19 +9,23 @@ import HamburgerButton from 'app/components/HamburgerButton';
 import Icon from 'app/components/Icon';
 import Search from 'app/components/Search';
 
-const navigationItems = [{
-  to: '/',
-  label: 'Home',
-  LinkComponent: IndexLink
-}, {
-  to: '/about',
-  label: 'About',
-  LinkComponent: Link
-}, {
-  to: '/contact',
-  label: 'Contact',
-  LinkComponent: Link
-}];
+const navigationItems = [
+  {
+    to: '/',
+    label: 'Home',
+    LinkComponent: IndexLink
+  },
+  {
+    to: '/about',
+    label: 'About',
+    LinkComponent: Link
+  },
+  {
+    to: '/contact',
+    label: 'Contact',
+    LinkComponent: Link
+  }
+];
 
 /**
  * A responsive header component with titles and menus.
@@ -45,14 +49,21 @@ class Header extends Component {
           </div>
 
           <Link to="/" className={styles.desktopTitle}>hanse</Link>
-          <ul className={cx(styles.navigationItems, this.state.menuOpen && styles.openMenu)}>
+          <ul
+            className={cx(
+              styles.navigationItems,
+              this.state.menuOpen && styles.openMenu
+            )}
+          >
             {navigationItems.map(({ LinkComponent, to, label }, index) => (
               <li key={index}>
                 <LinkComponent
                   to={to}
                   activeClassName={styles.activeItem}
                   onClick={() => this.setState({ menuOpen: false })}
-                >{label}</LinkComponent>
+                >
+                  {label}
+                </LinkComponent>
               </li>
             ))}
           </ul>
@@ -71,9 +82,7 @@ class Header extends Component {
           backdropClassName={styles.backdrop}
           backdrop
         >
-          <Search
-            query={this.props.location.query.q}
-          />
+          <Search query={this.props.location.query.q} />
         </Modal>
       </div>
     );

@@ -9,9 +9,9 @@ import type { Dispatch } from 'app/types';
 export default function requireAuth(ProtectedComponent: ReactClass<*>) {
   class AuthenticatedComponent extends Component {
     props: {
-      dispatch: Dispatch;
-      location: any;
-      isLoggedIn: boolean;
+      dispatch: Dispatch,
+      location: any,
+      isLoggedIn: boolean
     };
 
     componentWillMount() {
@@ -37,7 +37,7 @@ export default function requireAuth(ProtectedComponent: ReactClass<*>) {
     }
   }
 
-  return connect((state) => ({
+  return connect(state => ({
     isLoggedIn: isLoggedIn(state)
   }))(AuthenticatedComponent);
 }

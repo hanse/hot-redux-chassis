@@ -10,11 +10,11 @@ type RequestOptions = {
   crossDomain?: boolean,
   withCredentials?: boolean,
   headers?: Object,
-  method?: 'GET'|'POST'|'PUT'|'PATCH'|'DELETE',
+  method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
   user?: string,
   password?: string,
   progressObserver?: any,
-  responseType?: 'json'|'text'|'blob',
+  responseType?: 'json' | 'text' | 'blob',
   timeout?: number,
   url?: string
 };
