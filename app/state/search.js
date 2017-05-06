@@ -1,3 +1,5 @@
+// @flow
+
 import { fromJS } from 'immutable';
 import { Observable } from 'rxjs';
 import { replace } from 'react-router-redux';

@@ -1,12 +1,15 @@
 const express = require('express');
 const uuid = require('node-uuid');
+
 const router = new express.Router();
 
-const users = [{
-  id: 1,
-  username: 'admin',
-  password: 'admin'
-}];
+const users = [
+  {
+    id: 1,
+    username: 'admin',
+    password: 'admin'
+  }
+];
 
 const tokens = {};
 
@@ -23,7 +26,7 @@ router.get('/me', (req, res) => {
   }
 
   const userId = tokens[token];
-  const user = users.find((user) => user.id === userId);
+  const user = users.find(user => user.id === userId);
 
   return res.send({
     id: user.id,
@@ -31,12 +34,11 @@ router.get('/me', (req, res) => {
   });
 });
 
-
 router.post('/login', (req, res) => {
   const body = req.body;
 
-  const user = users.find((user) =>
-    user.username === body.username && user.password === body.password
+  const user = users.find(
+    user => user.username === body.username && user.password === body.password
   );
 
   if (!user) {

@@ -1,3 +1,5 @@
+// @flow
+
 import { fromJS } from 'immutable';
 
 export function toggleSearch() {
