@@ -38,8 +38,8 @@ class Search extends Component {
         </div>
 
         <div className={styles.itemList}>
-          {this.props.results.map((result, i) => (
-            <div key={i} className={styles.item}>{result}</div>
+          {this.props.results.map(result => (
+            <div key={result} className={styles.item}>{result}</div>
           ))}
         </div>
       </div>

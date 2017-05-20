@@ -1,13 +1,10 @@
 // @flow
 
 import { fromJS, Map } from 'immutable';
-
-type NotificationAction =
-  | { type: 'SHOW_NOTIFICATION', payload: { id: number, message: string } }
-  | { type: 'DISMISS_NOTIFICATION', payload: { id: number } };
+import type { Action } from 'app/types';
 
 let notificationId = 0;
-export function showNotification(message: string): NotificationAction {
+export function showNotification(message: string): Action {
   return {
     type: 'SHOW_NOTIFICATION',
     payload: {
@@ -17,7 +14,7 @@ export function showNotification(message: string): NotificationAction {
   };
 }
 
-export function dismissNotification(id: number): NotificationAction {
+export function dismissNotification(id: number): Action {
   return {
     type: 'DISMISS_NOTIFICATION',
     payload: { id }
@@ -52,7 +49,7 @@ const initialState = fromJS({});
  */
 export default function notifications(
   state: State = initialState,
-  action: NotificationAction
+  action: Action
 ): State {
   switch (action.type) {
     case 'SHOW_NOTIFICATION':

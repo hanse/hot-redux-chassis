@@ -19,13 +19,13 @@ type RequestOptions = {
   url?: string
 };
 
-type ApiClient = (path: string, options: RequestOptions) => Observable;
+type ApiClient = (path: string, options?: RequestOptions) => Observable<*>;
 type ApiClientOptions = {
   url: string
 };
 
 function createApiClient({ url }: ApiClientOptions): ApiClient {
-  return function request(path, options) {
+  return function request(path, options = {}) {
     return ajax({
       url: `${url}${path}`,
       responseType: 'json',

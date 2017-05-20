@@ -55,8 +55,8 @@ class Header extends Component {
               this.state.menuOpen && styles.openMenu
             )}
           >
-            {navigationItems.map(({ LinkComponent, to, label }, index) => (
-              <li key={index}>
+            {navigationItems.map(({ LinkComponent, to, label }) => (
+              <li key={label}>
                 <LinkComponent
                   to={to}
                   activeClassName={styles.activeItem}

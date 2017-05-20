@@ -3,41 +3,30 @@
 import { Observable } from 'rxjs';
 import { Map, fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import type { State as RootState } from 'app/types';
+import type { State as RootState, Action } from 'app/types';
 import request from 'app/services/restClient';
 
-type AuthAction =
-  | { type: 'FETCH_PROFILE' }
-  | { type: 'FETCH_PROFILE_SUCCESS', payload: { username: string } }
-  | { type: 'FETCH_PROFILE_FAILURE' }
-  | { type: 'LOGIN' }
-  | { type: 'LOGIN_SUCCESS', payload: { token: string } }
-  | { type: 'LOGIN_FAILURE' }
-  | { type: 'LOGIN_CLEAR_ERROR' }
-  | { type: 'LOGOUT' }
-  | { type: 'REHYDRATE_AUTH' };
-
-export function rehydrateAuth(): AuthAction {
+export function rehydrateAuth(): Action {
   return {
     type: 'REHYDRATE_AUTH'
   };
 }
 
-export function fetchUserProfile(token: string): AuthAction {
+export function fetchUserProfile(token: string): Action {
   return {
     type: 'FETCH_PROFILE',
     payload: { token }
   };
 }
 
-export function fetchProfileSuccess(payload: any): AuthAction {
+export function fetchProfileSuccess(payload: any): Action {
   return {
     type: 'FETCH_PROFILE_SUCCESS',
     payload
   };
 }
 
-export function loginSuccess(payload: any): AuthAction {
+export function loginSuccess(payload: any): Action {
   return {
     type: 'LOGIN_SUCCESS',
     payload
@@ -112,7 +101,7 @@ export const fetchProfileEpic = (action$: any) =>
         )
     );
 
-export function login(username: string, password: string): AuthAction {
+export function login(username: string, password: string): Action {
   return {
     type: 'LOGIN',
     payload: {
@@ -122,13 +111,13 @@ export function login(username: string, password: string): AuthAction {
   };
 }
 
-export function logout(): AuthAction {
+export function logout(): Action {
   return {
     type: 'LOGOUT'
   };
 }
 
-export function clearLoginError(): AuthAction {
+export function clearLoginError(): Action {
   return {
     type: 'LOGIN_CLEAR_ERROR'
   };
@@ -144,7 +133,7 @@ const initialState = fromJS({
 
 export default function auth(
   state: State = initialState,
-  action: AuthAction
+  action: Action
 ): State {
   switch (action.type) {
     case 'LOGIN':
