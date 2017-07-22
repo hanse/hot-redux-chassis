@@ -62,6 +62,7 @@ class Search extends Component {
         className={styles.overlay}
         onKeyDown={this.handleKeyDown}
         tabIndex={-1}
+        role="menu"
       >
         <div className={styles.inputContainer}>
           <input
@@ -78,9 +79,9 @@ class Search extends Component {
         </div>
 
         <div className={styles.itemList}>
-          {this.props.results.map((result, i) =>
+          {this.props.results.map((result, i) => (
             <div
-              key={i}
+              key={result}
               className={
                 i === this.state.selectedIndex
                   ? styles.selectedItem
@@ -89,7 +90,7 @@ class Search extends Component {
             >
               {result}
             </div>
-          )}
+          ))}
         </div>
       </div>
     );
