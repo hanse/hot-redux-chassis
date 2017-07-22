@@ -42,6 +42,7 @@ module.exports = options => ({
   plugins: getDependencyHandlers(options).concat(
     compact([
       !options.development && new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.optimize.ModuleConcatenationPlugin(),
 
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(!!options.development),
