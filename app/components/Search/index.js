@@ -79,7 +79,7 @@ class Search extends Component {
         </div>
 
         <div className={styles.itemList}>
-          {this.props.results.map((result, i) => (
+          {this.props.results.map((result, i) =>
             <div
               key={result}
               className={
@@ -90,7 +90,7 @@ class Search extends Component {
             >
               {result}
             </div>
-          ))}
+          )}
         </div>
       </div>
     );

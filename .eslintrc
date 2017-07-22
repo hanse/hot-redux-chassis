@@ -1,19 +1,14 @@
 {
   "parser": "babel-eslint",
   "extends": [
-    "airbnb",
+    "react-app",
     "plugin:flowtype/recommended",
     "plugin:react/recommended",
     "prettier",
     "prettier/flowtype",
     "prettier/react"
   ],
-  "plugins": [
-    "react",
-    "flowtype",
-    "prettier",
-    "import"
-  ],
+  "plugins": ["react", "flowtype", "prettier", "import"],
   "rules": {
     "prettier/prettier": [2, { "singleQuote": true }],
     "import/no-extraneous-dependencies": 0,

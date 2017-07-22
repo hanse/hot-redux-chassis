@@ -41,7 +41,9 @@ export default class LoginForm extends Component {
           onChange={e => this.setState({ password: e.target.value })}
         />
 
-        <Button type="submit" block>Login</Button>
+        <Button type="submit" block>
+          Login
+        </Button>
       </form>
     );
   }
