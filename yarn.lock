@@ -3553,6 +3553,10 @@ immutable@3.8.1:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
 
+import-inspector@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/import-inspector/-/import-inspector-2.0.0.tgz#ce75fdb6a277d2800effe097e2295bc8690b2923"
+
 imports-loader@^0.7.0:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/imports-loader/-/imports-loader-0.7.1.tgz#f204b5f34702a32c1db7d48d89d5e867a0441253"
@@ -3846,6 +3850,10 @@ is-unc-path@^0.1.1:
 is-utf8@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
+
+is-webpack-bundle@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-webpack-bundle/-/is-webpack-bundle-1.0.0.tgz#576a50bb7c53d1d6a5c1647939c93ae2cbb90eea"
 
 is-windows@^0.2.0:
   version "0.2.0"
@@ -6249,6 +6257,14 @@ react-hot-loader@v3.0.0-beta.6:
     redbox-react "^1.2.5"
     source-map "^0.4.4"
 
+react-loadable@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/react-loadable/-/react-loadable-4.0.3.tgz#296c5cdfba3d402d66d2120d52fc08c2ca1f3088"
+  dependencies:
+    import-inspector "^2.0.0"
+    is-webpack-bundle "^1.0.0"
+    webpack-require-weak "^1.0.0"
+
 react-markdown@^2.4.4:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-2.5.0.tgz#b1c61904fee5895886803bd9df7db23c3dc3a89e"
@@ -7669,6 +7685,12 @@ webpack-hot-middleware@^2.14.0:
     html-entities "^1.2.0"
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
+
+webpack-require-weak@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/webpack-require-weak/-/webpack-require-weak-1.0.1.tgz#a6a8e60871bebbe5b085a915ab0af633a412433f"
+  dependencies:
+    is-webpack-bundle "^1.0.0"
 
 webpack-sources@^1.0.1:
   version "1.0.1"

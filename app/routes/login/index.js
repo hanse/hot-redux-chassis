@@ -1,4 +1,7 @@
 // @flow
 
-import Route from './LoginRoute';
-export default Route;
+import Loadable from '../Loadable';
+
+export default Loadable({
+  loader: () => import('./LoginRoute')
+});
