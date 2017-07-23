@@ -152,15 +152,15 @@ module.exports = options => ({
 });
 
 function getDependencyHandlers(options) {
-  if (!options.development) {
-    return [
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: Infinity,
-        filename: '[name].js'
-      })
-    ];
-  }
+  //if (!options.development) {
+  return [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: '[name].js'
+    })
+  ];
+  //}
 
   const dllPath = path.resolve(process.cwd(), dllConfig.path);
   const manifestPath = path.resolve(dllPath, 'vendors.json');

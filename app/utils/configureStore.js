@@ -4,15 +4,14 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { createLogger } from 'redux-logger';
 import { Iterable } from 'immutable';
-import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import { rootEpic } from '../state';
 import type { Store } from '../types';
 
-export default function configureStore(): Store {
+export default function configureStore(history): Store {
   const middlewares = [
     createEpicMiddleware(rootEpic),
-    routerMiddleware(browserHistory)
+    routerMiddleware(history)
   ];
 
   if (__DEV__) {

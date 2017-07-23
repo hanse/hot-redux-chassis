@@ -1,36 +1,24 @@
 // @flow
 
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 import AppRoute from './app/AppRoute';
-import dashboard from './dashboard';
-import contact from './contact';
-import about from './about';
-import login from './login';
+import Dashboard from './dashboard';
+import Contact from './contact';
+import About from './about';
+import Login from './login';
 import { NotFound } from './errors';
 
-export type AsyncRoute = {
-  path: string,
-  getComponent: (location: string, cb: () => any) => void
-};
-
-export function loadRoute(callback: () => void) {
-  return (module: any) => callback(null, module.default);
-}
-
-export function loadingError(err: Error) {
-  console.error('Loading error', err); // eslint-disable-line
-}
-
-export default {
-  path: '/',
-  component: AppRoute,
-  indexRoute: dashboard,
-  childRoutes: [
-    about,
-    contact,
-    login,
-    {
-      path: '*',
-      component: NotFound
-    }
-  ]
-};
+export default ({ history }: any) =>
+  <ConnectedRouter history={history}>
+    <AppRoute>
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/login" component={Login} />
+        <Route component={NotFound} />
+      </Switch>
+    </AppRoute>
+  </ConnectedRouter>;

@@ -80,14 +80,16 @@
     "json-server": "^0.11.2",
     "lodash": "^4.17.4",
     "node-uuid": "^1.4.8",
+    "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-hot-loader": "v3.0.0-beta.6",
     "react-markdown": "^2.4.4",
     "react-overlays": "^0.7.0",
     "react-redux": "^5.0.5",
-    "react-router": "^3.0.2",
-    "react-router-redux": "^4.0.8",
+    "react-router": "^4.1.2",
+    "react-router-dom": "^4.1.2",
+    "react-router-redux": "next",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.14.1",
@@ -98,11 +100,20 @@
     "rules": {
       "string-quotes": "single",
       "indentation": 2,
-      "property-no-unknown": [true, { "ignoreProperties": ["composes"] }],
+      "property-no-unknown": [
+        true,
+        {
+          "ignoreProperties": [
+            "composes"
+          ]
+        }
+      ],
       "selector-pseudo-class-no-unknown": [
         true,
         {
-          "ignorePseudoClasses": ["global"]
+          "ignorePseudoClasses": [
+            "global"
+          ]
         }
       ]
     }
@@ -111,7 +122,10 @@
     "globals": {
       "__DEV__": false
     },
-    "moduleDirectories": ["<rootDir>", "node_modules"],
+    "moduleDirectories": [
+      "<rootDir>",
+      "node_modules"
+    ],
     "moduleNameMapper": {
       "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$": "<rootDir>/tests/FileStub.js",
       "^.+\\.css$": "<rootDir>/tests/CSSStub.js"

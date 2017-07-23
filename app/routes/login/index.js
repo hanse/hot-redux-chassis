@@ -1,6 +1,4 @@
 // @flow
 
-export default {
-  path: 'login',
-  component: require('./LoginRoute').default
-};
+import Route from './LoginRoute';
+export default Route;

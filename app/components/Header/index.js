@@ -2,9 +2,10 @@
 
 import styles from './Header.css';
 import React, { Component } from 'react';
-import { Link, IndexLink } from 'react-router';
+import { NavLink, Link } from 'react-router-dom';
 import { Modal } from 'react-overlays';
 import cx from 'classnames';
+import qs from 'query-string';
 import HamburgerButton from 'app/components/HamburgerButton';
 import Icon from 'app/components/Icon';
 import Search from 'app/components/Search';
@@ -13,17 +14,17 @@ const navigationItems = [
   {
     to: '/',
     label: 'Home',
-    LinkComponent: IndexLink
+    LinkComponent: props => <NavLink {...props} exact />
   },
   {
     to: '/about',
     label: 'About',
-    LinkComponent: Link
+    LinkComponent: NavLink
   },
   {
     to: '/contact',
     label: 'Contact',
-    LinkComponent: Link
+    LinkComponent: NavLink
   }
 ];
 
@@ -87,7 +88,7 @@ class Header extends Component {
           backdrop
         >
           <Search
-            query={this.props.location.query.q}
+            query={qs.parse(this.props.location.search).q}
             onClose={this.props.toggleSearch}
           />
         </Modal>

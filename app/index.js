@@ -11,10 +11,9 @@ import 'file-loader?name=[name].[ext]!./humans.txt';
 
 import React from 'react';
 import { render } from 'react-dom';
-import { browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from 'app/utils/configureStore';
+import createHistory from 'history/createBrowserHistory';
 import Root from './Root';
 
 global.log = function log(self = this) {
@@ -26,8 +25,8 @@ if (__DEV__) {
   global.React = React;
 }
 
-const store = configureStore();
-const history = syncHistoryWithStore(browserHistory, store);
+const history = createHistory();
+const store = configureStore(history);
 
 const rootElement = document.getElementById('root');
 

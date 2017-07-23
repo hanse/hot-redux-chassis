@@ -1,5 +1,4 @@
 // @flow
 
-export default {
-  component: require('./DashboardRoute').default
-};
+import Route from './DashboardRoute';
+export default Route;

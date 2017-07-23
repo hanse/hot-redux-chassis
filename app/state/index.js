@@ -17,7 +17,7 @@ const reducers = {
   auth,
   notifications,
   ui,
-  routing: routerReducer,
+  router: routerReducer,
   search: results
 };
 

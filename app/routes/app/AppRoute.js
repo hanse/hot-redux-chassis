@@ -13,7 +13,8 @@ import type { State } from 'app/types';
 const mapStateToProps = (state: State) => ({
   username: selectCurrentUsername(state),
   isLoggedIn: isLoggedIn(state),
-  searchOpen: state.ui.get('searchOpen')
+  searchOpen: state.ui.get('searchOpen'),
+  location: state.router.location
 });
 
 const mapDispatchToProps = {
