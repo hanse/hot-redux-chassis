@@ -3,7 +3,7 @@
 import styles from './Header.css';
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Modal } from 'react-overlays';
+import Modal from 'react-modal';
 import cx from 'classnames';
 import qs from 'query-string';
 import HamburgerButton from 'app/components/HamburgerButton';
@@ -82,10 +82,15 @@ class Header extends Component {
         </div>
 
         <Modal
-          show={this.props.searchOpen}
-          onHide={this.props.toggleSearch}
-          backdropClassName={styles.backdrop}
-          backdrop
+          isOpen={this.props.searchOpen}
+          onRequestClose={this.props.toggleSearch}
+          className={{
+            base: styles.modalContent
+          }}
+          overlayClassName={{
+            base: styles.backdrop
+          }}
+          contentLabel="Search"
         >
           <Search
             query={qs.parse(this.props.location.search).q}

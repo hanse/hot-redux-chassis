@@ -1784,7 +1784,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2:
     create-hash "^1.1.0"
     inherits "^2.0.1"
 
-create-react-class@^15.5.3, create-react-class@^15.6.0:
+create-react-class@^15.5.3:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
   dependencies:
@@ -2665,6 +2665,10 @@ execall@^1.0.0:
   resolved "https://registry.yarnpkg.com/execall/-/execall-1.0.0.tgz#73d0904e395b3cab0658b08d09ec25307f29bb73"
   dependencies:
     clone-regexp "^1.0.0"
+
+exenv@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/exenv/-/exenv-1.2.0.tgz#3835f127abf075bfe082d0aed4484057c78e3c89"
 
 expand-brackets@^0.1.4:
   version "0.1.5"
@@ -5922,7 +5926,7 @@ prop-types@^15.5.1, prop-types@^15.5.4, prop-types@^15.5.8:
   dependencies:
     fbjs "^0.8.9"
 
-prop-types@^15.5.10:
+prop-types@^15.5.10, prop-types@^15.5.6:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -6059,14 +6063,18 @@ react-dev-utils@^0.4.2:
     sockjs-client "1.0.3"
     strip-ansi "3.0.1"
 
-react-dom@^15.6.1:
-  version "15.6.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.1.tgz#2cb0ed4191038e53c209eb3a79a23e2a4cf99470"
+react-dom-factories@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-dom-factories/-/react-dom-factories-1.0.0.tgz#f43c05e5051b304f33251618d5bc859b29e46b6d"
+
+react-dom@next:
+  version "16.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.0.0-beta.2.tgz#55352e02d93112f06cce7f83ca378a1beae465d9"
   dependencies:
     fbjs "^0.8.9"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
-    prop-types "^15.5.10"
+    prop-types "^15.5.6"
 
 react-hot-loader@v3.0.0-beta.6:
   version "3.0.0-beta.6"
@@ -6095,6 +6103,14 @@ react-markdown@^2.4.4:
     commonmark-react-renderer "^4.2.4"
     in-publish "^2.0.0"
     prop-types "^15.5.1"
+
+react-modal@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-2.2.2.tgz#4bbf98bc506e61c446c9f57329c7a488ea7d504b"
+  dependencies:
+    exenv "1.2.0"
+    prop-types "^15.5.10"
+    react-dom-factories "^1.0.0"
 
 react-overlays@^0.7.0:
   version "0.7.0"
@@ -6159,15 +6175,14 @@ react-router@^4.1.1, react-router@^4.1.2:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react@^15.6.1:
-  version "15.6.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"
+react@next:
+  version "16.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0-beta.2.tgz#340bbaa28c8678499353586cf46d096438dee561"
   dependencies:
-    create-react-class "^15.6.0"
     fbjs "^0.8.9"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
-    prop-types "^15.5.10"
+    prop-types "^15.5.6"
 
 read-all-stream@^3.0.0:
   version "3.1.0"

@@ -130,3 +130,9 @@
   bottom: 0;
   position: fixed;
 }
+
+.modalContent {
+  border: 0;
+  background: transparent;
+  outline: none;
+}
