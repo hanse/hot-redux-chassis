@@ -75,7 +75,7 @@ class Header extends Component {
 
           <button
             className={styles.searchButton}
-            onClick={this.props.toggleSearch}
+            onClick={this.props.openSearch}
           >
             <Icon name="search" />
           </button>
@@ -83,7 +83,7 @@ class Header extends Component {
 
         <Modal
           isOpen={this.props.searchOpen}
-          onRequestClose={this.props.toggleSearch}
+          onRequestClose={this.props.closeSearch}
           className={{
             base: styles.modalContent
           }}
@@ -94,7 +94,7 @@ class Header extends Component {
         >
           <Search
             query={qs.parse(this.props.location.search).q}
-            onClose={this.props.toggleSearch}
+            onClose={this.props.closeSearch}
           />
         </Modal>
       </div>

@@ -1,0 +1,7 @@
+@import '../../../styles/variables.css';
+
+.root {
+  padding: var(--rootPadding);
+  max-width: var(--containerMaxWidth);
+  margin: 0 auto;
+}

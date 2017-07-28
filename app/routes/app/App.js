@@ -8,7 +8,6 @@ type Props = {
   children: any,
   rehydrateAuth: () => any,
   searchOpen: boolean,
-  toggleSearch: () => void,
   location: Object
 };
 
@@ -24,7 +23,8 @@ export default class App extends Component {
       <div>
         <Header
           searchOpen={this.props.searchOpen}
-          toggleSearch={this.props.toggleSearch}
+          closeSearch={this.props.closeSearch}
+          openSearch={this.props.openSearch}
           location={this.props.location}
         />
         {this.props.children}

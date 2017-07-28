@@ -20,9 +20,8 @@ const app = express();
 app.set('host', process.env.HOST || '0.0.0.0');
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
-app.use('/api', jsonServer.router('tests/db.json'));
-app.use('/auth', auth);
-app.use('/search', search);
+app.use('/api/auth', auth);
+app.use('/api/search', search);
 
 webpackMiddleware(app);
 

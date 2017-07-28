@@ -7,7 +7,7 @@ import {
   isLoggedIn,
   selectCurrentUsername
 } from 'app/state/auth';
-import { toggleSearch } from 'app/state/ui';
+import { closeSearch, openSearch } from 'app/state/ui';
 import type { State } from 'app/types';
 
 const mapStateToProps = (state: State) => ({
@@ -19,7 +19,8 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = {
   rehydrateAuth,
-  toggleSearch
+  closeSearch,
+  openSearch
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

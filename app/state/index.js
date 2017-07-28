@@ -11,7 +11,11 @@ import auth, {
 } from 'app/state/auth';
 import notifications, { errorNotificationEpic } from 'app/state/notifications';
 import ui from 'app/state/ui';
-import results, { searchEpic, clearSearchEpic } from 'app/state/search';
+import results, {
+  searchEpic,
+  clearSearchEpic,
+  searchResultSelectedEpic
+} from 'app/state/search';
 
 const reducers = {
   auth,
@@ -32,5 +36,6 @@ export const rootEpic = combineEpics(
   fetchProfileEpic,
   errorNotificationEpic,
   searchEpic,
-  clearSearchEpic
+  clearSearchEpic,
+  searchResultSelectedEpic
 );

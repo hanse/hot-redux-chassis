@@ -2,8 +2,9 @@
 
 import { fromJS } from 'immutable';
 import { Observable } from 'rxjs';
-import { replace } from 'react-router-redux';
+import { replace, push } from 'react-router-redux';
 import request from 'app/services/restClient';
+import { closeSearch } from 'app/state/ui';
 import type { Action } from 'app/types';
 
 export function search(query: string): Action {
@@ -30,9 +31,7 @@ export const clearSearchEpic = (action$: any) =>
   action$
     .ofType('SEARCH')
     .filter(action => !action.payload.query)
-    .mergeMap(() =>
-      Observable.merge(Observable.of(replace('')), Observable.of(clearSearch()))
-    );
+    .mergeMap(() => Observable.merge(Observable.of(clearSearch())));
 
 export const searchEpic = (action$: any) =>
   action$
@@ -41,7 +40,6 @@ export const searchEpic = (action$: any) =>
     .filter(query => !!query)
     .switchMap(query =>
       Observable.merge(
-        Observable.of(replace(`?q=${query}`)),
         Observable.timer(800)
           .takeUntil(action$.ofType('CLEAR_SEARCH'))
           .mergeMap(() =>
@@ -55,6 +53,17 @@ export const searchEpic = (action$: any) =>
                 })
               )
           )
+      )
+    );
+
+export const searchResultSelectedEpic = (action$: any) =>
+  action$
+    .ofType('SEARCH_RESULT_SELECTED')
+    .map(action => action.payload)
+    .switchMap(result =>
+      Observable.merge(
+        Observable.of(closeSearch()),
+        Observable.of(push(`/search?q=${result}`))
       )
     );
 

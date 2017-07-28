@@ -39,5 +39,5 @@ function createApiClient({ url }: ApiClientOptions): ApiClient {
 }
 
 export default createApiClient({
-  url: ''
+  url: 'api/'
 });

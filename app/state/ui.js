@@ -3,9 +3,15 @@
 import { fromJS } from 'immutable';
 import type { Action } from 'app/types';
 
-export function toggleSearch(): Action {
+export function closeSearch() {
   return {
-    type: 'TOGGLE_SEARCH'
+    type: 'CLOSE_SEARCH'
+  };
+}
+
+export function openSearch() {
+  return {
+    type: 'OPEN_SEARCH'
   };
 }
 
@@ -18,8 +24,11 @@ export default function ui(
   action: Action
 ) {
   switch (action.type) {
-    case 'TOGGLE_SEARCH':
-      return state.set('searchOpen', !state.get('searchOpen'));
+    case 'OPEN_SEARCH':
+      return state.set('searchOpen', true);
+
+    case 'CLOSE_SEARCH':
+      return state.set('searchOpen', false);
 
     default:
       return state;

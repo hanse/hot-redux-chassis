@@ -73,6 +73,7 @@
     "classnames": "2.2.5",
     "empty": "0.10.1",
     "express": "^4.15.3",
+    "fuzzysearch": "^1.0.3",
     "history": "^4.6.3",
     "immutable": "3.8.1",
     "immutable-devtools": "0.0.7",
@@ -105,13 +106,17 @@
       "property-no-unknown": [
         true,
         {
-          "ignoreProperties": ["composes"]
+          "ignoreProperties": [
+            "composes"
+          ]
         }
       ],
       "selector-pseudo-class-no-unknown": [
         true,
         {
-          "ignorePseudoClasses": ["global"]
+          "ignorePseudoClasses": [
+            "global"
+          ]
         }
       ]
     }
@@ -120,7 +125,10 @@
     "globals": {
       "__DEV__": false
     },
-    "moduleDirectories": ["<rootDir>", "node_modules"],
+    "moduleDirectories": [
+      "<rootDir>",
+      "node_modules"
+    ],
     "moduleNameMapper": {
       "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$": "<rootDir>/tests/FileStub.js",
       "^.+\\.css$": "<rootDir>/tests/CSSStub.js"
