@@ -46,7 +46,10 @@ module.exports = options => ({
 
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(!!options.development),
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        'process.env.UNSPLASH_APPLICATION_ID': JSON.stringify(
+          process.env.UNSPLASH_APPLICATION_ID
+        )
       }),
 
       options.development && new webpack.HotModuleReplacementPlugin(),

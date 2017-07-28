@@ -16,11 +16,13 @@ import results, {
   clearSearchEpic,
   searchResultSelectedEpic
 } from 'app/state/search';
+import posts, { fetchPostsEpic, refreshPostsEpic } from 'app/state/posts';
 
 const reducers = {
   auth,
   notifications,
   ui,
+  posts,
   router: routerReducer,
   search: results
 };
@@ -37,5 +39,7 @@ export const rootEpic = combineEpics(
   errorNotificationEpic,
   searchEpic,
   clearSearchEpic,
-  searchResultSelectedEpic
+  searchResultSelectedEpic,
+  fetchPostsEpic,
+  refreshPostsEpic
 );

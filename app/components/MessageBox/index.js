@@ -15,9 +15,10 @@ function MessageBox({ message, type, onClose }: Props) {
   return (
     <div className={cx(styles.messageBox, styles[type])}>
       {message}
-      <button className={styles.button} onClick={onClose}>
-        <Icon name="close" />
-      </button>
+      {onClose &&
+        <button className={styles.button} onClick={onClose}>
+          <Icon name="close" />
+        </button>}
     </div>
   );
 }
