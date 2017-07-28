@@ -6,15 +6,16 @@ A live production build is always available on [http://hot-redux-chassis.herokua
 
 ## Features
 
+* React 16 (w/ route level ErrorBoundaries)
 * Next-generation JavaScript using [Babel 6](http://babeljs.io/)
 * [React Hot Loader 3](https://github.com/gaearon/react-hot-loader)
-* Module bundling using [webpack 2](https://gist.github.com/sokra/27b24881210b56bbaff7)
-* Painless esting using [Jest](https://facebook.github.io/jest/) and [enzyme](https://github.com/airbnb/enzyme)
+* Module bundling using [webpack 3](https://gist.github.com/sokra/27b24881210b56bbaff7)
+* Painless testing using [Jest](https://facebook.github.io/jest/) and [enzyme](https://github.com/airbnb/enzyme)
 * Static type-checking using [flow](https://flowtye.org)
 * [ESLint](http://eslint.org/) for source code linting
 * [Redux](https://github.com/rackt/redux), [react-router v4](https://github.com/rackt/react-router) and [Immutable.js](https://facebook.github.io/immutable-js/)
 * [redux-observable](https://github.com/redux-observable/redux-observable) for managing async actions and side effects
-* Code Splitting with [react-loadable](https://github.com/thejameskyle/react-loadable)
+* Code splitting with [react-loadable](https://github.com/thejameskyle/react-loadable)
 * [CSS Modules](https://github.com/css-modules/css-modules) + [PostCSS](https://github.com/postcss/postcss) for next generation scoped CSS modules
 
 ## Start a New Project
