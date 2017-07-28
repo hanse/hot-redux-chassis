@@ -9,13 +9,27 @@ type Props = {
   block?: boolean
 };
 
-function Button({ className, block = false, ...props }: Props) {
+function Button({
+  className,
+  link = false,
+  loading = false,
+  block = false,
+  children,
+  ...props
+}: Props) {
   return (
     <button
       type="button"
-      className={cx(className || styles.button, block && styles.block)}
+      className={cx(
+        className || styles.button,
+        block && styles.block,
+        link && styles.link
+      )}
+      disabled={loading}
       {...props}
-    />
+    >
+      {loading ? '...' : children}
+    </button>
   );
 }
 

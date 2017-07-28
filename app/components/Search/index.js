@@ -101,7 +101,8 @@ class Search extends Component {
         </div>
 
         <div className={styles.itemList}>
-          {this.props.results.size === 0 &&
+          {this.state.query !== '' &&
+            this.props.results.size === 0 &&
             <div style={{ padding: 20 }}>
               <strong>No suggestions found</strong>
             </div>}

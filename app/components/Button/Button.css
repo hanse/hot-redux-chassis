@@ -18,3 +18,13 @@
     width: 100%;
   }
 }
+
+.link {
+  background: transparent;
+  color: #444;
+  text-transform: none;
+
+  &:hover {
+    background: transparent;
+  }
+}

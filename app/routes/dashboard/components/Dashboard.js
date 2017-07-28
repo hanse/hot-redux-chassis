@@ -6,6 +6,7 @@ import ballmer from 'app/assets/ballmer.jpg';
 import LoginForm from 'app/components/LoginForm';
 import MessageBox from 'app/components/MessageBox';
 import Button from 'app/components/Button';
+import Feed from './Feed';
 
 type Props = {
   username: string,
@@ -39,6 +40,8 @@ export default class Dashboard extends Component {
             <Button onClick={this.props.logout}>Log out</Button>
             <img src={ballmer} alt="Steve Ballmer" />
           </div>}
+
+        <Feed />
       </div>
     );
   }

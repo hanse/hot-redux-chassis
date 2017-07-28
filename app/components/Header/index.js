@@ -47,7 +47,7 @@ class Header extends Component {
               open={this.state.menuOpen}
             />
             <Link to="/" className={styles.mobileTitle}>
-              React
+              hanse
             </Link>
           </div>
 
@@ -75,7 +75,10 @@ class Header extends Component {
 
           <button
             className={styles.searchButton}
-            onClick={this.props.openSearch}
+            onClick={() => {
+              this.setState({ menuOpen: false });
+              this.props.openSearch();
+            }}
           >
             <Icon name="search" />
           </button>
