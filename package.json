@@ -63,8 +63,7 @@
     "stylelint": "7.13.0",
     "stylelint-config-standard": "^17.0.0",
     "url-loader": "^0.5.9",
-    "webpack": "^3.4.1",
-    "webpack-express-middleware": "^1.2.1"
+    "webpack": "^3.4.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.20.0",
@@ -95,7 +94,8 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.14.1",
-    "rxjs": "^5.4.2"
+    "rxjs": "^5.4.2",
+    "webpack-express-middleware": "^1.2.1"
   },
   "stylelint": {
     "extends": "stylelint-config-standard",
@@ -105,17 +105,13 @@
       "property-no-unknown": [
         true,
         {
-          "ignoreProperties": [
-            "composes"
-          ]
+          "ignoreProperties": ["composes"]
         }
       ],
       "selector-pseudo-class-no-unknown": [
         true,
         {
-          "ignorePseudoClasses": [
-            "global"
-          ]
+          "ignorePseudoClasses": ["global"]
         }
       ]
     }
@@ -124,10 +120,7 @@
     "globals": {
       "__DEV__": false
     },
-    "moduleDirectories": [
-      "<rootDir>",
-      "node_modules"
-    ],
+    "moduleDirectories": ["<rootDir>", "node_modules"],
     "moduleNameMapper": {
       "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$": "<rootDir>/tests/FileStub.js",
       "^.+\\.css$": "<rootDir>/tests/CSSStub.js"

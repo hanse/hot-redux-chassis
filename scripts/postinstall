@@ -1,5 +1,5 @@
 if [ $BUILD_ASSETS ]; then
-  yarn run build;
+  NODE_ENV=production yarn run build;
 fi
 
 if [ "$NODE_ENV" != "production" ]; then
