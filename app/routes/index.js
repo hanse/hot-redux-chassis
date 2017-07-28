@@ -3,7 +3,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
-import AppRoute from './app/AppRoute';
+import App from './app';
 import Dashboard from './dashboard';
 import Contact from './contact';
 import About from './about';
@@ -13,7 +13,7 @@ import { NotFound } from './errors';
 
 export default ({ history }: any) =>
   <ConnectedRouter history={history}>
-    <AppRoute>
+    <App>
       <Switch>
         <Route exact path="/" component={Dashboard} />
         <Route path="/about" component={About} />
@@ -22,5 +22,5 @@ export default ({ history }: any) =>
         <Route path="/search" component={Search} />
         <Route component={NotFound} />
       </Switch>
-    </AppRoute>
+    </App>
   </ConnectedRouter>;
