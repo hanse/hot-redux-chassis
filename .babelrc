@@ -1,9 +1,21 @@
 {
-  "presets": [["latest", { "es2015": { "modules": false } }], "react", "stage-0"],
+  "presets": [
+    ["env", { "useBuiltIns": false, "modules": false }],
+    "react",
+    "stage-2"
+  ],
   "plugins": ["react-hot-loader/babel"],
   "env": {
+    "development": {
+      "plugins": ["react-hot-loader/babel", "transform-react-jsx-source"]
+    },
     "test": {
-      "presets": ["latest", "react", "stage-0"]
+      "presets": [
+        ["env", { "targets": { "node": "current" } }],
+        "react",
+        "stage-2"
+      ],
+      "plugins": ["dynamic-import-node"]
     }
   }
 }
