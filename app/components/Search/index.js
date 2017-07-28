@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List } from 'immutable';
+import scrollIntoView from 'dom-scroll-into-view';
 import { search, clearSearch } from 'app/state/search';
 import Icon from 'app/components/Icon';
 import styles from './Search.css';
@@ -23,6 +24,8 @@ class Search extends Component {
     query: this.props.query || ''
   };
 
+  itemRefs = {};
+
   componentDidMount() {
     this.search(this.state.query);
   }
@@ -32,6 +35,21 @@ class Search extends Component {
       this.search(nextProps.query);
     }
   }
+
+  componentDidUpdate() {
+    this.scrollToSelectedIndex();
+  }
+
+  scrollToSelectedIndex = () => {
+    if (this.state.selectedIndex < 0) {
+      return;
+    }
+
+    const itemNode = this.itemRefs[`item-${this.state.selectedIndex}`];
+    const containerNode = this.itemRefs.container;
+
+    scrollIntoView(itemNode, containerNode, { onlyScrollIfNeeded: true });
+  };
 
   handleChange = ({ target: { value } }) => {
     this.search(value);
@@ -100,16 +118,22 @@ class Search extends Component {
           </button>
         </div>
 
-        <div className={styles.itemList}>
+        <div
+          className={styles.itemList}
+          ref={ref => (this.itemRefs.container = ref)}
+        >
           {this.state.query !== '' &&
             this.props.results.size === 0 &&
             <div style={{ padding: 20 }}>
               <strong>No suggestions found</strong>
             </div>}
+
           {this.props.results.map((result, i) =>
             <a
+              ref={ref => (this.itemRefs[`item-${i}`] = ref)}
               key={result}
               onClick={() => this.props.searchResultSelected(result)}
+              onMouseEnter={() => this.setState({ selectedIndex: i })}
               className={
                 i === this.state.selectedIndex
                   ? styles.selectedItem

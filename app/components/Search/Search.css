@@ -51,10 +51,6 @@
   }
 }
 
-.item:hover {
-  background: #eee;
-}
-
 .selectedItem {
   composes: item;
   background: #eee;

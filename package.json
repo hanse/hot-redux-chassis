@@ -71,6 +71,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.17.2",
     "classnames": "2.2.5",
+    "dom-scroll-into-view": "^1.2.1",
     "empty": "0.10.1",
     "express": "^4.15.3",
     "fuzzysearch": "^1.0.3",
