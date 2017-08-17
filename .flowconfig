@@ -3,9 +3,13 @@
 
 .*/node_modules/babel.*
 .*/node_modules/stylelint.*
+.*/node_modules/eslint-plugin-jsx-a11y.*
 
 [libs]
 flow/
+
+[lints]
+all=warn
 
 [options]
 esproposal.class_static_fields=enable
@@ -14,6 +18,8 @@ module.name_mapper='.*\(.css\|.jpg\|.png\)' -> 'empty/object'
 module.name_mapper='^\(.*\)$' -> '<PROJECT_ROOT>/\1'
 
 munge_underscores=true
+
+include_warnings=true
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe

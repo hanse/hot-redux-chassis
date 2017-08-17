@@ -38,7 +38,6 @@ render(
 );
 
 if (module.hot) {
-  // $FlowIssue
   module.hot.accept('./Root', () => {
     render(
       <AppContainer>

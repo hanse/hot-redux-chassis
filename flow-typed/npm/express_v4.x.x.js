@@ -1,5 +1,5 @@
-// flow-typed signature: 95e07d9e1396c50fdb19cec28b4ab656
-// flow-typed version: e01dc56513/express_v4.x.x/flow_>=v0.32.x
+// flow-typed signature: 1e4577f4ead8bf5f0adbdaa1a243c60a
+// flow-typed version: ef2fdb0770/express_v4.x.x/flow_>=v0.32.x
 
 import type { Server } from 'http';
 import type { Socket } from 'net';
@@ -15,6 +15,10 @@ declare class express$RequestResponseBase {
   get(field: string): string | void;
 }
 
+declare type express$RequestParams = {
+  [param: string]: string
+}
+
 declare class express$Request extends http$IncomingMessage mixins express$RequestResponseBase {
   baseUrl: string;
   body: any;
@@ -26,7 +30,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   ips: Array<string>;
   method: string;
   originalUrl: string;
-  params: {[param: string]: string};
+  params: express$RequestParams;
   path: string;
   protocol: 'https' | 'http';
   query: {[name: string]: string};
@@ -37,6 +41,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   subdomains: Array<string>;
   xhr: boolean;
   accepts(types: string): string | false;
+  accepts(types: Array<string>): string | false;
   acceptsCharsets(...charsets: Array<string>): string | false;
   acceptsEncodings(...encoding: Array<string>): string | false;
   acceptsLanguages(...lang: Array<string>): string | false;
@@ -92,6 +97,7 @@ declare class express$Response extends http$ServerResponse mixins express$Reques
   status(statusCode: number): this;
   type(type: string): this;
   vary(field: string): this;
+  req: express$Request;
 }
 
 declare type express$NextFunction = (err?: ?Error | 'route') => mixed;
@@ -173,19 +179,18 @@ declare class express$Application extends express$Router mixins events$EventEmit
 }
 
 declare module 'express' {
-  declare function serveStatic(root: string, options?: Object): express$Middleware;
-
   declare export type RouterOptions = express$RouterOptions;
   declare export type CookieOptions = express$CookieOptions;
   declare export type Middleware = express$Middleware;
   declare export type NextFunction = express$NextFunction;
+  declare export type RequestParams = express$RequestParams;
   declare export type $Response = express$Response;
   declare export type $Request = express$Request;
   declare export type $Application = express$Application;
 
   declare module.exports: {
     (): express$Application, // If you try to call like a function, it will use this signature
-    static: serveStatic, // `static` property on the function
+    static: (root: string, options?: Object) => express$Middleware, // `static` property on the function
     Router: typeof express$Router, // `Router` property on the function
   };
 }

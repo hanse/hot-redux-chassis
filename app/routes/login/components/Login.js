@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import LoginForm from 'app/components/LoginForm';
 
 type Props = {
-  login: () => any,
+  login: (string, string, ?string) => void,
   location: any
 };
 

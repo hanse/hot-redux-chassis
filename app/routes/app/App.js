@@ -8,6 +8,8 @@ type Props = {
   children: any,
   rehydrateAuth: () => any,
   searchOpen: boolean,
+  closeSearch: () => void,
+  openSearch: () => void,
   location: Object
 };
 

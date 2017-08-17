@@ -13,7 +13,8 @@ type Props = {
   isLoggedIn: boolean,
   login: () => any,
   logout: () => any,
-  clearLoginError: () => any
+  clearLoginError: () => any,
+  loginFailed: boolean
 };
 
 export default class Dashboard extends Component {

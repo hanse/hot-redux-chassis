@@ -6,7 +6,10 @@ import cx from 'classnames';
 
 type Props = {
   className?: string,
-  block?: boolean
+  block?: boolean,
+  link?: boolean,
+  loading?: boolean,
+  children: React.Element<*>
 };
 
 function Button({
@@ -21,7 +24,7 @@ function Button({
     <button
       type="button"
       className={cx(
-        className || styles.button,
+        typeof className === 'string' ? className : styles.button,
         block && styles.block,
         link && styles.link
       )}

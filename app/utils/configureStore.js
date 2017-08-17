@@ -6,9 +6,10 @@ import { createLogger } from 'redux-logger';
 import { Iterable } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import { rootEpic } from '../state';
+import history from 'history';
 import type { Store } from '../types';
 
-export default function configureStore(history): Store {
+export default function configureStore(history: typeof history): Store {
   const middlewares = [
     createEpicMiddleware(rootEpic),
     routerMiddleware(history)
@@ -38,7 +39,6 @@ export default function configureStore(history): Store {
   );
 
   if (module.hot) {
-    // $FlowIssue
     module.hot.accept('../state', () => {
       const nextReducer = require('../state').rootReducer;
       store.replaceReducer(nextReducer);
