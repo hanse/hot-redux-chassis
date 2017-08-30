@@ -123,26 +123,29 @@ class Search extends Component {
           ref={ref => (this.itemRefs.container = ref)}
         >
           {this.state.query !== '' &&
-            this.props.results.size === 0 &&
+          this.props.results.size === 0 && (
             <div style={{ padding: 20 }}>
               <strong>No suggestions found</strong>
-            </div>}
+            </div>
+          )}
 
-          {this.props.results.map((result, i) =>
+          {this.props.results.map((result, i) => (
             <a
               ref={ref => (this.itemRefs[`item-${i}`] = ref)}
               key={result}
               onClick={() => this.props.searchResultSelected(result)}
               onMouseEnter={() => this.setState({ selectedIndex: i })}
               className={
-                i === this.state.selectedIndex
-                  ? styles.selectedItem
-                  : styles.item
+                i === this.state.selectedIndex ? (
+                  styles.selectedItem
+                ) : (
+                  styles.item
+                )
               }
             >
               {result}
             </a>
-          )}
+          ))}
         </div>
       </div>
     );

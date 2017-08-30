@@ -25,22 +25,25 @@ export default class Dashboard extends Component {
       <div className={styles.root}>
         {this.props.isLoggedIn && <h2>{`Hello, ${this.props.username}!`}</h2>}
 
-        {!this.props.isLoggedIn &&
+        {!this.props.isLoggedIn && (
           <div className={styles.loginContainer}>
-            {this.props.loginFailed &&
+            {this.props.loginFailed && (
               <MessageBox
                 message="The login details were not correct"
                 type="error"
                 onClose={this.props.clearLoginError}
-              />}
+              />
+            )}
             <LoginForm onSubmit={this.props.login} />
-          </div>}
+          </div>
+        )}
 
-        {this.props.isLoggedIn &&
+        {this.props.isLoggedIn && (
           <div>
             <Button onClick={this.props.logout}>Log out</Button>
             <img src={ballmer} alt="Steve Ballmer" />
-          </div>}
+          </div>
+        )}
 
         <Feed />
       </div>

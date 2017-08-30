@@ -7,9 +7,10 @@ import Markdown from 'react-markdown';
 // $FlowIssue
 import readmeContent from 'raw-loader!README.md';
 
-const About = () =>
+const About = () => (
   <div className={styles.root}>
     <Markdown source={readmeContent} />
-  </div>;
+  </div>
+);
 
 export default About;

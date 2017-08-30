@@ -35,24 +35,26 @@ class Feed extends Component {
           </Button>
         </h2>
 
-        {this.props.failed
-          ? <MessageBox
-              type="neutral"
-              message="Failed to fetch posts from Unsplash. Maybe we have made too many requests."
-            />
-          : <div>
-              {this.props.posts.map(post =>
-                <div key={post.id}>
-                  <img src={post.urls.regular} />
-                  <p>
-                    Photo by{' '}
-                    <a href={`${post.user.links.html}?${utmSource}`}>
-                      {post.user.name}
-                    </a>
-                  </p>
-                </div>
-              )}
-            </div>}
+        {this.props.failed ? (
+          <MessageBox
+            type="neutral"
+            message="Failed to fetch posts from Unsplash. Maybe we have made too many requests."
+          />
+        ) : (
+          <div>
+            {this.props.posts.map(post => (
+              <div key={post.id}>
+                <img src={post.urls.regular} />
+                <p>
+                  Photo by{' '}
+                  <a href={`${post.user.links.html}?${utmSource}`}>
+                    {post.user.name}
+                  </a>
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Button link onClick={onLoadMore} loading={this.props.loading}>

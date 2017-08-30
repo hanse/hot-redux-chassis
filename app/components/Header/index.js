@@ -60,7 +60,7 @@ class Header extends Component {
               this.state.menuOpen && styles.openMenu
             )}
           >
-            {navigationItems.map(({ LinkComponent, to, label }) =>
+            {navigationItems.map(({ LinkComponent, to, label }) => (
               <li key={label}>
                 <LinkComponent
                   to={to}
@@ -70,7 +70,7 @@ class Header extends Component {
                   {label}
                 </LinkComponent>
               </li>
-            )}
+            ))}
           </ul>
 
           <button
