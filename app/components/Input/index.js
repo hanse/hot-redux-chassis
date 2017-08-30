@@ -3,7 +3,11 @@
 import styles from './Input.css';
 import React from 'react';
 
-function Input({ className, ...props }: Object) {
+type Props = {
+  className?: string
+};
+
+function Input({ className, ...props }: Props) {
   return <input type="text" className={className || styles.input} {...props} />;
 }
 

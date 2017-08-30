@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import history from 'history';
-import App from './app';
+import App from './toplevel';
 import Dashboard from './dashboard';
 import Contact from './contact';
 import About from './about';

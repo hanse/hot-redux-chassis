@@ -2,7 +2,15 @@
 
 import './App.css';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+  rehydrateAuth,
+  isLoggedIn,
+  selectCurrentUsername
+} from 'app/state/auth';
+import { closeSearch, openSearch } from 'app/state/ui';
 import Header from 'app/components/Header';
+import type { State } from 'app/types';
 
 type Props = {
   children: any,
@@ -13,7 +21,7 @@ type Props = {
   location: Object
 };
 
-export default class App extends Component {
+class App extends Component {
   props: Props;
 
   componentDidMount() {
@@ -34,3 +42,18 @@ export default class App extends Component {
     );
   }
 }
+
+const mapStateToProps = (state: State) => ({
+  username: selectCurrentUsername(state),
+  isLoggedIn: isLoggedIn(state),
+  searchOpen: state.ui.get('searchOpen'),
+  location: state.router.location
+});
+
+const mapDispatchToProps = {
+  rehydrateAuth,
+  closeSearch,
+  openSearch
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

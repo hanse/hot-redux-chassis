@@ -8,8 +8,6 @@
 [libs]
 flow/
 
-[lints]
-all=warn
 
 [options]
 esproposal.class_static_fields=enable
@@ -19,7 +17,6 @@ module.name_mapper='^\(.*\)$' -> '<PROJECT_ROOT>/\1'
 
 munge_underscores=true
 
-include_warnings=true
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
