@@ -1,7 +1,6 @@
 // @flow
 
 import { Observable } from 'rxjs';
-import { Map, fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'app/services/restClient';
 import type { State as RootState, Action } from 'app/types';
@@ -123,13 +122,17 @@ export function clearLoginError(): Action {
   };
 }
 
-type State = Map<string, any>;
-
-const initialState = fromJS({
+const initialState = {
   username: 'Guest',
   token: null,
   failed: false
-});
+};
+
+type State = {
+  username: string,
+  token: ?string,
+  failed: boolean
+};
 
 export default function auth(
   state: State = initialState,
@@ -139,24 +142,34 @@ export default function auth(
     case 'LOGIN':
     case LOCATION_CHANGE:
     case 'LOGIN_CLEAR_ERROR':
-      return state.merge({ failed: false });
+      return {
+        ...state,
+        failed: false
+      };
 
     case 'LOGIN_FAILURE':
-      return state.merge({ failed: true });
+      return {
+        ...state,
+        failed: true
+      };
 
     case 'LOGIN_SUCCESS':
-      return state.merge({
+      return {
+        ...state,
         token: action.payload.token
-      });
+      };
 
     case 'LOGOUT':
-      return state.merge(initialState);
+      return initialState;
 
     case 'FETCH_PROFILE_SUCCESS':
-      return state.merge(action.payload || {});
+      return {
+        ...state,
+        ...action.payload
+      };
 
     case 'FETCH_PROFILE_FAILURE':
-      return state.merge(initialState);
+      return initialState;
 
     default:
       return state;
@@ -166,13 +179,13 @@ export default function auth(
 /**
  *
  */
-export function isLoggedIn(state: RootState): string {
-  return !!state.auth.get('token');
+export function isLoggedIn(state: RootState): boolean {
+  return !!state.auth.token;
 }
 
 /**
  *
  */
 export function selectCurrentUsername(state: RootState): string {
-  return state.auth.get('username');
+  return state.auth.username;
 }

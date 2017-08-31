@@ -2,13 +2,14 @@
 
 import { connect } from 'react-redux';
 import Dashboard from './components/Dashboard';
-import { login, logout, clearLoginError } from 'app/state/auth';
+import { login, logout, clearLoginError, isLoggedIn } from 'app/state/auth';
+import type { State } from 'app/types';
 
-function mapStateToProps(state) {
+function mapStateToProps(state: State) {
   return {
-    username: state.auth.get('username'),
-    isLoggedIn: !!state.auth.get('token'),
-    loginFailed: state.auth.get('failed')
+    username: state.auth.username,
+    isLoggedIn: isLoggedIn(state),
+    loginFailed: state.auth.failed
   };
 }
 

@@ -1,6 +1,5 @@
 // @flow
 
-import { fromJS, Map } from 'immutable';
 import type { Action } from 'app/types';
 
 let notificationId = 0;
@@ -37,12 +36,12 @@ export const errorNotificationEpic = (action$: any) =>
 /**
  *
  */
-type State = Map<number, any>;
+type State = { [key: string]: mixed };
 
 /**
  *
  */
-const initialState = fromJS({});
+const initialState = {};
 
 /**
  *
@@ -53,10 +52,16 @@ export default function notifications(
 ): State {
   switch (action.type) {
     case 'SHOW_NOTIFICATION':
-      return state.set(action.payload.id, action.payload);
+      return {
+        ...state,
+        [action.payload.id]: action.payload
+      };
 
-    case 'DISMISS_NOTIFICATION':
-      return state.delete(action.payload.id);
+    case 'DISMISS_NOTIFICATION': {
+      const nextState = { ...state };
+      delete nextState[action.payload.id];
+      return nextState;
+    }
 
     default:
       return state;

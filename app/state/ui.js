@@ -1,6 +1,5 @@
 // @flow
 
-import { fromJS } from 'immutable';
 import type { Action } from 'app/types';
 
 export function closeSearch() {
@@ -15,20 +14,25 @@ export function openSearch() {
   };
 }
 
-const initialState = fromJS({
+const initialState = {
   searchOpen: false
-});
+};
 
-export default function ui(
-  state: typeof initialState = initialState,
-  action: Action
-) {
+type State = typeof initialState;
+
+export default function ui(state: State = initialState, action: Action) {
   switch (action.type) {
     case 'OPEN_SEARCH':
-      return state.set('searchOpen', true);
+      return {
+        ...state,
+        searchOpen: true
+      };
 
     case 'CLOSE_SEARCH':
-      return state.set('searchOpen', false);
+      return {
+        ...state,
+        searchOpen: false
+      };
 
     default:
       return state;

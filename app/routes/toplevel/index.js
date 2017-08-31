@@ -44,7 +44,7 @@ class App extends Component<Props> {
 const mapStateToProps = (state: State) => ({
   username: selectCurrentUsername(state),
   isLoggedIn: isLoggedIn(state),
-  searchOpen: state.ui.get('searchOpen'),
+  searchOpen: state.ui.searchOpen,
   location: state.router.location
 });
 

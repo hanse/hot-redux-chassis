@@ -2,16 +2,16 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { List } from 'immutable';
 import scrollIntoView from 'dom-scroll-into-view';
 import { search, clearSearch } from 'app/state/search';
 import Icon from 'app/components/Icon';
 import styles from './Search.css';
+import type { State as RootState } from 'app/types';
 
 type Props = {
   query: string,
   search: (query: string) => any,
-  results: List<*>,
+  results: Array<Object>,
   onClose: () => any,
   searchResultSelected: (result: any) => any
 };
@@ -76,7 +76,7 @@ class Search extends Component<Props, State> {
         e.preventDefault();
         this.setState((state, props) => ({
           selectedIndex: Math.min(
-            props.results.size - 1,
+            props.results.length - 1,
             state.selectedIndex + 1
           )
         }));
@@ -90,7 +90,7 @@ class Search extends Component<Props, State> {
         }
 
         this.props.searchResultSelected(
-          this.props.results.get(this.state.selectedIndex)
+          this.props.results[this.state.selectedIndex]
         );
         break;
 
@@ -126,7 +126,7 @@ class Search extends Component<Props, State> {
           ref={ref => (this.itemRefs.container = ref)}
         >
           {this.state.query !== '' &&
-          this.props.results.size === 0 && (
+          this.props.results.length === 0 && (
             <div style={{ padding: 20 }}>
               <strong>No suggestions found</strong>
             </div>
@@ -135,7 +135,7 @@ class Search extends Component<Props, State> {
           {this.props.results.map((result, i) => (
             <a
               ref={ref => (this.itemRefs[`item-${i}`] = ref)}
-              key={result}
+              key={result.id}
               onClick={() => this.props.searchResultSelected(result)}
               onMouseEnter={() => this.setState({ selectedIndex: i })}
               className={
@@ -155,7 +155,7 @@ class Search extends Component<Props, State> {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
   return {
     results: state.search
   };

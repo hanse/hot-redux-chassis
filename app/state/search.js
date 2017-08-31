@@ -1,6 +1,5 @@
 // @flow
 
-import { fromJS } from 'immutable';
 import { Observable } from 'rxjs';
 import { push } from 'react-router-redux';
 import request from 'app/services/restClient';
@@ -67,17 +66,17 @@ export const searchResultSelectedEpic = (action$: any) =>
       )
     );
 
-const initialState = fromJS([]);
+const initialState = [];
 
 type State = typeof initialState;
 
 export default function results(state: State = initialState, action: Action) {
   switch (action.type) {
     case 'SEARCH_RESULTS_RECEIVED':
-      return fromJS(action.payload);
+      return action.payload;
 
     case 'CLEAR_SEARCH':
-      return fromJS([]);
+      return [];
 
     default:
       return state;

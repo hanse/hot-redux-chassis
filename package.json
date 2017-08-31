@@ -8,12 +8,9 @@
   },
   "scripts": {
     "postinstall": "./scripts/postinstall",
-    "start":
-      "nodemon --ignore app --ignore tests --exec babel-node -- server/index.js",
-    "build":
-      "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --color -p --progress --env",
-    "build:dll":
-      "webpack --display-chunks --color --config webpack/webpack.dll.babel.js",
+    "start": "nodemon --ignore app --ignore tests --exec babel-node -- server/index.js",
+    "build": "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --color -p --progress --env",
+    "build:dll": "webpack --display-chunks --color --config webpack/webpack.dll.babel.js",
     "flow": "flow",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint app --ignore-path .gitignore",
@@ -79,8 +76,6 @@
     "express": "^4.15.4",
     "fuzzysearch": "^1.0.3",
     "history": "^4.7.2",
-    "immutable": "3.8.1",
-    "immutable-devtools": "0.0.7",
     "isomorphic-fetch": "2.2.1",
     "json-server": "^0.12.0",
     "lodash": "^4.17.4",
@@ -110,13 +105,17 @@
       "property-no-unknown": [
         true,
         {
-          "ignoreProperties": ["composes"]
+          "ignoreProperties": [
+            "composes"
+          ]
         }
       ],
       "selector-pseudo-class-no-unknown": [
         true,
         {
-          "ignorePseudoClasses": ["global"]
+          "ignorePseudoClasses": [
+            "global"
+          ]
         }
       ]
     }
@@ -125,15 +124,19 @@
     "globals": {
       "__DEV__": false
     },
-    "moduleDirectories": ["<rootDir>", "node_modules"],
+    "moduleDirectories": [
+      "<rootDir>",
+      "node_modules"
+    ],
     "moduleNameMapper": {
-      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$":
-        "<rootDir>/tests/FileStub.js",
+      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$": "<rootDir>/tests/FileStub.js",
       "^.+\\.css$": "<rootDir>/tests/CSSStub.js"
     },
     "testRegex": "\\.spec\\.(js|jsx)$"
   },
-  "eslintIgnore": ["flow-typed/npm"],
+  "eslintIgnore": [
+    "flow-typed/npm"
+  ],
   "dllConfig": {
     "path": "dist",
     "exclude": [
