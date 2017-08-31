@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
-import history from 'history';
 import App from './toplevel';
 import Dashboard from './dashboard';
 import Contact from './contact';
@@ -13,14 +12,13 @@ import Search from './search';
 import { NotFound } from './errors';
 
 type Props = {
-  history: typeof history
+  history: any
 };
 
-export default class Router extends Component {
-  props: Props;
+export default class Router extends Component<Props> {
   render() {
     return (
-      <ConnectedRouter history={history}>
+      <ConnectedRouter history={this.props.history}>
         <App>
           <Switch>
             <Route exact path="/" component={Dashboard} />

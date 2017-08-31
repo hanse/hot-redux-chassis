@@ -8,9 +8,7 @@ type Props = {
   location: any
 };
 
-export default class Search extends Component {
-  props: Props;
-
+export default class Search extends Component<Props> {
   render() {
     const query = qs.parse(this.props.location.search).q;
     return (

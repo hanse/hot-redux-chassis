@@ -16,9 +16,12 @@ type Props = {
   searchResultSelected: (result: any) => any
 };
 
-class Search extends Component {
-  props: Props;
+type State = {
+  selectedIndex: number,
+  query: string
+};
 
+class Search extends Component<Props, State> {
   state = {
     selectedIndex: -1,
     query: this.props.query || ''

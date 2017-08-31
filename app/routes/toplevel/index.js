@@ -21,9 +21,7 @@ type Props = {
   location: Object
 };
 
-class App extends Component {
-  props: Props;
-
+class App extends Component<Props> {
   componentDidMount() {
     this.props.rehydrateAuth();
   }

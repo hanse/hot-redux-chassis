@@ -34,13 +34,13 @@ export default function configureStore(history: typeof history): Store {
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
-    require('../state').rootReducer,
+    require('../state').rootReducer, // eslint-disable-line
     composeEnhancers(applyMiddleware(...middlewares))
   );
 
   if (module.hot) {
     module.hot.accept('../state', () => {
-      const nextReducer = require('../state').rootReducer;
+      const nextReducer = require('../state').rootReducer; // eslint-disable-line
       store.replaceReducer(nextReducer);
     });
   }

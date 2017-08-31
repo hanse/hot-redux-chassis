@@ -17,7 +17,13 @@ export type Action =
   | { type: 'SHOW_NOTIFICATION', payload: { id: number, message: string } }
   | { type: 'DISMISS_NOTIFICATION', payload: { id: number } }
   | { type: 'SEARCH', payload: { query: string } }
-  | { type: 'CLEAR_SEARCH' };
+  | { type: 'CLEAR_SEARCH' }
+  | { type: 'POSTS_FETCH' }
+  | { type: 'POSTS_REFRESH' }
+  | {
+      type: 'POSTS_RECEIVED',
+      payload: { items: Array<Object>, nextPageUrl: string }
+    };
 
 type $ExtractFunctionReturn = <V>(v: (...args: any) => V) => V;
 

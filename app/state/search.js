@@ -2,7 +2,7 @@
 
 import { fromJS } from 'immutable';
 import { Observable } from 'rxjs';
-import { replace, push } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import request from 'app/services/restClient';
 import { closeSearch } from 'app/state/ui';
 import type { Action } from 'app/types';

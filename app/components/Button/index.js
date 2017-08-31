@@ -9,7 +9,7 @@ type Props = {
   block?: boolean,
   link?: boolean,
   loading?: boolean,
-  children: React.Element<*>
+  children?: any
 };
 
 function Button({

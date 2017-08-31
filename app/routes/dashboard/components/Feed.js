@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from 'app/components/Button';
@@ -6,7 +8,29 @@ import MessageBox from 'app/components/MessageBox';
 const utmSource =
   'utm_source=hot-redux-chassis&utm_medium=referral&utm_campaign=api-credit';
 
-class Feed extends Component {
+type Post = {
+  id: number,
+  urls: {
+    regular: string
+  },
+  user: {
+    name: string,
+    links: {
+      html: string
+    }
+  }
+};
+
+type Props = {
+  onLoadMore: () => void,
+  onRefresh: () => void,
+  hasPosts: boolean,
+  loading: boolean,
+  failed: boolean,
+  posts: Array<Post>
+};
+
+class Feed extends Component<Props> {
   componentDidMount() {
     if (!this.props.hasPosts) {
       this.props.onLoadMore();
@@ -44,7 +68,7 @@ class Feed extends Component {
           <div>
             {this.props.posts.map(post => (
               <div key={post.id}>
-                <img src={post.urls.regular} />
+                <img src={post.urls.regular} alt={post.user.name} />
                 <p>
                   Photo by{' '}
                   <a href={`${post.user.links.html}?${utmSource}`}>
@@ -75,11 +99,9 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onRefresh: () => dispatch({ type: 'POSTS_REFRESH' }),
-    onLoadMore: () => dispatch({ type: 'POSTS_FETCH' })
-  };
-}
+const onRefresh = () => ({ type: 'POSTS_REFRESH' });
+const onLoadMore = () => ({ type: 'POSTS_FETCH' });
+
+const mapDispatchToProps = { onRefresh, onLoadMore };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feed);

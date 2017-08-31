@@ -1,9 +1,12 @@
+// @flow
+
 import { Observable } from 'rxjs';
 import { ajax } from 'rxjs/observable/dom/ajax';
+import type { Store, Action } from 'app/types';
 
 const API_URL = 'https://api.unsplash.com/photos';
 
-function extractNextPageUrl(xhr) {
+function extractNextPageUrl(xhr: XMLHttpRequest) {
   const linkHeader = xhr.getResponseHeader('Link');
   if (!linkHeader) {
     return null;
@@ -24,13 +27,18 @@ function extractNextPageUrl(xhr) {
 
 const initialState = {
   items: [],
-  nextPageUrl: null,
+  nextPageUrl: '',
   pageCount: 0,
   loading: false,
   failed: false
 };
 
-export default function posts(state = initialState, action) {
+type State = typeof initialState;
+
+export default function posts(
+  state: State = initialState,
+  action: Action
+): State {
   switch (action.type) {
     case 'POSTS_FETCH':
       return {
@@ -63,20 +71,20 @@ export default function posts(state = initialState, action) {
   }
 }
 
-export const refreshPostsEpic = (action$, store) =>
+export const refreshPostsEpic = (action$: any, store: Store) =>
   action$.ofType('POSTS_REFRESH').mergeMap(() =>
     Observable.of({
       type: 'POSTS_FETCH'
     })
   );
 
-export const fetchPostsEpic = (action$, store) =>
+export const fetchPostsEpic = (action$: any, store: Store) =>
   action$.ofType('POSTS_FETCH').switchMap(() => {
     const url = store.getState().posts.nextPageUrl || API_URL;
     return ajax({
       url,
       headers: {
-        Authorization: `Client-ID ${process.env.UNSPLASH_APPLICATION_ID}`
+        Authorization: `Client-ID ${process.env.UNSPLASH_APPLICATION_ID || ''}`
       }
     })
       .delay(1000)

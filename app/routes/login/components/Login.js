@@ -9,9 +9,7 @@ type Props = {
   location: any
 };
 
-export default class Login extends Component {
-  props: Props;
-
+export default class Login extends Component<Props> {
   handleLogin: (u: string, p: string) => void = (username, password) => {
     this.props.login(username, password, this.props.location.query.next);
   };

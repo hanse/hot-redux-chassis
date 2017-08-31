@@ -1,19 +1,19 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { Component, type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { isLoggedIn } from 'app/state/auth';
 import type { Dispatch } from 'app/types';
 
-export default function requireAuth(ProtectedComponent: ReactClass<*>) {
-  class AuthenticatedComponent extends Component {
-    props: {
-      dispatch: Dispatch,
-      location: any,
-      isLoggedIn: boolean
-    };
+type Props = {
+  dispatch: Dispatch,
+  location: any,
+  isLoggedIn: boolean
+};
 
+export default function requireAuth(ProtectedComponent: ComponentType<*>) {
+  class AuthenticatedComponent extends Component<Props> {
     componentWillMount() {
       this.redirectUnlessAuthenticated();
     }

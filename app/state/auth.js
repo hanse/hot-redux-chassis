@@ -3,8 +3,8 @@
 import { Observable } from 'rxjs';
 import { Map, fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import type { State as RootState, Action } from 'app/types';
 import request from 'app/services/restClient';
+import type { State as RootState, Action } from 'app/types';
 
 export function rehydrateAuth(): Action {
   return {
@@ -19,14 +19,14 @@ export function fetchUserProfile(token: string): Action {
   };
 }
 
-export function fetchProfileSuccess(payload: any): Action {
+export function fetchProfileSuccess(payload: { username: string }): Action {
   return {
     type: 'FETCH_PROFILE_SUCCESS',
     payload
   };
 }
 
-export function loginSuccess(payload: any): Action {
+export function loginSuccess(payload: { token: string }): Action {
   return {
     type: 'LOGIN_SUCCESS',
     payload

@@ -1,12 +1,28 @@
-import React, { Component } from 'react';
+// @flow
 
-class ErrorBoundary extends Component {
+import React, { Component, type Node } from 'react';
+
+type ErrorInfo = {
+  componentStack: string,
+  componentName: ?string
+};
+
+type Props = {
+  children: Node
+};
+
+type State = {
+  error: ?Error,
+  errorInfo: ?ErrorInfo
+};
+
+class ErrorBoundary extends Component<Props, State> {
   state = {
     error: null,
     errorInfo: null
   };
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.setState({
       error,
       errorInfo

@@ -1,13 +1,13 @@
 // @flow
 
 import styles from './MessageBox.css';
-import React from 'react';
+import React, { type Node } from 'react';
 import cx from 'classnames';
 import Icon from '../Icon';
 
 type Props = {
-  message: string | React.Element<*>,
-  type: 'success' | 'warning' | 'error',
+  message: Node,
+  type: 'success' | 'warning' | 'error' | 'neutral',
   onClose?: () => void
 };
 

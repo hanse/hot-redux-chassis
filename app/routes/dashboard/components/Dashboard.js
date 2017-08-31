@@ -17,9 +17,7 @@ type Props = {
   loginFailed: boolean
 };
 
-export default class Dashboard extends Component {
-  props: Props;
-
+export default class Dashboard extends Component<Props> {
   render() {
     return (
       <div className={styles.root}>

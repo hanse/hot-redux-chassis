@@ -13,15 +13,13 @@ type State = {
   password: string
 };
 
-export default class LoginForm extends Component {
-  props: Props;
-
-  state: State = {
+export default class LoginForm extends Component<Props, State> {
+  state = {
     username: '',
     password: ''
   };
 
-  handleSubmit = (e: SyntheticEvent) => {
+  handleSubmit = (e: SyntheticEvent<*>) => {
     e.preventDefault();
     this.props.onSubmit(this.state.username, this.state.password);
   };

@@ -10,11 +10,13 @@ import HamburgerButton from 'app/components/HamburgerButton';
 import Icon from 'app/components/Icon';
 import Search from 'app/components/Search';
 
+const ExactLink = props => <NavLink {...props} exact />;
+
 const navigationItems = [
   {
     to: '/',
     label: 'Home',
-    LinkComponent: props => <NavLink {...props} exact />
+    LinkComponent: ExactLink
   },
   {
     to: '/about',
@@ -28,11 +30,22 @@ const navigationItems = [
   }
 ];
 
+type Props = {
+  openSearch: () => void,
+  closeSearch: () => void,
+  searchOpen: boolean,
+  location: { [key: string]: mixed }
+};
+
+type State = {
+  menuOpen: boolean
+};
+
 /**
  * A responsive header component with titles and menus.
  * On small screens the menu collapses into an animated hamburger menu.
  */
-class Header extends Component {
+class Header extends Component<Props, State> {
   state = {
     menuOpen: false
   };
