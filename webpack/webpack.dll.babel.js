@@ -11,7 +11,8 @@ if (!dllConfig) {
 }
 
 const outputPath = path.join(process.cwd(), dllConfig.path);
-const exclude = (iterable, exclude = []) => iterable.filter((item) => !exclude.includes(item));
+const exclude = (iterable, exclude = []) =>
+  iterable.filter(item => !exclude.includes(item));
 const vendors = Object.keys(packageJson.dependencies);
 
 module.exports = () => ({
