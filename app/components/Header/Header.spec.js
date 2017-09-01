@@ -1,12 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { MemoryRouter } from 'react-router';
 import Header from './';
-import styles from './Header.css';
+import renderer from 'react-test-renderer';
 
 describe('<Header />', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<Header location={{ query: {} }} />);
-    expect(wrapper.type()).toEqual('div');
-    expect(wrapper.props().className).toEqual(styles.root);
+    const component = renderer.create(
+      <MemoryRouter>
+        <Header location={{ query: {} }} />
+      </MemoryRouter>
+    );
+    expect(component.toJSON()).toMatchSnapshot();
   });
 });

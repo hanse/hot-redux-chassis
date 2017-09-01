@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> should render correctly 1`] = `
+<div
+  className="root"
+>
+  <div
+    className="header"
+  >
+    <div
+      className="mobileMenu"
+    >
+      <div
+        className="hamburgerButton"
+        onClick={[Function]}
+      >
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
+      <a
+        className="mobileTitle"
+        href="/"
+        onClick={[Function]}
+      >
+        hanse
+      </a>
+    </div>
+    <a
+      className="desktopTitle"
+      href="/"
+      onClick={[Function]}
+    >
+      hanse
+    </a>
+    <ul
+      className="navigationItems"
+    >
+      <li>
+        <a
+          aria-current="true"
+          className="activeItem"
+          href="/"
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Home
+        </a>
+      </li>
+      <li>
+        <a
+          aria-current={false}
+          className={undefined}
+          href="/about"
+          onClick={[Function]}
+          style={undefined}
+        >
+          About
+        </a>
+      </li>
+      <li>
+        <a
+          aria-current={false}
+          className={undefined}
+          href="/contact"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Contact
+        </a>
+      </li>
+    </ul>
+    <button
+      className="searchButton"
+      onClick={[Function]}
+    >
+      <i
+        className="icon ion-search"
+      />
+    </button>
+  </div>
+</div>
+`;
