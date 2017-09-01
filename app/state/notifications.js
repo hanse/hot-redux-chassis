@@ -1,6 +1,6 @@
 // @flow
 
-import type { Action } from 'app/types';
+import type { Action, Notification, Epic } from 'app/types';
 
 let notificationId = 0;
 export function showNotification(message: string): Action {
@@ -16,27 +16,28 @@ export function showNotification(message: string): Action {
 export function dismissNotification(id: number): Action {
   return {
     type: 'DISMISS_NOTIFICATION',
-    payload: { id }
+    payload: id
   };
 }
 
-function formatActionError(action) {
+function formatActionError(action: Action): string {
   if (action.payload && action.payload.message) {
-    return action.payload.message;
+    const error: Error = (action.payload: any);
+    return error.message;
   }
 
   return 'Unknown error';
 }
 
-export const errorNotificationEpic = (action$: any) =>
+export const errorNotificationEpic: Epic = action$ =>
   action$
-    .filter(action => !!action.error)
+    .filter(action => (action.error ? !!action.error : false))
     .map(action => showNotification(formatActionError(action)));
 
 /**
  *
  */
-type State = { [key: string]: mixed };
+type State = { [key: string]: Notification };
 
 /**
  *
@@ -59,7 +60,7 @@ export default function notifications(
 
     case 'DISMISS_NOTIFICATION': {
       const nextState = { ...state };
-      delete nextState[action.payload.id];
+      delete nextState[action.payload];
       return nextState;
     }
 

@@ -1,7 +1,11 @@
 // @flow
 
-import { Observable } from 'rxjs';
+import { type Observable } from 'rxjs';
 import { ajax } from 'rxjs/observable/dom/ajax';
+
+type Response<T> = {
+  response: T
+};
 
 // https://github.com/Reactive-Extensions/RxJS-DOM/blob/master/doc/operators/ajax.md
 type RequestOptions = {
@@ -19,7 +23,11 @@ type RequestOptions = {
   url?: string
 };
 
-type ApiClient = (path: string, options?: RequestOptions) => Observable<*>;
+type ApiClient = <T>(
+  path: string,
+  options?: RequestOptions
+) => Observable<Response<T>>;
+
 type ApiClientOptions = {
   url: string
 };
@@ -31,7 +39,8 @@ function createApiClient({ url }: ApiClientOptions): ApiClient {
       responseType: 'json',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
+        ...options.headers
       },
       ...options
     });

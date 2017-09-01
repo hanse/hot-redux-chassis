@@ -6,14 +6,14 @@ import scrollIntoView from 'dom-scroll-into-view';
 import { search, clearSearch } from 'app/state/search';
 import Icon from 'app/components/Icon';
 import styles from './Search.css';
-import type { State as RootState } from 'app/types';
+import type { State as RootState, SearchResult } from 'app/types';
 
 type Props = {
   query: string,
   search: (query: string) => any,
-  results: Array<Object>,
+  results: Array<SearchResult>,
   onClose: () => any,
-  searchResultSelected: (result: any) => any
+  searchResultSelected: (result: SearchResult) => any
 };
 
 type State = {
@@ -135,7 +135,7 @@ class Search extends Component<Props, State> {
           {this.props.results.map((result, i) => (
             <a
               ref={ref => (this.itemRefs[`item-${i}`] = ref)}
-              key={result.id}
+              key={result}
               onClick={() => this.props.searchResultSelected(result)}
               onMouseEnter={() => this.setState({ selectedIndex: i })}
               className={

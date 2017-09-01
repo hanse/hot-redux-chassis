@@ -4,22 +4,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from 'app/components/Button';
 import MessageBox from 'app/components/MessageBox';
+import type { Post } from 'app/types';
 
 const utmSource =
   'utm_source=hot-redux-chassis&utm_medium=referral&utm_campaign=api-credit';
-
-type Post = {
-  id: number,
-  urls: {
-    regular: string
-  },
-  user: {
-    name: string,
-    links: {
-      html: string
-    }
-  }
-};
 
 type Props = {
   onLoadMore: () => void,

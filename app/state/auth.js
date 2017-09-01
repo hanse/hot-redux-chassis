@@ -3,7 +3,7 @@
 import { Observable } from 'rxjs';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'app/services/restClient';
-import type { State as RootState, Action } from 'app/types';
+import type { State as RootState, Action, UserProfile, Epic } from 'app/types';
 
 export function rehydrateAuth(): Action {
   return {
@@ -18,7 +18,7 @@ export function fetchUserProfile(token: string): Action {
   };
 }
 
-export function fetchProfileSuccess(payload: { username: string }): Action {
+export function fetchProfileSuccess(payload: UserProfile): Action {
   return {
     type: 'FETCH_PROFILE_SUCCESS',
     payload
@@ -32,8 +32,9 @@ export function loginSuccess(payload: { token: string }): Action {
   };
 }
 
-export const loginEpic = (action$: any) =>
-  action$.ofType('LOGIN').switchMap(action => {
+export const loginEpic: Epic = action$ =>
+  action$.filter(action => action.type === 'LOGIN').switchMap(action => {
+    if (action.type !== 'LOGIN') throw new Error();
     const { username, password } = action.payload;
     return request('auth/login', {
       method: 'POST',
@@ -59,17 +60,17 @@ export const loginEpic = (action$: any) =>
       );
   });
 
-export const logoutEpic = (action$: any) =>
-  action$.ofType('LOGOUT').switchMap(() => {
+export const logoutEpic: Epic = action$ =>
+  action$.filter(action => action.type === 'LOGOUT').switchMap(() => {
     window.localStorage.removeItem('token');
     return Observable.of({
       type: 'LOGOUT_SUCCESS'
     });
   });
 
-export const rehydrateAuthEpic = (action$: any) =>
-  action$.ofType('REHYDRATE_AUTH').switchMap(() => {
-    const token = window.localStorage.getItem('token');
+export const rehydrateAuthEpic: Epic = action$ =>
+  action$.filter(action => action.type === 'REHYDRATE_AUTH').switchMap(() => {
+    const token: string = window.localStorage.getItem('token');
     if (!token) {
       return Observable.of();
     }
@@ -80,25 +81,27 @@ export const rehydrateAuthEpic = (action$: any) =>
     );
   });
 
-export const fetchProfileEpic = (action$: any) =>
+export const fetchProfileEpic: Epic = action$ =>
   action$
-    .ofType('FETCH_PROFILE')
-    .map(action => action.payload.token)
-    .switchMap(token =>
-      request('auth/me', {
+    .filter(action => action.type === 'FETCH_PROFILE')
+    .switchMap(action => {
+      if (action.type !== 'FETCH_PROFILE') throw new Error();
+      const token = action.payload.token;
+      return request('auth/me', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-        .map(result => fetchProfileSuccess(result.response))
+        .map(result => (result.response: UserProfile))
+        .map(profile => fetchProfileSuccess(profile))
         .catch(error =>
           Observable.of({
             type: 'FETCH_PROFILE_FAILURE',
             payload: error.xhr.response,
             error: true
           })
-        )
-    );
+        );
+    });
 
 export function login(username: string, password: string): Action {
   return {

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { push } from 'react-router-redux';
 import request from 'app/services/restClient';
 import { closeSearch } from 'app/state/ui';
-import type { Action } from 'app/types';
+import type { Action, SearchResult, Epic } from 'app/types';
 
 export function search(query: string): Action {
   return {
@@ -19,35 +19,42 @@ export function clearSearch(): Action {
   };
 }
 
-export function receiveResults(payload: Array<Object>) {
+export function receiveResults(payload: Array<SearchResult>) {
   return {
     type: 'SEARCH_RESULTS_RECEIVED',
     payload
   };
 }
 
-export const clearSearchEpic = (action$: any) =>
+export const clearSearchEpic: Epic = action$ =>
   action$
-    .ofType('SEARCH')
-    .filter(action => !action.payload.query)
+    .filter(action => action.type === 'SEARCH')
+    .map(action => {
+      if (action.type !== 'SEARCH') throw new TypeError();
+      return action.payload.query;
+    })
+    .filter(query => !query)
     .mergeMap(() => Observable.merge(Observable.of(clearSearch())));
 
-export const searchEpic = (action$: any) =>
+export const searchEpic: Epic = action$ =>
   action$
-    .ofType('SEARCH')
-    .map(action => action.payload.query)
+    .filter(action => action.type === 'SEARCH')
+    .map(action => {
+      if (action.type !== 'SEARCH') throw new TypeError();
+      return action.payload.query;
+    })
     .filter(query => !!query)
     .switchMap(query =>
       Observable.merge(
         Observable.timer(800)
-          .takeUntil(action$.ofType('CLEAR_SEARCH'))
+          .takeUntil(action$.filter(action => action.type === 'CLEAR_SEARCH'))
           .mergeMap(() =>
             request(`search?q=${query}`)
               .map(result => receiveResults(result.response))
               .catch(error =>
                 Observable.of({
                   type: 'SEARCH_FAILURE',
-                  payload: error.xhr.response,
+                  payload: error,
                   error: true
                 })
               )
@@ -55,10 +62,13 @@ export const searchEpic = (action$: any) =>
       )
     );
 
-export const searchResultSelectedEpic = (action$: any) =>
+export const searchResultSelectedEpic: Epic = action$ =>
   action$
-    .ofType('SEARCH_RESULT_SELECTED')
-    .map(action => action.payload)
+    .filter(action => action.type === 'SEARCH_RESULT_SELECTED')
+    .map(action => {
+      if (action.type !== 'SEARCH_RESULT_SELECTED') throw new TypeError();
+      return action.payload;
+    })
     .switchMap(result =>
       Observable.merge(
         Observable.of(closeSearch()),

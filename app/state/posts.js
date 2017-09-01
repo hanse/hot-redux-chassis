@@ -2,7 +2,7 @@
 
 import { Observable } from 'rxjs';
 import { ajax } from 'rxjs/observable/dom/ajax';
-import type { Store, Action } from 'app/types';
+import type { Store, Action, Epic } from 'app/types';
 
 const API_URL = 'https://api.unsplash.com/photos';
 
@@ -71,15 +71,15 @@ export default function posts(
   }
 }
 
-export const refreshPostsEpic = (action$: any, store: Store) =>
-  action$.ofType('POSTS_REFRESH').mergeMap(() =>
+export const refreshPostsEpic: Epic = action$ =>
+  action$.filter(action => action.type === 'REFRESH_POSTS').mergeMap(() =>
     Observable.of({
       type: 'POSTS_FETCH'
     })
   );
 
-export const fetchPostsEpic = (action$: any, store: Store) =>
-  action$.ofType('POSTS_FETCH').switchMap(() => {
+export const fetchPostsEpic: Epic = (action$, store) =>
+  action$.filter(action => action.type === 'POSTS_FETCH').switchMap(() => {
     const url = store.getState().posts.nextPageUrl || API_URL;
     return ajax({
       url,

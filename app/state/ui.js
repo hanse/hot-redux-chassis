@@ -20,7 +20,7 @@ const initialState = {
 
 type State = typeof initialState;
 
-export default function ui(state: State = initialState, action: Action) {
+export default function ui(state: State = initialState, action: Action): State {
   switch (action.type) {
     case 'OPEN_SEARCH':
       return {

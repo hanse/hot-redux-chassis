@@ -10,7 +10,9 @@ import type { Store } from '../types';
 
 export default function configureStore(history: typeof history): Store {
   const middlewares = [
-    createEpicMiddleware(rootEpic),
+    createEpicMiddleware(rootEpic, {
+      dependencies: {}
+    }),
     routerMiddleware(history)
   ];
 
