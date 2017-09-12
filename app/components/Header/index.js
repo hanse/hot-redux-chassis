@@ -34,7 +34,9 @@ type Props = {
   openSearch: () => void,
   closeSearch: () => void,
   searchOpen: boolean,
-  location: { [key: string]: mixed }
+  location: {
+    search: string
+  }
 };
 
 type State = {

@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 8.1.2
+    version: 8.4.0
   pre:
     - mkdir ~/.yarn-cache
 
@@ -14,11 +14,7 @@ dependencies:
 
 test:
   override:
-    - echo "good"
-
-# test:
-#   override:
-#     - yarn run test
-#     - yarn test -- --coverage
-#   post:
-#     - cp -r coverage $CIRCLE_ARTIFACTS
+    - yarn run test
+    - yarn test -- --coverage
+  post:
+    - cp -r coverage $CIRCLE_ARTIFACTS
