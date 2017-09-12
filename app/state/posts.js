@@ -2,7 +2,8 @@
 
 import { Observable } from 'rxjs';
 import { ajax } from 'rxjs/observable/dom/ajax';
-import type { Store, Action, Epic } from 'app/types';
+import { toId } from 'app/types';
+import type { Action, Epic, Post, PostDto } from 'app/types';
 
 const API_URL = 'https://api.unsplash.com/photos';
 
@@ -33,7 +34,10 @@ const initialState = {
   failed: false
 };
 
-type State = typeof initialState;
+type State = {
+  ...typeof initialState,
+  items: Array<Post>
+};
 
 export default function posts(
   state: State = initialState,
@@ -72,11 +76,9 @@ export default function posts(
 }
 
 export const refreshPostsEpic: Epic = action$ =>
-  action$.filter(action => action.type === 'REFRESH_POSTS').mergeMap(() =>
-    Observable.of({
-      type: 'POSTS_FETCH'
-    })
-  );
+  action$
+    .filter(action => action.type === 'POSTS_REFRESH')
+    .mergeMap(() => Observable.of(fetchPosts()));
 
 export const fetchPostsEpic: Epic = (action$, store) =>
   action$.filter(action => action.type === 'POSTS_FETCH').switchMap(() => {
@@ -88,20 +90,46 @@ export const fetchPostsEpic: Epic = (action$, store) =>
       }
     })
       .delay(1000)
-      .switchMap(result =>
-        Observable.of({
-          type: 'POSTS_RECEIVED',
-          payload: {
-            items: result.response,
-            nextPageUrl: extractNextPageUrl(result.xhr)
-          }
-        })
-      )
-      .catch(error =>
-        Observable.of({
-          type: 'POSTS_FETCH_FAILED',
-          payload: error,
-          error: true
-        })
-      );
+      .switchMap(result => {
+        return Observable.of(
+          postsReceived(result.response, extractNextPageUrl(result.xhr))
+        );
+      })
+      .catch(error => Observable.of(fetchPostsFailed(error)));
   });
+
+function mapPostDto(post: PostDto): Post {
+  return {
+    id: toId(post.id),
+    imageUrl: post.urls.regular,
+    user: {
+      name: post.user.name,
+      location: post.user.location,
+      link: post.user.links.html
+    }
+  };
+}
+
+export function fetchPosts() {
+  return {
+    type: 'POSTS_FETCH'
+  };
+}
+
+export function fetchPostsFailed(error: Error) {
+  return {
+    type: 'POSTS_FETCH_FAILED',
+    payload: error,
+    error: true
+  };
+}
+
+export function postsReceived(items: Array<PostDto>, nextPageUrl: ?string) {
+  return {
+    type: 'POSTS_RECEIVED',
+    payload: {
+      items: items.map(mapPostDto),
+      nextPageUrl
+    }
+  };
+}

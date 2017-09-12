@@ -4,7 +4,11 @@ import { Observable } from 'rxjs';
 import { push } from 'react-router-redux';
 import request from 'app/services/restClient';
 import { closeSearch } from 'app/state/ui';
-import type { Action, SearchResult, Epic } from 'app/types';
+import type { Action, SearchResult, SearchResultDto, Epic } from 'app/types';
+
+function mapSearchResultDto(result: SearchResultDto): SearchResult {
+  return result;
+}
 
 export function search(query: string): Action {
   return {
@@ -19,10 +23,10 @@ export function clearSearch(): Action {
   };
 }
 
-export function receiveResults(payload: Array<SearchResult>) {
+export function receiveResults(results: Array<SearchResultDto>) {
   return {
     type: 'SEARCH_RESULTS_RECEIVED',
-    payload
+    payload: results.map(mapSearchResultDto)
   };
 }
 
@@ -78,9 +82,12 @@ export const searchResultSelectedEpic: Epic = action$ =>
 
 const initialState = [];
 
-type State = typeof initialState;
+type State = Array<SearchResult>;
 
-export default function results(state: State = initialState, action: Action) {
+export default function results(
+  state: State = initialState,
+  action: Action
+): State {
   switch (action.type) {
     case 'SEARCH_RESULTS_RECEIVED':
       return action.payload;

@@ -3,7 +3,22 @@
 import { Observable } from 'rxjs';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import request from 'app/services/restClient';
-import type { State as RootState, Action, UserProfile, Epic } from 'app/types';
+import { toId } from 'app/types';
+import type {
+  State as RootState,
+  Action,
+  UserProfile,
+  UserProfileDto,
+  Epic
+} from 'app/types';
+
+function mapUserProfileDto(userProfile: UserProfileDto): UserProfile {
+  const { id, ...rest } = userProfile;
+  return {
+    ...rest,
+    id: toId(id)
+  };
+}
 
 export function rehydrateAuth(): Action {
   return {
@@ -11,17 +26,35 @@ export function rehydrateAuth(): Action {
   };
 }
 
-export function fetchUserProfile(token: string): Action {
+export function fetchUserProfile(token: string) {
   return {
     type: 'FETCH_PROFILE',
     payload: { token }
   };
 }
 
-export function fetchProfileSuccess(payload: UserProfile): Action {
+export function fetchProfileSuccess(userProfile: UserProfileDto) {
   return {
     type: 'FETCH_PROFILE_SUCCESS',
-    payload
+    payload: mapUserProfileDto(userProfile)
+  };
+}
+
+export function fetchProfileFailure(error: Error) {
+  return {
+    type: 'FETCH_PROFILE_FAILURE',
+    payload: error,
+    error: true
+  };
+}
+
+export function login(username: string, password: string): Action {
+  return {
+    type: 'LOGIN',
+    payload: {
+      username,
+      password
+    }
   };
 }
 
@@ -29,6 +62,32 @@ export function loginSuccess(payload: { token: string }): Action {
   return {
     type: 'LOGIN_SUCCESS',
     payload
+  };
+}
+
+export function loginFailure(error: Error) {
+  return {
+    type: 'LOGIN_FAILURE',
+    payload: error,
+    error: true
+  };
+}
+
+export function logout(): Action {
+  return {
+    type: 'LOGOUT'
+  };
+}
+
+export function logoutSuccess() {
+  return {
+    type: 'LOGOUT_SUCCESS'
+  };
+}
+
+export function clearLoginError(): Action {
+  return {
+    type: 'LOGIN_CLEAR_ERROR'
   };
 }
 
@@ -51,21 +110,13 @@ export const loginEpic: Epic = action$ =>
           Observable.of(fetchUserProfile(payload.token))
         );
       })
-      .catch(error =>
-        Observable.of({
-          type: 'LOGIN_FAILURE',
-          payload: error.xhr.response,
-          error: true
-        })
-      );
+      .catch(error => Observable.of(loginFailure(error)));
   });
 
 export const logoutEpic: Epic = action$ =>
   action$.filter(action => action.type === 'LOGOUT').switchMap(() => {
     window.localStorage.removeItem('token');
-    return Observable.of({
-      type: 'LOGOUT_SUCCESS'
-    });
+    return Observable.of(logoutSuccess());
   });
 
 export const rehydrateAuthEpic: Epic = action$ =>
@@ -92,38 +143,10 @@ export const fetchProfileEpic: Epic = action$ =>
           Authorization: `Bearer ${token}`
         }
       })
-        .map(result => (result.response: UserProfile))
+        .map(result => (result.response: UserProfileDto))
         .map(profile => fetchProfileSuccess(profile))
-        .catch(error =>
-          Observable.of({
-            type: 'FETCH_PROFILE_FAILURE',
-            payload: error.xhr.response,
-            error: true
-          })
-        );
+        .catch(error => Observable.of(fetchProfileFailure(error)));
     });
-
-export function login(username: string, password: string): Action {
-  return {
-    type: 'LOGIN',
-    payload: {
-      username,
-      password
-    }
-  };
-}
-
-export function logout(): Action {
-  return {
-    type: 'LOGOUT'
-  };
-}
-
-export function clearLoginError(): Action {
-  return {
-    type: 'LOGIN_CLEAR_ERROR'
-  };
-}
 
 const initialState = {
   username: 'Guest',

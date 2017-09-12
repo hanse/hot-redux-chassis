@@ -8,15 +8,33 @@ import type { Reducers } from './state';
  * Models
  */
 
+export opaque type ID = string;
+
+export const toId = (value: string | number): ID => {
+  if (typeof value === 'number') {
+    return value.toString();
+  }
+
+  return value;
+};
+
+export const idToString = (id: ID): string => String(id);
+
+export type SearchResultDto = string;
 export type SearchResult = string;
 
+export type UserProfileDto = {
+  id: number,
+  username: string
+};
+
 export type UserProfile = {
-  id: string,
+  id: ID,
   username: string
 };
 
 // Unsplash Photo
-export type Post = {
+export type PostDto = {
   id: number,
   urls: {
     regular: string
@@ -27,6 +45,17 @@ export type Post = {
     links: {
       html: string
     }
+  }
+};
+
+// Unsplash photo internal representation
+export type Post = {
+  id: ID,
+  imageUrl: string,
+  user: {
+    name: string,
+    location: string,
+    link: string
   }
 };
 
@@ -55,6 +84,7 @@ export type Action =
   | { type: 'DISMISS_NOTIFICATION', payload: number }
   | { type: 'SEARCH', payload: { query: string } }
   | { type: 'SEARCH_FAILURE', payload: Error, error: boolean }
+  | { type: 'SEARCH_RESULTS_RECEIVED', payload: Array<SearchResult> }
   | { type: 'CLEAR_SEARCH' }
   | { type: 'OPEN_SEARCH' }
   | { type: 'CLOSE_SEARCH' }
@@ -62,7 +92,7 @@ export type Action =
   | { type: 'POSTS_REFRESH' }
   | {
       type: 'POSTS_RECEIVED',
-      payload: { items: Array<Object>, nextPageUrl: string }
+      payload: { items: Array<Post>, nextPageUrl: string }
     };
 
 type $ExtractFunctionReturn = <V>(v: (...args: any) => V) => V;

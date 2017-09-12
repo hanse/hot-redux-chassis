@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from 'app/components/Button';
 import MessageBox from 'app/components/MessageBox';
+import { idToString } from 'app/types';
 import type { Post } from 'app/types';
 
 const utmSource =
@@ -55,11 +56,11 @@ class Feed extends Component<Props> {
         ) : (
           <div>
             {this.props.posts.map(post => (
-              <div key={post.id}>
-                <img src={post.urls.regular} alt={post.user.name} />
+              <div key={idToString(post.id)}>
+                <img src={post.imageUrl} alt={post.user.name} />
                 <p>
                   Photo by{' '}
-                  <a href={`${post.user.links.html}?${utmSource}`}>
+                  <a href={`${post.user.link}?${utmSource}`}>
                     {post.user.name}
                   </a>
                 </p>
