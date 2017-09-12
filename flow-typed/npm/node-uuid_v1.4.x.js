@@ -1,7 +1,7 @@
-// flow-typed signature: c10d49f01378fca0328ed57cb31dbc59
-// flow-typed version: 37df165ba6/node-uuid_v1.4.x/flow_>=v0.28.x
+// flow-typed signature: 1c22a8c07f5233703efd793409d6890e
+// flow-typed version: 35be246cc3/node-uuid_v1.4.x/flow_>=v0.28.x
 
-declare module 'node-uuid' {
+declare module "node-uuid" {
   declare type V1Options = {
     node: Array<number>,
     clockseq: number,
@@ -17,12 +17,12 @@ declare module 'node-uuid' {
   declare type Uuid = {
     v1: (
       o?: V1Options | null,
-      b?: Array<number> | Buffer<number>,
+      b?: Array<number> | Buffer,
       of?: number
     ) => string,
     v4: (
       o?: V4Options | null,
-      b?: Array<number> | Buffer<number>,
+      b?: Array<number> | Buffer,
       of?: number
     ) => string,
     parse: (u: string, b?: Array<number>, o?: number) => Array<number>,
