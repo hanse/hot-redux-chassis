@@ -52,13 +52,26 @@ class Header extends Component<Props, State> {
     menuOpen: false
   };
 
+  handleToggleMenu = () => {
+    this.setState(state => ({ menuOpen: !state.menuOpen }));
+  };
+
+  handleCloseMenu = () => {
+    this.setState({ menuOpen: false });
+  };
+
+  handleOpenSearch = () => {
+    this.setState({ menuOpen: false });
+    this.props.openSearch();
+  };
+
   render() {
     return (
       <div className={styles.root}>
         <div className={styles.header}>
           <div className={styles.mobileMenu}>
             <HamburgerButton
-              onClick={() => this.setState({ menuOpen: !this.state.menuOpen })}
+              onClick={this.handleToggleMenu}
               open={this.state.menuOpen}
             />
             <Link to="/" className={styles.mobileTitle}>
@@ -80,7 +93,7 @@ class Header extends Component<Props, State> {
                 <LinkComponent
                   to={to}
                   activeClassName={styles.activeItem}
-                  onClick={() => this.setState({ menuOpen: false })}
+                  onClick={this.handleCloseMenu}
                 >
                   {label}
                 </LinkComponent>
@@ -90,10 +103,7 @@ class Header extends Component<Props, State> {
 
           <button
             className={styles.searchButton}
-            onClick={() => {
-              this.setState({ menuOpen: false });
-              this.props.openSearch();
-            }}
+            onClick={this.handleOpenSearch}
           >
             <Icon name="search" />
           </button>
