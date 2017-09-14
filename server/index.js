@@ -2,18 +2,14 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const jsonServer = require('json-server');
-const createWebpackMiddleware = require('webpack-express-middleware');
 const auth = require('./auth');
 const search = require('./search');
 
-const config = require('../webpack/webpack.config.babel')({
+const webpackConfig = require('../webpack/webpack.config.babel')({
   development: process.env.NODE_ENV === 'development'
 });
 
-const compiler = require('webpack')(config);
-
-const webpackMiddleware = createWebpackMiddleware(compiler, config);
+const compiler = require('webpack')(webpackConfig);
 
 const app = express();
 
@@ -23,6 +19,24 @@ app.use(bodyParser.json());
 app.use('/api/auth', auth);
 app.use('/api/search', search);
 
-webpackMiddleware(app);
+app.use(
+  require('webpack-dev-middleware')(compiler, {
+    publicPath: webpackConfig.output.publicPath,
+    quiet: true
+  })
+);
 
-app.listen(app.get('port'), app.get('host'), webpackMiddleware.listen);
+app.use(
+  require('webpack-hot-middleware')(compiler, {
+    log: false
+  })
+);
+
+app.use(express.static(webpackConfig.output.path));
+
+app.listen(app.get('port'), app.get('host'), err => {
+  if (err) {
+    console.log(err);
+  }
+  console.log('App listening on', app.get('port'));
+});

@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const packageJson = require('../package.json');
 
 const dllConfig = packageJson.dllConfig;
@@ -52,6 +53,7 @@ module.exports = options => ({
         )
       }),
 
+      options.development && new FriendlyErrorsPlugin(),
       options.development && new webpack.HotModuleReplacementPlugin(),
       options.development && new webpack.NoEmitOnErrorsPlugin(),
 
