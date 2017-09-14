@@ -6,17 +6,11 @@
 .*/node_modules/eslint-plugin-jsx-a11y.*
 
 [libs]
-flow/
-
 
 [options]
-esproposal.class_static_fields=enable
-esproposal.class_instance_fields=enable
-module.name_mapper='.*\(.css\|.jpg\|.png\)' -> 'empty/object'
+module.name_mapper='.*\(.css\)' -> 'CSSStub'
+module.name_mapper='.*\(.jpg\|.png\)' -> 'FileStub'
 module.name_mapper='^\(.*\)$' -> '<PROJECT_ROOT>/\1'
-
-munge_underscores=true
-
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe

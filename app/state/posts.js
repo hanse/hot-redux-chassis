@@ -90,11 +90,11 @@ export const fetchPostsEpic: Epic = (action$, store) =>
       }
     })
       .delay(1000)
-      .switchMap(result => {
-        return Observable.of(
+      .switchMap(result =>
+        Observable.of(
           postsReceived(result.response, extractNextPageUrl(result.xhr))
-        );
-      })
+        )
+      )
       .catch(error => Observable.of(fetchPostsFailed(error)));
   });
 

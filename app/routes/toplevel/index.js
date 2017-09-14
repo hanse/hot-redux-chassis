@@ -1,7 +1,7 @@
 // @flow
 
 import './App.css';
-import React, { Component } from 'react';
+import React, { Component, type Node } from 'react';
 import { connect } from 'react-redux';
 import {
   rehydrateAuth,
@@ -13,8 +13,8 @@ import Header from 'app/components/Header';
 import type { State } from 'app/types';
 
 type Props = {
-  children: any,
-  rehydrateAuth: () => any,
+  children: Node,
+  rehydrateAuth: () => mixed,
   searchOpen: boolean,
   closeSearch: () => void,
   openSearch: () => void,

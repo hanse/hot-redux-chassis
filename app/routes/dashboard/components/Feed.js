@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Button from 'app/components/Button';
 import MessageBox from 'app/components/MessageBox';
 import { idToString } from 'app/types';
-import type { Post } from 'app/types';
+import type { Post, State as RootState } from 'app/types';
 
 const utmSource =
   'utm_source=hot-redux-chassis&utm_medium=referral&utm_campaign=api-credit';
@@ -79,7 +79,7 @@ class Feed extends Component<Props> {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
   return {
     posts: state.posts.items,
     loading: state.posts.loading,

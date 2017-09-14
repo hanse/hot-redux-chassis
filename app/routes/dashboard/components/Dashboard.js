@@ -11,9 +11,9 @@ import Feed from './Feed';
 type Props = {
   username: string,
   isLoggedIn: boolean,
-  login: () => any,
-  logout: () => any,
-  clearLoginError: () => any,
+  login: () => mixed,
+  logout: () => mixed,
+  clearLoginError: () => mixed,
   loginFailed: boolean
 };
 

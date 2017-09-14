@@ -8,7 +8,7 @@ import Icon from '../Icon';
 type Props = {
   message: Node,
   type: 'success' | 'warning' | 'error' | 'neutral',
-  onClose?: () => void
+  onClose?: () => mixed
 };
 
 function MessageBox({ message, type, onClose }: Props) {

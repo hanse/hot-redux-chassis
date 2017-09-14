@@ -32,7 +32,7 @@ type ApiClientOptions = {
   url: string
 };
 
-function createApiClient({ url }: ApiClientOptions): ApiClient {
+export function createApiClient({ url }: ApiClientOptions): ApiClient {
   return function request(path, options = {}) {
     return ajax({
       url: `${url}${path}`,

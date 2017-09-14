@@ -85,6 +85,7 @@ export type Action =
   | { type: 'SEARCH', payload: { query: string } }
   | { type: 'SEARCH_FAILURE', payload: Error, error: boolean }
   | { type: 'SEARCH_RESULTS_RECEIVED', payload: Array<SearchResult> }
+  | { type: 'SEARCH_RESULT_SELECTED', payload: SearchResult }
   | { type: 'CLEAR_SEARCH' }
   | { type: 'OPEN_SEARCH' }
   | { type: 'CLOSE_SEARCH' }
