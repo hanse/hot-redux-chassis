@@ -1,11 +1,8 @@
 // @flow
 
 import { Observable } from 'rxjs';
-import { ajax } from 'rxjs/observable/dom/ajax';
 import { toId } from 'app/types';
 import type { Action, Epic, Post, PostDto } from 'app/types';
-
-const API_URL = 'https://api.unsplash.com/photos';
 
 function extractNextPageUrl(xhr: XMLHttpRequest) {
   const linkHeader = xhr.getResponseHeader('Link');
@@ -80,15 +77,10 @@ export const refreshPostsEpic: Epic = action$ =>
     .filter(action => action.type === 'POSTS_REFRESH')
     .mergeMap(() => Observable.of(fetchPosts()));
 
-export const fetchPostsEpic: Epic = (action$, store) =>
+export const fetchPostsEpic: Epic = (action$, store, { unsplash }) =>
   action$.filter(action => action.type === 'POSTS_FETCH').switchMap(() => {
-    const url = store.getState().posts.nextPageUrl || API_URL;
-    return ajax({
-      url,
-      headers: {
-        Authorization: `Client-ID ${process.env.UNSPLASH_APPLICATION_ID || ''}`
-      }
-    })
+    return unsplash
+      .fetchPosts(store.getState().posts.nextPageUrl)
       .delay(1000)
       .switchMap(result =>
         Observable.of(

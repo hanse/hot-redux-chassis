@@ -3,6 +3,7 @@
 import type { Observable } from 'rxjs';
 import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
 import type { Reducers } from './state';
+import type { Dependencies } from './utils/configureStore';
 
 /**
  * Models
@@ -94,6 +95,11 @@ export type Action =
   | {
       type: 'POSTS_RECEIVED',
       payload: { items: Array<Post>, nextPageUrl: string }
+    }
+  | {
+      type: 'POSTS_FETCH_FAILED',
+      payload: Error,
+      error: true
     };
 
 type $ExtractFunctionReturn = <V>(v: (...args: any) => V) => V;
@@ -107,8 +113,6 @@ export type GetState = () => State;
 export type Thunk<A> = (d: Dispatch, gs: GetState) => Promise<void> | void | A;
 
 export type Dispatch = ReduxDispatch<Action> & ((t: Thunk<*>) => Action);
-
-type Dependencies = {};
 
 export type Epic = (
   actions$: Observable<Action>,

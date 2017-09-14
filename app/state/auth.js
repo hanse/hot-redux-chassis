@@ -2,7 +2,6 @@
 
 import { Observable } from 'rxjs';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import request from 'app/services/restClient';
 import { toId } from 'app/types';
 import type {
   State as RootState,
@@ -91,18 +90,12 @@ export function clearLoginError(): Action {
   };
 }
 
-export const loginEpic: Epic = action$ =>
+export const loginEpic: Epic = (action$, store, { api }) =>
   action$.filter(action => action.type === 'LOGIN').switchMap(action => {
     if (action.type !== 'LOGIN') throw new Error();
     const { username, password } = action.payload;
-    return request('auth/login', {
-      method: 'POST',
-      body: {
-        username,
-        password
-      }
-    })
-      .map(result => result.response)
+    return api
+      .login(username, password)
       .switchMap(payload => {
         window.localStorage.setItem('token', payload.token);
         return Observable.merge(
@@ -132,19 +125,15 @@ export const rehydrateAuthEpic: Epic = action$ =>
     );
   });
 
-export const fetchProfileEpic: Epic = action$ =>
+export const fetchProfileEpic: Epic = (action$, store, { api }) =>
   action$
     .filter(action => action.type === 'FETCH_PROFILE')
     .switchMap(action => {
       if (action.type !== 'FETCH_PROFILE') throw new Error();
       const token = action.payload.token;
-      return request('auth/me', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-        .map(result => (result.response: UserProfileDto))
-        .map(profile => fetchProfileSuccess(profile))
+      return api
+        .fetchProfile(token)
+        .map(fetchProfileSuccess)
         .catch(error => Observable.of(fetchProfileFailure(error)));
     });
 
@@ -202,16 +191,10 @@ export default function auth(
   }
 }
 
-/**
- *
- */
 export function isLoggedIn(state: RootState): boolean {
   return !!state.auth.token;
 }
 
-/**
- *
- */
 export function selectCurrentUsername(state: RootState): string {
   return state.auth.username;
 }

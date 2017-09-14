@@ -3,8 +3,9 @@
 import { type Observable } from 'rxjs';
 import { ajax } from 'rxjs/observable/dom/ajax';
 
-type Response<T> = {
-  response: T
+export type Response<T> = {
+  response: T,
+  xhr: XMLHttpRequest
 };
 
 // https://github.com/Reactive-Extensions/RxJS-DOM/blob/master/doc/operators/ajax.md
@@ -32,7 +33,7 @@ type ApiClientOptions = {
   url: string
 };
 
-export function createApiClient({ url }: ApiClientOptions): ApiClient {
+export function createRestClient({ url }: ApiClientOptions): ApiClient {
   return function request(path, options = {}) {
     return ajax({
       url: `${url}${path}`,
@@ -47,6 +48,6 @@ export function createApiClient({ url }: ApiClientOptions): ApiClient {
   };
 }
 
-export default createApiClient({
+export default createRestClient({
   url: 'api/'
 });

@@ -2,7 +2,6 @@
 
 import { Observable } from 'rxjs';
 import { push } from 'react-router-redux';
-import request from 'app/services/restClient';
 import { closeSearch } from 'app/state/ui';
 import type { Action, SearchResult, SearchResultDto, Epic } from 'app/types';
 
@@ -40,7 +39,7 @@ export const clearSearchEpic: Epic = action$ =>
     .filter(query => !query)
     .mergeMap(() => Observable.merge(Observable.of(clearSearch())));
 
-export const searchEpic: Epic = action$ =>
+export const searchEpic: Epic = (action$, store, { api }) =>
   action$
     .filter(action => action.type === 'SEARCH')
     .map(action => {
@@ -49,21 +48,20 @@ export const searchEpic: Epic = action$ =>
     })
     .filter(query => !!query)
     .switchMap(query =>
-      Observable.merge(
-        Observable.timer(800)
-          .takeUntil(action$.filter(action => action.type === 'CLEAR_SEARCH'))
-          .mergeMap(() =>
-            request(`search?q=${query}`)
-              .map(result => receiveResults(result.response))
-              .catch(error =>
-                Observable.of({
-                  type: 'SEARCH_FAILURE',
-                  payload: error,
-                  error: true
-                })
-              )
-          )
-      )
+      Observable.timer(800)
+        .takeUntil(action$.filter(action => action.type === 'CLEAR_SEARCH'))
+        .mergeMap(() =>
+          api
+            .search(query)
+            .map(receiveResults)
+            .catch(error =>
+              Observable.of({
+                type: 'SEARCH_FAILURE',
+                payload: error,
+                error: true
+              })
+            )
+        )
     );
 
 export const searchResultSelectedEpic: Epic = action$ =>

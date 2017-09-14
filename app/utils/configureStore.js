@@ -4,14 +4,23 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { createLogger } from 'redux-logger';
 import { routerMiddleware } from 'react-router-redux';
-import { rootEpic } from '../state';
 import history from 'history';
+import { rootEpic } from '../state';
+import * as api from '../services/api';
+import * as unsplash from '../services/unsplash';
 import type { Store } from '../types';
+
+const dependencies = {
+  api,
+  unsplash
+};
+
+export type Dependencies = typeof dependencies;
 
 export default function configureStore(history: typeof history): Store {
   const middlewares = [
     createEpicMiddleware(rootEpic, {
-      dependencies: {}
+      dependencies
     }),
     routerMiddleware(history)
   ];
