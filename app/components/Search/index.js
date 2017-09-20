@@ -126,11 +126,11 @@ class Search extends Component<Props, State> {
           ref={ref => (this.itemRefs.container = ref)}
         >
           {this.state.query !== '' &&
-          this.props.results.length === 0 && (
-            <div style={{ padding: 20 }}>
-              <strong>No suggestions found</strong>
-            </div>
-          )}
+            this.props.results.length === 0 && (
+              <div style={{ padding: 20 }}>
+                <strong>No suggestions found</strong>
+              </div>
+            )}
 
           {this.props.results.map((result, i) => (
             <a
@@ -139,11 +139,9 @@ class Search extends Component<Props, State> {
               onClick={() => this.props.searchResultSelected(result)}
               onMouseEnter={() => this.setState({ selectedIndex: i })}
               className={
-                i === this.state.selectedIndex ? (
-                  styles.selectedItem
-                ) : (
-                  styles.item
-                )
+                i === this.state.selectedIndex
+                  ? styles.selectedItem
+                  : styles.item
               }
             >
               {result}
