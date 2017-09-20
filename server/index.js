@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const auth = require('./auth');
@@ -32,7 +33,26 @@ app.use(
   })
 );
 
-app.use(express.static(webpackConfig.output.path));
+if (process.env.NODE_ENV === 'development') {
+  app.use(express.static(webpackConfig.output.path));
+  app.use((req, res, next) => {
+    const filename = path.join(compiler.outputPath, 'index.html');
+    compiler.outputFileSystem.readFile(filename, (err, result) => {
+      if (err) {
+        next(err);
+        return;
+      }
+
+      res.set('Content-Type', 'text/html');
+      res.send(result);
+    });
+  });
+} else {
+  app.use(express.static(webpackConfig.output.path));
+  app.use((req, res) => {
+    res.sendFile(`${webpackConfig.output.path}/index.html`);
+  });
+}
 
 app.listen(app.get('port'), app.get('host'), err => {
   if (err) {

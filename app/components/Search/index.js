@@ -29,8 +29,12 @@ class Search extends Component<Props, State> {
 
   itemRefs: { [key: string]: ?HTMLElement } = {};
 
+  searchInput: ?HTMLInputElement;
+
   componentDidMount() {
     this.search(this.state.query);
+    this.searchInput &&
+      this.searchInput.setSelectionRange(0, this.state.query.length);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -109,6 +113,7 @@ class Search extends Component<Props, State> {
       >
         <div className={styles.inputContainer}>
           <input
+            ref={ref => (this.searchInput = ref)}
             type="text"
             placeholder="What are you looking for?"
             value={this.state.query}
