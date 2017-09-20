@@ -8,6 +8,8 @@ import type {
   Action,
   UserProfile,
   UserProfileDto,
+  LoginResult,
+  LoginResultDto,
   Epic
 } from 'app/types';
 
@@ -17,6 +19,10 @@ function mapUserProfileDto(userProfile: UserProfileDto): UserProfile {
     ...rest,
     id: toId(id)
   };
+}
+
+function mapLoginResultDto(loginResult: LoginResultDto): LoginResult {
+  return loginResult;
 }
 
 export function rehydrateAuth(): Action {
@@ -32,10 +38,10 @@ export function fetchUserProfile(token: string) {
   };
 }
 
-export function fetchProfileSuccess(userProfile: UserProfileDto) {
+export function fetchProfileSuccess(userProfile: UserProfile) {
   return {
     type: 'FETCH_PROFILE_SUCCESS',
-    payload: mapUserProfileDto(userProfile)
+    payload: userProfile
   };
 }
 
@@ -47,7 +53,7 @@ export function fetchProfileFailure(error: Error) {
   };
 }
 
-export function login(username: string, password: string): Action {
+export function login(username: string, password: string) {
   return {
     type: 'LOGIN',
     payload: {
@@ -57,7 +63,7 @@ export function login(username: string, password: string): Action {
   };
 }
 
-export function loginSuccess(payload: { token: string }): Action {
+export function loginSuccess(payload: LoginResult) {
   return {
     type: 'LOGIN_SUCCESS',
     payload
@@ -72,7 +78,7 @@ export function loginFailure(error: Error) {
   };
 }
 
-export function logout(): Action {
+export function logout() {
   return {
     type: 'LOGOUT'
   };
@@ -84,7 +90,7 @@ export function logoutSuccess() {
   };
 }
 
-export function clearLoginError(): Action {
+export function clearLoginError() {
   return {
     type: 'LOGIN_CLEAR_ERROR'
   };
@@ -99,11 +105,11 @@ export const loginEpic: Epic = (action$, store, { api }) =>
       .switchMap(payload => {
         window.localStorage.setItem('token', payload.token);
         return Observable.merge(
-          Observable.of(loginSuccess(payload)),
+          Observable.of(loginSuccess(mapLoginResultDto(payload))),
           Observable.of(fetchUserProfile(payload.token))
         );
       })
-      .catch(error => Observable.of(loginFailure(error)));
+      .catch((error: Error) => Observable.of(loginFailure(error)));
   });
 
 export const logoutEpic: Epic = action$ =>
@@ -133,8 +139,8 @@ export const fetchProfileEpic: Epic = (action$, store, { api }) =>
       const token = action.payload.token;
       return api
         .fetchProfile(token)
-        .map(fetchProfileSuccess)
-        .catch(error => Observable.of(fetchProfileFailure(error)));
+        .map(userProfile => fetchProfileSuccess(mapUserProfileDto(userProfile)))
+        .catch((error: Error) => Observable.of(fetchProfileFailure(error)));
     });
 
 const initialState = {

@@ -29,6 +29,13 @@ export function receiveResults(results: Array<SearchResultDto>) {
   };
 }
 
+export function searchResultSelected(result: SearchResult) {
+  return {
+    type: 'SEARCH_RESULT_SELECTED',
+    payload: result
+  };
+}
+
 export const clearSearchEpic: Epic = action$ =>
   action$
     .filter(action => action.type === 'SEARCH')
@@ -54,7 +61,7 @@ export const searchEpic: Epic = (action$, store, { api }) =>
           api
             .search(query)
             .map(receiveResults)
-            .catch(error =>
+            .catch((error: Error) =>
               Observable.of({
                 type: 'SEARCH_FAILURE',
                 payload: error,

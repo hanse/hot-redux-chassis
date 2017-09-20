@@ -87,7 +87,7 @@ export const fetchPostsEpic: Epic = (action$, store, { unsplash }) =>
           postsReceived(result.response, extractNextPageUrl(result.xhr))
         )
       )
-      .catch(error => Observable.of(fetchPostsFailed(error)));
+      .catch((error: Error) => Observable.of(fetchPostsFailed(error)));
   });
 
 function mapPostDto(post: PostDto): Post {

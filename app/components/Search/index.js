@@ -3,17 +3,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import scrollIntoView from 'dom-scroll-into-view';
-import { search, clearSearch } from 'app/state/search';
+import { search, clearSearch, searchResultSelected } from 'app/state/search';
 import Icon from 'app/components/Icon';
 import styles from './Search.css';
 import type { State as RootState, SearchResult } from 'app/types';
 
 type Props = {
   query: string,
-  search: (query: string) => any,
+  search: (query: string) => void,
   results: Array<SearchResult>,
-  onClose: () => any,
-  searchResultSelected: (result: SearchResult) => any
+  onClose: () => void,
+  searchResultSelected: (result: SearchResult) => void
 };
 
 type State = {
@@ -27,7 +27,7 @@ class Search extends Component<Props, State> {
     query: this.props.query || ''
   };
 
-  itemRefs = {};
+  itemRefs: { [key: string]: ?HTMLElement } = {};
 
   componentDidMount() {
     this.search(this.state.query);
@@ -63,7 +63,7 @@ class Search extends Component<Props, State> {
     this.props.search(query);
   }
 
-  handleKeyDown = e => {
+  handleKeyDown = (e: SyntheticKeyboardEvent<*>) => {
     switch (e.which) {
       case 38:
         e.preventDefault();
@@ -162,10 +162,7 @@ function mapStateToProps(state: RootState) {
 const mapDispatchToProps = {
   search,
   clearSearch,
-  searchResultSelected: result => ({
-    type: 'SEARCH_RESULT_SELECTED',
-    payload: result
-  })
+  searchResultSelected
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

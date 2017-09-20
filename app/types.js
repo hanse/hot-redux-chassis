@@ -21,6 +21,12 @@ export const toId = (value: string | number): ID => {
 
 export const idToString = (id: ID): string => String(id);
 
+export type LoginResultDto = {
+  token: string
+};
+
+export type LoginResult = LoginResultDto;
+
 export type SearchResultDto = string;
 export type SearchResult = string;
 

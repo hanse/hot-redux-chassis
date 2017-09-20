@@ -2,13 +2,20 @@
 
 import { Observable } from 'rxjs';
 import { createRestClient } from './restClient';
-import type { UserProfileDto, SearchResultDto } from 'app/types';
+import type {
+  UserProfileDto,
+  SearchResultDto,
+  LoginResultDto
+} from 'app/types';
 
 const fetch = createRestClient({
   url: 'api/'
 });
 
-export function login(username: string, password: string): Observable<*> {
+export function login(
+  username: string,
+  password: string
+): Observable<LoginResultDto> {
   return fetch('auth/login', {
     method: 'POST',
     body: {
