@@ -8,9 +8,12 @@
   },
   "scripts": {
     "postinstall": "./scripts/postinstall",
-    "start": "nodemon --ignore app --ignore tests --exec babel-node -- server/index.js",
-    "build": "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --color -p --progress --env",
-    "build:dll": "webpack --display-chunks --color --config webpack/webpack.dll.babel.js",
+    "start":
+      "nodemon --ignore app --ignore tests --exec babel-node -- server/index.js",
+    "build":
+      "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --color -p --progress --env",
+    "build:dll":
+      "webpack --display-chunks --color --config webpack/webpack.dll.babel.js",
     "flow": "flow",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint app --ignore-path .gitignore",
@@ -57,6 +60,7 @@
     "postcss-loader": "^2.0.6",
     "postcss-nested": "^2.1.2",
     "prettier": "^1.7.0",
+    "raf": "^3.3.2",
     "raw-loader": "0.5.1",
     "react-addons-test-utils": "^15.6.0",
     "style-loader": "^0.18.2",
@@ -105,17 +109,13 @@
       "property-no-unknown": [
         true,
         {
-          "ignoreProperties": [
-            "composes"
-          ]
+          "ignoreProperties": ["composes"]
         }
       ],
       "selector-pseudo-class-no-unknown": [
         true,
         {
-          "ignorePseudoClasses": [
-            "global"
-          ]
+          "ignorePseudoClasses": ["global"]
         }
       ]
     }
@@ -124,24 +124,18 @@
     "globals": {
       "__DEV__": false
     },
-    "moduleDirectories": [
-      "<rootDir>",
-      "node_modules"
-    ],
+    "moduleDirectories": ["<rootDir>", "node_modules"],
     "moduleNameMapper": {
-      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$": "<rootDir>/tests/FileStub.js",
+      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$":
+        "<rootDir>/tests/FileStub.js",
       "^.+\\.css$": "<rootDir>/tests/CSSStub.js"
     },
-    "testRegex": "\\.spec\\.(js|jsx)$"
+    "testRegex": "\\.spec\\.(js|jsx)$",
+    "setupFiles": ["raf/polyfill"]
   },
-  "eslintIgnore": [
-    "flow-typed/npm"
-  ],
+  "eslintIgnore": ["flow-typed/npm"],
   "dllConfig": {
     "path": "dist",
-    "exclude": [
-      "express",
-      "node-uuid"
-    ]
+    "exclude": ["express", "node-uuid"]
   }
 }
