@@ -4,12 +4,13 @@ import React, { Component, type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { isLoggedIn } from 'app/state/auth';
-import type { Dispatch } from 'app/types';
+import type { Dispatch, State } from 'app/types';
 
 type Props = {
   dispatch: Dispatch,
   location: any,
-  isLoggedIn: boolean
+  isLoggedIn: boolean,
+  goToLoginPage: string => void
 };
 
 export default function requireAuth(ProtectedComponent: ComponentType<*>) {
@@ -25,7 +26,7 @@ export default function requireAuth(ProtectedComponent: ComponentType<*>) {
     redirectUnlessAuthenticated() {
       if (!this.props.isLoggedIn) {
         const redirectLocation = this.props.location.pathname;
-        this.props.dispatch(push(`/login?next=${redirectLocation}`));
+        this.props.goToLoginPage(redirectLocation);
       }
     }
 
@@ -37,7 +38,13 @@ export default function requireAuth(ProtectedComponent: ComponentType<*>) {
     }
   }
 
-  return connect(state => ({
-    isLoggedIn: isLoggedIn(state)
-  }))(AuthenticatedComponent);
+  return connect(
+    (state: State) => ({
+      isLoggedIn: isLoggedIn(state)
+    }),
+    dispatch => ({
+      goToLoginPage: redirectLocation =>
+        dispatch(push(`/login?next=${redirectLocation}`))
+    })
+  )(AuthenticatedComponent);
 }
