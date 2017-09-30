@@ -1,7 +1,7 @@
 // @flow
 
-import type { Observable } from 'rxjs';
 import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
+import type { Epic as ReduxObservableEpic } from 'redux-observable';
 import type { Reducers } from './state';
 import type { Dependencies } from './utils/configureStore';
 
@@ -120,12 +120,4 @@ export type Thunk<A> = (d: Dispatch, gs: GetState) => Promise<void> | void | A;
 
 export type Dispatch = ReduxDispatch<Action> & ((t: Thunk<*>) => Action);
 
-export type Epic = (
-  actions$: Observable<Action>,
-  store: Store,
-  dependencies: Dependencies
-) => Observable<Action>;
-
-// export type ActionObservable = {
-//   ofType: <T: string>(type: T) => Observable<any>
-// };
+export type Epic = ReduxObservableEpic<Store, Action, Dependencies>;
