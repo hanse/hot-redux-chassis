@@ -28,7 +28,7 @@ if (__DEV__) {
 const history = createHistory();
 const store = configureStore(history);
 
-const rootElement = document.getElementById('root');
+const rootElement: HTMLElement = (document.getElementById('root'): any);
 
 render(
   <AppContainer>
