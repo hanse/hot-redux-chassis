@@ -112,12 +112,8 @@ class Header extends Component<Props, State> {
         <Modal
           isOpen={this.props.searchOpen}
           onRequestClose={this.props.closeSearch}
-          className={{
-            base: styles.modalContent
-          }}
-          overlayClassName={{
-            base: styles.backdrop
-          }}
+          className={styles.modalContent}
+          overlayClassName={styles.backdrop}
           contentLabel="Search"
         >
           <Search
