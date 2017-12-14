@@ -23,7 +23,7 @@ app.use('/api/search', search);
 app.use(
   require('webpack-dev-middleware')(compiler, {
     publicPath: webpackConfig.output.publicPath,
-    quiet: true
+    logLevel: 'silent'
   })
 );
 
