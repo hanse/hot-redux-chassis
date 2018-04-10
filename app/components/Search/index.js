@@ -3,17 +3,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import scrollIntoView from 'dom-scroll-into-view';
-import { search, clearSearch, searchResultSelected } from 'app/state/search';
+import { search, searchResultSelected } from 'app/state/search';
 import Icon from 'app/components/Icon';
 import styles from './Search.css';
 import type { State as RootState, SearchResult } from 'app/types';
 
 type Props = {
   query: string,
-  search: (query: string) => void,
+  search: (query: string) => any,
   results: Array<SearchResult>,
   onClose: () => void,
-  searchResultSelected: (result: SearchResult) => void
+  searchResultSelected: (result: SearchResult) => any
 };
 
 type State = {
@@ -164,7 +164,6 @@ function mapStateToProps(state: RootState) {
 
 const mapDispatchToProps = {
   search,
-  clearSearch,
   searchResultSelected
 };
 

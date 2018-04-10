@@ -11,8 +11,8 @@ const utmSource =
   'utm_source=hot-redux-chassis&utm_medium=referral&utm_campaign=api-credit';
 
 type Props = {
-  onLoadMore: () => void,
-  onRefresh: () => void,
+  onLoadMore: () => any,
+  onRefresh: () => any,
   hasPosts: boolean,
   loading: boolean,
   failed: boolean,
