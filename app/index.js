@@ -4,7 +4,7 @@ import 'babel-polyfill';
 import 'isomorphic-fetch';
 
 // $FlowIssue
-import '!file-loader?name=[name].[ext]!./manifest.json';
+//import '!file-loader?name=[name].[ext]!./manifest.json';
 
 // $FlowIssue
 import 'file-loader?name=[name].[ext]!./humans.txt';

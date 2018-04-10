@@ -10,6 +10,7 @@ const dllConfig = packageJson.dllConfig;
 const compact = filterable => filterable.filter(Boolean);
 
 module.exports = options => ({
+  mode: options.development ? 'development' : 'production',
   /**
    * @see webpack-devtools
    */
@@ -37,6 +38,19 @@ module.exports = options => ({
     publicPath: '/'
   },
 
+  optimization: {
+    minimize: !options.development,
+    ...(options.development
+      ? {}
+      : {
+          splitChunks: {
+            name: 'vendor',
+            minChunks: Infinity,
+            filename: '[name].js'
+          }
+        })
+  },
+
   /**
    *
    */
@@ -55,17 +69,6 @@ module.exports = options => ({
 
       options.development && new FriendlyErrorsPlugin(),
       options.development && new webpack.HotModuleReplacementPlugin(),
-      options.development && new webpack.NoEmitOnErrorsPlugin(),
-
-      // Minify bundles
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
-        },
-        output: {
-          comments: false
-        }
-      }),
 
       new webpack.LoaderOptionsPlugin({
         options: {
@@ -75,7 +78,7 @@ module.exports = options => ({
 
       // Make a separate css bundle for production
       new ExtractTextPlugin({
-        filename: '[name].[contenthash:8].css',
+        filename: '[name].[md5:contenthash:hex:8].css',
         allChunks: true,
         disable: !!options.development
       }),
@@ -93,8 +96,7 @@ module.exports = options => ({
   ),
 
   resolve: {
-    modules: [path.resolve(__dirname, '../'), 'node_modules'],
-    extensions: ['.js', '.json']
+    modules: [path.resolve(__dirname, '../'), 'node_modules']
   },
 
   module: {
@@ -158,13 +160,7 @@ module.exports = options => ({
 
 function getDependencyHandlers(options) {
   if (!options.development) {
-    return [
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: Infinity,
-        filename: '[name].js'
-      })
-    ];
+    return [];
   }
 
   const dllPath = path.resolve(process.cwd(), dllConfig.path);

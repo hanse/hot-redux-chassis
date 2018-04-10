@@ -16,6 +16,7 @@ const exclude = (iterable, exclude = []) =>
 const vendors = Object.keys(packageJson.dependencies);
 
 module.exports = () => ({
+  mode: 'development',
   context: process.cwd(),
   devtool: 'eval',
   entry: {
