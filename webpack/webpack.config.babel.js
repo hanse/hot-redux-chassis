@@ -104,7 +104,12 @@ module.exports = options => ({
       {
         test: /\.jsx?$/,
         include: path.join(process.cwd(), 'app'),
-        use: 'babel-loader'
+        use: [
+          {
+            loader: 'babel-loader',
+            options: { cacheDirectory: true }
+          }
+        ]
       },
       {
         test: /\.css$/,
