@@ -37,13 +37,11 @@ class Search extends Component<Props, State> {
       this.searchInput.setSelectionRange(0, this.state.query.length);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.query && this.props.query !== nextProps.query) {
-      this.search(nextProps.query);
+  componentDidUpdate(prevProps) {
+    if (this.props.query && prevProps.query !== this.props.query) {
+      this.search(this.props.query);
     }
-  }
 
-  componentDidUpdate() {
     this.scrollToSelectedIndex();
   }
 
