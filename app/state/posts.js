@@ -33,7 +33,8 @@ const initialState = {
 
 type State = {
   ...typeof initialState,
-  items: Array<Post>
+  items: Array<Post>,
+  nextPageUrl: ?string
 };
 
 export default function posts(
@@ -116,7 +117,10 @@ export function fetchPostsFailed(error: Error) {
   };
 }
 
-export function postsReceived(items: Array<PostDto>, nextPageUrl: ?string) {
+export function postsReceived(
+  items: Array<PostDto>,
+  nextPageUrl: ?string
+): Action {
   return {
     type: 'POSTS_RECEIVED',
     payload: {

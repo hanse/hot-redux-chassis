@@ -100,7 +100,7 @@ export type Action =
   | { type: 'POSTS_REFRESH' }
   | {
       type: 'POSTS_RECEIVED',
-      payload: { items: Array<Post>, nextPageUrl: string }
+      payload: { items: Array<Post>, nextPageUrl: ?string }
     }
   | {
       type: 'POSTS_FETCH_FAILED',

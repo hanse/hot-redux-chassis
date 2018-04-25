@@ -22,7 +22,7 @@ export function clearSearch() {
   };
 }
 
-export function receiveResults(results: Array<SearchResultDto>) {
+export function receiveResults(results: Array<SearchResultDto>): Action {
   return {
     type: 'SEARCH_RESULTS_RECEIVED',
     payload: results.map(mapSearchResultDto)
