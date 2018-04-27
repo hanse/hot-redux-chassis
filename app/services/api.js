@@ -2,15 +2,23 @@
 
 import { Observable } from 'rxjs';
 import { createRestClient, type Response } from './restClient';
-import type {
-  UserProfileDto,
-  SearchResultDto,
-  LoginResultDto
+import {
+  toId,
+  type UserProfileDto,
+  type UserProfile,
+  type SearchResultDto,
+  type SearchResult,
+  type LoginResultDto,
+  type LoginResult
 } from 'app/types';
 
 const fetch = createRestClient({
   url: 'api/'
 });
+
+function mapLoginResultDto(loginResult: LoginResultDto): LoginResult {
+  return loginResult;
+}
 
 export function login(
   username: string,
@@ -22,19 +30,34 @@ export function login(
       username,
       password
     }
-  }).map((result: Response<LoginResultDto>) => result.response);
+  }).map((result: Response<LoginResult>) => mapLoginResultDto(result.response));
 }
 
-export function fetchProfile(token: string): Observable<UserProfileDto> {
+function mapUserProfileDto(userProfile: UserProfileDto): UserProfile {
+  const { id, ...rest } = userProfile;
+  return {
+    ...rest,
+    id: toId(id)
+  };
+}
+
+export function fetchProfile(token: string): Observable<UserProfile> {
   return fetch('auth/me', {
     headers: {
       Authorization: `Bearer ${token}`
     }
-  }).map((result: Response<UserProfileDto>) => result.response);
+  }).map((result: Response<UserProfileDto>) =>
+    mapUserProfileDto(result.response)
+  );
 }
 
-export function search(query: string): Observable<Array<SearchResultDto>> {
+function mapSearchResultDto(result: SearchResultDto): SearchResult {
+  return result;
+}
+
+export function search(query: string): Observable<Array<SearchResult>> {
   return fetch(`search?q=${query}`).map(
-    (result: Response<Array<SearchResultDto>>) => result.response
+    (result: Response<Array<SearchResultDto>>) =>
+      result.response.map(mapSearchResultDto)
   );
 }

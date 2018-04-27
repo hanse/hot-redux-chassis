@@ -39,10 +39,10 @@ export type UserProfileDto = {
   username: string
 };
 
-export type UserProfile = {
+export type UserProfile = {|
   id: ID,
   username: string
-};
+|};
 
 // Unsplash Photo
 export type PostDto = {
@@ -60,7 +60,7 @@ export type PostDto = {
 };
 
 // Unsplash photo internal representation
-export type Post = {
+export type Post = {|
   id: ID,
   imageUrl: string,
   user: {
@@ -68,12 +68,12 @@ export type Post = {
     location: string,
     link: string
   }
-};
+|};
 
-export type Notification = {
+export type Notification = {|
   id: number,
   message: string
-};
+|};
 
 /**
  * Redux

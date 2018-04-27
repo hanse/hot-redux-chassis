@@ -3,11 +3,7 @@
 import { Observable } from 'rxjs';
 import { push } from 'react-router-redux';
 import { closeSearch } from 'app/state/ui';
-import type { Action, SearchResult, SearchResultDto, Epic } from 'app/types';
-
-function mapSearchResultDto(result: SearchResultDto): SearchResult {
-  return result;
-}
+import type { Action, SearchResult, Epic } from 'app/types';
 
 export function search(query: string): Action {
   return {
@@ -22,10 +18,10 @@ export function clearSearch(): Action {
   };
 }
 
-export function receiveResults(results: Array<SearchResultDto>): Action {
+export function receiveResults(results: Array<SearchResult>): Action {
   return {
     type: 'SEARCH_RESULTS_RECEIVED',
-    payload: results.map(mapSearchResultDto)
+    payload: results
   };
 }
 

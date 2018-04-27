@@ -2,28 +2,13 @@
 
 import { Observable } from 'rxjs';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { toId } from 'app/types';
 import type {
   State as RootState,
   Action,
   UserProfile,
-  UserProfileDto,
   LoginResult,
-  LoginResultDto,
   Epic
 } from 'app/types';
-
-function mapUserProfileDto(userProfile: UserProfileDto): UserProfile {
-  const { id, ...rest } = userProfile;
-  return {
-    ...rest,
-    id: toId(id)
-  };
-}
-
-function mapLoginResultDto(loginResult: LoginResultDto): LoginResult {
-  return loginResult;
-}
 
 export function rehydrateAuth(): Action {
   return {
@@ -105,7 +90,7 @@ export const loginEpic: Epic = (action$, store, { api }) =>
       .switchMap(payload => {
         window.localStorage.setItem('token', payload.token);
         return Observable.merge(
-          Observable.of(loginSuccess(mapLoginResultDto(payload))),
+          Observable.of(loginSuccess(payload)),
           Observable.of(fetchUserProfile(payload.token))
         );
       })
@@ -139,7 +124,7 @@ export const fetchProfileEpic: Epic = (action$, store, { api }) =>
       const token = action.payload.token;
       return api
         .fetchProfile(token)
-        .map(userProfile => fetchProfileSuccess(mapUserProfileDto(userProfile)))
+        .map(userProfile => fetchProfileSuccess(userProfile))
         .catch((error: Error) => Observable.of(fetchProfileFailure(error)));
     });
 
