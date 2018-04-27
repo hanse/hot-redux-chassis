@@ -1,13 +1,13 @@
 // @flow
 
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, type Middleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { createLogger } from 'redux-logger';
 import { routerMiddleware } from 'react-router-redux';
 import { rootEpic } from '../state';
 import * as api from '../services/api';
 import * as unsplash from '../services/unsplash';
-import type { Store } from '../types';
+import type { Store, State, Action } from '../types';
 
 const dependencies = {
   api,
@@ -17,7 +17,7 @@ const dependencies = {
 export type Dependencies = typeof dependencies;
 
 export default function configureStore(history: *): Store {
-  const middlewares = [
+  const middlewares: Array<Middleware<State, Action>> = [
     createEpicMiddleware(rootEpic, {
       dependencies
     }),
@@ -35,7 +35,7 @@ export default function configureStore(history: *): Store {
 
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  const store = createStore(
+  const store: Store = createStore(
     require('../state').rootReducer, // eslint-disable-line
     composeEnhancers(applyMiddleware(...middlewares))
   );

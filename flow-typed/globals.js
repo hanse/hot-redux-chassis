@@ -7,3 +7,12 @@ declare var module: {
     accept: (path: string, fn: () => mixed) => void
   }
 };
+
+declare var window: {
+  localStorage: {
+    setItem: (key: string, value: string) => void,
+    getItem: (key: string) => string,
+    removeItem: (key: string) => void
+  },
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: ?$Compose
+};

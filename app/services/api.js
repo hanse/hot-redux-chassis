@@ -1,7 +1,7 @@
 // @flow
 
 import { Observable } from 'rxjs';
-import { createRestClient } from './restClient';
+import { createRestClient, type Response } from './restClient';
 import type {
   UserProfileDto,
   SearchResultDto,
@@ -22,7 +22,7 @@ export function login(
       username,
       password
     }
-  }).map(result => result.response);
+  }).map((result: Response<LoginResultDto>) => result.response);
 }
 
 export function fetchProfile(token: string): Observable<UserProfileDto> {
@@ -30,9 +30,11 @@ export function fetchProfile(token: string): Observable<UserProfileDto> {
     headers: {
       Authorization: `Bearer ${token}`
     }
-  }).map(result => result.response);
+  }).map((result: Response<UserProfileDto>) => result.response);
 }
 
 export function search(query: string): Observable<Array<SearchResultDto>> {
-  return fetch(`search?q=${query}`).map(result => result.response);
+  return fetch(`search?q=${query}`).map(
+    (result: Response<Array<SearchResultDto>>) => result.response
+  );
 }
