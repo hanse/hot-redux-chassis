@@ -9,14 +9,14 @@ function mapSearchResultDto(result: SearchResultDto): SearchResult {
   return result;
 }
 
-export function search(query: string) {
+export function search(query: string): Action {
   return {
     type: 'SEARCH',
     payload: { query }
   };
 }
 
-export function clearSearch() {
+export function clearSearch(): Action {
   return {
     type: 'CLEAR_SEARCH'
   };

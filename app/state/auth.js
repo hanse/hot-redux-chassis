@@ -31,21 +31,21 @@ export function rehydrateAuth(): Action {
   };
 }
 
-export function fetchUserProfile(token: string) {
+export function fetchUserProfile(token: string): Action {
   return {
     type: 'FETCH_PROFILE',
     payload: { token }
   };
 }
 
-export function fetchProfileSuccess(userProfile: UserProfile) {
+export function fetchProfileSuccess(userProfile: UserProfile): Action {
   return {
     type: 'FETCH_PROFILE_SUCCESS',
     payload: userProfile
   };
 }
 
-export function fetchProfileFailure(error: Error) {
+export function fetchProfileFailure(error: Error): Action {
   return {
     type: 'FETCH_PROFILE_FAILURE',
     payload: error,
@@ -53,7 +53,7 @@ export function fetchProfileFailure(error: Error) {
   };
 }
 
-export function login(username: string, password: string) {
+export function login(username: string, password: string): Action {
   return {
     type: 'LOGIN',
     payload: {
@@ -63,14 +63,14 @@ export function login(username: string, password: string) {
   };
 }
 
-export function loginSuccess(payload: LoginResult) {
+export function loginSuccess(payload: LoginResult): Action {
   return {
     type: 'LOGIN_SUCCESS',
     payload
   };
 }
 
-export function loginFailure(error: Error) {
+export function loginFailure(error: Error): Action {
   return {
     type: 'LOGIN_FAILURE',
     payload: error,
@@ -78,19 +78,19 @@ export function loginFailure(error: Error) {
   };
 }
 
-export function logout() {
+export function logout(): Action {
   return {
     type: 'LOGOUT'
   };
 }
 
-export function logoutSuccess() {
+export function logoutSuccess(): Action {
   return {
     type: 'LOGOUT_SUCCESS'
   };
 }
 
-export function clearLoginError() {
+export function clearLoginError(): Action {
   return {
     type: 'LOGIN_CLEAR_ERROR'
   };

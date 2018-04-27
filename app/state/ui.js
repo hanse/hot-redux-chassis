@@ -2,13 +2,13 @@
 
 import type { Action } from 'app/types';
 
-export function closeSearch() {
+export function closeSearch(): Action {
   return {
     type: 'CLOSE_SEARCH'
   };
 }
 
-export function openSearch() {
+export function openSearch(): Action {
   return {
     type: 'OPEN_SEARCH'
   };

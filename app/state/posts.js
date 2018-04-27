@@ -103,13 +103,13 @@ function mapPostDto(post: PostDto): Post {
   };
 }
 
-export function fetchPosts() {
+export function fetchPosts(): Action {
   return {
     type: 'POSTS_FETCH'
   };
 }
 
-export function fetchPostsFailed(error: Error) {
+export function fetchPostsFailed(error: Error): Action {
   return {
     type: 'POSTS_FETCH_FAILED',
     payload: error,
