@@ -1,5 +1,5 @@
-// flow-typed signature: c55461580afaeb584bc187ba63ff817b
-// flow-typed version: 8fea42b7f8/query-string_v5.1.x/flow_>=v0.32.x
+// flow-typed signature: 1a14eef988547b1e3302b701cfa49803
+// flow-typed version: 8dd6b0d069/query-string_v6.x.x/flow_>=v0.32.x
 
 declare module 'query-string' {
   declare type ArrayFormat = 'none' | 'bracket' | 'index'

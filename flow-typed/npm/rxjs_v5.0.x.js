@@ -1,5 +1,5 @@
-// flow-typed signature: 05918b9457bf84507ab712b4d1bcbc62
-// flow-typed version: e1a981be2f/rxjs_v5.0.x/flow_>=v0.34.x
+// flow-typed signature: cd3f6957afcdaf4e6c509f7f26926084
+// flow-typed version: cf388269bd/rxjs_v5.0.x/flow_>=v0.34.x
 
 type rxjs$PartialObserver<-T> =
   | {
@@ -373,7 +373,7 @@ declare class rxjs$Observable<+T> {
 
   catch<U>(
     selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>
-  ): rxjs$Observable<U>;
+  ): rxjs$Observable<T | U>;
 
   concat<U>(...sources: rxjs$Observable<U>[]): rxjs$Observable<T | U>;
 
