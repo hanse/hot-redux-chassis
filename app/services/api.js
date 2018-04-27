@@ -17,7 +17,9 @@ const fetch = createRestClient({
 });
 
 function mapLoginResultDto(loginResult: LoginResultDto): LoginResult {
-  return loginResult;
+  return {
+    token: loginResult.token
+  };
 }
 
 export function login(
@@ -34,9 +36,9 @@ export function login(
 }
 
 function mapUserProfileDto(userProfile: UserProfileDto): UserProfile {
-  const { id, ...rest } = userProfile;
+  const { id, username } = userProfile;
   return {
-    ...rest,
+    username,
     id: toId(id)
   };
 }
