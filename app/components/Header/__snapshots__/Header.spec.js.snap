@@ -39,7 +39,7 @@ exports[`<Header /> should render correctly 1`] = `
     >
       <li>
         <a
-          aria-current="true"
+          aria-current="page"
           className="activeItem"
           href="/"
           onClick={[Function]}
@@ -50,22 +50,18 @@ exports[`<Header /> should render correctly 1`] = `
       </li>
       <li>
         <a
-          aria-current={false}
-          className={undefined}
+          aria-current={null}
           href="/about"
           onClick={[Function]}
-          style={undefined}
         >
           About
         </a>
       </li>
       <li>
         <a
-          aria-current={false}
-          className={undefined}
+          aria-current={null}
           href="/contact"
           onClick={[Function]}
-          style={undefined}
         >
           Contact
         </a>

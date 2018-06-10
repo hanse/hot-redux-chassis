@@ -167,4 +167,7 @@ const mapDispatchToProps = {
   searchResultSelected
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Search);
