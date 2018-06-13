@@ -1,15 +1,25 @@
+// @flow
+
 import React from 'react';
 import { MemoryRouter } from 'react-router';
 import Header from './';
-import renderer from 'react-test-renderer';
+import { testComponentSnapshots } from 'tests/helpers';
+
+const Component = props => (
+  <MemoryRouter>
+    <Header {...props} />
+  </MemoryRouter>
+);
+
+const defaultProps = {
+  location: {
+    search: ''
+  },
+  closeSearch: () => {},
+  openSearch: () => {},
+  searchOpen: false
+};
 
 describe('<Header />', () => {
-  it('should render correctly', () => {
-    const component = renderer.create(
-      <MemoryRouter>
-        <Header location={{ query: {} }} />
-      </MemoryRouter>
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  testComponentSnapshots(Component, [defaultProps]);
 });

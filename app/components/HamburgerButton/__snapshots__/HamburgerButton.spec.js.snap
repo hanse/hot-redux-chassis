@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HamburgerButton /> should match snapshot 1`] = `
+<div
+  className="hamburgerButton"
+>
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+`;
+
+exports[`<HamburgerButton /> should match snapshot 2`] = `
+<div
+  className="hamburgerButton open"
+>
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+`;
