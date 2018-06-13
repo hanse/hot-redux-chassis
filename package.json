@@ -82,7 +82,6 @@
     "fuzzysearch": "1.0.3",
     "history": "4.7.2",
     "isomorphic-fetch": "2.2.1",
-    "lodash": "4.17.10",
     "node-uuid": "1.4.8",
     "query-string": "6.1.0",
     "react": "^16.4.1",
