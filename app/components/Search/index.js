@@ -34,7 +34,8 @@ class Search extends Component<Props, State> {
   componentDidMount() {
     this.search(this.state.query);
     this.searchInput &&
-      this.searchInput.setSelectionRange(0, this.state.query.length);
+      this.searchInput.setSelectionRange(0, this.state.query.length) &&
+      this.searchInput.focus();
   }
 
   componentDidUpdate(prevProps) {
