@@ -97,8 +97,8 @@
     "react-test-renderer": "^16.4.1",
     "redux": "4.0.0",
     "redux-logger": "3.0.6",
-    "redux-observable": "0.19.0",
-    "rxjs": "5.5.8"
+    "redux-observable": "^1.0.0-beta.1",
+    "rxjs": "^6.2.1"
   },
   "stylelint": {
     "extends": "stylelint-config-standard",

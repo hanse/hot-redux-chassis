@@ -1,6 +1,8 @@
 // @flow
 
-import { Observable } from 'rxjs';
+import { catchError, switchMap, map } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { ofType } from 'redux-observable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import type {
   State as RootState,
@@ -82,51 +84,53 @@ export function clearLoginError(): Action {
 }
 
 export const loginEpic: Epic = (action$, store, { api }) =>
-  action$.filter(action => action.type === 'LOGIN').switchMap(action => {
-    if (action.type !== 'LOGIN') throw new Error();
-    const { username, password } = action.payload;
-    return api
-      .login(username, password)
-      .switchMap(payload => {
-        window.localStorage.setItem('token', payload.token);
-        return Observable.merge(
-          Observable.of(loginSuccess(payload)),
-          Observable.of(fetchUserProfile(payload.token))
-        );
-      })
-      .catch((error: Error) => Observable.of(loginFailure(error)));
-  });
+  action$.pipe(
+    ofType('LOGIN'),
+    map(action => action.payload),
+    switchMap(({ username, password }) =>
+      api.login(username, password).pipe(
+        switchMap(payload => {
+          window.localStorage.setItem('token', payload.token);
+          return of(loginSuccess(payload), fetchUserProfile(payload.token));
+        }),
+        catchError((error: Error) => of(loginFailure(error)))
+      )
+    )
+  );
 
 export const logoutEpic: Epic = action$ =>
-  action$.filter(action => action.type === 'LOGOUT').switchMap(() => {
-    window.localStorage.removeItem('token');
-    return Observable.of(logoutSuccess());
-  });
+  action$.pipe(
+    ofType('LOGOUT'),
+    switchMap(() => {
+      window.localStorage.removeItem('token');
+      return of(logoutSuccess());
+    })
+  );
 
 export const rehydrateAuthEpic: Epic = action$ =>
-  action$.filter(action => action.type === 'REHYDRATE_AUTH').switchMap(() => {
-    const token: string = window.localStorage.getItem('token');
-    if (!token) {
-      return Observable.of();
-    }
+  action$.pipe(
+    ofType('REHYDRATE_AUTH'),
+    switchMap(() => {
+      const token: string = window.localStorage.getItem('token');
+      if (!token) {
+        return of();
+      }
 
-    return Observable.merge(
-      Observable.of(loginSuccess({ token })),
-      Observable.of(fetchUserProfile(token))
-    );
-  });
+      return of(loginSuccess({ token }), fetchUserProfile(token));
+    })
+  );
 
-export const fetchProfileEpic: Epic = (action$, store, { api }) =>
-  action$
-    .filter(action => action.type === 'FETCH_PROFILE')
-    .switchMap(action => {
-      if (action.type !== 'FETCH_PROFILE') throw new Error();
-      const token = action.payload.token;
-      return api
-        .fetchProfile(token)
-        .map(userProfile => fetchProfileSuccess(userProfile))
-        .catch((error: Error) => Observable.of(fetchProfileFailure(error)));
-    });
+export const fetchProfileEpic: Epic = (action$, state$, { api }) =>
+  action$.pipe(
+    ofType('FETCH_PROFILE'),
+    switchMap(action => {
+      const { token } = action.payload;
+      return api.fetchProfile(token).pipe(
+        map(userProfile => fetchProfileSuccess(userProfile)),
+        catchError((error: Error) => of(fetchProfileFailure(error)))
+      );
+    })
+  );
 
 const initialState = {
   username: 'Guest',

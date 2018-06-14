@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const rxPaths = require('rxjs/_esm5/path-mapping');
 const packageJson = require('../package.json');
 
 const dllConfig = packageJson.dllConfig;
@@ -14,7 +15,7 @@ module.exports = options => ({
   /**
    * @see webpack-devtools
    */
-  devtool: options.development && 'cheap-module-eval-source-map',
+  devtool: options.development ? 'cheap-module-eval-source-map' : 'source-map',
 
   /**
    * Define webpack entries
@@ -96,7 +97,8 @@ module.exports = options => ({
   ),
 
   resolve: {
-    modules: [path.resolve(__dirname, '../'), 'node_modules']
+    modules: [path.resolve(__dirname, '../'), 'node_modules'],
+    alias: rxPaths()
   },
 
   module: {

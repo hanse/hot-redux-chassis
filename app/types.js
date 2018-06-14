@@ -1,10 +1,6 @@
 // @flow
 
-import type {
-  Store as ReduxStore,
-  Dispatch as ReduxDispatch,
-  MiddlewareAPI
-} from 'redux';
+import type { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
 import type { Observable } from 'rxjs';
 import type { Reducers } from './state';
 import type { Dependencies } from './utils/configureStore';
@@ -126,6 +122,6 @@ export type Dispatch = ReduxDispatch<Action> & ((t: Thunk<*>) => Action);
 
 export type Epic = (
   actions$: Observable<Action>,
-  store: MiddlewareAPI<State, Action>,
+  state$: Observable<State> & { value: State },
   dependencies: Dependencies
 ) => Observable<Action>;

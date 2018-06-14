@@ -1,6 +1,7 @@
 // @flow
 
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { createRestClient, type Response } from './restClient';
 import {
   toId,
@@ -32,7 +33,9 @@ export function login(
       username,
       password
     }
-  }).map((result: Response<LoginResult>) => mapLoginResultDto(result.response));
+  }).pipe(
+    map((result: Response<LoginResult>) => mapLoginResultDto(result.response))
+  );
 }
 
 function mapUserProfileDto(userProfile: UserProfileDto): UserProfile {
@@ -48,8 +51,10 @@ export function fetchProfile(token: string): Observable<UserProfile> {
     headers: {
       Authorization: `Bearer ${token}`
     }
-  }).map((result: Response<UserProfileDto>) =>
-    mapUserProfileDto(result.response)
+  }).pipe(
+    map((result: Response<UserProfileDto>) =>
+      mapUserProfileDto(result.response)
+    )
   );
 }
 
@@ -58,8 +63,9 @@ function mapSearchResultDto(result: SearchResultDto): SearchResult {
 }
 
 export function search(query: string): Observable<Array<SearchResult>> {
-  return fetch(`search?q=${query}`).map(
-    (result: Response<Array<SearchResultDto>>) =>
+  return fetch(`search?q=${query}`).pipe(
+    map((result: Response<Array<SearchResultDto>>) =>
       result.response.map(mapSearchResultDto)
+    )
   );
 }

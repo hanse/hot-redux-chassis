@@ -1,6 +1,15 @@
 // @flow
 
-import { Observable } from 'rxjs';
+import { ofType } from 'redux-observable';
+import { of, timer } from 'rxjs';
+import {
+  map,
+  filter,
+  mergeMap,
+  takeUntil,
+  switchMap,
+  catchError
+} from 'rxjs/operators';
 import { push } from 'react-router-redux';
 import { closeSearch } from 'app/state/ui';
 import type { Action, SearchResult, Epic } from 'app/types';
@@ -25,7 +34,7 @@ export function receiveResults(results: Array<SearchResult>): Action {
   };
 }
 
-export function searchResultSelected(result: SearchResult) {
+export function searchResultSelected(result: SearchResult): Action {
   return {
     type: 'SEARCH_RESULT_SELECTED',
     payload: result
@@ -33,53 +42,41 @@ export function searchResultSelected(result: SearchResult) {
 }
 
 export const clearSearchEpic: Epic = action$ =>
-  action$
-    .filter(action => action.type === 'SEARCH')
-    .map(action => {
-      if (action.type !== 'SEARCH') throw new TypeError();
-      return action.payload.query;
-    })
-    .filter(query => !query)
-    .mergeMap(() => Observable.merge(Observable.of(clearSearch())));
+  action$.pipe(
+    ofType('SEARCH'),
+    map(action => action.payload.query),
+    filter(query => !query),
+    mergeMap(() => of(clearSearch()))
+  );
 
 export const searchEpic: Epic = (action$, store, { api }) =>
-  action$
-    .filter(action => action.type === 'SEARCH')
-    .map(action => {
-      if (action.type !== 'SEARCH') throw new TypeError();
-      return action.payload.query;
-    })
-    .filter(query => !!query)
-    .switchMap(query =>
-      Observable.timer(800)
-        .takeUntil(action$.filter(action => action.type === 'CLEAR_SEARCH'))
-        .mergeMap(() =>
-          api
-            .search(query)
-            .map(receiveResults)
-            .catch((error: Error) =>
-              Observable.of({
-                type: 'SEARCH_FAILURE',
-                payload: error,
-                error: true
-              })
+  action$.pipe(
+    ofType('SEARCH'),
+    map(action => action.payload.query),
+    filter(query => !!query),
+    switchMap(query =>
+      timer(800).pipe(
+        takeUntil(action$.pipe(ofType('CLEAR_SEARCH'))),
+        mergeMap(() =>
+          api.search(query).pipe(
+            map(receiveResults),
+            catchError((error: Error) =>
+              of({ type: 'SEARCH_FAILURE', payload: error, error: true })
             )
+          )
         )
-    );
+      )
+    )
+  );
 
 export const searchResultSelectedEpic: Epic = action$ =>
-  action$
-    .filter(action => action.type === 'SEARCH_RESULT_SELECTED')
-    .map(action => {
-      if (action.type !== 'SEARCH_RESULT_SELECTED') throw new TypeError();
-      return action.payload;
-    })
-    .switchMap(result =>
-      Observable.merge(
-        Observable.of(closeSearch()),
-        Observable.of(push(`/search?q=${result}`))
-      )
-    );
+  action$.pipe(
+    ofType('SEARCH_RESULT_SELECTED'),
+    map(action => action.payload),
+    switchMap(result =>
+      of(closeSearch(), (push(`/search?q=${result}`): Action))
+    )
+  );
 
 const initialState = [];
 

@@ -1,6 +1,8 @@
 // @flow
 
-import { Observable } from 'rxjs';
+import { ofType } from 'redux-observable';
+import { of } from 'rxjs';
+import { map, delay, switchMap, catchError } from 'rxjs/operators';
 import { toId } from 'app/types';
 import type { Action, Epic, Post, PostDto } from 'app/types';
 
@@ -74,22 +76,24 @@ export default function posts(
 }
 
 export const refreshPostsEpic: Epic = action$ =>
-  action$
-    .filter(action => action.type === 'POSTS_REFRESH')
-    .mergeMap(() => Observable.of(fetchPosts()));
+  action$.pipe(
+    ofType('POSTS_REFRESH'),
+    map(fetchPosts)
+  );
 
-export const fetchPostsEpic: Epic = (action$, store, { unsplash }) =>
-  action$.filter(action => action.type === 'POSTS_FETCH').switchMap(() => {
-    return unsplash
-      .fetchPosts(store.getState().posts.nextPageUrl)
-      .delay(1000)
-      .switchMap(result =>
-        Observable.of(
-          postsReceived(result.response, extractNextPageUrl(result.xhr))
-        )
+export const fetchPostsEpic: Epic = (action$, state$, { unsplash }) =>
+  action$.pipe(
+    ofType('POSTS_FETCH'),
+    switchMap(() =>
+      unsplash.fetchPosts(state$.value.posts.nextPageUrl).pipe(
+        delay(1000),
+        switchMap(result =>
+          of(postsReceived(result.response, extractNextPageUrl(result.xhr)))
+        ),
+        catchError((error: Error) => of(fetchPostsFailed(error)))
       )
-      .catch((error: Error) => Observable.of(fetchPostsFailed(error)));
-  });
+    )
+  );
 
 function mapPostDto(post: PostDto): Post {
   return {

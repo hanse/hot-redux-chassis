@@ -17,10 +17,12 @@ const dependencies = {
 export type Dependencies = typeof dependencies;
 
 export default function configureStore(history: *): Store {
+  const epicMiddleware = createEpicMiddleware({
+    dependencies
+  });
+
   const middlewares: Array<Middleware<State, Action>> = [
-    createEpicMiddleware(rootEpic, {
-      dependencies
-    }),
+    epicMiddleware,
     routerMiddleware(history)
   ];
 
@@ -46,6 +48,8 @@ export default function configureStore(history: *): Store {
       store.replaceReducer(nextReducer);
     });
   }
+
+  epicMiddleware.run(rootEpic);
 
   return store;
 }

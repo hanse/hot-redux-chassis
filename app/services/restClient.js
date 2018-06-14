@@ -1,7 +1,7 @@
 // @flow
 
 import { type Observable } from 'rxjs';
-import { ajax } from 'rxjs/observable/dom/ajax';
+import { ajax } from 'rxjs/ajax';
 
 export type Response<T> = {
   response: T,

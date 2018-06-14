@@ -1,5 +1,7 @@
 // @flow
 
+import { map, filter } from 'rxjs/operators';
+
 import type { Action, Notification, Epic } from 'app/types';
 
 let notificationId = 0;
@@ -30,9 +32,10 @@ function formatActionError(action: Action): string {
 }
 
 export const errorNotificationEpic: Epic = action$ =>
-  action$
-    .filter(action => (action.error ? !!action.error : false))
-    .map(action => showNotification(formatActionError(action)));
+  action$.pipe(
+    filter(action => (action.error ? !!action.error : false)),
+    map(action => showNotification(formatActionError(action)))
+  );
 
 /**
  *
