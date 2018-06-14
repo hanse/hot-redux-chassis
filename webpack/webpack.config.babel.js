@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const rxPaths = require('rxjs/_esm5/path-mapping');
@@ -78,10 +78,10 @@ module.exports = options => ({
       }),
 
       // Make a separate css bundle for production
-      new ExtractTextPlugin({
-        filename: '[name].[md5:contenthash:hex:8].css',
-        allChunks: true,
-        disable: !!options.development
+      new MiniCssExtractPlugin({
+        filename: '[name].[md5:contenthash:hex:8].css'
+        //allChunks: true,
+        //disable: !!options.development
       }),
 
       // build a index.html with assets injected
@@ -116,37 +116,35 @@ module.exports = options => ({
       {
         test: /\.css$/,
         include: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
+        use: [
+          options.development ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: 1,
-                localIdentName: '[name]__[local]___[hash:base64:5]'
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: [
-                  require('postcss-import')(), // eslint-disable-line
-                  require('postcss-cssnext'), // eslint-disable-line
-                  require('postcss-nested') // eslint-disable-line
-                ]
-              }
+        use: [
+          options.development ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
             }
-          ]
-        })
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                require('postcss-import')(), // eslint-disable-line
+                require('postcss-cssnext'), // eslint-disable-line
+                require('postcss-nested') // eslint-disable-line
+              ]
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpg|mp4|webm)/,
