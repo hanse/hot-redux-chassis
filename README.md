@@ -28,8 +28,8 @@ This is not intended as a boilerplate, but rather to show how to use different t
 
 - [nuclide](https://atom.io/packages/nuclide)
 - [pigments](https://atom.io/packages/pigments)
-- [linter-stylelint](https://atom.io/packages/linter-stylelint)
 - [linter-eslint](https://atom.io/packages/linter-eslint)
+- [prettier-atom](https://atom.io/packages/prettier-atom)
 
 ## License
 
