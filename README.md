@@ -6,39 +6,31 @@ A live production build is always available on [http://hot-redux-chassis.herokua
 
 ## Features
 
-* React 16 (w/ route level ErrorBoundaries)
-* Next-generation JavaScript using [Babel 6](http://babeljs.io/)
-* [React Hot Loader 3](https://github.com/gaearon/react-hot-loader)
-* Module bundling using [webpack 3](https://gist.github.com/sokra/27b24881210b56bbaff7)
-* Painless testing using [Jest](https://facebook.github.io/jest/) and [enzyme](https://github.com/airbnb/enzyme)
-* Static type-checking using [flow](https://flowtye.org)
-* [ESLint](http://eslint.org/) for source code linting
-* [Redux](https://github.com/rackt/redux) and [react-router v4](https://github.com/rackt/react-router)
-* [redux-observable](https://github.com/redux-observable/redux-observable) for managing async actions and side effects
-* Code splitting with [react-loadable](https://github.com/thejameskyle/react-loadable)
-* [CSS Modules](https://github.com/css-modules/css-modules) + [PostCSS](https://github.com/postcss/postcss) for next generation scoped CSS modules
+- React 16.4
+- Next-generation JavaScript using [Babel](http://babeljs.io/)
+- [React Hot Loader](https://github.com/gaearon/react-hot-loader)
+- Module bundling using [webpack 4](https://github.com/webpack/webpack/)
+- Painless testing using [Jest](https://facebook.github.io/jest/) and [enzyme](https://github.com/airbnb/enzyme)
+- Static type-checking using [Flow](https://flowtye.org)
+- [ESLint](http://eslint.org/) for linting and [Prettier](https://prettier.org) for auto-formatting
+- [Redux](https://github.com/rackt/redux) and [react-router v4](https://github.com/rackt/react-router)
+- [redux-observable](https://github.com/redux-observable/redux-observable) 1.0.0 and RxJS 6 for managing async actions and side effects
+- Code splitting with [react-loadable](https://github.com/thejameskyle/react-loadable)
+- [CSS Modules](https://github.com/css-modules/css-modules) + [PostCSS](https://github.com/postcss/postcss) for next generation scoped CSS modules
 
 ## Start a New Project
 
-To use it, just clone the repo and remove the `.git` folder and start over using your version control system of choice. No friggin' generators. Remember to update your `package.json` and `LICENSE.md`, though.
-
-```bash
-git clone git@github.com:Hanse/hot-redux-chassis.git new-project-name
-cd new-project-name
-rm -rf .git
-git init
-vim package.json # Edit package.json before committing
-git add .
-git commit -m "Initial commit"
-```
+This is not intended as a boilerplate, but rather to show how to use different things in this big eco-system.
 
 ## Atom
+
 [Atom](https://atom.io) is a great editor for modern JavaScript development. With these additional packages it becomes even greater:
 
-* [nuclide](https://atom.io/packages/nuclide)
-* [pigments](https://atom.io/packages/pigments)
-* [linter-stylelint](https://atom.io/packages/linter-stylelint)
-* [linter-eslint](https://atom.io/packages/linter-eslint)
+- [nuclide](https://atom.io/packages/nuclide)
+- [pigments](https://atom.io/packages/pigments)
+- [linter-stylelint](https://atom.io/packages/linter-stylelint)
+- [linter-eslint](https://atom.io/packages/linter-eslint)
 
 ## License
+
 MIT
