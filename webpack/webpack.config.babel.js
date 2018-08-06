@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const rxPaths = require('rxjs/_esm5/path-mapping');
@@ -41,6 +43,14 @@ module.exports = options => ({
 
   optimization: {
     minimize: !options.development,
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ],
     ...(options.development
       ? {}
       : {
@@ -79,9 +89,8 @@ module.exports = options => ({
 
       // Make a separate css bundle for production
       new MiniCssExtractPlugin({
-        filename: '[name].[md5:contenthash:hex:8].css'
-        //allChunks: true,
-        //disable: !!options.development
+        filename: options.development ? '[name].css' : '[name].[hash].css',
+        chunkFilename: options.development ? '[id].css' : '[id].[hash].css'
       }),
 
       // build a index.html with assets injected
@@ -131,7 +140,10 @@ module.exports = options => ({
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
+              localIdentName: options.development
+                ? '[name]__[local]___[hash:base64:5]'
+                : '[hash:base64:8]',
+              minimize: true
             }
           },
           {
