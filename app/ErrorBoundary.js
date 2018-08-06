@@ -3,8 +3,7 @@
 import React, { Component, type Node } from 'react';
 
 type ErrorInfo = {
-  componentStack: string,
-  componentName: ?string
+  componentStack: string
 };
 
 type Props = {
