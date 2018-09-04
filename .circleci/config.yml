@@ -8,8 +8,8 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
-          name: install-npm-wee
-          command: npm install
+          name: Install Dependencies
+          command: yarn
       - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
@@ -21,7 +21,7 @@ jobs:
           name: Lint CSS
           command: yarn lint:css
       - run:
-          name: Tests
+          name: Run Tests
           command: yarn test --coverage
       - store_artifacts:
           path: coverage
