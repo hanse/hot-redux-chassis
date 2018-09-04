@@ -15,11 +15,14 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          name: Lint CSS
+          name: Lint JS
           command: yarn lint:js
       - run:
           name: Lint CSS
           command: yarn lint:css
+      - run:
+          name: Flow
+          command: yarn flow check
       - run:
           name: Run Tests
           command: yarn test --coverage
