@@ -2,7 +2,7 @@
 
 This repo is a playground for modern web development techniques with a focus on the [React](https://facebook.github.io/react/) eco-system. It is rapidly changing to adopt new versions of popular npm packages and ideas from the community. The code shows how one can glue a mix of these packages together to create cool projects. In addition, the repo itself can serve as a starting point for new projects.
 
-A live production build is always available on [https://hot-redux-chassis.now.sh](https://hot-redux-chassis.now.sh).
+A live production build is always available on [https://hot-redux-chassis.now.sh](https://hot-redux-chassis.now.sh) (admin:admin).
 
 ## Features
 
