@@ -1,44 +1,19 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "react-app",
-    "plugin:flowtype/recommended",
-    "plugin:react/recommended",
-    "prettier",
-    "prettier/flowtype",
-    "prettier/react"
-  ],
-  "plugins": ["react", "flowtype", "prettier", "import"],
+  "extends": ["react-app", "prettier", "prettier/flowtype", "prettier/react"],
+  "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": [2, { "singleQuote": true }],
-    "import/no-extraneous-dependencies": 0,
-    "import/extensions": 0,
-    "import/no-unresolved": 0,
-    "import/first": 0,
-    "import/no-absolute-path": 0,
-    "import/no-named-as-default-member": 0,
-    "import/no-named-as-default": 0,
-    "import/no-webpack-loader-syntax": 0,
-    "import/no-duplicates": 0,
-    "no-duplicate-imports": 0,
-    "import/prefer-default-export": 0,
-    "global-require": 1,
-    "react/sort-comp": 0,
-    "react/jsx-filename-extension": 0,
-    "react/prefer-stateless-function": 0,
-    "react/require-default-props": 0,
-    "react/prop-types": 1,
-    "react/display-name": 1,
-    "no-plusplus": 0,
-    "no-underscore-dangle": 0,
-    "no-param-reassign": 0,
-    "jsx-a11y/no-static-element-interactions": 0
+    "prettier/prettier": [2, { "singleQuote": true, "bracketSpacing": true }],
+    "import/no-webpack-loader-syntax": 0
   },
   "settings": {
     "import/resolver": {
       "webpack": {
         "config": "webpack/webpack.config.babel.js"
       }
+    },
+    "react": {
+      "version": "16"
     }
   },
   "env": {
@@ -48,7 +23,6 @@
   "globals": {
     "__DEV__": true,
     "COMMIT_HASH": true,
-    "log": true,
-    "expect": true
+    "log": true
   }
 }
