@@ -1,21 +1,44 @@
 {
   "presets": [
-    ["env", { "useBuiltIns": false, "modules": false }],
-    "react",
-    "stage-2"
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": false,
+        "modules": false
+      }
+    ],
+    "@babel/preset-react",
+    "@babel/preset-flow"
   ],
-  "plugins": ["react-hot-loader/babel"],
+  "plugins": [
+    "react-hot-loader/babel",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties"
+  ],
   "env": {
     "development": {
-      "plugins": ["react-hot-loader/babel", "transform-react-jsx-source"]
+      "plugins": [
+        "react-hot-loader/babel",
+        "@babel/plugin-transform-react-jsx-source"
+      ]
     },
     "test": {
       "presets": [
-        ["env", { "targets": { "node": "current" } }],
-        "react",
-        "stage-2"
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ],
+        "@babel/preset-react"
       ],
-      "plugins": ["dynamic-import-node"]
+      "plugins": [
+        "dynamic-import-node",
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-proposal-class-properties"
+      ]
     }
   }
 }

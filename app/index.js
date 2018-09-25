@@ -1,6 +1,6 @@
 // @flow
 
-import 'babel-polyfill';
+import '@babel/polyfill';
 import 'isomorphic-fetch';
 
 // $FlowIssue
