@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import App from './toplevel';
 import Dashboard from './dashboard';
 import Contact from './contact';

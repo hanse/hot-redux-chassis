@@ -10,7 +10,7 @@ import {
   switchMap,
   catchError
 } from 'rxjs/operators';
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import { closeSearch } from 'app/state/ui';
 import type { Action, SearchResult, Epic } from 'app/types';
 

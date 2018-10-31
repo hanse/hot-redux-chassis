@@ -3,7 +3,7 @@
 import { catchError, switchMap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE } from 'connected-react-router';
 import type {
   State as RootState,
   Action,

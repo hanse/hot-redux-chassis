@@ -2,7 +2,6 @@
 
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
-import { routerReducer } from 'react-router-redux';
 import auth, {
   loginEpic,
   logoutEpic,
@@ -23,7 +22,6 @@ const reducers = {
   notifications,
   ui,
   posts,
-  router: routerReducer,
   search: results
 };
 
