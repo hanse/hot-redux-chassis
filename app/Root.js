@@ -1,6 +1,7 @@
 // @flow
 
-import React, { Component, StrictMode, ConcurrentMode, Suspense } from 'react';
+// $FlowFixMe React modern
+import React, { Component, StrictMode, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import history from 'history';
 import Router from 'app/routes';

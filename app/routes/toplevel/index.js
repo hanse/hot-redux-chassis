@@ -14,7 +14,7 @@ import type { State } from 'app/types';
 
 type Props = {
   children: Node,
-  rehydrateAuth: () => mixed,
+  rehydrateAuth: () => void,
   searchOpen: boolean,
   closeSearch: () => void,
   openSearch: () => void,

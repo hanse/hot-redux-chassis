@@ -6,7 +6,7 @@ A live production build is always available on [https://hot-redux-chassis.now.sh
 
 ## Features
 
-- React 16.5
+- React 16.7 alpha
 - Next-generation JavaScript using [Babel 7](http://babeljs.io/)
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader)
 - Module bundling using [webpack 4](https://github.com/webpack/webpack/)
