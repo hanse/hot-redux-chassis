@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component, StrictMode, ConcurrentMode } from 'react';
+import React, { Component, StrictMode, ConcurrentMode, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import history from 'history';
 import Router from 'app/routes';
@@ -16,11 +16,11 @@ export default class Root extends Component<Props> {
     const { store, history } = this.props;
     return (
       <StrictMode>
-        <ConcurrentMode>
+        <Suspense fallback={() => null}>
           <Provider {...{ store }}>
             <Router history={history} />
           </Provider>
-        </ConcurrentMode>
+        </Suspense>
       </StrictMode>
     );
   }

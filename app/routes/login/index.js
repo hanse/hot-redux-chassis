@@ -1,7 +1,5 @@
 // @flow
 
-import Loadable from '../Loadable';
+import { lazy } from 'react';
 
-export default Loadable({
-  loader: () => import('./LoginRoute')
-});
+export default lazy(() => import('./LoginRoute'));

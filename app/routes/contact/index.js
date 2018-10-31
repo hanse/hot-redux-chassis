@@ -1,7 +1,5 @@
 // @flow
 
-import Loadable from '../Loadable';
+import { lazy } from 'react';
 
-export default Loadable({
-  loader: () => import('./ContactRoute')
-});
+export default lazy(() => import('./ContactRoute'));
