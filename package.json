@@ -70,7 +70,7 @@
     "style-loader": "^0.23.1",
     "stylelint": "^9.10.1",
     "stylelint-config-standard": "18.2.0",
-    "uglifyjs-webpack-plugin": "^2.1.1",
+    "terser-webpack-plugin": "^1.2.2",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",
@@ -78,7 +78,6 @@
     "webpack-hot-middleware": "^2.24.3"
   },
   "dependencies": {
-    "add": "2.0.6",
     "body-parser": "1.18.3",
     "classnames": "2.2.6",
     "connected-react-router": "^4.5.0",
