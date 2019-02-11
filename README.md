@@ -6,7 +6,7 @@ A live production build is always available on [https://hot-redux-chassis.now.sh
 
 ## Features
 
-- React 16.7 alpha
+- React 16.8
 - Next-generation JavaScript using [Babel 7](http://babeljs.io/)
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader)
 - Module bundling using [webpack 4](https://github.com/webpack/webpack/)
@@ -21,19 +21,6 @@ A live production build is always available on [https://hot-redux-chassis.now.sh
 ## Start a New Project
 
 This is not intended as a boilerplate, but rather to show how to use different things in this big eco-system. When starting out you **should not add every bits and pieces at once**, unless you know what you are doing.
-
-## Atom
-
-[Atom](https://atom.io) is a great editor for modern JavaScript development. With these additional packages it becomes even greater:
-
-- [nuclide](https://atom.io/packages/nuclide)
-- [pigments](https://atom.io/packages/pigments)
-- [linter-eslint](https://atom.io/packages/linter-eslint)
-- [prettier-atom](https://atom.io/packages/prettier-atom)
-
-## [Visual Studio Code](https://github.com/Microsoft/vscode)
-
-A decent alternative from Microsoft to Atom/Nuclide.
 
 ## License
 
