@@ -14,10 +14,10 @@ import type { State } from 'app/types';
 
 type Props = {
   children: Node,
-  rehydrateAuth: () => void,
+  rehydrateAuth: () => any,
   searchOpen: boolean,
-  closeSearch: () => void,
-  openSearch: () => void,
+  closeSearch: () => any,
+  openSearch: () => any,
   location: Object
 };
 

@@ -16,6 +16,7 @@ import results, {
   searchResultSelectedEpic
 } from 'app/state/search';
 import posts, { fetchPostsEpic, refreshPostsEpic } from 'app/state/posts';
+import type { State, Action } from 'app/types';
 
 const reducers = {
   auth,
@@ -25,7 +26,9 @@ const reducers = {
   search: results
 };
 
-export type Reducers = typeof reducers;
+export type Reducers = typeof reducers & {
+  router: (State, Action) => State
+};
 
 export const rootReducer = combineReducers(reducers);
 
