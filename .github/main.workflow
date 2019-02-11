@@ -1,4 +1,4 @@
-workflow "New workflow" {
+workflow "Run Tests and Build" {
   on = "push"
   resolves = ["Build", "Run Tests"]
 }
@@ -6,10 +6,6 @@ workflow "New workflow" {
 action "Install Dependencies" {
   uses = "actions/npm@4633da3702a5366129dca9d8cc3191476fc3433c"
   args = "install"
-  secrets = ["UNSPLASH_APPLICATION_ID"]
-  env = {
-    NODE_ENV = "production"
-  }
 }
 
 action "Build" {
