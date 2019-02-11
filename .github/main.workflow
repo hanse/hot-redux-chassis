@@ -1,6 +1,9 @@
 workflow "Run Tests and Build" {
   on = "push"
-  resolves = ["Build", "Run Tests"]
+  resolves = [
+    "Run Tests",
+    "Alias",
+  ]
 }
 
 action "Install Dependencies" {
@@ -25,4 +28,17 @@ action "Run Tests" {
   env = {
     NODE_ENV = "test"
   }
+}
+
+action "Deploy" {
+  uses = "actions/zeit-now@master"
+  needs = ["Build"]
+  secrets = ["ZEIT_TOKEN"]
+}
+
+action "Alias" {
+  uses = "actions/zeit-now@master"
+  needs = ["Deploy"]
+  secrets = ["ZEIT_TOKEN"]
+  args = "alias"
 }
