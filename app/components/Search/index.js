@@ -129,12 +129,11 @@ class Search extends Component<Props, State> {
           className={styles.itemList}
           ref={ref => (this.itemRefs.container = ref)}
         >
-          {this.state.query !== '' &&
-            this.props.results.length === 0 && (
-              <div style={{ padding: 20 }}>
-                <strong>No suggestions found</strong>
-              </div>
-            )}
+          {this.state.query !== '' && this.props.results.length === 0 && (
+            <div style={{ padding: 20 }}>
+              <strong>No suggestions found</strong>
+            </div>
+          )}
 
           {this.props.results.map((result, i) => (
             <a
