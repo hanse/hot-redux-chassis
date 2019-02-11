@@ -17,7 +17,7 @@ export default class Root extends Component<Props> {
     const { store, history } = this.props;
     return (
       <StrictMode>
-        <Suspense fallback={() => null}>
+        <Suspense fallback={<div />}>
           <Provider {...{ store }}>
             <Router history={history} />
           </Provider>

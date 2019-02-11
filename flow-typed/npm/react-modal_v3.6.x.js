@@ -1,8 +1,8 @@
-// flow-typed signature: 1473e903c62ae7c73bdfc56d14576c15
-// flow-typed version: 80987ae0fa/react-modal_v3.1.x/flow_>=v0.54.1
+// flow-typed signature: f4f6175f58a082cd35c46973b6b5804b
+// flow-typed version: 328b628a6f/react-modal_v3.6.x/flow_>=v0.54.1
 
 declare module 'react-modal' {
-  declare type DefaultProps = {
+  declare type ModalProps = {
     isOpen?: boolean,
     portalClassName?: string,
     bodyOpenClassName?: string,
@@ -12,10 +12,7 @@ declare module 'react-modal' {
     shouldCloseOnEsc?: boolean,
     shouldCloseOnOverlayClick?: boolean,
     shouldReturnFocusAfterClose?: boolean,
-    parentSelector?: () => HTMLElement,
-  };
-
-  declare type Props = DefaultProps & {
+    parentSelector?: () => HTMLElement | null,
     style?: {
       content?: {
         [key: string]: string | number
@@ -34,17 +31,18 @@ declare module 'react-modal' {
       afterOpen: string,
       beforeClose: string
     },
-    appElement?: HTMLElement | string | null,
     onAfterOpen?: () => void | Promise<void>,
-    onRequestClose?: () => void,
+    onRequestClose?: (SyntheticEvent<>) => void,
     aria?: {
       [key: string]: string
     },
     role?: string,
-    contentLabel?: string
+    contentLabel?: string,
+    overlayRef?: (node: ?HTMLElement) => mixed,
+    containerRef?: (node: ?HTMLElement) => mixed,
   };
 
-  declare class Modal extends React$Component<Props> {
+  declare class Modal extends React$Component<ModalProps> {
     static setAppElement(element: HTMLElement | string | null): void;
   }
 
