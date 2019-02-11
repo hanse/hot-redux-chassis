@@ -142,8 +142,7 @@ module.exports = options => ({
               importLoaders: 1,
               localIdentName: options.development
                 ? '[name]__[local]___[hash:base64:5]'
-                : '[hash:base64:8]',
-              minimize: true
+                : '[hash:base64:8]'
             }
           },
           {
