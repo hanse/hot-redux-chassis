@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Button from 'app/components/Button';
 import Input from 'app/components/Input';
 
@@ -8,49 +8,36 @@ type Props = {
   onSubmit: (username: string, password: string) => void
 };
 
-type State = {
-  username: string,
-  password: string
-};
+function LoginForm(props: Props) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-export default class LoginForm extends Component<Props, State> {
-  state = {
-    username: '',
-    password: ''
-  };
-
-  handleSubmit = (e: SyntheticEvent<*>) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.username, this.state.password);
+    props.onSubmit(username, password);
   };
 
-  handleChange = (field: string) => (e: SyntheticInputEvent<*>) => {
-    this.setState({ [field]: e.target.value });
-  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <Input
+        type="text"
+        placeholder="username"
+        value={username}
+        onChange={e => setUsername(e.target.value)}
+      />
 
-  handleChangeUsername = this.handleChange('username');
-  handleChangePassword = this.handleChange('password');
+      <Input
+        type="password"
+        placeholder="password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+      />
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <Input
-          type="text"
-          placeholder="username"
-          value={this.state.username}
-          onChange={this.handleChangeUsername}
-        />
-
-        <Input
-          type="password"
-          placeholder="password"
-          onChange={this.handleChangePassword}
-        />
-
-        <Button type="submit" block>
-          Login
-        </Button>
-      </form>
-    );
-  }
+      <Button type="submit" block>
+        Login
+      </Button>
+    </form>
+  );
 }
+
+export default LoginForm;
