@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose, type Middleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { createLogger } from 'redux-logger';
 import { routerMiddleware, connectRouter } from 'connected-react-router';
-import { rootEpic } from '../state';
+import { rootEpic, rootReducer } from '../state';
 import * as api from '../services/api';
 import * as unsplash from '../services/unsplash';
 import type { Store, State, Action } from '../types';
@@ -38,9 +38,8 @@ export default function configureStore(history: *): Store {
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-  // $FlowFixMe
   const store: Store = createStore(
-    connectRouter(history)(require('../state').rootReducer), // eslint-disable-line
+    rootReducer(history),
     composeEnhancers(applyMiddleware(...middlewares))
   );
 

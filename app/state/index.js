@@ -2,6 +2,7 @@
 
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
+import { connectRouter } from 'connected-react-router';
 import auth, {
   loginEpic,
   logoutEpic,
@@ -30,7 +31,11 @@ export type Reducers = typeof reducers & {
   router: (State, Action) => State
 };
 
-export const rootReducer = combineReducers(reducers);
+export const rootReducer = history =>
+  combineReducers({
+    router: connectRouter(history),
+    ...reducers
+  });
 
 export const rootEpic = combineEpics(
   rehydrateAuthEpic,
