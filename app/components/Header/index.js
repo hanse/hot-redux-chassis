@@ -1,7 +1,7 @@
 // @flow
 
 import styles from './Header.css';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import cx from 'classnames';
@@ -39,91 +39,67 @@ type Props = {
   }
 };
 
-type State = {
-  menuOpen: boolean
-};
-
 /**
  * A responsive header component with titles and menus.
  * On small screens the menu collapses into an animated hamburger menu.
  */
-class Header extends Component<Props, State> {
-  state = {
-    menuOpen: false
+
+function Header(props: Props) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(open => !open);
+  const closeMenu = () => setMenuOpen(false);
+  const openSearch = () => {
+    setMenuOpen(false);
+    props.openSearch();
   };
 
-  handleToggleMenu = () => {
-    this.setState(state => ({ menuOpen: !state.menuOpen }));
-  };
-
-  handleCloseMenu = () => {
-    this.setState({ menuOpen: false });
-  };
-
-  handleOpenSearch = () => {
-    this.setState({ menuOpen: false });
-    this.props.openSearch();
-  };
-
-  render() {
-    return (
-      <div className={styles.root}>
-        <div className={styles.header}>
-          <div className={styles.mobileMenu}>
-            <HamburgerButton
-              onClick={this.handleToggleMenu}
-              open={this.state.menuOpen}
-            />
-            <Link to="/" className={styles.mobileTitle}>
-              hanse
-            </Link>
-          </div>
-
-          <Link to="/" className={styles.desktopTitle}>
+  return (
+    <div className={styles.root}>
+      <div className={styles.header}>
+        <div className={styles.mobileMenu}>
+          <HamburgerButton onClick={toggleMenu} open={menuOpen} />
+          <Link to="/" className={styles.mobileTitle}>
             hanse
           </Link>
-          <ul
-            className={cx(
-              styles.navigationItems,
-              this.state.menuOpen && styles.openMenu
-            )}
-          >
-            {navigationItems.map(({ LinkComponent, to, label }) => (
-              <li key={label}>
-                <LinkComponent
-                  to={to}
-                  activeClassName={styles.activeItem}
-                  onClick={this.handleCloseMenu}
-                >
-                  {label}
-                </LinkComponent>
-              </li>
-            ))}
-          </ul>
-
-          <button
-            className={styles.searchButton}
-            onClick={this.handleOpenSearch}
-          >
-            <Icon name="search" />
-          </button>
         </div>
 
-        <Modal
-          isOpen={this.props.searchOpen}
-          onRequestClose={this.props.closeSearch}
-          className={styles.modalContent}
-          overlayClassName={styles.backdrop}
-          contentLabel="Search"
-        >
-          <Search
-            query={qs.parse(this.props.location.search).q}
-            onClose={this.props.closeSearch}
-          />
-        </Modal>
+        <Link to="/" className={styles.desktopTitle}>
+          hanse
+        </Link>
+        <ul className={cx(styles.navigationItems, menuOpen && styles.openMenu)}>
+          {navigationItems.map(({ LinkComponent, to, label }) => (
+            <li key={label}>
+              <LinkComponent
+                to={to}
+                activeClassName={styles.activeItem}
+                onClick={closeMenu}
+              >
+                {label}
+              </LinkComponent>
+            </li>
+          ))}
+        </ul>
+
+        <button className={styles.searchButton} onClick={openSearch}>
+          <Icon name="search" />
+        </button>
       </div>
-    );
-  }
+
+      <Modal
+        isOpen={props.searchOpen}
+        onRequestClose={props.closeSearch}
+        className={styles.modalContent}
+        overlayClassName={styles.backdrop}
+        contentLabel="Search"
+      >
+        <Search
+          query={qs.parse(props.location.search).q}
+          onClose={props.closeSearch}
+        />
+      </Modal>
+    </div>
+  );
 }
 
 export default Header;
