@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Button from 'app/components/Button';
 import MessageBox from 'app/components/MessageBox';
@@ -19,64 +19,59 @@ type Props = {
   posts: Array<Post>
 };
 
-class Feed extends Component<Props> {
-  componentDidMount() {
-    if (!this.props.hasPosts) {
-      this.props.onLoadMore();
+function Feed(props: Props) {
+  useEffect(() => {
+    if (!props.hasPosts) {
+      props.onLoadMore();
     }
-  }
+  }, []);
 
-  render() {
-    const { onLoadMore, onRefresh } = this.props;
-    return (
-      <div>
-        <h2
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between'
-          }}
+  return (
+    <div>
+      <h2
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between'
+        }}
+      >
+        <a
+          href={`http://unsplash.com?${utmSource}`}
+          style={{ textDecoration: 'none', color: '#333' }}
         >
-          <a
-            href={`http://unsplash.com?${utmSource}`}
-            style={{ textDecoration: 'none', color: '#333' }}
-          >
-            Unsplash
-          </a>
-          <Button link onClick={onRefresh} disabled={this.props.loading}>
-            Refresh
-          </Button>
-        </h2>
+          Unsplash
+        </a>
+        <Button link onClick={props.onRefresh} disabled={props.loading}>
+          Refresh
+        </Button>
+      </h2>
 
-        {this.props.failed ? (
-          <MessageBox
-            type="neutral"
-            message="Failed to fetch posts from Unsplash. Maybe we have made too many requests."
-          />
-        ) : (
-          <div>
-            {this.props.posts.map(post => (
-              <div key={idToString(post.id)}>
-                <img src={post.imageUrl} alt={post.user.name} />
-                <p>
-                  Photo by{' '}
-                  <a href={`${post.user.link}?${utmSource}`}>
-                    {post.user.name}
-                  </a>
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button link onClick={onLoadMore} loading={this.props.loading}>
-            Load More
-          </Button>
+      {props.failed ? (
+        <MessageBox
+          type="neutral"
+          message="Failed to fetch posts from Unsplash. Maybe we have made too many requests."
+        />
+      ) : (
+        <div>
+          {props.posts.map(post => (
+            <div key={idToString(post.id)}>
+              <img src={post.imageUrl} alt={post.user.name} />
+              <p>
+                Photo by{' '}
+                <a href={`${post.user.link}?${utmSource}`}>{post.user.name}</a>
+              </p>
+            </div>
+          ))}
         </div>
+      )}
+
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Button link onClick={props.onLoadMore} loading={props.loading}>
+          Load More
+        </Button>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 function mapStateToProps(state: RootState) {

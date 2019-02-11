@@ -1,7 +1,7 @@
 // @flow
 
 import './App.css';
-import React, { Component, type Node } from 'react';
+import React, { useEffect, type Node } from 'react';
 import { connect } from 'react-redux';
 import {
   rehydrateAuth,
@@ -21,24 +21,22 @@ type Props = {
   location: Object
 };
 
-class App extends Component<Props> {
-  componentDidMount() {
-    this.props.rehydrateAuth();
-  }
+function App(props: Props) {
+  useEffect(() => {
+    props.rehydrateAuth();
+  }, []);
 
-  render() {
-    return (
-      <div>
-        <Header
-          searchOpen={this.props.searchOpen}
-          closeSearch={this.props.closeSearch}
-          openSearch={this.props.openSearch}
-          location={this.props.location}
-        />
-        {this.props.children}
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Header
+        searchOpen={props.searchOpen}
+        closeSearch={props.closeSearch}
+        openSearch={props.openSearch}
+        location={props.location}
+      />
+      {props.children}
+    </div>
+  );
 }
 
 const mapStateToProps = (state: State) => ({
