@@ -113,6 +113,7 @@ export const rehydrateAuthEpic: Epic = action$ =>
     switchMap(() => {
       const token: string = window.localStorage.getItem('token');
       if (!token) {
+        // $FlowFixMe
         return of();
       }
 

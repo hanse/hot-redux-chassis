@@ -38,7 +38,7 @@ class Search extends Component<Props, State> {
       this.searchInput.focus();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (this.props.query && prevProps.query !== this.props.query) {
       this.search(this.props.query);
     }
@@ -57,11 +57,11 @@ class Search extends Component<Props, State> {
     scrollIntoView(itemNode, containerNode, { onlyScrollIfNeeded: true });
   };
 
-  handleChange = ({ target: { value } }) => {
+  handleChange = ({ target: { value } }: any) => {
     this.search(value);
   };
 
-  search(query) {
+  search(query: string) {
     this.setState({ query });
     this.props.search(query);
   }
@@ -167,7 +167,7 @@ const mapDispatchToProps = {
   searchResultSelected
 };
 
-export default connect(
+export default connect<*, *, *, *, *, *>(
   mapStateToProps,
   mapDispatchToProps
 )(Search);

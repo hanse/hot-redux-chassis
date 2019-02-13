@@ -31,8 +31,8 @@ export type Reducers = typeof reducers & {
   router: (State, Action) => State
 };
 
-export const rootReducer = history =>
-  combineReducers({
+export const rootReducer = (history: *) =>
+  combineReducers<*, Action>({
     router: connectRouter(history),
     ...reducers
   });

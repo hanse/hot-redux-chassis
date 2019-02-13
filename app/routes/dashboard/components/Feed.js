@@ -88,7 +88,7 @@ const onLoadMore = () => ({ type: 'POSTS_FETCH' });
 
 const mapDispatchToProps = { onRefresh, onLoadMore };
 
-export default connect(
+export default connect<*, *, *, *, *, *>(
   mapStateToProps,
   mapDispatchToProps
 )(Feed);

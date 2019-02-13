@@ -35,7 +35,7 @@ type ApiClientOptions = {
 
 export function createRestClient({ url }: ApiClientOptions): ApiClient {
   return function request(path, options = {}) {
-    return ajax({
+    const response: any = ajax({
       url: `${url}${path}`,
       responseType: 'json',
       headers: {
@@ -45,6 +45,8 @@ export function createRestClient({ url }: ApiClientOptions): ApiClient {
       },
       ...options
     });
+
+    return response;
   };
 }
 

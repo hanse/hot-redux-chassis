@@ -1,5 +1,4 @@
 // @flow
 
-import { lazy } from 'react';
-
-export default lazy(() => import('./AboutRoute'));
+import About from './components/About';
+export default About;

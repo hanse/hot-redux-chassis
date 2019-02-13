@@ -1,15 +1,16 @@
 // @flow
 
-import React from 'react';
+import React, { lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import App from './toplevel';
-import Dashboard from './dashboard';
-import Contact from './contact';
-import About from './about';
-import Login from './login';
-import Search from './search';
 import { NotFound } from './errors';
+
+const Dashboard = lazy(() => import('./dashboard'));
+const Contact = lazy(() => import('./contact'));
+const About = lazy(() => import('./about'));
+const Login = lazy(() => import('./login'));
+const Search = lazy(() => import('./search'));
 
 type Props = {
   history: any

@@ -1,5 +1,5 @@
 // @flow
 
-import { lazy } from 'react';
+import Contact from './components/Contact';
 
-export default lazy(() => import('./ContactRoute'));
+export default Contact;

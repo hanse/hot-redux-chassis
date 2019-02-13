@@ -52,7 +52,7 @@ const mapDispatchToProps = {
   openSearch
 };
 
-export default connect(
+export default connect<*, *, *, *, *, *>(
   mapStateToProps,
   mapDispatchToProps
 )(App);
