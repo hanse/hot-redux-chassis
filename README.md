@@ -15,7 +15,6 @@ A live production build is always available on [https://hot-redux-chassis.now.sh
 - [ESLint](http://eslint.org/) for linting and [Prettier](https://prettier.org) for auto-formatting
 - [Redux](https://github.com/rackt/redux) and [react-router v4](https://github.com/rackt/react-router)
 - [redux-observable](https://github.com/redux-observable/redux-observable) 1.0.0 and RxJS 6 for managing async actions and side effects
-- Code splitting with [react-loadable](https://github.com/thejameskyle/react-loadable)
 - [CSS Modules](https://github.com/css-modules/css-modules) + [PostCSS](https://github.com/postcss/postcss) for next generation scoped CSS modules
 
 ## Start a New Project
