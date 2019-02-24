@@ -16,7 +16,7 @@ type Props = {
 function Search({ search, query, results }: Props) {
   useEffect(() => {
     search(query);
-  }, []);
+  }, [search, query]);
 
   return (
     <div className={styles.root}>

@@ -20,11 +20,13 @@ type Props = {
 };
 
 function Feed(props: Props) {
+  const { hasPosts, onLoadMore } = props;
+
   useEffect(() => {
-    if (!props.hasPosts) {
-      props.onLoadMore();
+    if (!hasPosts) {
+      onLoadMore();
     }
-  }, []);
+  }, [hasPosts, onLoadMore]);
 
   return (
     <div>

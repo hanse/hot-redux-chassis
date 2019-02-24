@@ -22,9 +22,10 @@ type Props = {
 };
 
 function App(props: Props) {
+  const { rehydrateAuth } = props;
   useEffect(() => {
-    props.rehydrateAuth();
-  }, []);
+    rehydrateAuth();
+  }, [rehydrateAuth]);
 
   return (
     <div>

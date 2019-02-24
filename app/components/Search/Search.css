@@ -45,15 +45,22 @@
   display: block;
   text-decoration: none;
   cursor: pointer;
+  font-size: inherit;
+  width: 100%;
+  text-align: left;
 
   &:last-of-type {
     border-bottom: 0;
   }
 }
 
+.item:hover {
+  background: #f2f2f2;
+}
+
 .selectedItem {
   composes: item;
-  background: #eee;
+  background: #f2f2f2;
 }
 
 .closeButton {

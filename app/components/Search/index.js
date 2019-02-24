@@ -136,7 +136,7 @@ class Search extends Component<Props, State> {
           )}
 
           {this.props.results.map((result, i) => (
-            <a
+            <button
               ref={ref => (this.itemRefs[`item-${i}`] = ref)}
               key={result}
               onClick={() => this.props.searchResultSelected(result)}
@@ -148,7 +148,7 @@ class Search extends Component<Props, State> {
               }
             >
               {result}
-            </a>
+            </button>
           ))}
         </div>
       </div>

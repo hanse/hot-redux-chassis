@@ -3,9 +3,13 @@
   "extends": ["react-app", "prettier", "prettier/flowtype", "prettier/react"],
   "plugins": ["prettier", "react-hooks"],
   "rules": {
-    "prettier/prettier": [2, { "singleQuote": true, "bracketSpacing": true }],
-    "import/no-webpack-loader-syntax": 0,
-    "react-hooks/rules-of-hooks": 2
+    "prettier/prettier": [
+      "error",
+      { "singleQuote": true, "bracketSpacing": true }
+    ],
+    "import/no-webpack-loader-syntax": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error"
   },
   "settings": {
     "import/resolver": {
