@@ -3,7 +3,7 @@
 import { createStore, applyMiddleware, compose, type Middleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { createLogger } from 'redux-logger';
-import { routerMiddleware, connectRouter } from 'connected-react-router';
+import { routerMiddleware } from 'connected-react-router';
 import { rootEpic, rootReducer } from '../state';
 import * as api from '../services/api';
 import * as unsplash from '../services/unsplash';
