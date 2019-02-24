@@ -7,7 +7,8 @@ import Search from './components/Search';
 
 const mapStateToProps = (state, ownProps) => ({
   query: qs.parse(ownProps.location.search).q,
-  results: state.search
+  results: state.search.results,
+  searching: state.search.searching
 });
 
 const mapDispatchToProps = {

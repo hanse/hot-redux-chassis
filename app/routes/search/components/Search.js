@@ -8,12 +8,13 @@ type Props = {
   query: string,
   results: Array<SearchResult>,
   search: (query: string) => void,
+  searching: boolean,
   location: {
     search: string
   }
 };
 
-function Search({ search, query, results }: Props) {
+function Search({ search, query, results, searching }: Props) {
   useEffect(() => {
     search(query);
   }, [search, query]);
@@ -24,11 +25,15 @@ function Search({ search, query, results }: Props) {
         Search <em>{query}</em>
       </h2>
 
-      {results.map((result, i) => (
-        <div key={result} id={`result-${i}`}>
-          {result}
-        </div>
-      ))}
+      {searching ? null : (
+        <>
+          {results.map((result, i) => (
+            <div key={result} id={`result-${i}`}>
+              {result}
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 }

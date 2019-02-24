@@ -158,7 +158,7 @@ class Search extends Component<Props, State> {
 
 function mapStateToProps(state: RootState) {
   return {
-    results: state.search
+    results: state.search.results
   };
 }
 

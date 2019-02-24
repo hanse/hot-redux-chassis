@@ -78,20 +78,47 @@ export const searchResultSelectedEpic: Epic = action$ =>
     )
   );
 
-const initialState = [];
+const initialState = {
+  searching: false,
+  results: []
+};
 
-type State = Array<SearchResult>;
+type State = {
+  searching: boolean,
+  results: Array<SearchResult>
+};
 
 export default function results(
   state: State = initialState,
   action: Action
 ): State {
   switch (action.type) {
+    case 'SEARCH':
+      return {
+        ...state,
+        searching: true
+      };
+
     case 'SEARCH_RESULTS_RECEIVED':
-      return action.payload;
+      return {
+        ...state,
+        results: action.payload,
+        searching: false
+      };
+
+    case 'SEARCH_FAILURE':
+      return {
+        ...state,
+        searching: false,
+        results: []
+      };
 
     case 'CLEAR_SEARCH':
-      return [];
+      return {
+        ...state,
+        searching: false,
+        results: []
+      };
 
     default:
       return state;
