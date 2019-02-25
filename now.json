@@ -2,9 +2,7 @@
   "version": 1,
   "name": "hot-redux-chassis",
   "alias": ["hot-redux-chassis"],
-  "build": {
-    "env": {
-      "UNSPLASH_APPLICATION_ID": "@unsplash-app-id"
-    }
+  "env": {
+    "UNSPLASH_APPLICATION_ID": "@unsplash-app-id"
   }
 }
