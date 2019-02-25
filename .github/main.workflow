@@ -39,7 +39,7 @@ action "Build" {
     NODE_ENV = "production"
   }
   secrets = ["UNSPLASH_APPLICATION_ID"]
-  needs = ["Run Tests", "Lint"]
+  needs = ["Run Tests", "Lint", "Type Checking"]
 }
 
 action "Deploy" {
