@@ -26,7 +26,7 @@ module.exports = options => ({
     app: compact([
       options.development && 'webpack-hot-middleware/client',
       options.development && 'react-hot-loader/patch',
-      './app/index.js'
+      './app/index.tsx'
     ]),
     vendor: ['react', 'react-dom', 'react-router']
   },
@@ -108,6 +108,7 @@ module.exports = options => ({
 
   resolve: {
     modules: [path.resolve(__dirname, '../'), 'node_modules'],
+    extensions: ['.ts', '.tsx', '.js', '.json'],
     alias: rxPaths()
   },
 

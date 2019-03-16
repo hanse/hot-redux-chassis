@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> should match snapshot 1`] = `
+<div
+  className="root"
+>
+  <div
+    className="header"
+  >
+    <div
+      className="mobileMenu"
+    >
+      <button
+        className="hamburgerButton"
+        onClick={[Function]}
+      >
+        <div />
+        <div />
+        <div />
+        <div />
+      </button>
+      <a
+        className="mobileTitle"
+        href="/"
+        onClick={[Function]}
+      >
+        hanse
+      </a>
+    </div>
+    <a
+      className="desktopTitle"
+      href="/"
+      onClick={[Function]}
+    >
+      hanse
+    </a>
+    <ul
+      className="navigationItems"
+    >
+      <li>
+        <a
+          aria-current="page"
+          className="activeItem"
+          href="/"
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Home
+        </a>
+      </li>
+      <li>
+        <a
+          aria-current={null}
+          href="/about"
+          onClick={[Function]}
+        >
+          About
+        </a>
+      </li>
+      <li>
+        <a
+          aria-current={null}
+          href="/contact"
+          onClick={[Function]}
+        >
+          Contact
+        </a>
+      </li>
+    </ul>
+    <button
+      className="searchButton"
+      onClick={[Function]}
+    >
+      <i
+        className="icon ion-search"
+      />
+    </button>
+  </div>
+</div>
+`;

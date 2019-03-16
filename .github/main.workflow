@@ -26,11 +26,11 @@ action "Lint" {
   args = "run lint"
 }
 
-action "Type Checking" {
-  uses = "actions/npm@4633da3702a5366129dca9d8cc3191476fc3433c"
-  needs = ["Install Dependencies"]
-  args = "run flow"
-}
+# action "Type Checking" {
+#   uses = "actions/npm@4633da3702a5366129dca9d8cc3191476fc3433c"
+#   needs = ["Install Dependencies"]
+#   args = "run tsc"
+# }
 
 action "Build" {
   uses = "actions/npm@4633da3702a5366129dca9d8cc3191476fc3433c"
@@ -39,7 +39,7 @@ action "Build" {
     NODE_ENV = "production"
   }
   secrets = ["UNSPLASH_APPLICATION_ID"]
-  needs = ["Run Tests", "Lint", "Type Checking"]
+  needs = ["Run Tests", "Lint"]
 }
 
 action "Deploy" {

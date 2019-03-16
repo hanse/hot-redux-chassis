@@ -1,7 +1,7 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["react-app", "prettier", "prettier/flowtype", "prettier/react"],
-  "plugins": ["prettier", "react-hooks"],
+  "parser": "@typescript-eslint/parser",
+  "extends": ["react-app", "prettier", "prettier/react"],
+  "plugins": ["@typescript-eslint", "prettier", "react-hooks"],
   "rules": {
     "prettier/prettier": [
       "error",
@@ -9,7 +9,8 @@
     ],
     "import/no-webpack-loader-syntax": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "error"
+    "react-hooks/exhaustive-deps": "error",
+    "no-unused-vars": "off"
   },
   "settings": {
     "import/resolver": {

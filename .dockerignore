@@ -3,5 +3,4 @@ npm-debug.log
 *.log
 dist
 .env
-flow-typed
 node_modules

@@ -21,8 +21,8 @@ jobs:
           name: Lint CSS
           command: yarn lint:css
       - run:
-          name: Flow
-          command: yarn flow check
+          name: Type Check
+          command: yarn tsc
       - run:
           name: Run Tests
           command: yarn test --coverage

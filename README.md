@@ -10,8 +10,8 @@ A live production build is always available on [https://hot-redux-chassis.now.sh
 - Next-generation JavaScript using [Babel 7](http://babeljs.io/)
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader)
 - Module bundling using [webpack 4](https://github.com/webpack/webpack/)
-- Painless testing using [Jest](https://facebook.github.io/jest/) and [enzyme](https://github.com/airbnb/enzyme)
-- Static type-checking using [Flow](https://flowtype.org)
+- Painless testing using [Jest](https://facebook.github.io/jest/)
+- ~~Static type-checking using [Flow](https://flowtype.org)~~ (Rewritten to TypeScript!)
 - [ESLint](http://eslint.org/) for linting and [Prettier](https://prettier.org) for auto-formatting
 - [Redux](https://github.com/rackt/redux) and [react-router v4](https://github.com/rackt/react-router)
 - [redux-observable](https://github.com/redux-observable/redux-observable) 1.0.0 and RxJS 6 for managing async actions and side effects
