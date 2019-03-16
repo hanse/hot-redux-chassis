@@ -114,7 +114,7 @@ module.exports = options => ({
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(j|t)sx?$/,
         include: path.join(process.cwd(), 'app'),
         use: [
           {
