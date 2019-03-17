@@ -152,7 +152,7 @@ module.exports = options => ({
             options: {
               plugins: [
                 require('postcss-import')(), // eslint-disable-line
-                require('postcss-cssnext'), // eslint-disable-line
+                require('postcss-preset-env')(), // eslint-disable-line
                 require('postcss-nested') // eslint-disable-line
               ]
             }
