@@ -8,7 +8,7 @@ import 'file-loader?name=[name].[ext]!./humans.txt';
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import configureStore from 'app/utils/configureStore';
+import configureStore from 'app/configureStore';
 import createHistory from 'history/createBrowserHistory';
 import Root from './Root';
 

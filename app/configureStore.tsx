@@ -2,10 +2,10 @@ import { createStore, applyMiddleware, compose, Middleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { createLogger } from 'redux-logger';
 import { routerMiddleware } from 'connected-react-router';
-import { rootEpic, rootReducer } from '../state';
-import * as api from '../services/api';
-import * as unsplash from '../services/unsplash';
-import { Store, State, Action } from '../types';
+import { rootEpic, rootReducer } from './state';
+import * as api from './services/api';
+import * as unsplash from './services/unsplash';
+import { Store, State, Action } from './types';
 
 const dependencies = {
   api,
@@ -15,9 +15,11 @@ const dependencies = {
 export type Dependencies = typeof dependencies;
 
 export default function configureStore(history: any): Store {
-  const epicMiddleware = createEpicMiddleware({
-    dependencies
-  });
+  const epicMiddleware = createEpicMiddleware<Action, any, State, Dependencies>(
+    {
+      dependencies
+    }
+  );
 
   const middlewares: Array<Middleware<State, Action>> = [
     epicMiddleware,
@@ -42,8 +44,8 @@ export default function configureStore(history: any): Store {
   );
 
   if (module.hot) {
-    module.hot.accept('../state', () => {
-      const nextReducer = require('../state').rootReducer; // eslint-disable-line
+    module.hot.accept('./state', () => {
+      const nextReducer = require('./state').rootReducer; // eslint-disable-line
       store.replaceReducer(nextReducer);
     });
   }

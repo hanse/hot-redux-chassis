@@ -1,8 +1,7 @@
-import { Store as ReduxStore, Dispatch as ReduxDispatch, Reducer } from 'redux';
-import { Observable } from 'rxjs';
+import { Store as ReduxStore, Dispatch as ReduxDispatch } from 'redux';
 import { Epic as _Epic } from 'redux-observable';
 import { Reducers } from './state';
-import { Dependencies } from './utils/configureStore';
+import { Dependencies } from './configureStore';
 import { LOCATION_CHANGE } from 'connected-react-router';
 
 /**
@@ -117,4 +116,4 @@ export type Store = ReduxStore<State, Action>;
 
 export type Dispatch = ReduxDispatch<Action>;
 
-export type Epic = _Epic<Action, Action, State, Dependencies>;
+export type Epic = _Epic<any, any, State, Dependencies>;

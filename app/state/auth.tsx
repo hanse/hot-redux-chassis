@@ -121,7 +121,7 @@ export const rehydrateAuthEpic: Epic = action$ =>
 export const fetchProfileEpic: Epic = (action$, state$, { api }) =>
   action$.pipe(
     ofType('FETCH_PROFILE'),
-    switchMap(action => {
+    switchMap((action: Extract<Action, { type: 'FETCH_PROFILE' }>) => {
       const { token } = action.payload;
       return api.fetchProfile(token).pipe(
         map(userProfile => fetchProfileSuccess(userProfile)),
