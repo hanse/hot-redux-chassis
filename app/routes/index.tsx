@@ -1,7 +1,7 @@
 import React, { lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-import App from './toplevel';
+import App from './App';
 import { NotFound } from './errors';
 
 const Dashboard = lazy(() => import('./dashboard'));
