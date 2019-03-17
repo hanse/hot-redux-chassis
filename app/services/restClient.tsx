@@ -1,26 +1,11 @@
 import { Observable } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
+import { ajax, AjaxRequest, AjaxResponse } from 'rxjs/ajax';
 
-export type Response<T> = {
+export type Response<T> = AjaxResponse & {
   response: T;
-  xhr: XMLHttpRequest;
 };
 
-// https://github.com/Reactive-Extensions/RxJS-DOM/blob/master/doc/operators/ajax.md
-type RequestOptions = {
-  async?: boolean;
-  body?: Object;
-  crossDomain?: boolean;
-  withCredentials?: boolean;
-  headers?: Object;
-  method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-  user?: string;
-  password?: string;
-  progressObserver?: any;
-  responseType?: 'json' | 'text' | 'blob';
-  timeout?: number;
-  url?: string;
-};
+type RequestOptions = AjaxRequest;
 
 type ApiClient = <T>(
   path: string,
@@ -33,7 +18,7 @@ type ApiClientOptions = {
 
 export function createRestClient({ url }: ApiClientOptions): ApiClient {
   return function request(path, options = {}) {
-    const response: any = ajax({
+    const response = ajax({
       url: `${url}${path}`,
       responseType: 'json',
       headers: {

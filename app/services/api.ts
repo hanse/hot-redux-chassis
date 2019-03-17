@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { createRestClient } from './restClient';
 import {
@@ -21,17 +20,14 @@ function mapLoginResultDto(loginResult: LoginResultDto): LoginResult {
   };
 }
 
-export function login(
-  username: string,
-  password: string
-): Observable<LoginResult> {
-  return fetch('auth/login', {
+export function login(username: string, password: string) {
+  return fetch<LoginResultDto>('auth/login', {
     method: 'POST',
     body: {
       username,
       password
     }
-  }).pipe(map(result => mapLoginResultDto(result.response as LoginResultDto)));
+  }).pipe(map(result => mapLoginResultDto(result.response)));
 }
 
 function mapUserProfileDto(userProfile: UserProfileDto): UserProfile {
@@ -42,22 +38,20 @@ function mapUserProfileDto(userProfile: UserProfileDto): UserProfile {
   };
 }
 
-export function fetchProfile(token: string): Observable<UserProfile> {
-  return fetch('auth/me', {
+export function fetchProfile(token: string) {
+  return fetch<UserProfileDto>('auth/me', {
     headers: {
       Authorization: `Bearer ${token}`
     }
-  }).pipe(map(result => mapUserProfileDto(result.response as UserProfileDto)));
+  }).pipe(map(result => mapUserProfileDto(result.response)));
 }
 
 function mapSearchResultDto(result: SearchResultDto): SearchResult {
   return result;
 }
 
-export function search(query: string): Observable<Array<SearchResult>> {
-  return fetch(`search?q=${query}`).pipe(
-    map(result =>
-      (result.response as Array<SearchResultDto>).map(mapSearchResultDto)
-    )
+export function search(query: string) {
+  return fetch<Array<SearchResultDto>>(`search?q=${query}`).pipe(
+    map(result => result.response.map(mapSearchResultDto))
   );
 }

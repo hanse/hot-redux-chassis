@@ -24,7 +24,9 @@ export type LoginResultDto = {
   token: string;
 };
 
-export type LoginResult = LoginResultDto;
+export type LoginResult = {
+  token: string;
+};
 
 export type SearchResultDto = string;
 export type SearchResult = string;
