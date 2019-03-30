@@ -21,12 +21,12 @@ export function createRestClient({ url }: ApiClientOptions): ApiClient {
     const response = ajax({
       url: `${url}${path}`,
       responseType: 'json',
+      ...options,
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         ...options.headers
-      },
-      ...options
+      }
     });
 
     return response;
