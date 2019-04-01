@@ -20,7 +20,7 @@ function Button({
 }: Props) {
   return (
     <button
-      type="button"
+      type={'button' as any}
       className={cx(
         typeof className === 'string' ? className : styles.button,
         block && styles.block,
