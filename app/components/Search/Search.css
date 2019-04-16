@@ -14,7 +14,7 @@
   height: 84px;
   display: flex;
   padding: 0 var(--rootPadding);
-  background: #222;
+  background: #353c49;
 
   input {
     font-size: 26px;
@@ -33,7 +33,7 @@
 }
 
 .itemList {
-  background: #fff;
+  background: #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   max-height: 600px;
   overflow-y: scroll;
@@ -41,7 +41,7 @@
 
 .item {
   padding: 20px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #aaa;
   display: block;
   text-decoration: none;
   cursor: pointer;

@@ -38,7 +38,7 @@ function Feed(props: Props) {
       >
         <a
           href={`http://unsplash.com?${utmSource}`}
-          style={{ textDecoration: 'none', color: '#333' }}
+          style={{ textDecoration: 'none' }}
         >
           Unsplash
         </a>

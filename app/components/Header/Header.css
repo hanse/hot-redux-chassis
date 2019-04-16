@@ -6,7 +6,7 @@
 }
 
 .root {
-  background: #222;
+  background: #2f3642;
 }
 
 .header {
@@ -36,7 +36,7 @@
     right: 0;
     top: var(--mobileNavigationHeight);
     max-height: 0;
-    background: #333;
+    background: #2f3642;
 
     &.openMenu {
       transform: scaleY(1);

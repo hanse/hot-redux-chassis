@@ -16,10 +16,12 @@ body {
   font-family: system-ui, sans-serif;
   font-size: 1.2rem;
   line-height: 1.8;
+  background: #111;
+  color: #fff;
 }
 
 a {
-  color: rgb(115, 26, 53);
+  color: #eac2c2;
 }
 
 img {
@@ -42,7 +44,10 @@ p {
 
 h2 {
   margin: 20px 0 10px;
-  border-bottom: 1px solid #eee;
+}
+
+h2 a {
+  color: #eac2c2;
 }
 
 pre,

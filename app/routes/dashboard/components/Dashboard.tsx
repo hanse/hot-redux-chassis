@@ -1,6 +1,5 @@
 import styles from './Dashboard.css';
 import React from 'react';
-import ballmer from 'app/assets/ballmer.jpg';
 import LoginForm from 'app/components/LoginForm';
 import MessageBox from 'app/components/MessageBox';
 import Button from 'app/components/Button';
@@ -36,7 +35,6 @@ function Dashboard(props: Props) {
       {props.isLoggedIn && (
         <div>
           <Button onClick={props.logout}>Log out</Button>
-          <img src={ballmer} alt="Steve Ballmer" />
         </div>
       )}
 

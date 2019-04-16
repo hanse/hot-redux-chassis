@@ -13,12 +13,12 @@ const ExactLink = (props: NavLinkProps) => <NavLink {...props} exact />;
 const navigationItems = [
   {
     to: '/',
-    label: 'Home',
+    label: 'Dashboard',
     LinkComponent: ExactLink
   },
   {
     to: '/about',
-    label: 'About',
+    label: 'README',
     LinkComponent: NavLink
   },
   {
