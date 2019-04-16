@@ -4,6 +4,7 @@ import Button from 'app/components/Button';
 import MessageBox from 'app/components/MessageBox';
 import { idToString } from 'app/types';
 import { Post, State as RootState } from 'app/types';
+import styles from './Feed.css';
 
 const utmSource =
   'utm_source=hot-redux-chassis&utm_medium=referral&utm_campaign=api-credit';
@@ -52,20 +53,26 @@ function Feed(props: Props) {
           message="Failed to fetch posts from Unsplash. Maybe we have made too many requests."
         />
       ) : (
-        <div>
+        <div className={styles.postsContainer}>
           {props.posts.map(post => (
-            <div key={idToString(post.id)}>
-              <img src={post.imageUrl} alt={post.user.name} />
-              <p>
-                Photo by{' '}
-                <a href={`${post.user.link}?${utmSource}`}>{post.user.name}</a>
-              </p>
+            <div className={styles.post}>
+              <div key={idToString(post.id)} className={styles.crop}>
+                <img src={post.imageUrl} alt={post.user.name} />
+                <div className={styles.metadata}>
+                  <span>
+                    Photo by{' '}
+                    <a href={`${post.user.link}?${utmSource}`}>
+                      {post.user.name}
+                    </a>
+                  </span>
+                </div>
+              </div>
             </div>
           ))}
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
         <Button link onClick={props.onLoadMore} loading={props.loading}>
           Load More
         </Button>

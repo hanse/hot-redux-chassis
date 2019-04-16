@@ -1,13 +1,12 @@
 .button {
-  font-size: 1.2rem;
-  text-transform: uppercase;
   border: 0;
+  font-size: 1.3rem;
   background: rgba(112, 154, 23, 1);
   color: #fff;
   padding: 10px;
-  font-weight: 400;
   cursor: pointer;
   display: block;
+  border-radius: 4px;
 
   &:hover {
     background: rgba(112, 154, 23, 0.9);

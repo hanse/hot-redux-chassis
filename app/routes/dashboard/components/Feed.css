@@ -1,0 +1,48 @@
+.postsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.post {
+  width: 50%;
+  height: 250px;
+}
+
+.crop {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.crop img {
+  display: block;
+  min-width: 100%;
+  min-height: 100%;
+  margin: auto;
+  position: absolute;
+  top: -100%;
+  right: -100%;
+  bottom: -100%;
+  left: -100%;
+}
+
+.metadata {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-weight: 700;
+}
+
+.post:hover .metadata {
+  opacity: 1;
+}
