@@ -116,6 +116,9 @@
     "rxjs": "6.5.4",
     "uuid": "3.3.3"
   },
+  "resolutions": {
+    "@types/react": "16.9.17"
+  },
   "stylelint": {
     "extends": "stylelint-config-standard",
     "rules": {
