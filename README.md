@@ -6,15 +6,15 @@ A live production build is always available on [https://hot-redux-chassis.now.sh
 
 ## Features
 
-- React 16.8
+- Latest React
 - Next-generation JavaScript using [Babel 7](http://babeljs.io/)
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader)
 - Module bundling using [webpack 4](https://github.com/webpack/webpack/)
 - Painless testing using [Jest](https://facebook.github.io/jest/)
 - ~~Static type-checking using [Flow](https://flowtype.org)~~ (Rewritten to TypeScript!)
 - [ESLint](http://eslint.org/) for linting and [Prettier](https://prettier.org) for auto-formatting
-- [Redux](https://github.com/rackt/redux) and [react-router v4](https://github.com/rackt/react-router)
-- [redux-observable](https://github.com/redux-observable/redux-observable) 1.0.0 and RxJS 6 for managing async actions and side effects
+- [Redux](https://github.com/rackt/redux) and [react-router](https://github.com/rackt/react-router)
+- [redux-observable](https://github.com/redux-observable/redux-observable)and RxJS for managing async actions and side effects
 - [CSS Modules](https://github.com/css-modules/css-modules) + [PostCSS](https://github.com/postcss/postcss) for next generation scoped CSS modules
 
 ## Start a New Project

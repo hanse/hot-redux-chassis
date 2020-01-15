@@ -1,44 +1,44 @@
-const fs = require('fs');
-const path = require('path');
-const webpack = require('webpack');
-const TerserPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-const rxPaths = require('rxjs/_esm5/path-mapping');
-const packageJson = require('../package.json');
+const fs = require("fs");
+const path = require("path");
+const webpack = require("webpack");
+const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin");
+const rxPaths = require("rxjs/_esm5/path-mapping");
+const packageJson = require("../package.json");
 
 const dllConfig = packageJson.dllConfig;
 const compact = filterable => filterable.filter(Boolean);
 
 module.exports = options => ({
-  mode: options.development ? 'development' : 'production',
+  mode: options.development ? "development" : "production",
   /**
    * @see webpack-devtools
    */
-  devtool: options.development ? 'cheap-module-eval-source-map' : 'source-map',
+  devtool: options.development ? "cheap-module-eval-source-map" : "source-map",
 
   /**
    * Define webpack entries
    */
   entry: {
     app: compact([
-      options.development && 'webpack-hot-middleware/client',
-      options.development && 'react-hot-loader/patch',
-      './app/index.tsx'
+      options.development && "webpack-hot-middleware/client",
+      options.development && "react-hot-loader/patch",
+      "./app/index.tsx"
     ]),
-    vendor: ['react', 'react-dom', 'react-router']
+    vendor: ["react", "react-dom", "react-router"]
   },
 
   /**
    * Define the output directory
    */
   output: {
-    path: path.join(__dirname, '..', 'dist'),
-    filename: '[name].js',
-    chunkFilename: '[name].chunk.js',
-    publicPath: '/'
+    path: path.join(__dirname, "..", "dist"),
+    filename: "[name].js",
+    chunkFilename: "[name].chunk.js",
+    publicPath: "/"
   },
 
   optimization: {
@@ -56,9 +56,9 @@ module.exports = options => ({
       ? {}
       : {
           splitChunks: {
-            name: 'vendor',
+            name: "vendor",
             minChunks: Infinity,
-            filename: '[name].js'
+            filename: "[name].js"
           }
         })
   },
@@ -73,8 +73,8 @@ module.exports = options => ({
 
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(!!options.development),
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        'process.env.UNSPLASH_APPLICATION_ID': JSON.stringify(
+        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+        "process.env.UNSPLASH_APPLICATION_ID": JSON.stringify(
           process.env.UNSPLASH_APPLICATION_ID
         )
       }),
@@ -90,16 +90,16 @@ module.exports = options => ({
 
       // Make a separate css bundle for production
       new MiniCssExtractPlugin({
-        filename: options.development ? '[name].css' : '[name].[hash].css',
-        chunkFilename: options.development ? '[id].css' : '[id].[hash].css'
+        filename: options.development ? "[name].css" : "[name].[hash].css",
+        chunkFilename: options.development ? "[id].css" : "[id].[hash].css"
       }),
 
       // build a index.html with assets injected
       new HtmlWebpackPlugin({
-        template: 'app/index.html',
+        template: "app/index.html",
         inject: true,
         hash: true,
-        favicon: 'app/assets/favicon.ico',
+        favicon: "app/assets/favicon.ico",
         appName: packageJson.name,
         isDevelopment: options.development
       })
@@ -107,8 +107,8 @@ module.exports = options => ({
   ),
 
   resolve: {
-    modules: [path.resolve(__dirname, '../'), 'node_modules'],
-    extensions: ['.ts', '.tsx', '.js', '.json'],
+    modules: [path.resolve(__dirname, "../"), "node_modules"],
+    extensions: [".ts", ".tsx", ".js", ".json"],
     alias: rxPaths()
   },
 
@@ -116,10 +116,10 @@ module.exports = options => ({
     rules: [
       {
         test: /\.(j|t)sx?$/,
-        include: path.join(process.cwd(), 'app'),
+        include: path.join(process.cwd(), "app"),
         use: [
           {
-            loader: 'babel-loader',
+            loader: "babel-loader",
             options: { cacheDirectory: true }
           }
         ]
@@ -128,37 +128,38 @@ module.exports = options => ({
         test: /\.css$/,
         include: /node_modules/,
         use: [
-          options.development ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader'
+          options.development ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader"
         ]
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
         use: [
-          options.development ? 'style-loader' : MiniCssExtractPlugin.loader,
+          options.development ? "style-loader" : MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
-              modules: true,
-              importLoaders: 1,
-              localIdentName: options.development
-                ? '[name]__[local]___[hash:base64:5]'
-                : '[hash:base64:8]'
+              modules: {
+                localIdentName: options.development
+                  ? "[name]__[local]___[hash:base64:5]"
+                  : "[hash:base64:8]"
+              },
+              importLoaders: 1
             }
           },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
               plugins: [
-                require('postcss-import')(), // eslint-disable-line
-                require('postcss-preset-env')({
+                require("postcss-import")(), // eslint-disable-line
+                require("postcss-preset-env")({
                   stage: 1,
                   features: {
-                    'nesting-rules': true
+                    "nesting-rules": true
                   }
                 }),
-                require('postcss-nested') // eslint-disable-line
+                require("postcss-nested") // eslint-disable-line
               ]
             }
           }
@@ -168,7 +169,7 @@ module.exports = options => ({
         test: /\.(png|jpg|mp4|webm)/,
         use: [
           {
-            loader: 'url-loader',
+            loader: "url-loader",
             options: {
               limit: 8192
             }
@@ -178,7 +179,7 @@ module.exports = options => ({
     ]
   },
 
-  target: 'web'
+  target: "web"
 });
 
 function getDependencyHandlers(options) {
@@ -187,11 +188,11 @@ function getDependencyHandlers(options) {
   }
 
   const dllPath = path.resolve(process.cwd(), dllConfig.path);
-  const manifestPath = path.resolve(dllPath, 'vendors.json');
+  const manifestPath = path.resolve(dllPath, "vendors.json");
 
   if (!fs.existsSync(manifestPath)) {
     console.error(
-      'The DLL manifest is missing. Please run `yarn run build:dll`'
+      "The DLL manifest is missing. Please run `yarn run build:dll`"
     );
     process.exit(0);
   }
