@@ -45,7 +45,7 @@ exports[`<Header /> should match snapshot 1`] = `
           onClick={[Function]}
           style={Object {}}
         >
-          Home
+          Dashboard
         </a>
       </li>
       <li>
@@ -54,7 +54,7 @@ exports[`<Header /> should match snapshot 1`] = `
           href="/about"
           onClick={[Function]}
         >
-          About
+          README
         </a>
       </li>
       <li>
