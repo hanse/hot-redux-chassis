@@ -17,7 +17,4 @@ const mapDispatchToProps = {
   clearLoginError
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

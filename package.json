@@ -45,6 +45,7 @@
     "@types/react-test-renderer": "16.9.1",
     "@types/redux-logger": "3.0.7",
     "@typescript-eslint/eslint-plugin": "2.16.0",
+    "@typescript-eslint/parser": "2.16.0",
     "babel-eslint": "10.0.3",
     "babel-jest": "24.9.0",
     "babel-loader": "8.0.6",
@@ -161,5 +162,48 @@
       "express",
       "node-uuid"
     ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "bracketSpacing": true
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "react-app",
+      "prettier",
+      "prettier/react"
+    ],
+    "plugins": [
+      "@typescript-eslint",
+      "prettier",
+      "react-hooks"
+    ],
+    "rules": {
+      "prettier/prettier": "error",
+      "import/no-webpack-loader-syntax": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "error",
+      "no-unused-vars": "off"
+    },
+    "settings": {
+      "import/resolver": {
+        "webpack": {
+          "config": "webpack/webpack.config.babel.js"
+        }
+      },
+      "react": {
+        "version": "16"
+      }
+    },
+    "env": {
+      "browser": true,
+      "jest": true
+    },
+    "globals": {
+      "__DEV__": true,
+      "COMMIT_HASH": true,
+      "log": true
+    }
   }
 }

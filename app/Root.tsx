@@ -1,6 +1,5 @@
 import React, { StrictMode, Suspense } from 'react';
 import { Provider } from 'react-redux';
-import history from 'history';
 import Router from 'app/routes';
 import { Store } from './types';
 

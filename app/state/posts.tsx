@@ -76,10 +76,7 @@ export default function posts(
 }
 
 export const refreshPostsEpic: Epic = action$ =>
-  action$.pipe(
-    ofType('POSTS_REFRESH'),
-    map(fetchPosts)
-  );
+  action$.pipe(ofType('POSTS_REFRESH'), map(fetchPosts));
 
 export const fetchPostsEpic: Epic = (action$, state$, { unsplash }) =>
   action$.pipe(

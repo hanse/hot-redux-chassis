@@ -10,7 +10,7 @@ function HamburgerButton({ open, ...props }: Props) {
   return (
     <button
       className={cx(styles.hamburgerButton, open === true && styles.open)}
-      {...props as any}
+      {...(props as any)}
     >
       <div />
       <div />
