@@ -1,5 +1,5 @@
 const express = require('express');
-const uuid = require('node-uuid');
+const uuid = require('uuid');
 
 const router = new express.Router();
 
