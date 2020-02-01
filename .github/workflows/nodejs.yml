@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 13.x]
+        node-version: [13.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -27,7 +27,7 @@ jobs:
       - name: Archive production artifact
         uses: actions/upload-artifact@v1
         with:
-          name: dist
+          name: hot-redux-chassis-${{ github.sha }}
           path: dist
       - name: Archive code coverage results
         uses: actions/upload-artifact@v1
