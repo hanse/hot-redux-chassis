@@ -38,7 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Docker image
-        run: docker build --build-arg UNSPLASH_APPLICATION_ID=${{ secrets.UNSPLASH_APPLICATION_ID }} -t hanse/hot-redux-chassis:${{ github.sha }} .
+        run: docker build --build-arg UNSPLASH_APPLICATION_ID=${{ secrets.UNSPLASH_APPLICATION_ID }} --tag image .
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
