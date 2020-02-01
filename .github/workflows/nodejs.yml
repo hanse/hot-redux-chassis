@@ -24,3 +24,13 @@ jobs:
       - run: yarn build
         env:
           UNSPLASH_APPLICATION_ID: ${{ secrets.UNSPLASH_APPLICATION_ID }}
+      - name: Archive production artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: dist
+          path: dist
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v1
+        with:
+          name: code-coverage-report
+          path: coverage

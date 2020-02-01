@@ -20,12 +20,11 @@ jobs:
       - run:
           name: Lint CSS
           command: yarn lint:css
-      - run:
-          name: Type Check
-          command: yarn tsc
+      #- run:
+      #    name: Type Check
+      #    command: yarn tsc
       - run:
           name: Run Tests
           command: yarn test --coverage
       - store_artifacts:
           path: coverage
-          prefix: coverage
