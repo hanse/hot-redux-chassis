@@ -1,14 +1,13 @@
 # Stage 1
 
-FROM node:10-alpine as builder
+FROM node:13-alpine as builder
 
 WORKDIR /app
 
 ARG UNSPLASH_APPLICATION_ID
 
-ENV PORT 3000
-ENV NODE_ENV=production
-ENV UNSPLASH_APPLICATION_ID=${UNSPLASH_APPLICATION_ID}
+ENV NODE_ENV production
+ENV UNSPLASH_APPLICATION_ID ${UNSPLASH_APPLICATION_ID}
 
 COPY package.json .
 COPY yarn.lock .
