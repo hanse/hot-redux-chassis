@@ -21,14 +21,8 @@ jobs:
       - run: yarn test
         env:
           CI: true
-      - run: yarn build
-        env:
-          UNSPLASH_APPLICATION_ID: ${{ secrets.UNSPLASH_APPLICATION_ID }}
-      - name: Archive production artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: hot-redux-chassis-${{ github.sha }}
-          path: dist
+      - name: Build Docker image
+        run: docker build --build-arg UNSPLASH_APPLICATION_ID=${{ secrets.UNSPLASH_APPLICATION_ID }} -t hanse/hot-redux-chassis:${{ github.sha }} .
       - name: Archive code coverage results
         uses: actions/upload-artifact@v1
         with:
