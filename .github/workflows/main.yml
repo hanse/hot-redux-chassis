@@ -41,8 +41,9 @@ jobs:
         run: docker build --build-arg UNSPLASH_APPLICATION_ID=${{ secrets.UNSPLASH_APPLICATION_ID }} --tag image .
 
       - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+          echo "${{ secrets.HEROKU_AUTH_TOKEN }}" | docker login registry.heroku.com -u _ --password-stdin
       - name: Push image
         run: |
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/app
@@ -53,3 +54,5 @@ jobs:
           echo VERSION=$VERSION
           docker tag image $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
+          docker tag image registry.heroku.com/hot-redux-chassis/web
+          docker push registry.heroku.com/hot-redux-chassis/web

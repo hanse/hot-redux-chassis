@@ -21,11 +21,11 @@ RUN yarn build
 
 # Stage 2
 
-FROM node:10-alpine
+FROM node:13-alpine
 WORKDIR /app
 
 ENV PORT 3000
-ENV NODE_ENV=production
+ENV NODE_ENV production
 
 COPY package.json .
 COPY yarn.lock .
