@@ -18,6 +18,7 @@ function LoginForm(props: Props) {
   return (
     <form onSubmit={handleSubmit}>
       <Input
+        autoFocus
         type="text"
         placeholder="username"
         value={username}
