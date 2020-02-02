@@ -24,6 +24,8 @@ RUN yarn build
 FROM node:13-alpine
 WORKDIR /app
 
+USER node
+
 ENV PORT 3000
 ENV NODE_ENV production
 
