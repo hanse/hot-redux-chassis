@@ -24,7 +24,11 @@ function Dashboard(props: Props) {
       {!props.isLoggedIn && (
         <>
           <Button onClick={() => setLoginOpen(true)}>Login</Button>
-          <Modal isOpen={loginOpen} onDismiss={() => setLoginOpen(false)}>
+          <Modal
+            isOpen={loginOpen}
+            onDismiss={() => setLoginOpen(false)}
+            title="Login"
+          >
             <div className={styles.loginContainer}>
               {props.loginFailed && (
                 <MessageBox

@@ -4,12 +4,18 @@
   padding: 16px;
   margin-bottom: 10px;
   border: 0;
-  border-bottom: 2px solid #ccc;
+  border: 2px solid #ccc;
+  background: #fafafa;
   width: 100%;
   border-radius: 4px;
+}
 
-  &:focus {
-    outline: none;
-    border-color: #333;
-  }
+.input:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.label {
+  font-weight: 700;
+  cursor: pointer;
 }

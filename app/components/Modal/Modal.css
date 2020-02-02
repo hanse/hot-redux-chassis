@@ -11,14 +11,37 @@
   justify-content: center;
 }
 
-.content {
+.dialog {
   max-width: 600px;
   border: 0;
   box-shadow: none;
   outline: none;
-  padding: 16px;
   background: #fff;
   display: flex;
   flex-direction: column;
   flex: 1;
+  position: relative;
+}
+
+.title {
+  padding: 12px 24px;
+  background: #ddd;
+}
+
+.title h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+}
+
+.content {
+  padding: 24px;
+}
+
+.closeButton {
+  position: absolute;
+  cursor: pointer;
+  font-size: 24px;
+  top: 16px;
+  right: 24px;
 }

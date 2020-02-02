@@ -19,20 +19,22 @@ function LoginForm(props: Props) {
     <form onSubmit={handleSubmit}>
       <Input
         autoFocus
+        id="username"
+        label="Username"
         type="text"
-        placeholder="username"
         value={username}
         onChange={e => setUsername((e.target as HTMLInputElement).value)}
       />
 
       <Input
+        id="password"
         type="password"
-        placeholder="password"
+        label="Password"
         value={password}
         onChange={e => setPassword((e.target as HTMLInputElement).value)}
       />
 
-      <Button type="submit" block>
+      <Button type="submit" block style={{ marginTop: '24px' }}>
         Login
       </Button>
     </form>
