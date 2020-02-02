@@ -2,39 +2,23 @@
 
 import '@babel/polyfill';
 import 'isomorphic-fetch';
+import 'react-hot-loader';
 
 import 'file-loader?name=[name].[ext]!./humans.txt';
 
 import React from 'react';
 import { render } from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
 import configureStore from 'app/configureStore';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import Root from './Root';
 
 if (__DEV__) {
   (global as any).React = React;
 }
 
-const history = createHistory();
+const history = createBrowserHistory();
 const store = configureStore(history);
 
 const rootElement = document.getElementById('root') as HTMLElement;
 
-render(
-  <AppContainer>
-    <Root {...{ store, history }} />
-  </AppContainer>,
-  rootElement
-);
-
-if (module.hot) {
-  module.hot.accept('./Root', () => {
-    render(
-      <AppContainer>
-        <Root {...{ store, history }} />
-      </AppContainer>,
-      rootElement
-    );
-  });
-}
+render(<Root {...{ store, history }} />, rootElement);

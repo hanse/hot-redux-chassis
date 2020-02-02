@@ -72,11 +72,19 @@ function Feed(props: Props) {
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
-        <Button link onClick={props.onLoadMore} loading={props.loading}>
-          Load More
-        </Button>
-      </div>
+      {!props.failed && (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: 20
+          }}
+        >
+          <Button link onClick={props.onLoadMore} loading={props.loading}>
+            Load More
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

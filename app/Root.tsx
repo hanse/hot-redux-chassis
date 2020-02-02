@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import React, { StrictMode, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import Router from 'app/routes';
@@ -20,4 +21,4 @@ function Root({ store, history }: Props) {
   );
 }
 
-export default Root;
+export default hot(Root);

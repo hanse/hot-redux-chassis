@@ -45,7 +45,7 @@ class Search extends Component<Props, State> {
   }
 
   scrollToSelectedIndex = () => {
-    if (this.state.selectedIndex < 0) {
+    if (this.state.selectedIndex < 0 || this.props.results.length === 0) {
       return;
     }
 

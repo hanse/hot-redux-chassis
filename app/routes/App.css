@@ -16,12 +16,11 @@ body {
   font-family: system-ui, sans-serif;
   font-size: 1.2rem;
   line-height: 1.8;
-  background: #111;
-  color: #fff;
+  color: #333;
 }
 
 a {
-  color: #eac2c2;
+  color: #a06c6c;
 }
 
 img {
@@ -47,7 +46,7 @@ h2 {
 }
 
 h2 a {
-  color: #eac2c2;
+  color: #333;
 }
 
 pre,

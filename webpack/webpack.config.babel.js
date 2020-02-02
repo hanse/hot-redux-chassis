@@ -109,7 +109,10 @@ module.exports = options => ({
   resolve: {
     modules: [path.resolve(__dirname, '../'), 'node_modules'],
     extensions: ['.ts', '.tsx', '.js', '.json'],
-    alias: rxPaths()
+    alias: {
+      ...rxPaths(),
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
 
   module: {
