@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [13.x]
+        node-version: [12.x, 13.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -40,11 +40,11 @@ jobs:
       - name: Build Docker image
         run: docker build --build-arg UNSPLASH_APPLICATION_ID=${{ secrets.UNSPLASH_APPLICATION_ID }} --tag image .
 
-      - name: Log into registry
+      - name: Log into Docker registries
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
           echo "${{ secrets.HEROKU_AUTH_TOKEN }}" | docker login registry.heroku.com -u _ --password-stdin
-      - name: Push image
+      - name: Push Docker images
         run: |
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/app
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')

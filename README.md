@@ -1,4 +1,4 @@
-# hot-redux-chassis [![CircleCI](https://circleci.com/gh/hanse/hot-redux-chassis/tree/master.svg?style=svg)](https://circleci.com/gh/hanse/hot-redux-chassis/tree/master) ![](https://github.com/hanse/hot-redux-chassis/workflows/Test, Build and Deploy/badge.svg)
+# hot-redux-chassis [![CircleCI](https://circleci.com/gh/hanse/hot-redux-chassis/tree/master.svg?style=svg)](https://circleci.com/gh/hanse/hot-redux-chassis/tree/master)
 
 This repo is a playground for modern web development techniques with a focus on the [React](https://facebook.github.io/react/) eco-system. It is rapidly changing to adopt new versions of popular packages and ideas from the community. The code shows how one can glue a mix of these packages together to create cool projects. In addition, the repo itself can serve as a starting point for new projects.
 
@@ -23,7 +23,7 @@ A CI/CD pipeline is set up with GitHub Actions. The pipeline runs tests, linters
 
 ## Start a New Project
 
-This is not intended as a boilerplate, but rather to show how to use different things in this big eco-system. When starting out you **should not add every bits and pieces at once**, unless you know what you are doing.
+This is not intended as a boilerplate, but rather to show how to use different things in the JavaScript/React eco-system. When starting out you **should not add every bits and pieces at once**, unless you know what you are doing. If you want everything setup and ready to go, use [create-react-app](https://github.com/facebook/create-react-app)!
 
 ## License
 
