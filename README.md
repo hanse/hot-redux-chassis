@@ -1,4 +1,4 @@
-# hot-redux-chassis [![CircleCI](https://circleci.com/gh/hanse/hot-redux-chassis/tree/master.svg?style=svg)](https://circleci.com/gh/hanse/hot-redux-chassis/tree/master) ![](https://github.com/hanse/hot-redux-chassis/workflows/main/badge.svg)
+# hot-redux-chassis [![CircleCI](https://circleci.com/gh/hanse/hot-redux-chassis/tree/master.svg?style=svg)](https://circleci.com/gh/hanse/hot-redux-chassis/tree/master) ![](https://github.com/hanse/hot-redux-chassis/workflows/Test, Build and Deploy/badge.svg)
 
 This repo is a playground for modern web development techniques with a focus on the [React](https://facebook.github.io/react/) eco-system. It is rapidly changing to adopt new versions of popular packages and ideas from the community. The code shows how one can glue a mix of these packages together to create cool projects. In addition, the repo itself can serve as a starting point for new projects.
 
@@ -17,7 +17,7 @@ A live production build is always available on [https://hot-redux-chassis.heroku
 - [redux-observable](https://github.com/redux-observable/redux-observable) and RxJS for managing async actions and side effects
 - [CSS Modules](https://github.com/css-modules/css-modules) + [PostCSS](https://github.com/postcss/postcss) for next generation scoped CSS modules
 
-## Github Actions
+## GitHub Actions
 
 A CI/CD pipeline is set up with GitHub Actions. The pipeline runs tests, linters, build docker images and publish them to the Package Registry and to Heroku.
 
