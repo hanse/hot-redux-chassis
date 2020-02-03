@@ -37,6 +37,8 @@ COPY . .
 
 COPY --from=builder /app/dist ./dist
 
+USER node
+
 ENTRYPOINT node server
 
 EXPOSE $PORT
