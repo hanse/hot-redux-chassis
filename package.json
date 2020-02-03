@@ -36,7 +36,7 @@
     "@types/history": "4.7.5",
     "@types/jest": "25.1.1",
     "@types/node": "13.7.0",
-    "@types/react": "16.9.17",
+    "@types/react": "16.9.19",
     "@types/react-dom": "16.9.4",
     "@types/react-modal": "3.10.3",
     "@types/react-redux": "7.1.5",
@@ -118,7 +118,7 @@
     "uuid": "3.4.0"
   },
   "resolutions": {
-    "@types/react": "16.9.17"
+    "@types/react": "16.9.19"
   },
   "stylelint": {
     "extends": "stylelint-config-standard",
