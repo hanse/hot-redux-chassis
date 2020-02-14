@@ -103,7 +103,7 @@
     "fuzzysearch": "1.0.3",
     "history": "4.10.1",
     "isomorphic-fetch": "2.2.1",
-    "query-string": "6.10.1",
+    "query-string": "6.11.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-markdown": "4.3.1",
