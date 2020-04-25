@@ -2,7 +2,7 @@ import LoginForm from './';
 import { testComponentSnapshots } from 'tests/helpers';
 
 const defaultProps = {
-  onSubmit: () => {}
+  onSubmit: () => {},
 };
 
 describe('<LoginForm />', () => {

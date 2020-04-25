@@ -33,7 +33,7 @@ function Feed(props: Props) {
         style={{
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
         }}
       >
         <a
@@ -54,7 +54,7 @@ function Feed(props: Props) {
         />
       ) : (
         <div className={styles.postsContainer}>
-          {props.posts.map(post => (
+          {props.posts.map((post) => (
             <div className={styles.post}>
               <div key={idToString(post.id)} className={styles.crop}>
                 <img src={post.imageUrl} alt={post.user.name} />
@@ -77,7 +77,7 @@ function Feed(props: Props) {
           style={{
             display: 'flex',
             justifyContent: 'center',
-            marginTop: 20
+            marginTop: 20,
           }}
         >
           <Button link onClick={props.onLoadMore} loading={props.loading}>
@@ -94,7 +94,7 @@ function mapStateToProps(state: RootState) {
     posts: state.posts.items,
     loading: state.posts.loading,
     failed: state.posts.failed,
-    hasPosts: state.posts.pageCount > 0
+    hasPosts: state.posts.pageCount > 0,
   };
 }
 

@@ -14,18 +14,18 @@ const navigationItems = [
   {
     to: '/',
     label: 'Dashboard',
-    LinkComponent: ExactLink
+    LinkComponent: ExactLink,
   },
   {
     to: '/about',
     label: 'README',
-    LinkComponent: NavLink
+    LinkComponent: NavLink,
   },
   {
     to: '/contact',
     label: 'Contact',
-    LinkComponent: NavLink
-  }
+    LinkComponent: NavLink,
+  },
 ];
 
 type Props = {
@@ -45,7 +45,7 @@ type Props = {
 function Header(props: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => setMenuOpen(open => !open);
+  const toggleMenu = () => setMenuOpen((open) => !open);
   const closeMenu = () => setMenuOpen(false);
   const openSearch = () => {
     setMenuOpen(false);

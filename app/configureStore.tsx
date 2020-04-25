@@ -9,7 +9,7 @@ import { Store, State, Action } from './types';
 
 const dependencies = {
   api,
-  unsplash
+  unsplash,
 };
 
 export type Dependencies = typeof dependencies;
@@ -17,19 +17,19 @@ export type Dependencies = typeof dependencies;
 export default function configureStore(history: any): Store {
   const epicMiddleware = createEpicMiddleware<Action, any, State, Dependencies>(
     {
-      dependencies
+      dependencies,
     }
   );
 
   const middlewares: Array<Middleware<State, Action>> = [
     epicMiddleware,
-    routerMiddleware(history)
+    routerMiddleware(history),
   ];
 
   if (__DEV__) {
     const logger = createLogger({
       level: 'info',
-      collapsed: true
+      collapsed: true,
     });
 
     middlewares.push(logger);

@@ -7,11 +7,11 @@ import { State } from 'app/types';
 const mapStateToProps = (state: State, ownProps: any) => ({
   query: qs.parse(ownProps.location.search).q as string | undefined,
   results: state.search.results,
-  searching: state.search.searching
+  searching: state.search.searching,
 });
 
 const mapDispatchToProps = {
-  search
+  search,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

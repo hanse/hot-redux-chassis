@@ -12,15 +12,12 @@ function extractNextPageUrl(xhr: XMLHttpRequest) {
 
   const links = linkHeader.split(',');
 
-  const nextLink = links.find(link => link.includes('rel="next"'));
+  const nextLink = links.find((link) => link.includes('rel="next"'));
   if (!nextLink) {
     return null;
   }
 
-  return nextLink
-    .trim()
-    .split(';')[0]
-    .slice(1, -1);
+  return nextLink.trim().split(';')[0].slice(1, -1);
 }
 
 const initialState = {
@@ -28,7 +25,7 @@ const initialState = {
   nextPageUrl: '',
   pageCount: 0,
   loading: false,
-  failed: false
+  failed: false,
 };
 
 type State = {
@@ -48,7 +45,7 @@ export default function posts(
       return {
         ...state,
         failed: false,
-        loading: true
+        loading: true,
       };
 
     case 'POSTS_REFRESH':
@@ -60,14 +57,14 @@ export default function posts(
         items: state.items.concat(action.payload.items),
         nextPageUrl: action.payload.nextPageUrl,
         loading: false,
-        pageCount: state.pageCount + 1
+        pageCount: state.pageCount + 1,
       };
 
     case 'POSTS_FETCH_FAILED':
       return {
         ...state,
         failed: true,
-        loading: false
+        loading: false,
       };
 
     default:
@@ -75,7 +72,7 @@ export default function posts(
   }
 }
 
-export const refreshPostsEpic: Epic = action$ =>
+export const refreshPostsEpic: Epic = (action$) =>
   action$.pipe(ofType('POSTS_REFRESH'), map(fetchPosts));
 
 export const fetchPostsEpic: Epic = (action$, state$, { unsplash }) =>
@@ -84,7 +81,7 @@ export const fetchPostsEpic: Epic = (action$, state$, { unsplash }) =>
     switchMap(() =>
       unsplash.fetchPosts(state$.value.posts.nextPageUrl).pipe(
         delay(1000),
-        switchMap(result =>
+        switchMap((result) =>
           of(postsReceived(result.response, extractNextPageUrl(result.xhr)))
         ),
         catchError((error: Error) => of(fetchPostsFailed(error)))
@@ -99,14 +96,14 @@ function mapPostDto(post: PostDto): Post {
     user: {
       name: post.user.name,
       location: post.user.location,
-      link: post.user.links.html
-    }
+      link: post.user.links.html,
+    },
   };
 }
 
 export function fetchPosts(): Action {
   return {
-    type: 'POSTS_FETCH'
+    type: 'POSTS_FETCH',
   };
 }
 
@@ -114,7 +111,7 @@ export function fetchPostsFailed(error: Error): Action {
   return {
     type: 'POSTS_FETCH_FAILED',
     payload: error,
-    error: true
+    error: true,
   };
 }
 
@@ -126,7 +123,7 @@ export function postsReceived(
     type: 'POSTS_RECEIVED',
     payload: {
       items: items.map(mapPostDto),
-      nextPageUrl
-    }
+      nextPageUrl,
+    },
   };
 }

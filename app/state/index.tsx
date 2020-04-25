@@ -5,14 +5,14 @@ import auth, {
   loginEpic,
   logoutEpic,
   rehydrateAuthEpic,
-  fetchProfileEpic
+  fetchProfileEpic,
 } from 'app/state/auth';
 import notifications, { errorNotificationEpic } from 'app/state/notifications';
 import ui from 'app/state/ui';
 import results, {
   searchEpic,
   clearSearchEpic,
-  searchResultSelectedEpic
+  searchResultSelectedEpic,
 } from 'app/state/search';
 import posts, { fetchPostsEpic, refreshPostsEpic } from 'app/state/posts';
 
@@ -21,7 +21,7 @@ const reducers = {
   notifications,
   ui,
   posts,
-  search: results
+  search: results,
 };
 
 export type Reducers = typeof reducers & {
@@ -31,7 +31,7 @@ export type Reducers = typeof reducers & {
 export const rootReducer = (history: any) =>
   combineReducers({
     router: connectRouter(history),
-    ...reducers
+    ...reducers,
   });
 
 export const rootEpic = combineEpics(

@@ -8,15 +8,15 @@ export function showNotification(message: string): Action {
     type: 'SHOW_NOTIFICATION',
     payload: {
       id: notificationId++, // impure
-      message
-    }
+      message,
+    },
   };
 }
 
 export function dismissNotification(id: number): Action {
   return {
     type: 'DISMISS_NOTIFICATION',
-    payload: id
+    payload: id,
   };
 }
 
@@ -29,10 +29,10 @@ function formatActionError(action: Action): string {
   return 'Unknown error';
 }
 
-export const errorNotificationEpic: Epic = action$ =>
+export const errorNotificationEpic: Epic = (action$) =>
   action$.pipe(
-    filter(action => ('error' in action ? !!action.error : false)),
-    map(action => showNotification(formatActionError(action)))
+    filter((action) => ('error' in action ? !!action.error : false)),
+    map((action) => showNotification(formatActionError(action)))
   );
 
 /**
@@ -56,7 +56,7 @@ export default function notifications(
     case 'SHOW_NOTIFICATION':
       return {
         ...state,
-        [action.payload.id]: action.payload
+        [action.payload.id]: action.payload,
       };
 
     case 'DISMISS_NOTIFICATION': {

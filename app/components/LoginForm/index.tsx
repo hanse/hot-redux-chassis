@@ -23,7 +23,7 @@ function LoginForm(props: Props) {
         label="Username"
         type="text"
         value={username}
-        onChange={e => setUsername((e.target as HTMLInputElement).value)}
+        onChange={(e) => setUsername((e.target as HTMLInputElement).value)}
       />
 
       <Input
@@ -31,7 +31,7 @@ function LoginForm(props: Props) {
         type="password"
         label="Password"
         value={password}
-        onChange={e => setPassword((e.target as HTMLInputElement).value)}
+        onChange={(e) => setPassword((e.target as HTMLInputElement).value)}
       />
 
       <Button type="submit" block style={{ marginTop: '24px' }}>

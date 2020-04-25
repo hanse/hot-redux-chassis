@@ -25,8 +25,8 @@ export function createRestClient({ url }: ApiClientOptions): ApiClient {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        ...options.headers
-      }
+        ...options.headers,
+      },
     });
 
     return response;
@@ -34,5 +34,5 @@ export function createRestClient({ url }: ApiClientOptions): ApiClient {
 }
 
 export default createRestClient({
-  url: 'api/'
+  url: 'api/',
 });

@@ -6,7 +6,7 @@ const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {
   login,
-  logout
+  logout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

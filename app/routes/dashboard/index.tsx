@@ -7,14 +7,14 @@ function mapStateToProps(state: State) {
   return {
     username: state.auth.username,
     isLoggedIn: isLoggedIn(state),
-    loginFailed: state.auth.failed
+    loginFailed: state.auth.failed,
   };
 }
 
 const mapDispatchToProps = {
   login,
   logout,
-  clearLoginError
+  clearLoginError,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

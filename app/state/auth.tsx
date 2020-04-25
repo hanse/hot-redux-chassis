@@ -7,26 +7,26 @@ import {
   Action,
   UserProfile,
   LoginResult,
-  Epic
+  Epic,
 } from 'app/types';
 
 export function rehydrateAuth(): Action {
   return {
-    type: 'REHYDRATE_AUTH'
+    type: 'REHYDRATE_AUTH',
   };
 }
 
 export function fetchUserProfile(token: string): Action {
   return {
     type: 'FETCH_PROFILE',
-    payload: { token }
+    payload: { token },
   };
 }
 
 export function fetchProfileSuccess(userProfile: UserProfile): Action {
   return {
     type: 'FETCH_PROFILE_SUCCESS',
-    payload: userProfile
+    payload: userProfile,
   };
 }
 
@@ -34,7 +34,7 @@ export function fetchProfileFailure(error: Error): Action {
   return {
     type: 'FETCH_PROFILE_FAILURE',
     payload: error,
-    error: true
+    error: true,
   };
 }
 
@@ -43,15 +43,15 @@ export function login(username: string, password: string): Action {
     type: 'LOGIN',
     payload: {
       username,
-      password
-    }
+      password,
+    },
   };
 }
 
 export function loginSuccess(payload: LoginResult): Action {
   return {
     type: 'LOGIN_SUCCESS',
-    payload
+    payload,
   };
 }
 
@@ -59,35 +59,35 @@ export function loginFailure(error: Error): Action {
   return {
     type: 'LOGIN_FAILURE',
     payload: error,
-    error: true
+    error: true,
   };
 }
 
 export function logout(): Action {
   return {
-    type: 'LOGOUT'
+    type: 'LOGOUT',
   };
 }
 
 export function logoutSuccess(): Action {
   return {
-    type: 'LOGOUT_SUCCESS'
+    type: 'LOGOUT_SUCCESS',
   };
 }
 
 export function clearLoginError(): Action {
   return {
-    type: 'LOGIN_CLEAR_ERROR'
+    type: 'LOGIN_CLEAR_ERROR',
   };
 }
 
 export const loginEpic: Epic = (action$, store, { api }) =>
   action$.pipe(
     ofType('LOGIN'),
-    map(action => action.payload),
+    map((action) => action.payload),
     switchMap(({ username, password }) =>
       api.login(username, password).pipe(
-        switchMap(payload => {
+        switchMap((payload) => {
           window.localStorage.setItem('token', payload.token);
           return of(loginSuccess(payload), fetchUserProfile(payload.token));
         }),
@@ -96,7 +96,7 @@ export const loginEpic: Epic = (action$, store, { api }) =>
     )
   );
 
-export const logoutEpic: Epic = action$ =>
+export const logoutEpic: Epic = (action$) =>
   action$.pipe(
     ofType('LOGOUT'),
     switchMap(() => {
@@ -105,7 +105,7 @@ export const logoutEpic: Epic = action$ =>
     })
   );
 
-export const rehydrateAuthEpic: Epic = action$ =>
+export const rehydrateAuthEpic: Epic = (action$) =>
   action$.pipe(
     ofType('REHYDRATE_AUTH'),
     switchMap(() => {
@@ -124,7 +124,7 @@ export const fetchProfileEpic: Epic = (action$, state$, { api }) =>
     switchMap((action: Extract<Action, { type: 'FETCH_PROFILE' }>) => {
       const { token } = action.payload;
       return api.fetchProfile(token).pipe(
-        map(userProfile => fetchProfileSuccess(userProfile)),
+        map((userProfile) => fetchProfileSuccess(userProfile)),
         catchError((error: Error) => of(fetchProfileFailure(error)))
       );
     })
@@ -133,7 +133,7 @@ export const fetchProfileEpic: Epic = (action$, state$, { api }) =>
 const initialState = {
   username: 'Guest',
   token: null,
-  failed: false
+  failed: false,
 };
 
 type State = {
@@ -152,19 +152,19 @@ export default function auth(
     case 'LOGIN_CLEAR_ERROR':
       return {
         ...state,
-        failed: false
+        failed: false,
       };
 
     case 'LOGIN_FAILURE':
       return {
         ...state,
-        failed: true
+        failed: true,
       };
 
     case 'LOGIN_SUCCESS':
       return {
         ...state,
-        token: action.payload.token
+        token: action.payload.token,
       };
 
     case 'LOGOUT':
@@ -173,7 +173,7 @@ export default function auth(
     case 'FETCH_PROFILE_SUCCESS':
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
 
     case 'FETCH_PROFILE_FAILURE':

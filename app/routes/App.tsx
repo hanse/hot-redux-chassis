@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   rehydrateAuth,
   isLoggedIn,
-  selectCurrentUsername
+  selectCurrentUsername,
 } from 'app/state/auth';
 import { closeSearch, openSearch } from 'app/state/ui';
 import Header from 'app/components/Header';
@@ -42,13 +42,13 @@ const mapStateToProps = (state: State) => ({
   username: selectCurrentUsername(state),
   isLoggedIn: isLoggedIn(state),
   searchOpen: state.ui.searchOpen,
-  location: state.router.location
+  location: state.router.location,
 });
 
 const mapDispatchToProps = {
   rehydrateAuth,
   closeSearch,
-  openSearch
+  openSearch,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

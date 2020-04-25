@@ -22,7 +22,7 @@ type State = {
 class Search extends Component<Props, State> {
   state = {
     selectedIndex: -1,
-    query: this.props.query || ''
+    query: this.props.query || '',
   };
 
   itemRefs: { [key: string]: HTMLElement | undefined | null } = {};
@@ -68,8 +68,8 @@ class Search extends Component<Props, State> {
     switch (e.which) {
       case 38:
         e.preventDefault();
-        this.setState(state => ({
-          selectedIndex: Math.max(-1, state.selectedIndex - 1)
+        this.setState((state) => ({
+          selectedIndex: Math.max(-1, state.selectedIndex - 1),
         }));
         break;
 
@@ -79,7 +79,7 @@ class Search extends Component<Props, State> {
           selectedIndex: Math.min(
             props.results.length - 1,
             state.selectedIndex + 1
-          )
+          ),
         }));
         break;
 
@@ -110,7 +110,7 @@ class Search extends Component<Props, State> {
       >
         <div className={styles.inputContainer}>
           <input
-            ref={ref => (this.searchInput = ref)}
+            ref={(ref) => (this.searchInput = ref)}
             type="text"
             placeholder="What are you looking for?"
             value={this.state.query}
@@ -125,7 +125,7 @@ class Search extends Component<Props, State> {
 
         <div
           className={styles.itemList}
-          ref={ref => (this.itemRefs.container = ref)}
+          ref={(ref) => (this.itemRefs.container = ref)}
         >
           {this.state.query !== '' && this.props.results.length === 0 && (
             <div style={{ padding: 20 }}>
@@ -135,7 +135,7 @@ class Search extends Component<Props, State> {
 
           {this.props.results.map((result, i) => (
             <button
-              ref={ref => (this.itemRefs[`item-${i}`] = ref)}
+              ref={(ref) => (this.itemRefs[`item-${i}`] = ref)}
               key={result}
               onClick={() => this.props.searchResultSelected(result)}
               onMouseEnter={() => this.setState({ selectedIndex: i })}
@@ -156,13 +156,13 @@ class Search extends Component<Props, State> {
 
 function mapStateToProps(state: RootState) {
   return {
-    results: state.search.results
+    results: state.search.results,
   };
 }
 
 const mapDispatchToProps = {
   search,
-  searchResultSelected
+  searchResultSelected,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

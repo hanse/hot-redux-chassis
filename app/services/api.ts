@@ -7,16 +7,16 @@ import {
   SearchResultDto,
   SearchResult,
   LoginResultDto,
-  LoginResult
+  LoginResult,
 } from 'app/types';
 
 const fetch = createRestClient({
-  url: 'api/'
+  url: 'api/',
 });
 
 function mapLoginResultDto(loginResult: LoginResultDto): LoginResult {
   return {
-    token: loginResult.token
+    token: loginResult.token,
   };
 }
 
@@ -25,25 +25,25 @@ export function login(username: string, password: string) {
     method: 'POST',
     body: {
       username,
-      password
-    }
-  }).pipe(map(result => mapLoginResultDto(result.response)));
+      password,
+    },
+  }).pipe(map((result) => mapLoginResultDto(result.response)));
 }
 
 function mapUserProfileDto(userProfile: UserProfileDto): UserProfile {
   const { id, username } = userProfile;
   return {
     username,
-    id: toId(id)
+    id: toId(id),
   };
 }
 
 export function fetchProfile(token: string) {
   return fetch<UserProfileDto>('auth/me', {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }).pipe(map(result => mapUserProfileDto(result.response)));
+      Authorization: `Bearer ${token}`,
+    },
+  }).pipe(map((result) => mapUserProfileDto(result.response)));
 }
 
 function mapSearchResultDto(result: SearchResultDto): SearchResult {
@@ -52,6 +52,6 @@ function mapSearchResultDto(result: SearchResultDto): SearchResult {
 
 export function search(query: string) {
   return fetch<Array<SearchResultDto>>(`search?q=${query}`).pipe(
-    map(result => result.response.map(mapSearchResultDto))
+    map((result) => result.response.map(mapSearchResultDto))
   );
 }

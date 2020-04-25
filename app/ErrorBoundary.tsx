@@ -16,13 +16,13 @@ type State = {
 class ErrorBoundary extends Component<Props, State> {
   state: State = {
     error: null,
-    errorInfo: null
+    errorInfo: null,
   };
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.setState({
       error,
-      errorInfo
+      errorInfo,
     });
 
     console.log('Error', error, errorInfo);
@@ -36,7 +36,7 @@ class ErrorBoundary extends Component<Props, State> {
             background: '#c0392b',
             color: '#fff',
             padding: 20,
-            margin: 10
+            margin: 10,
           }}
         >
           <h3>Something went wrong.</h3>

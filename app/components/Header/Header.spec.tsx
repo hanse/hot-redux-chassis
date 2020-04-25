@@ -11,11 +11,11 @@ const Component = (props: any) => (
 
 const defaultProps = {
   location: {
-    search: ''
+    search: '',
   },
   closeSearch: () => {},
   openSearch: () => {},
-  searchOpen: false
+  searchOpen: false,
 };
 
 describe('<Header />', () => {
