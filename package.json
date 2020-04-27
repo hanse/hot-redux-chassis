@@ -94,7 +94,7 @@
     "webpack-hot-middleware": "2.25.0"
   },
   "dependencies": {
-    "@hot-loader/react-dom": "^16.12.0",
+    "@hot-loader/react-dom": "^16.13.0",
     "body-parser": "1.19.0",
     "classnames": "2.2.6",
     "connected-react-router": "6.7.0",
