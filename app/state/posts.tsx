@@ -17,10 +17,7 @@ function extractNextPageUrl(xhr: XMLHttpRequest) {
     return null;
   }
 
-  return nextLink
-    .trim()
-    .split(';')[0]
-    .slice(1, -1);
+  return nextLink.trim().split(';')[0].slice(1, -1);
 }
 
 const initialState = {
