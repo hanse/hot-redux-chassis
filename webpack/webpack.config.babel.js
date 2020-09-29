@@ -6,7 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-const rxPaths = require('rxjs/_esm5/path-mapping');
 const packageJson = require('../package.json');
 
 const dllConfig = packageJson.dllConfig;
@@ -25,7 +24,6 @@ module.exports = options => ({
   entry: {
     app: compact([
       options.development && 'webpack-hot-middleware/client',
-      options.development && 'react-hot-loader/patch',
       './app/index.tsx'
     ]),
     vendor: ['react', 'react-dom', 'react-router']
@@ -108,11 +106,7 @@ module.exports = options => ({
 
   resolve: {
     modules: [path.resolve(__dirname, '../'), 'node_modules'],
-    extensions: ['.ts', '.tsx', '.js', '.json'],
-    alias: {
-      ...rxPaths(),
-      'react-dom': '@hot-loader/react-dom'
-    }
+    extensions: ['.ts', '.tsx', '.js', '.json']
   },
 
   module: {
@@ -154,16 +148,20 @@ module.exports = options => ({
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [
-                require('postcss-import')(), // eslint-disable-line
-                require('postcss-preset-env')({
-                  stage: 1,
-                  features: {
-                    'nesting-rules': true
-                  }
-                }),
-                require('postcss-nested') // eslint-disable-line
-              ]
+              postcssOptions: {
+                plugins: [
+                  'postcss-import',
+                  [
+                    'postcss-preset-env',
+                    {
+                      stage: 1,
+                      features: {
+                        'nesting-rules': true
+                      }
+                    }
+                  ]
+                ]
+              }
             }
           }
         ]

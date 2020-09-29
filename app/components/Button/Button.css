@@ -7,23 +7,23 @@
   cursor: pointer;
   display: block;
   border-radius: 4px;
+}
 
-  &:hover {
-    background: rgba(112, 154, 23, 0.9);
-  }
+.button:hover {
+  background: rgba(112, 154, 23, 0.9);
+}
 
-  &.block {
-    display: block;
-    width: 100%;
-  }
+.button.block {
+  display: block;
+  width: 100%;
 }
 
 .link {
   background: transparent;
   color: #a06c6c;
   text-transform: none;
+}
 
-  &:hover {
-    background: transparent;
-  }
+.link:hover {
+  background: transparent;
 }

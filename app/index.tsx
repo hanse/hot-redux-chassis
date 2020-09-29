@@ -2,14 +2,13 @@
 
 import '@babel/polyfill';
 import 'isomorphic-fetch';
-import 'react-hot-loader';
-
 import 'file-loader?name=[name].[ext]!./humans.txt';
 
-import React from 'react';
-import { render } from 'react-dom';
 import configureStore from 'app/configureStore';
 import { createBrowserHistory } from 'history';
+import React from 'react';
+import { render } from 'react-dom';
+
 import Root from './Root';
 
 if (__DEV__) {

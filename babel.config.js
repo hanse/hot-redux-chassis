@@ -11,16 +11,12 @@ module.exports = {
     '@babel/preset-typescript'
   ],
   plugins: [
-    'react-hot-loader/babel',
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-proposal-class-properties'
   ],
   env: {
     development: {
-      plugins: [
-        'react-hot-loader/babel',
-        '@babel/plugin-transform-react-jsx-source'
-      ]
+      plugins: ['@babel/plugin-transform-react-jsx-source']
     },
     test: {
       presets: [

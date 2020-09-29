@@ -15,17 +15,17 @@
   display: flex;
   padding: 0 var(--rootPadding);
   background: #353c49;
+}
 
-  input {
-    font-size: 26px;
-    outline: 0;
-    border: 0;
-    flex: 1;
-    padding: 0 10px;
-    color: #eee;
-    background: transparent;
-    appearance: none;
-  }
+.inputContainer input {
+  font-size: 26px;
+  outline: 0;
+  border: 0;
+  flex: 1;
+  padding: 0 10px;
+  color: #eee;
+  background: transparent;
+  appearance: none;
 }
 
 ::-webkit-input-placeholder {
@@ -51,10 +51,10 @@
   font-size: inherit;
   width: 100%;
   text-align: left;
+}
 
-  &:last-of-type {
-    border-bottom: 0;
-  }
+.item:last-of-type {
+  border-bottom: 0;
 }
 
 .item:hover {

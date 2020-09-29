@@ -1,7 +1,7 @@
-import { hot } from 'react-hot-loader/root';
+import Router from 'app/routes';
 import React, { StrictMode, Suspense } from 'react';
 import { Provider } from 'react-redux';
-import Router from 'app/routes';
+
 import { Store } from './types';
 
 type Props = {
@@ -21,4 +21,4 @@ function Root({ store, history }: Props) {
   );
 }
 
-export default hot(Root);
+export default Root;
