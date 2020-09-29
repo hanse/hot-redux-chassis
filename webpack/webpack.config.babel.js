@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const packageJson = require('../package.json');
 
 const dllConfig = packageJson.dllConfig;
@@ -68,6 +69,15 @@ module.exports = options => ({
     compact([
       !options.development && new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.optimize.ModuleConcatenationPlugin(),
+
+      new ForkTsCheckerWebpackPlugin({
+        typescript: {
+          diagnosticOptions: {
+            semantic: true,
+            syntactic: true
+          }
+        }
+      }),
 
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(!!options.development),
