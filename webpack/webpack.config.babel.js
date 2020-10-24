@@ -14,14 +14,9 @@ const compact = filterable => filterable.filter(Boolean);
 
 module.exports = options => ({
   mode: options.development ? 'development' : 'production',
-  /**
-   * @see webpack-devtools
-   */
+
   devtool: options.development ? 'cheap-module-eval-source-map' : 'source-map',
 
-  /**
-   * Define webpack entries
-   */
   entry: {
     app: compact([
       options.development && 'webpack-hot-middleware/client',
@@ -30,9 +25,6 @@ module.exports = options => ({
     vendor: ['react', 'react-dom', 'react-router']
   },
 
-  /**
-   * Define the output directory
-   */
   output: {
     path: path.join(__dirname, '..', 'dist'),
     filename: '[name].js',
@@ -44,7 +36,10 @@ module.exports = options => ({
     minimize: !options.development,
     minimizer: [
       new TerserPlugin({
+        cache: true,
+        extractComments: false,
         parallel: true,
+        sourceMap: true,
         terserOptions: {
           ecma: 6
         }
@@ -62,14 +57,8 @@ module.exports = options => ({
         })
   },
 
-  /**
-   *
-   */
   plugins: getDependencyHandlers(options).concat(
     compact([
-      !options.development && new webpack.optimize.OccurrenceOrderPlugin(),
-      new webpack.optimize.ModuleConcatenationPlugin(),
-
       new ForkTsCheckerWebpackPlugin({
         typescript: {
           diagnosticOptions: {
@@ -89,12 +78,6 @@ module.exports = options => ({
 
       options.development && new FriendlyErrorsPlugin(),
       options.development && new webpack.HotModuleReplacementPlugin(),
-
-      new webpack.LoaderOptionsPlugin({
-        options: {
-          minimize: !options.development
-        }
-      }),
 
       // Make a separate css bundle for production
       new MiniCssExtractPlugin({
@@ -161,15 +144,7 @@ module.exports = options => ({
               postcssOptions: {
                 plugins: [
                   'postcss-import',
-                  [
-                    'postcss-preset-env',
-                    {
-                      stage: 1,
-                      features: {
-                        'nesting-rules': true
-                      }
-                    }
-                  ]
+                  ['postcss-preset-env', { stage: 2 }]
                 ]
               }
             }
