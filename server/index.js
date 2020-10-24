@@ -27,12 +27,6 @@ if (process.env.NODE_ENV === 'development') {
     })
   );
 
-  app.use(
-    require('webpack-hot-middleware')(compiler, {
-      log: false
-    })
-  );
-
   app.use(express.static(webpackConfig.output.path));
   app.use((req, res, next) => {
     const filename = path.join(compiler.outputPath, 'index.html');

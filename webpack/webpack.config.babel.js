@@ -18,10 +18,7 @@ module.exports = options => ({
   devtool: options.development ? 'cheap-module-eval-source-map' : 'source-map',
 
   entry: {
-    app: compact([
-      options.development && 'webpack-hot-middleware/client',
-      './app/index.tsx'
-    ]),
+    app: compact(['./app/index.tsx']),
     vendor: ['react', 'react-dom', 'react-router']
   },
 

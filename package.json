@@ -6,8 +6,8 @@
   "scripts": {
     "postinstall": "./scripts/postinstall",
     "start": "nodemon --ignore app --ignore tests --exec babel-node -- server/index.js",
-    "build": "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js -p --env",
-    "build:dll": "webpack --display-chunks --config webpack/webpack.dll.babel.js -p --env",
+    "build": "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --env production",
+    "build:dll": "webpack --config webpack/webpack.dll.babel.js --env development",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint app --ext ts,tsx,js --ignore-path .gitignore",
     "lint:css": "stylelint \"app/**/*.css\"",
@@ -90,9 +90,8 @@
     "typescript": "4.0.3",
     "url-loader": "4.1.1",
     "webpack": "4.44.2",
-    "webpack-cli": "3.3.12",
-    "webpack-dev-middleware": "3.7.2",
-    "webpack-hot-middleware": "2.25.0"
+    "webpack-cli": "^4.1.0",
+    "webpack-dev-middleware": "3.7.2"
   },
   "dependencies": {
     "body-parser": "1.19.0",
