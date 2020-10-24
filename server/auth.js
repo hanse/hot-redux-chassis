@@ -1,5 +1,5 @@
 const express = require('express');
-const uuid = require('uuid');
+const { v4: uuid } = require('uuid');
 
 const router = new express.Router();
 
@@ -47,7 +47,7 @@ router.post('/login', (req, res) => {
     });
   }
 
-  const token = uuid.v4();
+  const token = uuid();
   tokens[token] = user.id;
 
   return res.send({
