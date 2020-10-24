@@ -1,4 +1,4 @@
-# hot-redux-chassis [![CircleCI](https://circleci.com/gh/hanse/hot-redux-chassis/tree/master.svg?style=svg)](https://circleci.com/gh/hanse/hot-redux-chassis/tree/master)
+# hot-redux-chassis
 
 This repo is a playground for modern web development techniques with a focus on the [React](https://facebook.github.io/react/) eco-system. It is rapidly changing to adopt new versions of popular packages and ideas from the community. The code shows how one can glue a mix of these packages together to create cool projects. In addition, the repo itself can serve as a starting point for new projects.
 
