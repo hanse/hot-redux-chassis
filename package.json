@@ -6,7 +6,8 @@
   "scripts": {
     "postinstall": "./scripts/postinstall",
     "start": "nodemon --ignore app --ignore tests --exec babel-node -- server/index.js",
-    "build": "NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --env production",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && NODE_ENV=production webpack  --config webpack/webpack.config.babel.js --env production",
     "build:dll": "webpack --config webpack/webpack.dll.babel.js --env development",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint app --ext ts,tsx,js --ignore-path .gitignore",
@@ -15,11 +16,11 @@
     "tsc:watch": "tsc --watch",
     "test": "NODE_ENV=test jest --coverage",
     "test:watch": "npm run test -- --watch",
-    "ci": "yarn test && yarn lint && yarn tsc"
+    "ci": "npm run test && npm run lint && npm run tsc"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Hanse/hot-redux-chassis.git"
+    "url": "https://github.com/hanse/hot-redux-chassis.git"
   },
   "devDependencies": {
     "@babel/cli": "7.12.1",
